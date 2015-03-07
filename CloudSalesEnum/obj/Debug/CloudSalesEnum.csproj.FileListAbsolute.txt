@@ -1,4 +1,0 @@
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesEnum\bin\Debug\CloudSalesEnum.dll
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesEnum\bin\Debug\CloudSalesEnum.pdb
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesEnum\obj\Debug\CloudSalesEnum.dll
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesEnum\obj\Debug\CloudSalesEnum.pdb

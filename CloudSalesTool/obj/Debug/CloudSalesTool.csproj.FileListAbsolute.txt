@@ -1,4 +1,0 @@
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesTool\bin\Debug\CloudSalesTool.dll
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesTool\bin\Debug\CloudSalesTool.pdb
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesTool\obj\Debug\CloudSalesTool.dll
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesTool\obj\Debug\CloudSalesTool.pdb
