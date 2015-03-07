@@ -2,4 +2,3 @@ D:\YunXiaoProjects\CloudSales1.0\CloudSalesDAL\bin\Debug\CloudSalesDAL.dll
 D:\YunXiaoProjects\CloudSales1.0\CloudSalesDAL\bin\Debug\CloudSalesDAL.pdb
 D:\YunXiaoProjects\CloudSales1.0\CloudSalesDAL\obj\Debug\CloudSalesDAL.dll
 D:\YunXiaoProjects\CloudSales1.0\CloudSalesDAL\obj\Debug\CloudSalesDAL.pdb
-D:\YunXiaoProjects\CloudSales1.0\CloudSalesDAL\obj\Debug\CloudSalesDAL.csprojResolveAssemblyReference.cache
