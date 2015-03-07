@@ -1,0 +1,4 @@
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesEntity\bin\Debug\CloudSalesEntity.dll
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesEntity\bin\Debug\CloudSalesEntity.pdb
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesEntity\obj\Debug\CloudSalesEntity.dll
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesEntity\obj\Debug\CloudSalesEntity.pdb

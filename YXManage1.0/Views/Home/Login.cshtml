@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>登录</title>
+    <link href="/modules/css/base.css" rel="stylesheet" />
+    <link href="/modules/css/layout.css" rel="stylesheet" />
+    <link href="/modules/css/home.css" rel="stylesheet" />
+    <script src="/Scripts/sea.js"></script>
+    <script src="/Scripts/sea-config.js"></script>
+   <script type="text/javascript">
+       seajs.use(["scripts/home"], function (home) {
+           home.loginInit();
+       });
+    </script>
+</head>
+<body>
+    <header>
+
+    </header>
+    <div class="login-main">
+        <ul>
+            <li><span>账号：</span><input id="iptUserName" class="verify"  data-empty="账号不能为空！" type="text" /><span></span></li>
+            <li><span>密码：</span><input id="iptPwd" class="verify"  data-empty="密码不能为空！" type="password" /><span></span></li>
+            <li><input type="button" class="btn-login" id="btnLogin" value="登录"></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿
+.verify-fail-err { margin-left:5px; display:inline-block; line-height:25px; }
+
+/*登录样式*/
+.login-main { width:450px; margin:150px auto 0 auto; border:solid 1px #ccc; background-color:#f9f9f9; padding-bottom:50px;}
+.login-main ul { padding-top:30px;}
+.login-main li { padding-left:100px; margin-top:30px; color:#666;}
+
+.btn-login { background-color:#002463;border-radius:5px; width:230px; border:none;  color:#efefef; 
+            height:30px; line-height:30px; padding:0px 10px;  cursor:pointer; }
+
+

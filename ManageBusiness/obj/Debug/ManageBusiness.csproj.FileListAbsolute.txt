@@ -1,0 +1,4 @@
+D:\YunXiaoProjects\CloudSales1.0\ManageBusiness\bin\Debug\ManageBusiness.dll
+D:\YunXiaoProjects\CloudSales1.0\ManageBusiness\bin\Debug\ManageBusiness.pdb
+D:\YunXiaoProjects\CloudSales1.0\ManageBusiness\obj\Debug\ManageBusiness.dll
+D:\YunXiaoProjects\CloudSales1.0\ManageBusiness\obj\Debug\ManageBusiness.pdb

@@ -1,0 +1,11 @@
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesBusiness.dll
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesBusiness.pdb
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\obj\Debug\CloudSalesBusiness.dll
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\obj\Debug\CloudSalesBusiness.pdb
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesDAL.dll
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesEntity.dll
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesDAL.pdb
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesEntity.pdb
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\obj\Debug\CloudSalesBusiness.csprojResolveAssemblyReference.cache
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesEnum.dll
+D:\YunXiaoProjects\CloudSales1.0\CloudSalesBusiness\bin\Debug\CloudSalesEnum.pdb
