@@ -27,3 +27,5 @@ D:\YunXiaoProjects\CloudSales1.0\YXManage1.0\bin\CloudSalesDAL.dll
 D:\YunXiaoProjects\CloudSales1.0\YXManage1.0\bin\CloudSalesBusiness.pdb
 D:\YunXiaoProjects\CloudSales1.0\YXManage1.0\bin\CloudSalesEntity.pdb
 D:\YunXiaoProjects\CloudSales1.0\YXManage1.0\bin\CloudSalesDAL.pdb
+D:\YunXiaoProjects\CloudSales1.0\YXManage1.0\bin\CloudSalesTool.dll
+D:\YunXiaoProjects\CloudSales1.0\YXManage1.0\bin\CloudSalesTool.pdb

@@ -152,6 +152,10 @@
       <Project>{6e99de28-adb3-4c22-8de9-dea1e44c04bb}</Project>
       <Name>CloudSalesEntity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CloudSalesTool\CloudSalesTool.csproj">
+      <Project>{c9aca144-ea91-4fa5-a799-39d458af1fcb}</Project>
+      <Name>CloudSalesTool</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

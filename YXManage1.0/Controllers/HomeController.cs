@@ -22,6 +22,10 @@ namespace YXManage1._0.Controllers
 
         public ActionResult Login()
         {
+            if (Session["Manager"] != null)
+            {
+                return Redirect("/Home/Index");
+            }
             return View();
         }
         public ActionResult Logout()
@@ -33,7 +37,7 @@ namespace YXManage1._0.Controllers
 
         public JsonResult UserLogin(string userName, string pwd)
         {
-
+            pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, userName);
             return new JsonResult() 
             { 
                 Data = "", 
