@@ -16,6 +16,7 @@
 *.cache
 *.ilk
 *.log
+*.suo
 [Bb]in
 [Dd]ebug*/
 *.lib
