@@ -57,6 +57,10 @@
       <Project>{b86924c1-ec31-449f-97f3-258dfa43a44f}</Project>
       <Name>CloudSalesEnum</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CloudSalesTool\CloudSalesTool.csproj">
+      <Project>{c9aca144-ea91-4fa5-a799-39d458af1fcb}</Project>
+      <Name>CloudSalesTool</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

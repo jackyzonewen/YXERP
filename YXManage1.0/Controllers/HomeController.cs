@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace YXManage1._0.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         //
         // GET: /Home/
 
         public ActionResult Index()
         {
-            if (Session["Manager"] == null)
+            if (CurrentUser == null)
             {
                 return Redirect("/Home/Login");
             }
@@ -22,7 +22,7 @@ namespace YXManage1._0.Controllers
 
         public ActionResult Login()
         {
-            if (Session["Manager"] != null)
+            if (CurrentUser != null)
             {
                 return Redirect("/Home/Index");
             }
@@ -30,18 +30,25 @@ namespace YXManage1._0.Controllers
         }
         public ActionResult Logout()
         {
-            Session["Manager"] = null;
+            CurrentUser = null;
             return Redirect("/Home/Login");
         }
 
 
         public JsonResult UserLogin(string userName, string pwd)
         {
-            pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, userName);
-            return new JsonResult() 
-            { 
-                Data = "", 
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet 
+            bool bl = false;
+            CloudSalesEntity.M_Users model = CloudSalesBusiness.M_UsersBusiness.GetM_UserByUserName(userName, pwd);
+            if (model != null)
+            {
+                CurrentUser = model;
+                bl = true;
+            }
+            Json.Add("result", bl);
+            return new JsonResult
+            {
+                Data = Json,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
 

@@ -4,7 +4,8 @@ define(function (require, exports, module) {
 
     require("jquery");
     var Verify = require("verify"),
-        VerifyObject;
+        VerifyObject,
+        Global = require("global");
 
     var Home = {};
     //
@@ -22,8 +23,15 @@ define(function (require, exports, module) {
             if (!VerifyObject.isPass()) {
                 return;
             }
-            
+            Global.post("/Home/UserLogin", { userName: $("#iptUserName").val(), pwd: $("#iptPwd").val() }, function (data) {
+                if (data.result) {
+                    location.href = "/Home/Index";
+                } else {
+                    alert("账户或密码不正确！")
+                }
+            });
         });
+
     }
 
     module.exports = Home;
