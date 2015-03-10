@@ -26,7 +26,18 @@ namespace CloudSalesEntity
                     switch (property.PropertyType.Name)
                     {
                         case "Int32":
-                            property.SetValue(entity, dr[property.Name], null);
+                            property.SetValue(entity,
+                                dr[property.Name] != null && dr[property.Name] != DBNull.Value
+                                ? Convert.ToInt32(dr[property.Name])
+                                : -1,
+                                null);
+                            break;
+                        case "String":
+                            property.SetValue(entity,
+                                dr[property.Name] != null && dr[property.Name] != DBNull.Value 
+                                ? dr[property.Name].ToString() 
+                                : "",
+                                null);
                             break;
                         default:
                             property.SetValue(entity, dr[property.Name], null);

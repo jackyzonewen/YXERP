@@ -27,7 +27,7 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private Guid _userid;
+		private string _userid;
 		private string _loginname;
 		private string _loginpwd;
 		private string _name="";
@@ -40,7 +40,7 @@ namespace CloudSalesEntity
 		private int? _status=1;
 		private string _description="";
 		private DateTime? _createtime= DateTime.Now;
-		private Guid _createuserid;
+        private string _createuserid;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -52,7 +52,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid UserID
+        public string UserID
 		{
 			set{ _userid=value;}
 			get{return _userid;}
@@ -156,12 +156,21 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid CreateUserID
+        public string CreateUserID
 		{
 			set{ _createuserid=value;}
 			get{return _createuserid;}
 		}
 		#endregion Model
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 	}
 }
