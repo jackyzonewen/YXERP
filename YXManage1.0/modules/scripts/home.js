@@ -19,6 +19,13 @@ define(function (require, exports, module) {
             verifyType: "data-type",
             regText: "data-text"
         });
+
+        $(document).on("keypress", function (e) {
+            if (e.keyCode == 13) {
+                $("#btnLogin").click();
+            }
+        });
+
         $("#btnLogin").click(function () {
             if (!VerifyObject.isPass()) {
                 return;
