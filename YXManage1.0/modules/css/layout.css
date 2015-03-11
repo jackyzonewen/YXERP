@@ -15,6 +15,13 @@ header { width:100%; height:45px;background-color:#0066CC; border-bottom:solid 2
 .header-box {width:1024px; margin:0 auto; }
 .header-box a{ height:45px; line-height:45px; color:#eee;}
 
+.header-box .home { background:url(/modules/images/ico-home.png); width:16px; height:16px; display:inline-block; margin-top:15px; }
+.header-box .home:hover { background:url(/modules/images/ico-home-hover.png);}
+
+.header-box .logout { background:url(/modules/images/ico-logout.png); width:16px; height:16px; display:inline-block; margin-top:15px; }
+.header-box .logout:hover { background:url(/modules/images/ico-logout-hover.png);}
+
+
 /*模板主体*/
 .main-box {width:1024px; margin:0 auto; border-top-right-radius:5px;}
 

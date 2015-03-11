@@ -11,7 +11,7 @@
     <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YXManage1._0</RootNamespace>
+    <RootNamespace>YXManage</RootNamespace>
     <AssemblyName>YXManage1.0</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -95,8 +95,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ExpandClass.cs" />
+    <Compile Include="Common\UserAuthorize.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
     <Content Include="modules\css\base.css" />
     <Content Include="modules\css\home.css" />
     <Content Include="modules\css\layout.css" />
+    <Content Include="modules\images\ico-home-hover.png" />
+    <Content Include="modules\images\ico-home.png" />
+    <Content Include="modules\images\ico-logout-hover.png" />
+    <Content Include="modules\images\ico-logout.png" />
     <Content Include="modules\images\open.png" />
     <Content Include="modules\images\pull.png" />
     <Content Include="modules\plug\verify.js" />
@@ -144,7 +151,7 @@
     <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\_HomeLeftNav.cshtml" />
+    <Content Include="Views\Shared\_LeftNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CloudSalesBusiness\CloudSalesBusiness.csproj">
@@ -159,6 +166,18 @@
       <Project>{c9aca144-ea91-4fa5-a799-39d458af1fcb}</Project>
       <Name>CloudSalesTool</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Modules\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Modules\_ModulesLeftNav.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\_HomeLeftNav.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Modules\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -176,7 +195,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>7411</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:15444/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

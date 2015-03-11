@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace YXManage1._0.Controllers
+namespace YXManage.Controllers
 {
     public class HomeController : BaseController
     {
