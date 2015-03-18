@@ -15,6 +15,7 @@
 *└──────────────────────────────────┘
 */
 using System;
+using System.Collections.Generic;
 namespace CloudSalesEntity
 {
 	/// <summary>
@@ -80,8 +81,21 @@ namespace CloudSalesEntity
 			set{ _sort=value;}
 			get{return _sort;}
 		}
+        /// <summary>
+        /// 菜单列表
+        /// </summary>
+        public List<Menu> Menus { get; set; }
+
 		#endregion Model
 
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 	}
 }
 

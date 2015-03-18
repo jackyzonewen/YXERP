@@ -43,8 +43,6 @@
     <Compile Include="Common\Country.cs" />
     <Compile Include="Common\Menu.cs" />
     <Compile Include="ExpandFillData.cs" />
-    <Compile Include="Manage\M_ClientModules.cs" />
-    <Compile Include="Manage\M_ClientPermission.cs" />
     <Compile Include="Manage\M_Clients.cs" />
     <Compile Include="Manage\M_Dictionary.cs" />
     <Compile Include="Manage\M_Modules.cs" />

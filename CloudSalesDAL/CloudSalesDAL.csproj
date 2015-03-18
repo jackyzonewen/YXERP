@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="CommonDAL.cs" />
+    <Compile Include="Manage\M_ModulesDAL.cs" />
     <Compile Include="Manage\M_UsersDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

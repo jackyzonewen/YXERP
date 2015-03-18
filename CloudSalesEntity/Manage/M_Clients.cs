@@ -15,6 +15,7 @@
 *└──────────────────────────────────┘
 */
 using System;
+using System.Collections.Generic;
 namespace CloudSalesEntity
 {
 	/// <summary>
@@ -27,9 +28,9 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private Guid _clientid;
+        private string _clientid;
 		private string _companyname;
-		private Guid _industry;
+        private string _industry;
 		private string _citycode="";
 		private string _address="";
 		private string _postalcode="";
@@ -38,7 +39,7 @@ namespace CloudSalesEntity
 		private string _officephone="";
 		private int _status=0;
 		private DateTime? _createtime= DateTime.Now;
-		private Guid _createuserid;
+        private string _createuserid;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -50,7 +51,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid ClientID
+		public string ClientID
 		{
 			set{ _clientid=value;}
 			get{return _clientid;}
@@ -66,7 +67,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid Industry
+        public string Industry
 		{
 			set{ _industry=value;}
 			get{return _industry;}
@@ -138,12 +139,26 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid CreateUserID
+		public string CreateUserID
 		{
 			set{ _createuserid=value;}
 			get{return _createuserid;}
 		}
+        /// <summary>
+        /// 模块列表
+        /// </summary>
+        public List<M_Modules> Modules { get; set; }
+
 		#endregion Model
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 	}
 }

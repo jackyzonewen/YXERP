@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CommonBusiness.cs" />
     <Compile Include="CommonCache.cs" />
+    <Compile Include="Manage\M_ModulesBusiness.cs" />
     <Compile Include="Manage\M_UsersBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

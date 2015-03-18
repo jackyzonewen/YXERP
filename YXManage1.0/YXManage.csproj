@@ -110,6 +110,7 @@
     <Content Include="modules\css\base.css" />
     <Content Include="modules\css\home.css" />
     <Content Include="modules\css\layout.css" />
+    <Content Include="modules\css\modules.css" />
     <Content Include="modules\images\ico-home-hover.png" />
     <Content Include="modules\images\ico-home.png" />
     <Content Include="modules\images\ico-logout-hover.png" />
