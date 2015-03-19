@@ -1,5 +1,5 @@
 ﻿@{
-    var actionName = Url.RequestContext.RouteData.Values["action"].ToString();
+    var controller = Url.RequestContext.RouteData.Values["controller"].ToString();
 }
 
 <div class="nav-class hand">
@@ -7,7 +7,7 @@
 </div>
 <ul class="nav-list">
     <li><a href="javascript:void(0)">员工管理</a></li>
-    <li><a href="/Modules/Index">菜单模块</a></li>
-    <li><a href="javascript:void(0)">客户授权</a></li>
+    <li><a class="@Html.GetActiveMenu(controller,"Modules","active")" href="/Modules/Index">菜单模块</a></li>
+    <li><a class="@Html.GetActiveMenu(controller,"Client","active")" href="/Client/Index">客户授权</a></li>
 </ul>
 

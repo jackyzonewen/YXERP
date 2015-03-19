@@ -34,7 +34,12 @@ namespace YXManage.Controllers
             return Redirect("/Home/Login");
         }
 
-
+        /// <summary>
+        /// 管理员登录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
         public JsonResult UserLogin(string userName, string pwd)
         {
             bool bl = false;

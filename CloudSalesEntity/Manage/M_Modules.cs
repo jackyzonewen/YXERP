@@ -28,10 +28,10 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private Guid _modulesid;
+		private string _modulesid;
 		private string _name;
 		private string _description="";
-		private Guid _parentid;
+		private string _parentid;
 		private int? _sort=0;
 		/// <summary>
 		/// 
@@ -44,7 +44,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid ModulesID
+		public string ModulesID
 		{
 			set{ _modulesid=value;}
 			get{return _modulesid;}
@@ -68,7 +68,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid ParentID
+		public string ParentID
 		{
 			set{ _parentid=value;}
 			get{return _parentid;}

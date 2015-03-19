@@ -1,0 +1,12 @@
+﻿@{
+    var actionName = Url.RequestContext.RouteData.Values["action"].ToString();
+}
+<nav>
+    <div class="nav-class hand">
+        <span class="">客户授权</span><img class="mLeft5" title="收起" src="/modules/images/pull.png" />
+    </div>
+    <ul class="nav-list">
+        <li><a class="@Html.GetActiveMenu(actionName,"Index","active")" href="/Client/Index">客户列表</a></li>
+    </ul>
+    @Html.Partial("_LeftNav")
+</nav>

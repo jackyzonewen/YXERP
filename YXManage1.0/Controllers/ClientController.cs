@@ -4,20 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using CloudSalesBusiness;
-
 namespace YXManage.Controllers
 {
-    [YXManage.Common.UserAuthorize]
-    public class ModulesController : BaseController
+    public class ClientController : Controller
     {
         //
-        // GET: /Modules/
+        // GET: /Client/
 
         public ActionResult Index()
         {
-            ViewBag.Items = M_ModulesBusiness.GetModules();
             return View();
         }
+
     }
 }

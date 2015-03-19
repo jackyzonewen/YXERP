@@ -3,11 +3,10 @@
 }
 <nav>
     <div class="nav-class hand">
-        <span class="">菜单模块</span><img class="mLeft5" title="收起" src="/modules/images/pull.png" />
+        <span class="">模块管理</span><img class="mLeft5" title="收起" src="/modules/images/pull.png" />
     </div>
     <ul class="nav-list">
         <li><a class="@Html.GetActiveMenu(actionName,"Index","active")" href="/Modules/Index">模块列表</a></li>
-        <li><a class="@Html.GetActiveMenu(actionName,"Create","active")" href="/Modules/Create">新建模块</a></li>
     </ul>
     @Html.Partial("_LeftNav")
 </nav>
