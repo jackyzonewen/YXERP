@@ -41,5 +41,15 @@ nav { background-color:#E8E7E4;width:148px; height:100%;  float:left; border-rig
 .nav-list li a:hover{ background-color:#fff;}
 .nav-list .active{ background-color:#fff;}
 
-/*内容样式*/
-.main-body {width:834px; min-height:400px; margin-top:47px; margin-left:149px; background-color:#fff; padding:20px;}
+
+/*模板样式内容*/
+.main-body { width:834px; float:right; padding:67px 20px;background-color: #fff; min-height:450px; }
+
+
+.table-list { width:100%; border-top:solid 1px #ccc;border-left:solid 1px #ccc; border-collapse:collapse;border-spacing:0;}
+.table-list tr{ height:30px;}
+.table-list tr:hover { background-color: #eee; }
+.table-list td{ border-bottom:solid 1px #ccc;border-right:solid 1px #ccc; padding:0 10px; vertical-align:middle;}
+.table-list a{ color:#333;  vertical-align:middle;}
+.table-list a:hover{ color:red; text-decoration:underline; }
+.table-list .tr-header{ background-color:#eee; color:#333; text-align:center;}

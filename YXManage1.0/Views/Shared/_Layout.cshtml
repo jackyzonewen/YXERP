@@ -4,6 +4,9 @@
     <title>@ViewBag.Title</title>
     <link href="/modules/css/base.css" rel="stylesheet" />
     <link href="/modules/css/layout.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.11.1.js"></script>
+    <script src="/modules/scripts/layout.js"></script>
+    
 </head>
 <body>
     <header>
@@ -14,7 +17,9 @@
     </header>
     <div class="main-box">
          @RenderSection("leftNav",false)
-         @RenderBody()
+        <div class="main-body">
+            @RenderBody()
+        </div>
     </div>
     <footer>
         
