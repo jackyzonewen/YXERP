@@ -13,7 +13,7 @@ namespace CloudSalesDAL
 
         public DataTable GetModules()
         {
-            return GetDataTable("select * from M_Modules");
+            return GetDataTable("select * from M_Modules Order by Sort");
         }
 
         #endregion
