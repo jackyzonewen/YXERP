@@ -109,6 +109,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="modules\css\base.css" />
+    <Content Include="modules\css\clients.css" />
     <Content Include="modules\css\home.css" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\modules.css" />
@@ -185,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Client\_ClientLeftNav.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Client\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

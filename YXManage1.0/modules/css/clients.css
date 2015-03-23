@@ -1,0 +1,10 @@
+﻿
+/*新建客户端*/
+.contentnew { border-bottom:solid 1px #ccc; padding:20px;}
+.contentnew li { line-height:30px; margin-top:5px; }
+.contentnew input { width:150px;}
+.contentnew select { width:150px; }
+.contentnew textarea { width:300px;  }
+.contentnew .columnname { color:#666; width:60px; padding-right:20px; vertical-align:top; }
+.contentnew .direction {border:solid 1px #ccc; color:#666; cursor:pointer; padding:2px 12px; border-radius:12px;}
+.contentnew .active {border:solid 1px #002463; color:#002463;}

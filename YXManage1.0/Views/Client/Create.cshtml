@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "新建客户";
+}
+
+@section script{
+
+}
+@section leftNav{
+    @Html.Partial("_ClientLeftNav")
+}
+<link href="/modules/css/clients.css" rel="stylesheet" />
+<div class="headertitle">
+    <span>新建客户</span>
+</div>
+<ul class="contentnew">
+    <li>
+        <span class="columnname">模块：</span>
+        <span class="direction active" data-value="1">基础</span>
+        <span class="direction" data-value="2">报表</span>
+        <span class="direction" data-value="3">财务</span>
+        <span class="direction" data-value="4">代理商</span>
+    </li>
+    <li>
+        <span class="columnname">名称：</span>
+        <span><input type="text" id="happenMoney" /></span>
+    </li>
+    <li>
+        <span class="columnname">日期：</span>
+        <span><input type="text" id="accountDate" /></span>
+    </li>
+    <li>
+        <span class="columnname">项目：</span>
+        <span>
+            <select id="accountSubject">
+                <option>其他项</option>
+            </select>
+        </span>
+        <span id="otherSubject" class="hide">
+            名称：
+            <input type="text" id="subjectName" /><a href="javascript:void(0)" id="saveSubject" class="blueBtnS mLeft10 hidden">保存</a>
+        </span>
+    </li>
+    <li>
+        <span class="columnname">账户：</span>
+        <span>
+            <select id="accountType">
+                <option value="1">现金</option>
+                <option value="2">信用卡</option>
+                <option value="3">储蓄卡</option>
+                <option value="4">虚拟货币</option>
+            </select>
+        </span>
+    </li>
+    <li>
+        <span class="columnname">成员：</span>
+        <span>
+            <select id="accountObject">
+                <option>其他人</option>
+            </select>
+        </span>
+        <span id="otherObject" class="hide">
+            名称：
+            <input type="text" id="objectName" /><a href="javascript:void(0)" id="saveObject" class="blueBtnS mLeft10 hidden">保存</a>
+        </span>
+    </li>
+    <li>
+        <span class="columnname">备注：</span>
+        <span><textarea id="Remark"></textarea></span>
+    </li>
+</ul>
+<div class="mTop20">
+    <input type="button" id="saveClient" class="btn right" value="确认新建" />
+</div>
