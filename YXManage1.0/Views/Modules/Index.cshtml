@@ -8,5 +8,21 @@
 @section leftNav{
     @Html.Partial("_ModulesLeftNav")
 }
+<div class="headertitle">
+    <span>模块列表</span>
+</div>
+<table class="table-list mTop20">
+    <tr class="tr-header">
+        <td>名称</td>
+        <td>描述</td>
+    </tr>
+    @foreach (CloudSalesEntity.M_Modules model in (List<CloudSalesEntity.M_Modules>)ViewBag.Items)
+    {
+         <tr>
+            <td>@(model.Name)</td>
+            <td>@(model.Description)</td>
+        </tr>
+    }
+</table>
 
 

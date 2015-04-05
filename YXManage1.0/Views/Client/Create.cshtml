@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "新建客户";
+}
+
+@section script{
+
+}
+@section leftNav{
+    @Html.Partial("_ClientLeftNav")
+}
+<link href="/modules/css/clients.css" rel="stylesheet" />
+<div class="headertitle">
+    <span>新建客户</span>
+</div>
+<ul class="contentnew">
+    <li>
+        <span class="columnname">公司名称：</span>
+        <span><input type="text" id="name" /></span>
+    </li>
+    <li>
+        <span class="columnname">行业：</span>
+        <span>
+             <select id="industry">
+                <option>其他行业</option>
+            </select>
+        </span>
+         <span id="otherIndustry" class="hide">
+            名称：
+            <input type="text" id="industryName" /><a href="javascript:void(0)" id="saveIndustry" class="blueBtnS mLeft10 hidden">保存</a>
+        </span>
+    </li>
+    <li>
+        <span class="columnname">地址：</span>
+        <span>
+            <select id="accountSubject">
+                <option>其他项</option>
+            </select>
+        </span>
+        <span><input type="text" id="address" /></span>
+    </li>
+    <li>
+        <span class="columnname">联系人：</span>
+        <span><input type="text" id="contact" /></span>
+    </li>
+    <li>
+        <span class="columnname">联系电话：</span>
+        <span><input type="text" id="mobile" /></span>
+    </li>
+    <li>
+        <span class="columnname">模块：</span>
+        <span class="direction active" data-value="1">基础</span>
+        <span class="direction" data-value="2">报表</span>
+        <span class="direction" data-value="3">财务</span>
+        <span class="direction" data-value="4">代理商</span>
+    </li>
+    <li>
+        <span class="columnname">备注：</span>
+        <span><textarea id="Remark"></textarea></span>
+    </li>
+</ul>
+<div class="mTop20">
+    <input type="button" id="saveClient" class="btn right" value="确认新建" />
+</div>
