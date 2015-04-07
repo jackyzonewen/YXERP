@@ -15,6 +15,7 @@
 *└──────────────────────────────────┘
 */
 using System;
+using System.Collections.Generic;
 using System.Data;
 namespace CloudSalesEntity
 {
@@ -126,6 +127,11 @@ namespace CloudSalesEntity
 			set{ _sort=value;}
 			get{return _sort;}
 		}
+        /// <summary>
+        /// 菜单包含权限
+        /// </summary>
+        public List<Permission> Permission { get; set; }
+
 		#endregion Model
 
         /// <summary>

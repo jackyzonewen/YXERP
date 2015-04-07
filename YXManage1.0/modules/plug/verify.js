@@ -64,7 +64,7 @@ define(function (require, exports, module) {
             }
             else {
                 _this.css("border-color", "#ccc");
-                _this.next().remove();
+                _this.next(".verify-fail-err").remove();
             }
         });
     }
