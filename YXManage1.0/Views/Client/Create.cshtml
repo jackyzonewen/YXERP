@@ -3,7 +3,11 @@
 }
 
 @section script{
-
+    <script type="text/javascript">
+           seajs.use(["scripts/clients"], function (client) {
+               client.createInit();
+           });
+    </script>
 }
 @section leftNav{
     @Html.Partial("_ClientLeftNav")
@@ -15,15 +19,23 @@
 <ul class="contentnew">
     <li>
         <span class="columnname">公司名称：</span>
-        <span><input type="text" id="name" /></span>
+        <span><input type="text" id="name" class="verify" data-empty="公司名称不能为空!" /></span>
     </li>
     <li>
         <span class="columnname">登陆账号：</span>
-        <span><input type="text" id="loginName" /></span>
+        <span><input type="text" id="loginName" class="verify" data-empty="账号不能为空!" /></span>
     </li>
     <li>
         <span class="columnname">登陆密码：</span>
-        <span><input type="password" id="loginPwd" /></span>
+        <span><input type="password" id="loginPwd" class="verify" data-empty="密码不能为空!" /></span>
+    </li>
+    <li>
+        <span class="columnname">联系人：</span>
+        <span><input type="text" id="contact" class="verify" data-empty="联系人不能为空!" /></span>
+    </li>
+    <li>
+        <span class="columnname">联系电话：</span>
+        <span><input type="text" id="mobile" class="verify" data-empty="电话不能为空!" /></span>
     </li>
     <li>
         <span class="columnname">行业：</span>
@@ -39,27 +51,21 @@
     </li>
     <li>
         <span class="columnname">地址：</span>
-        <span>
-            <select id="accountSubject">
-                <option>地区插件</option>
-            </select>
+        <span id="citySpan">
+            
         </span>
-        <span><input type="text" id="address" /></span>
     </li>
     <li>
-        <span class="columnname">联系人：</span>
-        <span><input type="text" id="contact" /></span>
+        <span class="columnname"></span>
+        <span><input type="text" placeholder="详细地址..." class="width300" id="address" /></span>
     </li>
-    <li>
-        <span class="columnname">联系电话：</span>
-        <span><input type="text" id="mobile" /></span>
-    </li>
+
     <li>
         <span class="columnname">模块：</span>
         
         @foreach (CloudSalesEntity.M_Modules model in (List<CloudSalesEntity.M_Modules>)ViewBag.Modules)
         {
-            <span class="direction" title="@(model.Description)" data-value="@(model.ModulesID)">@(model.Name)</span>
+            <span class="direction modules-item" title="@(model.Description)" data-value="@(model.ModulesID)">@(model.Name)</span>
         }
     </li>
     <li>

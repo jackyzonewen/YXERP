@@ -27,6 +27,19 @@ namespace YXManage.Controllers
 
         #region Create Ajax
 
+        /// <summary>
+        /// 添加客户端
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        public JsonResult CreateClient(string client)
+        {
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
         #endregion
 

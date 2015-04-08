@@ -7,6 +7,8 @@ seajs.config({
         "global": "scripts/global.js",
         //数据验证
         "verify": "plug/verify.js",
+        //城市地区
+        "city": "plug/city.js",
         //HTML模板引擎
         "dot": "plug/doT.js"
     }

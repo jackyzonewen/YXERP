@@ -25,6 +25,5 @@ namespace YXManage.Controllers
             }
             set { Session["Manager"] = value; }
         }
-
     }
 }

@@ -11,6 +11,8 @@ input[type="password"] { border:solid 1px #ccc; border-radius:5px;height:25px; l
 input[type="password"]:focus { border:solid 1px #06C; }
 select { border:solid 1px #ccc; border-radius:5px; padding:2px 0 2px 2px;height:25px; line-height:25px;}
 
+/*错误信息*/
+.verify-fail-err{ padding-left:5px;color:red;}
 .err-info{ padding-left:5px;color:red;}
 
 .btn { background-color:#002463;border-radius:5px; border:none; color:#efefef; height:30px; line-height:30px; padding:0px 10px; cursor:pointer;}
