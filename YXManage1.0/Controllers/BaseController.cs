@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CloudSalesTool;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace YXManage.Controllers
 {
     public class BaseController : Controller
     {
+        protected string ClientID = AppSettings.Settings[AppSettingsWEB.Manage, "ClientID"];
+
         protected Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
 
         protected CloudSalesEntity.M_Users CurrentUser

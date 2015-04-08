@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using CloudSalesBusiness;
+using CloudSalesTool;
 
 namespace YXManage.Controllers
 {
@@ -21,11 +22,28 @@ namespace YXManage.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.Industry = C_IndustryBusiness.GetIndustryByClientID(ClientID);
             ViewBag.Modules = M_ModulesBusiness.GetModules();
             return View();
         }
 
         #region Create Ajax
+
+        /// <summary>
+        /// 添加行业
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public JsonResult CreateIndustry(string name)
+        {
+            string id = new C_IndustryBusiness().InsertIndustry(name, "", string.Empty, ClientID);
+            JsonDictionary.Add("ID", id);
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
         /// <summary>
         /// 添加客户端

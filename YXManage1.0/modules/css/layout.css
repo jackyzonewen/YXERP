@@ -18,6 +18,9 @@ select { border:solid 1px #ccc; border-radius:5px; padding:2px 0 2px 2px;height:
 .btn { background-color:#002463;border-radius:5px; border:none; color:#efefef; height:30px; line-height:30px; padding:0px 10px; cursor:pointer;}
 .btn:hover { background-color:#0066CC;}
 
+.btnS { background-color:#002463;border-radius:1px; border:none; color:#efefef; padding:3px 7px; cursor:pointer;}
+.btnS:hover { background-color:#0066CC;}
+
 
 /*模板样式头部*/
 header { width:100%; height:45px;background-color:#0066CC; border-bottom:solid 2px #002463;position:fixed;z-index:999; top:0;}

@@ -41,12 +41,16 @@
         <span class="columnname">行业：</span>
         <span>
              <select id="industry">
-                <option>其他行业</option>
+                @foreach (CloudSalesEntity.C_Industry model in (List<CloudSalesEntity.C_Industry>)ViewBag.Industry)
+                {
+                    <option value="@(model.IndustryID)" data-name="@(model.Name)">@(model.Name)</option>
+                }
+                <option value="-1">其他行业</option>
             </select>
         </span>
          <span id="otherIndustry" class="hide">
             名称：
-            <input type="text" id="industryName" /><a href="javascript:void(0)" id="saveIndustry" class="blueBtnS mLeft10 hidden">保存</a>
+            <input type="text" id="industryName" /><a href="javascript:void(0)" id="saveIndustry" class="btnS mLeft10 hide">保存</a>
         </span>
     </li>
     <li>

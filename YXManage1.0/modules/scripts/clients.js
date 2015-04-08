@@ -35,6 +35,42 @@ define(function (require, exports, module) {
             }
         });
 
+        //更换行业
+        $("#industry").change(function () {
+            $("#industryName").val("");
+            if ($(this).val() == "-1") {
+                $("#otherIndustry").show();
+                $("#saveIndustry").hide();
+            } else {
+                $("#otherIndustry").hide();
+            }
+        });
+
+        $("#industryName").blur(function () {
+            if ($(this).val() == "") {
+                $("#saveIndustry").hide();
+            } else {
+                var ele = $("#industry option[data-name='" + $(this).val() + "']");
+                if (ele.length > 0) {
+                    ele.prop("selected", "selected");
+                    $("#otherIndustry").hide();
+                } else {
+                    $("#saveIndustry").show();
+                }
+            }
+        });
+        //添加行业
+        $("#saveIndustry").click(function () {
+            var name = $("#industryName").val();
+            Global.post("/Client/CreateIndustry", { name: name }, function (data) {
+                if (data.ID) {
+                    var option = "<option value=\"" + data.ID + "\" selected=\"selected\" data-name=\"" + name + "\">" + name + "</option>";
+                    $("#industry").prepend(option);
+                    $("#otherIndustry").hide();
+                }
+            })
+        });
+
         $("#saveClient").click(function () {
             if (!VerifyObject.isPass()) {
                 return false;

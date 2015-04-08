@@ -13,12 +13,25 @@ namespace CloudSalesTool
         Agents = 3
     }
 
-    /// <summary>
-    /// 获取config AppSettings配置信息
-    /// </summary>
     public class AppSettings
     {
-        public static Dictionary<string, string> _appSettings = new Dictionary<string, string>();
+        private static Settings _settings;
+        public static Settings Settings 
+        {
+            get 
+            {
+                if (_settings == null)
+                {
+                    _settings = new Settings();
+                }
+                return _settings;
+            }
+        }
+    }
+
+    public class Settings
+    {
+        private static Dictionary<string, string> _appSettings = new Dictionary<string, string>();
         /// <summary>
         /// 获取网站AppSettings配置信息
         /// </summary>

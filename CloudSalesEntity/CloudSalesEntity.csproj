@@ -39,6 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\C_Department.cs" />
+    <Compile Include="Client\C_Industry.cs" />
+    <Compile Include="Client\C_Role.cs" />
+    <Compile Include="Client\C_RolePermission.cs" />
+    <Compile Include="Client\C_UserDepart.cs" />
+    <Compile Include="Client\C_UserRole.cs" />
+    <Compile Include="Client\C_Users.cs" />
     <Compile Include="Common\City.cs" />
     <Compile Include="Common\Country.cs" />
     <Compile Include="Common\Menu.cs" />

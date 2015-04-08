@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\C_IndustryBusiness.cs" />
     <Compile Include="CommonBusiness.cs" />
     <Compile Include="CommonCache.cs" />
     <Compile Include="Manage\M_ModulesBusiness.cs" />
