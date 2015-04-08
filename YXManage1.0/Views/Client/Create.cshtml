@@ -18,6 +18,14 @@
         <span><input type="text" id="name" /></span>
     </li>
     <li>
+        <span class="columnname">登陆账号：</span>
+        <span><input type="text" id="loginName" /></span>
+    </li>
+    <li>
+        <span class="columnname">登陆密码：</span>
+        <span><input type="password" id="loginPwd" /></span>
+    </li>
+    <li>
         <span class="columnname">行业：</span>
         <span>
              <select id="industry">
@@ -33,7 +41,7 @@
         <span class="columnname">地址：</span>
         <span>
             <select id="accountSubject">
-                <option>其他项</option>
+                <option>地区插件</option>
             </select>
         </span>
         <span><input type="text" id="address" /></span>
@@ -48,10 +56,11 @@
     </li>
     <li>
         <span class="columnname">模块：</span>
-        <span class="direction active" data-value="1">基础</span>
-        <span class="direction" data-value="2">报表</span>
-        <span class="direction" data-value="3">财务</span>
-        <span class="direction" data-value="4">代理商</span>
+        
+        @foreach (CloudSalesEntity.M_Modules model in (List<CloudSalesEntity.M_Modules>)ViewBag.Modules)
+        {
+            <span class="direction" title="@(model.Description)" data-value="@(model.ModulesID)">@(model.Name)</span>
+        }
     </li>
     <li>
         <span class="columnname">备注：</span>

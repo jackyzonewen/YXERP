@@ -49,10 +49,10 @@ namespace YXManage.Controllers
                 CurrentUser = model;
                 bl = true;
             }
-            Json.Add("result", bl);
+            JsonDictionary.Add("result", bl);
             return new JsonResult
             {
-                Data = Json,
+                Data = JsonDictionary,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

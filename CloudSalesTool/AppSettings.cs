@@ -9,7 +9,8 @@ namespace CloudSalesTool
     public enum AppSettingsWEB
     {
         Manage = 1,
-        Client = 2
+        Client = 2,
+        Agents = 3
     }
 
     /// <summary>

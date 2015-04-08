@@ -124,6 +124,7 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home.js" />
     <Content Include="modules\scripts\layout.js" />
+    <Content Include="modules\scripts\clients.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

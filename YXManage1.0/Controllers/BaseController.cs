@@ -8,7 +8,7 @@ namespace YXManage.Controllers
 {
     public class BaseController : Controller
     {
-        protected Dictionary<string, object> Json = new Dictionary<string, object>();
+        protected Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
 
         protected CloudSalesEntity.M_Users CurrentUser
         {
