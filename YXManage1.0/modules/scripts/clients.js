@@ -11,6 +11,8 @@ define(function (require, exports, module) {
     //
     Clients.createInit = function () {
         Clients.bindEvent();
+        //行业为空
+        if ($("#industry option").length == 1) $("#industry").change();
     }
     Clients.bindEvent = function () {
         //验证插件
@@ -59,7 +61,7 @@ define(function (require, exports, module) {
                 }
             }
         });
-        //添加行业
+        //保存行业
         $("#saveIndustry").click(function () {
             var name = $("#industryName").val();
             Global.post("/Client/CreateIndustry", { name: name }, function (data) {
@@ -70,7 +72,7 @@ define(function (require, exports, module) {
                 }
             })
         });
-
+        //保存客户端
         $("#saveClient").click(function () {
             if (!VerifyObject.isPass()) {
                 return false;
