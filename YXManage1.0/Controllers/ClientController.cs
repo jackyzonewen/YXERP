@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 using CloudSalesBusiness;
 using CloudSalesTool;
+using CloudSalesEntity;
 
 namespace YXManage.Controllers
 {
@@ -50,8 +52,10 @@ namespace YXManage.Controllers
         /// </summary>
         /// <param name="client"></param>
         /// <returns></returns>
-        public JsonResult CreateClient(string client)
+        public JsonResult CreateClient(string client, string loginName)
         {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            M_Clients model = serializer.Deserialize<M_Clients>(client);
             return new JsonResult()
             {
                 Data = JsonDictionary,

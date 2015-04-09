@@ -22,6 +22,7 @@ define(function (require, exports, module) {
     var Verify = function (options) {
         var _this = this;
         _this.setting = $.extend([], _this.default, options);
+        _this.initType();
         _this.init();
     }
 

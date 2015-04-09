@@ -128,6 +128,9 @@ namespace CloudSalesEntity
 			set{ _status=value;}
 			get{return _status;}
 		}
+
+        public string Description { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>

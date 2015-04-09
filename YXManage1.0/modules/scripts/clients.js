@@ -40,7 +40,7 @@ define(function (require, exports, module) {
         //更换行业
         $("#industry").change(function () {
             $("#industryName").val("");
-            if ($(this).val() == "-1") {
+            if ($(this).val() == "") {
                 $("#otherIndustry").show();
                 $("#saveIndustry").hide();
             } else {
@@ -77,12 +77,28 @@ define(function (require, exports, module) {
             if (!VerifyObject.isPass()) {
                 return false;
             };
+            var modules = [];
+            $(".modules-item").each(function () {
+                var _this = $(this);
+                if (_this.hasClass("active")) {
+                    modules.push({
+                        ModulesID: _this.data("value")
+                    });
+                }
+            });
             var client = {
-                CompanyName: $("#").val(),
-
+                CompanyName: $("#name").val(),
+                ContactName: $("#contact").val(),
+                MobilePhone: $("#mobile").val(),
+                Industry: $("#industry").val(),
+                CityCode: CityObject.getCityCode(),
+                Industry: $("#industry").val(),
+                Address: $("#address").val(),
+                Description: $("#description").val(),
+                Modules: modules
             };
 
-            Global.post("/Client/CreateClient", { client: JSON.stringify(client) }, function (data) {
+            Global.post("/Client/CreateClient", { client: JSON.stringify(client), loginName: $("#loginName").val() }, function (data) {
 
             })
         });
