@@ -68,6 +68,22 @@ namespace YXManage.Controllers
             };
         }
 
+        /// <summary>
+        /// 账号是否存在
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public JsonResult IsExistLoginName(string loginName)
+        {
+            bool bl = C_UserBusiness.IsExistLoginName(loginName);
+            JsonDictionary.Add("Result", bl);
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         #endregion
 
     }
