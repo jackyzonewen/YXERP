@@ -42,6 +42,7 @@
     <Compile Include="Client\C_IndustryBusiness.cs" />
     <Compile Include="CommonBusiness.cs" />
     <Compile Include="CommonCache.cs" />
+    <Compile Include="Manage\M_ClientBusiness.cs" />
     <Compile Include="Manage\M_ModulesBusiness.cs" />
     <Compile Include="Manage\M_UsersBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
