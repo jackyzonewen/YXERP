@@ -39,7 +39,7 @@ namespace CloudSalesBusiness
             loginPwd = CloudSalesTool.Encrypt.GetEncryptPwd(loginPwd, loginName);
             modules = modules.Substring(0, modules.Length - 1);
             string clientid = new M_ClientDAL().InsertClient(model.CompanyName, model.ContactName, model.MobilePhone, model.Industry, model.CityCode,
-                                                             model.Address, model.Description, loginName, loginPwd, loginName, modules, out result);
+                                                             model.Address, model.Description, loginName, loginPwd, modules, userid, out result);
             return clientid;
         }
 

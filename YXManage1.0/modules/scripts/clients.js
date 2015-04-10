@@ -98,7 +98,12 @@ define(function (require, exports, module) {
             };
 
             Global.post("/Client/CreateClient", { client: JSON.stringify(client), loginName: $("#loginName").val() }, function (data) {
-
+                if (data.Result == "1") {
+                    location.href = "/Client/Index";
+                }else if (data.Result == "2") {
+                    alert("登陆账号已存在!");
+                    $("#loginName").val("");
+                }
             })
         });
     }

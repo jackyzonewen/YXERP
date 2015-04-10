@@ -56,6 +56,11 @@ namespace YXManage.Controllers
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             M_Clients model = serializer.Deserialize<M_Clients>(client);
+
+            int result = 0;
+            string clientid = M_ClientBusiness.InsertClient(model, loginName, loginName, CurrentUser.UserID, out result);
+            JsonDictionary.Add("Result", result);
+            JsonDictionary.Add("ClientID", clientid);
             return new JsonResult()
             {
                 Data = JsonDictionary,
