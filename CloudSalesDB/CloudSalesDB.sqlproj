@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{86994cb6-735c-43cc-99f9-0e461efb21a1}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -62,7 +62,7 @@
     <Folder Include="Procedures\Client" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Procedures\InitDatabase.sql" />
-    <Build Include="Procedures\P_GetPagerData.sql" />
+    <None Include="Procedures\InitDatabase.sql" />
+    <None Include="Procedures\P_GetPagerData.sql" />
   </ItemGroup>
 </Project>
