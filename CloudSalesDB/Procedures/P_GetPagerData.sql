@@ -1,7 +1,5 @@
 ﻿Use [CloudSales1.0]
 GO
-Use [CloudSales1.0]
-GO
 IF EXISTS (SELECT * FROM sysobjects WHERE type = 'P' AND name = 'P_GetPagerData')
 BEGIN
 	DROP  Procedure  P_GetPagerData

@@ -92,7 +92,6 @@ define(function (require, exports, module) {
                 MobilePhone: $("#mobile").val(),
                 Industry: $("#industry").val(),
                 CityCode: CityObject.getCityCode(),
-                Industry: $("#industry").val(),
                 Address: $("#address").val(),
                 Description: $("#description").val(),
                 Modules: modules

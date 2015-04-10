@@ -65,4 +65,7 @@
     <None Include="Procedures\InitDatabase.sql" />
     <None Include="Procedures\P_GetPagerData.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\P_InsertClient.sql" />
+  </ItemGroup>
 </Project>
