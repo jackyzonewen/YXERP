@@ -55,7 +55,7 @@ define(function (require, exports, module) {
                 }
             }//格式判断
             else if (!!_this.attr(_self.setting.verifyType) && !!_this.val() && !_this.val().match(_self.setting.type[_this.attr(_self.setting.verifyType)])) {
-                _this.val("");
+                //_this.val("");
                 if (_this.next().attr("class") != "verify-fail-err") {
                     _this.css("border-color", "red");
                     _this.after($("<span class=\"verify-fail-err\">" + _this.attr(_self.setting.regText) + "</span>").css("color", "red"));

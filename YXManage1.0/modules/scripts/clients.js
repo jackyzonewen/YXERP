@@ -70,13 +70,30 @@ define(function (require, exports, module) {
                     $("#industry").prepend(option);
                     $("#otherIndustry").hide();
                 }
-            })
+            });
+        });
+        //判断账号是否存在
+        $("#loginName").blur(function () {
+            var value = $(this).val();
+            if (!value) {
+                return;
+            }
+            Global.post("/Client/IsExistLoginName", { loginName: value }, function (data) {
+                if (data.Result) {
+                    $("#loginName").val("");
+                    alert("登录账号已存在!");
+                }
+            });
         });
         //保存客户端
         $("#saveClient").click(function () {
             if (!VerifyObject.isPass()) {
                 return false;
             };
+            if ($("#industry").val() == "") {
+                $("#industryName").css("borderColor", "red");
+                return false;
+            }
             var modules = [];
             $(".modules-item").each(function () {
                 var _this = $(this);
