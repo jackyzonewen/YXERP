@@ -1,0 +1,18 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+<tr class="list-item">
+    <td><a href="javascript:void(0);">{%=item.CompanyName%}</a></td>
+    <td>{%=item.ContactName%}</td>
+    <td>{%=item.MobilePhone%}</td>
+    <td>{%=item.Industry%}</td>
+    <td>{%=item.CityCode%}</td>
+    <td>{%=item.Address%}</td>
+    <td title="{%=item.Description%}">{%=item.Description.subString(50)%}</td>
+    <td>{%=item.CreateTime.toDate("yyyy-MM-dd hh:mm:ss")%}</td>
+<!--    <td class="center">
+        <a class="ico-del" href="javascript:void(0)" title="删除" data-id="{%=item.ClientID%}"></a>
+    </td>-->
+</tr>
+{% } %}

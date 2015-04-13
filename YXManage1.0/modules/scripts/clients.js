@@ -3,18 +3,21 @@
 define(function (require, exports, module) {
 
     require("jquery");
+    require("pager");
     var Verify = require("verify"),
         Global = require("global"),
+        doT = require("dot"),
         City = require("city");
     var VerifyObject, CityObject;
     var Clients = {};
-    //
+    //新建客户初始化
     Clients.createInit = function () {
-        Clients.bindEvent();
+        Clients.createEvent();
         //行业为空
         if ($("#industry option").length == 1) $("#industry").change();
     }
-    Clients.bindEvent = function () {
+    //绑定事件
+    Clients.createEvent = function () {
         //验证插件
         VerifyObject = Verify.createVerify({
             element: ".verify",
@@ -117,13 +120,58 @@ define(function (require, exports, module) {
             Global.post("/Client/CreateClient", { client: JSON.stringify(client), loginName: $("#loginName").val() }, function (data) {
                 if (data.Result == "1") {
                     location.href = "/Client/Index";
-                }else if (data.Result == "2") {
+                } else if (data.Result == "2") {
                     alert("登陆账号已存在!");
                     $("#loginName").val("");
                 }
             })
         });
-    }
+    };
 
+
+    //客户列表初始化
+    Clients.init = function () {
+        Clients.Params = {
+            pageIndex: 1
+        };
+        Clients.bindEvent();
+        Clients.bindData();
+    };
+    //绑定事件
+    Clients.bindEvent = function () {
+
+    };
+    //绑定数据
+    Clients.bindData = function () {
+        var _self = this;
+        $("#client-header").nextAll().remove();
+        Global.post("/Client/GetClients", Clients.Params, function (data) {
+            doT.exec("template/client_list.html?1", function (templateFun) {
+                var innerText = templateFun(data.Items);
+                innerText = $(innerText);
+                $("#client-header").after(innerText);
+            });
+            $("#pager").paginate({
+                total_count: data.TotalCount,
+                count: data.PageCount,
+                start: Clients.Params.pageIndex,
+                display: 5,
+                border: true,
+                border_color: '#fff',
+                text_color: '#333',
+                background_color: '#fff',
+                border_hover_color: '#ccc',
+                text_hover_color: '#000',
+                background_hover_color: '#efefef',
+                rotate: true,
+                images: false,
+                mouse: 'slide',
+                onChange: function (page) {
+                    Clients.Params.pageIndex = page;
+                    Clients.bindData();
+                }
+            });
+        });
+    }
     module.exports = Clients;
 });

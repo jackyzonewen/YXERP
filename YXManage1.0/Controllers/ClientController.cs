@@ -29,7 +29,27 @@ namespace YXManage.Controllers
             return View();
         }
 
-        #region Create Ajax
+        #region Ajax
+
+        /// <summary>
+        /// 获取客户端列表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="keyWords"></param>
+        /// <returns></returns>
+        public JsonResult GetClients(int pageIndex, string keyWords)
+        {
+            int totalCount = 0, pageCount = 0;
+            var list = M_ClientBusiness.GetClients(keyWords, PageSize, pageIndex, ref totalCount, ref pageCount);
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", totalCount);
+            JsonDictionary.Add("PageCount", pageCount);
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
         /// <summary>
         /// 添加行业

@@ -11,6 +11,8 @@ namespace YXManage.Controllers
     {
         protected string ClientID = AppSettings.Settings[AppSettingsWEB.Manage, "ClientID"];
 
+        protected int PageSize = 20;
+
         protected Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
 
         protected CloudSalesEntity.M_Users CurrentUser

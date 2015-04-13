@@ -2,15 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 using CloudSalesEntity;
 using CloudSalesDAL;
+
 
 namespace CloudSalesBusiness
 {
     public class M_ClientBusiness
     {
         #region 查询
+
+        /// <summary>
+        /// 获取客户端列表
+        /// </summary>
+        /// <param name="keyWords"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="totalCount"></param>
+        /// <param name="pageCount"></param>
+        /// <returns></returns>
+        public static List<M_Clients> GetClients(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount)
+        {
+            DataTable dt = CommonBusiness.GetPagerData("M_Clients", "*", "Status<>9", "AutoID", pageSize, pageIndex, out totalCount, out pageCount);
+            List<M_Clients> list = new List<M_Clients>();
+            M_Clients model;
+            foreach (DataRow item in dt.Rows)
+            {
+                model = new M_Clients();
+                model.FillData(item);
+                list.Add(model);
+            }
+
+            return list;
+        }
+
         #endregion
 
         #region 添加

@@ -5,19 +5,20 @@ seajs.config({
     alias: {
         "jquery": "/Scripts/jquery-1.11.1.js",
         "global": "scripts/global.js",
-        //数据验证
-        "verify": "plug/verify.js",
-        //城市地区
-        "city": "plug/city.js",
         //HTML模板引擎
-        "dot": "plug/doT.js"
+        "dot": "plug/doT.js",
+        //分页控件
+        "pager": "plug/datapager/paginate.js"
     }
 });
 
 
-//seajs.config({
-//    alias: {
-//        "layout-js": "manage/scripts/manage-layout.js"
-//    }
-//});
+seajs.config({
+    alias: {
+        //数据验证
+        "verify": "plug/verify.js",
+        //城市地区
+        "city": "plug/city.js",
+    }
+});
 

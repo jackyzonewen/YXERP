@@ -46,7 +46,7 @@
     String.prototype.toDate = function (format) {
         var d = new Date();
         d.setTime(this.match(/\d+/)[0]);
-        return (!!format) ? d.format(format) : d;
+        return (!!format) ? d.toString(format) : d;
     }
 
     //截取字符串

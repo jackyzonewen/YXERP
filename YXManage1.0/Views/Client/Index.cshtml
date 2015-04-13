@@ -3,8 +3,28 @@
 }
 
 @section script{
-
+    <script type="text/javascript">
+        seajs.use(["scripts/clients"], function (client) {
+            client.init();
+        });
+    </script>
 }
 @section leftNav{
     @Html.Partial("_ClientLeftNav")
 }
+<div class="headertitle">
+    <span>客户列表</span>
+</div>
+<table class="table-list mTop20">
+    <tr class="tr-header" id="client-header">
+        <td class="">公司名称</td>
+        <td class="">联系人</td>
+        <td class="">移动电话</td>
+        <td class="">行业</td>
+        <td class="">省份城市</td>
+        <td class="">详细地址</td>
+        <td class="">备注</td>
+        <td class="">注册日期</td>
+    </tr>
+</table>
+<div id="pager" class="mTop20"></div>

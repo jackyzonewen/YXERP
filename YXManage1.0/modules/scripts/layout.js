@@ -2,6 +2,7 @@
 //页面加载
 $(document).ready(function () {
     $(".main-body").css("min-height", document.documentElement.clientHeight - 134);
+    $(".main-body").css("width", document.documentElement.clientWidth - 218);
     //隐藏下拉菜单
     $(".nav-class").click(
         function () {

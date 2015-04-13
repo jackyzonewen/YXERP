@@ -24,24 +24,24 @@ select { border:solid 1px #ccc; border-radius:5px; padding:2px 0 2px 2px;height:
 
 /*模板样式头部*/
 header { width:100%; height:45px;background-color:#0066CC; border-bottom:solid 2px #002463;position:fixed;z-index:999; top:0;}
-.header-box {width:1024px; margin:0 auto; }
+.header-box { margin:0 auto; }
 .header-box a{ height:45px; line-height:45px; color:#eee;}
 
-.header-box .home { background:url(/modules/images/ico-home.png); width:16px; height:16px; display:inline-block; margin-top:15px; }
+.header-box .home { background:url(/modules/images/ico-home.png); width:16px; height:16px; display:inline-block; margin-top:15px; margin-left:188px; }
 .header-box .home:hover { background:url(/modules/images/ico-home-hover.png);}
 
-.header-box .logout { background:url(/modules/images/ico-logout.png); width:16px; height:16px; display:inline-block; margin-top:15px; }
+.header-box .logout { background:url(/modules/images/ico-logout.png); width:16px; height:16px; display:inline-block; margin-top:15px; margin-right:188px;}
 .header-box .logout:hover { background:url(/modules/images/ico-logout-hover.png);}
 
 .headertitle { height:30px;border-bottom:solid 1px #ccc;padding-top:20px; padding-bottom:10px;}/*002463*/
 .headertitle span { border-left:solid 5px #002463; font-size:18px; color:#002463; display:block; height:20px; line-height:20px; text-indent:20px;}
 
 /*模板主体*/
-.main-box {width:1024px; margin:0 auto; border-top-right-radius:5px;}
+.main-box {/*width:1024px;*/ margin:0 auto; border-top-right-radius:5px;}
 
 
 /*模板样式导航*/
-nav { background-color:#E8E7E4;width:148px; height:100%;  float:left; border-right:solid 1px #ccc; border-top-left-radius:5px; position:fixed; top:47px;}
+nav { background-color:#E8E7E4;width:178px; height:100%; border-right:solid 1px #ccc; border-top-left-radius:5px; position:fixed; top:47px;}
 .nav-class { color:#333; font-size:14px; height:30px;line-height:30px; padding:20px 0 0 30px;border-bottom:solid 1px #D9D6D1;}
 .nav-class img{vertical-align:middle;display:none;}
 .nav-class:hover img{display:inline-block;}
@@ -53,7 +53,7 @@ nav { background-color:#E8E7E4;width:148px; height:100%;  float:left; border-rig
 
 
 /*模板样式内容*/
-.main-body { width:834px; float:right; padding:67px 20px;background-color: #fff; min-height:450px; }
+.main-body {  margin-left:178px; padding:67px 20px;background-color: #fff; min-height:450px; }
 
 
 .table-list { width:100%; border-top:solid 1px #ccc;border-left:solid 1px #ccc; border-collapse:collapse;border-spacing:0;}
