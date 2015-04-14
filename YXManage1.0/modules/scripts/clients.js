@@ -146,7 +146,7 @@ define(function (require, exports, module) {
         var _self = this;
         $("#client-header").nextAll().remove();
         Global.post("/Client/GetClients", Clients.Params, function (data) {
-            doT.exec("template/client_list.html?1", function (templateFun) {
+            doT.exec("template/client_list.html?3", function (templateFun) {
                 var innerText = templateFun(data.Items);
                 innerText = $(innerText);
                 $("#client-header").after(innerText);

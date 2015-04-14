@@ -40,6 +40,8 @@ namespace CloudSalesEntity
 		private int _status=0;
 		private DateTime? _createtime= DateTime.Now;
         private string _createuserid;
+
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -151,6 +153,10 @@ namespace CloudSalesEntity
         /// 模块列表
         /// </summary>
         public List<M_Modules> Modules { get; set; }
+
+        public CityEntity City { get; set; }
+
+        public C_Industry IndustryEntity { get; set; }
 
 		#endregion Model
 

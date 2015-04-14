@@ -6,6 +6,7 @@ using System.Data;
 
 using CloudSalesEntity;
 using CloudSalesDAL;
+using CloudSalesTool;
 
 
 namespace CloudSalesBusiness
@@ -32,6 +33,8 @@ namespace CloudSalesBusiness
             {
                 model = new M_Clients();
                 model.FillData(item);
+                model.City = CommonCache.Citys.Where(c => c.CityCode == model.CityCode).FirstOrDefault();
+                model.IndustryEntity = C_IndustryBusiness.GetIndustryByClientID(AppSettings.Settings[AppSettingsWEB.Manage, "ClientID"]).Where(i => i.IndustryID.ToLower() == model.Industry.ToLower()).FirstOrDefault();
                 list.Add(model);
             }
 

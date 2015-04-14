@@ -60,5 +60,26 @@ namespace CloudSalesBusiness
                 return _citys;
             }
         }
+
+        private static Dictionary<string, List<C_Industry>> _industry;
+
+        /// <summary>
+        /// 行业
+        /// </summary>
+        public static Dictionary<string, List<C_Industry>> Industry
+        {
+            get
+            {
+                if (_industry == null)
+                {
+                    _industry = new Dictionary<string, List<C_Industry>>();
+                }
+                return _industry;
+            }
+            set
+            {
+                _industry = value;
+            }
+        }
     }
 }

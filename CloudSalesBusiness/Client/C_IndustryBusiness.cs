@@ -21,15 +21,23 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public static List<C_Industry> GetIndustryByClientID(string clientid)
         {
-            List<C_Industry> list = new List<C_Industry>();
-            DataTable dt = new C_IndustryDAL().GetIndustryByClientID(clientid);
-            foreach (DataRow item in dt.Rows)
+            if (CommonCache.Industry.ContainsKey(clientid.ToLower()))
             {
-                C_Industry model = new C_Industry();
-                model.FillData(item);
-                list.Add(model);
+                return CommonCache.Industry[clientid.ToLower()];
             }
-            return list;
+            else
+            {
+                List<C_Industry> list = new List<C_Industry>();
+                DataTable dt = new C_IndustryDAL().GetIndustryByClientID(clientid);
+                foreach (DataRow item in dt.Rows)
+                {
+                    C_Industry model = new C_Industry();
+                    model.FillData(item);
+                    list.Add(model);
+                }
+                CommonCache.Industry.Add(clientid.ToLower(), list);
+                return list;
+            }
         }
 
         #endregion
@@ -46,7 +54,25 @@ namespace CloudSalesBusiness
         /// <returns>行业ID</returns>
         public string InsertIndustry(string name, string description, string userid, string clientid)
         {
-            return new C_IndustryDAL().InsertIndustry(name, description, userid, clientid);
+            string id = new C_IndustryDAL().InsertIndustry(name, description, userid, clientid);
+            //处理缓存
+            if (!string.IsNullOrEmpty(id))
+            {
+                if (!CommonCache.Industry.ContainsKey(clientid.ToLower()))
+                {
+                    CommonCache.Industry[clientid.ToLower()] = new List<C_Industry>();
+                }
+                CommonCache.Industry[clientid.ToLower()].Add(new C_Industry()
+                {
+                    IndustryID = id,
+                    Name = name,
+                    CreateUserID = userid,
+                    ClientID = clientid,
+                    CreateTime = DateTime.Now,
+                    Description = description
+                });
+            }
+            return id;
         }
 
         #endregion
