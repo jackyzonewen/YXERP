@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -102,6 +103,38 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="modules\css\layout.css" />
+    <Content Include="modules\images\header.jpg" />
+    <Content Include="modules\images\ico-add.png" />
+    <Content Include="modules\images\ico-del-deep.png" />
+    <Content Include="modules\images\ico-del-light.png" />
+    <Content Include="modules\images\ico-delete.png" />
+    <Content Include="modules\images\ico-edit-deep.png" />
+    <Content Include="modules\images\ico-edit-light.png" />
+    <Content Include="modules\images\ico-goback.png" />
+    <Content Include="modules\images\ico-gonext.png" />
+    <Content Include="modules\images\ico-home.png" />
+    <Content Include="modules\images\ico-input-add.png" />
+    <Content Include="modules\images\ico-left-open.png" />
+    <Content Include="modules\images\ico-left-openL.png" />
+    <Content Include="modules\images\ico-left-pull.png" />
+    <Content Include="modules\images\ico-left-pullL.png" />
+    <Content Include="modules\images\ico-open.png" />
+    <Content Include="modules\images\ico-pull.png" />
+    <Content Include="modules\images\ico-tree-full.png" />
+    <Content Include="modules\images\ico-tree-last.png" />
+    <Content Include="modules\images\ico-tree-line.png" />
+    <Content Include="modules\images\ico-tree-open.png" />
+    <Content Include="modules\images\ico-tree-pull.png" />
+    <Content Include="modules\images\logo.gif" />
+    <Content Include="modules\images\sidebar.gif" />
+    <Content Include="modules\images\submenu.gif" />
+    <Content Include="modules\images\topLine.gif" />
+    <Content Include="modules\images\topmenu.gif" />
+    <Content Include="modules\scripts\layout.js" />
+    <Content Include="Scripts\jquery-1.11.1.js" />
+    <Content Include="Scripts\sea-config.js" />
+    <Content Include="Scripts\sea.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -117,12 +150,13 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

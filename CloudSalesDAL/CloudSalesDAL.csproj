@@ -42,13 +42,16 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="Client\C_IndustryDAL.cs" />
+    <Compile Include="Client\C_RoleDAL.cs" />
     <Compile Include="CommonDAL.cs" />
     <Compile Include="Manage\M_ClientDAL.cs" />
     <Compile Include="Manage\M_ModulesDAL.cs" />
     <Compile Include="Manage\M_UsersDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

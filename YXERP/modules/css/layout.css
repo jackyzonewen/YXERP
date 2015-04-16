@@ -1,0 +1,137 @@
+﻿
+
+* { padding: 0; margin: 0; font-size:9pt; color:#333; }/*033d91*/
+li{ list-style-type:none;}
+a { text-decoration:none; }
+textarea { min-height:60px; }
+input { padding-left:5px; padding-right:5px; border:solid 1px #ccc; border-radius:5px; }
+
+.left { float:left !important; }
+.right { float:right !important; }
+.hand { cursor:pointer; }
+.middle { vertical-align:middle;}
+.bolder { font-weight:bold; }
+.clear { clear:both; }
+.center { text-align:center; }
+.tRight { text-align:right;}
+.hide { display:none; }
+
+
+.red { color:red !important;}
+
+/*按钮和图标*/
+.btn { height:25px; padding:0px 10px; line-height:25px; background-color:#BFD9EA ; color:#033d91; 
+       border:none; font-weight:bold; cursor:pointer; display:inline-block; border-radius:0;}
+
+.ico-add{ background:url(../images/ico-add.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
+          display:inline-block; cursor:pointer; padding-left:25px; color:#7faaca; font-weight:bold; }
+
+.ico-edit{ background:url(../images/ico-edit-light.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
+          display:inline-block; cursor:pointer;  color:#666; }
+.ico-edit:hover{ background:url(../images/ico-edit-deep.png) no-repeat;}
+
+.ico-del{ background:url(../images/ico-del-light.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
+          display:inline-block; cursor:pointer; color:#666; }
+.ico-del:hover{ background:url(../images/ico-del-deep.png) no-repeat;}
+
+.ico-delete{ background:url(../images/ico-delete.png) no-repeat; height:20px; min-width:20px; line-height:20px; 
+          display:inline-block; cursor:pointer;}
+
+.ico-input-add{ background:url(../images/ico-input-add.png) no-repeat 4px ; height:20px; width:23px; line-height:20px; display:inline-block; cursor:pointer; }
+
+/*字体*/
+.font14 {font-size:14px; }
+.font16 {font-size:16px; }
+.font18 {font-size:18px; }
+.font20 {font-size:20px; }
+
+/*间距*/
+
+.mLeft5 { margin-left:5px; }
+.mLeft10 { margin-left:10px; }
+.mLeft20 { margin-left:20px; }
+.mLeft50 { margin-left:50px; }
+
+.mTop1 { margin-top:1px; }
+.mTop2 { margin-top:2px; }
+.mTop3 { margin-top:3px; }
+.mTop4 { margin-top:4px; }
+.mTop5 { margin-top:5px; }
+.mTop10 { margin-top:10px; }
+.mTop20 { margin-top:20px; }
+.mTop50 { margin-top:50px; }
+
+/*常用宽度*/
+.width80 { width:80px; }
+.width100 { width:100px; }
+.width120 { width:120px; }
+.width150 { width:150px; }
+.width200 { width:200px; }
+
+/*header样式*/
+header { height:55px; width:100%; padding-top:25px; background:url(../images/header.jpg) no-repeat left top; position:relative; }
+
+header .logo { width:200px; height:50px; padding-left:20px; }
+header .logo img{ width:189px; height:45px; }
+header .menu { position:absolute; height:28px; left:240px; bottom:0; overflow:hidden;}
+header .menu a{ background:url(../images/topmenu.gif) no-repeat left top;color:#033d91;height:28px; line-height:28px;text-align:center;width:79px; display:inline-block;}
+header .menu a:hover,header .menu .select{ background:url(../images/topmenu.gif) no-repeat -234px top;color:#fff; width:78px;font-weight:bold;}
+
+.topLine {width:100%;height:4px;background:url(../images/topLine.gif) repeat-x left top;}
+
+/*main页面*/
+.main-body { width:100%; position:fixed; top:84px; }
+
+/*左侧菜单栏*/
+nav { width:186px; position:absolute; left:0;}
+nav .admin-name { background:url(../images/sidebar.gif) repeat-x left top; padding:10px 0 0 20px; height:22px; width:166px; color:#2a3441;}
+
+nav .top-nav { width:186px; height:32px; border-bottom:1px solid #aae3fd; background-color:#97bed8; color:#2a3441; }
+nav .top-nav img{ margin:10px 0 0 19px;display:inline; float:left; height:16px; width:16px;}
+nav .top-nav span{margin-top:10px;float:left; padding-left:5px;}
+nav .top-nav a{color:#2a3441;}
+
+nav .controller .ico-img { background:url(../images/ico-open.png) no-repeat; float:left; width:16px; height:16px; border-radius:8px; margin:6px 0 0 19px; display:inline-block;}
+nav .controller ul { display:none; }
+nav .controller { width:186px; overflow:hidden; background-color:#bfd9ea; border-bottom:1px solid #e7f5fd;cursor:pointer;}
+nav .select .ico-img{ background:url(../images/ico-pull.png) no-repeat; }
+nav .select ul { display:block; background-color:#eafafe; margin-top:29px;}
+nav .controller .menu-name{float:left; font-size:10pt; color:#2a3441; padding-left:5px; height:28px; line-height:28px;}
+
+nav .action {width:186px; border-bottom:1px solid #fff; float:left; }
+nav .action a{ width:141px; height:25px;line-height:25px;padding-left:45px; display:block; color:#2a3441; background:url(../images/submenu.gif) repeat-x -5px -26px;}
+nav .action a:hover{background:url(../images/submenu.gif) no-repeat left top; font-weight:bold;}
+nav .action .select{background:url(../images/submenu.gif) no-repeat left top;font-weight:bold;}
+
+/*隐藏左侧菜单*/
+.controlbar { width:4px; background-color:#7faaca; position:absolute; left:186px;}
+
+.ico-left-pull{ background:url(../images/ico-left-pull.png) no-repeat; position:absolute; left:188px; width:22px; height:32px; cursor:pointer; }
+.ico-left-pull:hover{ background:url(../images/ico-left-pullL.png) no-repeat;left:186px;  height:64px; cursor:pointer; }
+.ico-left-open{ background:url(../images/ico-left-open.png) no-repeat; position:absolute; left:2px; width:22px; height:32px; cursor:pointer;}
+.ico-left-open:hover{ background:url(../images/ico-left-openL.png) no-repeat;left:0px;  height:64px; cursor:pointer; }
+
+/*内容页样式*/
+.main-content { overflow-x:hidden; position:absolute; right:0; }
+
+.header-box { border-bottom:solid 1px #7faaca; margin:20px; height:35px; }
+.ico-goback { background:url(../images/ico-goback.png) no-repeat; width:32px; height:32px; cursor:pointer; display:inline-block; }
+.ico-gonext { background:url(../images/ico-gonext.png) no-repeat; width:32px; height:32px; cursor:pointer; display:inline-block; }
+.header-title { height:20px; line-height:20px; padding-left:10px; margin-top:6px; border-left:solid 5px #7faaca; font-weight:bold; color:#7faaca; }
+
+
+.content-body{ margin:0 20px; padding-bottom:50px; overflow:auto; }
+
+/**/
+.verify-fail-err { height:20px; line-height:20px; padding-left:10px; padding-top:2px;}
+
+
+/*表格样式*/
+.table-list { width:100%; border-top:solid 1px #c5dceb;border-left:solid 1px #c5dceb; border-collapse:collapse;border-spacing:0;}
+.table-list tr{ height:25px;  background-color: #fff;}
+.table-list tr:hover { background-color: #e7f5fd; }
+.table-list td{ border-bottom:solid 1px #c5dceb;border-right:solid 1px #c5dceb; padding:5px 10px; vertical-align:middle;  }
+.table-list a{ color:#333;  vertical-align:middle;}
+.table-list a:hover{ color:red; text-decoration:underline; }
+.table-list .tr-header{ text-align:center;font-weight:bold; height:35px; }
+.table-list .tr-header td{ background-color:#e7f5fd; color:#2a3441;}
