@@ -43,6 +43,7 @@
     <Compile Include="BaseDAL.cs" />
     <Compile Include="Client\C_IndustryDAL.cs" />
     <Compile Include="Client\C_RoleDAL.cs" />
+    <Compile Include="Client\C_UsersDAL.cs" />
     <Compile Include="CommonDAL.cs" />
     <Compile Include="Manage\M_ClientDAL.cs" />
     <Compile Include="Manage\M_ModulesDAL.cs" />

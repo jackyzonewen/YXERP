@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>后台管理系统</title>
+    <link href="/modules/css/login.css" rel="stylesheet" />
+    <link href="/modules/css/layout.css" rel="stylesheet" />
+    <script src="/Scripts/sea.js"></script>
+    <script src="/Scripts/sea-config.js"></script>
+    <script type="text/javascript">
+        seajs.use(["scripts/home"], function (home) {
+            home.loginInit();
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div class="main">
+        <div class="logo"><img src="/modules/images/logoLogin.jpg" width="460" height="70" /></div>
+        <div class="content">
+            <div class="logoLanSan"><img src="/modules/images/logo.gif" width="243" height="55" /></div>
+            <div class="login">
+            <div class="loginbar">
+                <div class="userName">账号：</div>
+                <input type="text" id="iptUserName" class="verify"  data-empty="*" maxlength="25"/>
+            </div>
+            <div class="loginbar">
+                <div class="userName">密码：</div>
+                <input type="password"  class="verify"  data-empty="*" id="iptPwd"/>
+            </div>
+            <div id="loginBtn"> 
+                <input class="btn" id="btnLogin" type="button" value="登录"/>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="copyright">
+            <p>上海云销信息科技有限公司 (C)2013-2015<p>
+            <span>上海云销信息科技有限公司 (C)2013-2015</span>
+        </div>
+    </div>
+</body>
+</html>
