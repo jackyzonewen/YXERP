@@ -68,4 +68,7 @@
   <ItemGroup>
     <None Include="Procedures\Manage\P_InsertClient.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\P_GetC_UserToLogin.sql" />
+  </ItemGroup>
 </Project>

@@ -33,12 +33,12 @@ namespace CloudSalesBusiness
         public static C_Users GetC_UserByUserName(string userName, string pwd)
         {
             pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, userName);
-            DataTable dt = new C_UsersDAL().GetC_UserByUserName(userName, pwd);
+            DataSet ds = new C_UsersDAL().GetC_UserByUserName(userName, pwd);
             C_Users model = null;
-            if (dt.Rows.Count > 0)
+            if (ds.Tables.Contains("User") && ds.Tables["User"].Rows.Count > 0)
             {
                 model = new C_Users();
-                model.FillData(dt.Rows[0]);
+                model.FillData(ds.Tables["User"].Rows[0]);
             }
             return model;
         }

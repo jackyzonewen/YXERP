@@ -369,7 +369,6 @@ namespace CloudSalesDAL
                 throw;
             }
         }
-
         /// <summary>
         /// 执行SQL语句返回一个数据集
         /// </summary>
@@ -403,6 +402,65 @@ namespace CloudSalesDAL
                 SqlDataAdapter sda = new SqlDataAdapter(comm);
                 sda.Fill(ds);
 
+                comm.Parameters.Clear();
+                if (conn.State != ConnectionState.Closed)
+                {
+                    conn.Close();
+                }
+
+                return ds;
+            }
+            catch
+            {
+                conn.Close();
+                throw;
+            }
+        }
+        /// <summary>
+        /// 执行SQL语句返回一个数据集
+        /// </summary>
+        /// <param name="cmdText">SQL语句</param>
+        /// <param name="parms">参数</param>
+        /// <param name="cmdType">命令类型</param>
+        /// <param name="tableNames">tableA|tableB</param>
+        /// <returns>数据集</returns>
+        public static DataSet GetDataSet(string cmdText, SqlParameter[] parms, CommandType cmdType, string tableNames)
+        {
+            DataSet ds = new DataSet();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand comm = new SqlCommand();
+
+            try
+            {
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
+
+                comm.Connection = conn;
+                comm.CommandText = cmdText;
+                comm.CommandTimeout = 600;
+                comm.CommandType = cmdType;
+
+                foreach (SqlParameter parm in parms)
+                {
+                    comm.Parameters.Add(parm);
+                }
+
+                SqlDataAdapter sda = new SqlDataAdapter(comm);
+                string[] tables = tableNames.Split('|');
+                string mapTableName = "Table";
+                for (int index = 0; index < tables.Length; index++)
+                {
+                    if (tables[index] != null && tables[index].Length >= 0)
+                    {
+                        sda.TableMappings.Add(mapTableName, tables[index]);
+                        mapTableName = "Table" + (index + 1).ToString();
+                    }
+                }
+
+                sda.Fill(ds);
+                
                 comm.Parameters.Clear();
                 if (conn.State != ConnectionState.Closed)
                 {
