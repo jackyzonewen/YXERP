@@ -1,12 +1,12 @@
 ﻿/**  版本信息模板在安装目录下，可自行修改。
-* C_UserRole.cs
+* C_WareHouseType.cs
 *
 * 功 能： N/A
-* 类 名： C_UserRole
+* 类 名： C_WareHouseType
 *
 * Ver    变更日期             负责人  变更内容
 * ───────────────────────────────────
-* V0.01  2015/4/8 19:58:55   N/A    初版
+* V0.01  2015/5/3 13:38:26   N/A    初版
 *
 * Copyright (c) 2012 Maticsoft Corporation. All rights reserved.
 *┌──────────────────────────────────┐
@@ -18,19 +18,23 @@ using System;
 namespace CloudSalesEntity
 {
 	/// <summary>
-	/// C_UserRole:实体类(属性说明自动提取数据库字段的描述信息)
+	/// C_WareHouseType:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
 	[Serializable]
-	public partial class C_UserRole
+	public partial class C_WareHouseType
 	{
-		public C_UserRole()
+		public C_WareHouseType()
 		{}
 		#region Model
 		private int _autoid;
-		private string _userid;
-		private string _roleid;
-		private DateTime? _createtime= DateTime.Now;
+		private string _typecode;
+		private string _typename="";
+		private int? _status=1;
+		private string _description="";
 		private string _createuserid;
+		private DateTime? _createtime= DateTime.Now;
+		private DateTime? _updatetime= DateTime.Now;
+		private string _operateip="";
 		private string _clientid;
 		/// <summary>
 		/// 
@@ -43,18 +47,42 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string UserID
+		public string TypeCode
 		{
-			set{ _userid=value;}
-			get{return _userid;}
+			set{ _typecode=value;}
+			get{return _typecode;}
 		}
 		/// <summary>
 		/// 
 		/// </summary>
-		public string RoleID
+		public string TypeName
 		{
-			set{ _roleid=value;}
-			get{return _roleid;}
+			set{ _typename=value;}
+			get{return _typename;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int? Status
+		{
+			set{ _status=value;}
+			get{return _status;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Description
+		{
+			set{ _description=value;}
+			get{return _description;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string CreateUserID
+		{
+			set{ _createuserid=value;}
+			get{return _createuserid;}
 		}
 		/// <summary>
 		/// 
@@ -67,10 +95,18 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string CreateUserID
+		public DateTime? UpdateTime
 		{
-			set{ _createuserid=value;}
-			get{return _createuserid;}
+			set{ _updatetime=value;}
+			get{return _updatetime;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string OperateIP
+		{
+			set{ _operateip=value;}
+			get{return _operateip;}
 		}
 		/// <summary>
 		/// 

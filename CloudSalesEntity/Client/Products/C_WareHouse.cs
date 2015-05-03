@@ -1,12 +1,12 @@
 ﻿/**  版本信息模板在安装目录下，可自行修改。
-* C_Department.cs
+* C_WareHouse.cs
 *
 * 功 能： N/A
-* 类 名： C_Department
+* 类 名： C_WareHouse
 *
 * Ver    变更日期             负责人  变更内容
 * ───────────────────────────────────
-* V0.01  2015/4/8 19:58:54   N/A    初版
+* V0.01  2015/5/3 13:38:26   N/A    初版
 *
 * Copyright (c) 2012 Maticsoft Corporation. All rights reserved.
 *┌──────────────────────────────────┐
@@ -18,22 +18,27 @@ using System;
 namespace CloudSalesEntity
 {
 	/// <summary>
-	/// C_Department:实体类(属性说明自动提取数据库字段的描述信息)
+	/// C_WareHouse:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
 	[Serializable]
-	public partial class C_Department
+	public partial class C_WareHouse
 	{
-		public C_Department()
+		public C_WareHouse()
 		{}
 		#region Model
 		private int _autoid;
-		private string _departid;
-		private string _name;
-		private string _parentid;
-		private int? _status=0;
+		private string _warecode;
+		private string _name="";
+		private string _shortname="";
+		private string _typecode="";
+		private string _countrycode="";
+		private string _citycode="";
+		private int? _status=1;
 		private string _description="";
-		private DateTime? _createtime= DateTime.Now;
 		private string _createuserid;
+		private DateTime? _createtime= DateTime.Now;
+		private DateTime? _updatetime= DateTime.Now;
+		private string _operateip="";
 		private string _clientid;
 		/// <summary>
 		/// 
@@ -46,10 +51,10 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string DepartID
+		public string WareCode
 		{
-			set{ _departid=value;}
-			get{return _departid;}
+			set{ _warecode=value;}
+			get{return _warecode;}
 		}
 		/// <summary>
 		/// 
@@ -62,10 +67,34 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ParentID
+		public string ShortName
 		{
-			set{ _parentid=value;}
-			get{return _parentid;}
+			set{ _shortname=value;}
+			get{return _shortname;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string TypeCode
+		{
+			set{ _typecode=value;}
+			get{return _typecode;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string CountryCode
+		{
+			set{ _countrycode=value;}
+			get{return _countrycode;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string CityCode
+		{
+			set{ _citycode=value;}
+			get{return _citycode;}
 		}
 		/// <summary>
 		/// 
@@ -86,6 +115,14 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
+		public string CreateUserID
+		{
+			set{ _createuserid=value;}
+			get{return _createuserid;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public DateTime? CreateTime
 		{
 			set{ _createtime=value;}
@@ -94,10 +131,18 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string CreateUserID
+		public DateTime? UpdateTime
 		{
-			set{ _createuserid=value;}
-			get{return _createuserid;}
+			set{ _updatetime=value;}
+			get{return _updatetime;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string OperateIP
+		{
+			set{ _operateip=value;}
+			get{return _operateip;}
 		}
 		/// <summary>
 		/// 

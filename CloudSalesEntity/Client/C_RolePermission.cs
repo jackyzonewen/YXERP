@@ -27,11 +27,11 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private Guid _roleid;
+		private string _roleid;
 		private string _permissionid;
 		private DateTime? _createtime= DateTime.Now;
-		private Guid _createuserid;
-		private Guid _clientid;
+		private string _createuserid;
+		private string _clientid;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -43,7 +43,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid RoleID
+		public string RoleID
 		{
 			set{ _roleid=value;}
 			get{return _roleid;}
@@ -67,7 +67,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid CreateUserID
+		public string CreateUserID
 		{
 			set{ _createuserid=value;}
 			get{return _createuserid;}
@@ -75,7 +75,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid ClientID
+		public string ClientID
 		{
 			set{ _clientid=value;}
 			get{return _clientid;}

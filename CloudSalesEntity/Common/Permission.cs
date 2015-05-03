@@ -27,7 +27,7 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private Guid _permissionid;
+		private string _permissionid;
 		private string _name;
 		private string _menucode;
 		private string _action="";
@@ -43,7 +43,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid PermissionID
+		public string PermissionID
 		{
 			set{ _permissionid=value;}
 			get{return _permissionid;}

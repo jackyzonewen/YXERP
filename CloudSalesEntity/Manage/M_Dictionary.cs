@@ -27,7 +27,7 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private Guid _key;
+		private string _key;
 		private string _value;
 		private int? _type=0;
 		private string _description="";
@@ -42,7 +42,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public Guid Key
+		public string Key
 		{
 			set{ _key=value;}
 			get{return _key;}
