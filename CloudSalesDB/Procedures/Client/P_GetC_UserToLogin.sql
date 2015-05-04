@@ -19,9 +19,9 @@ CREATE PROCEDURE [dbo].[P_GetC_UserToLogin]
 @LoginPWD nvarchar(64)
 AS
 
-declare @C_UserID nvarchar(64)
+declare @C_UserID nvarchar(64),@ClientID nvarchar(64)
 
-select @C_UserID = UserID from C_Users where LoginName=@LoginName and LoginPWD=@LoginPWD
+select @C_UserID = UserID,@ClientID=ClientID from C_Users where LoginName=@LoginName and LoginPWD=@LoginPWD
 
 if(@C_UserID is not null)
 begin
@@ -41,6 +41,9 @@ begin
 	join Permission p on r.PermissionID=p.PermissionID 
 	where r.RoleID in (select RoleID from #Roles)
 	group by p.PermissionID,p.Name,p.MenuCode,p.Action
+
+	--模块信息
+	select * from M_ClientModules where ClientID=@ClientID
 end
 
  

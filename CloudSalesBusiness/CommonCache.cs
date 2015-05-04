@@ -15,26 +15,56 @@ namespace CloudSalesBusiness
     /// </summary>
     public class CommonCache
     {
-        private static List<Menu> _menus;
+        private static Dictionary<string, List<Menu>> _modules;
         /// <summary>
-        /// 菜单
+        /// 模块
         /// </summary>
-        public static List<Menu> Menus
+        public static Dictionary<string, List<Menu>> Modules
         {
             get 
             {
-                if (_menus == null)
+                if (_modules == null)
                 {
-                    DataTable dt = new CommonDAL().GetMenus();
-                    _menus = new List<Menu>();
-                    foreach (DataRow dr in dt.Rows)
+                    DataSet ds = new CommonDAL().GetModulesMenus();
+                    _modules = new Dictionary<string, List<Menu>>();
+                    if (ds.Tables.Contains("Modules") && ds.Tables.Contains("Menus"))
                     {
-                        Menu model = new Menu();
-                        model.FillData(dr);
-                        _menus.Add(model);
+                        foreach (DataRow dr in ds.Tables["Modules"].Rows)
+                        {
+                            M_Modules model = new M_Modules();
+                            model.FillData(dr);
+                            List<Menu> list = new List<Menu>();
+                            foreach (DataRow menu in ds.Tables["Menus"].Select("ModulesID='" + model.ModulesID + "'"))
+                            {
+                                Menu mModel = new Menu();
+                                mModel.FillData(menu);
+                                list.Add(mModel);
+                            }
+                            _modules.Add(model.ModulesID, list);
+                        }
                     }
                 }
-                return _menus;
+                return _modules;
+            }
+        }
+
+        private static Dictionary<string, List<Menu>> _clientMenus;
+        /// <summary>
+        /// 客户端菜单
+        /// </summary>
+        public static Dictionary<string, List<Menu>> ClientMenus
+        {
+            get
+            {
+                if (_clientMenus == null)
+                {
+                    _clientMenus = new Dictionary<string, List<Menu>>();
+                }
+                return _clientMenus;
+            }
+            set
+            {
+                _clientMenus = value;
             }
         }
 

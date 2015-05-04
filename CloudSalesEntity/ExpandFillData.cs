@@ -39,6 +39,13 @@ namespace CloudSalesEntity
                                 : "",
                                 null);
                             break;
+                        case "DateTime": 
+                            property.SetValue(entity,
+                                dr[property.Name] != null && dr[property.Name] != DBNull.Value
+                                ? Convert.ToDateTime( dr[property.Name])
+                                : DateTime.MinValue,
+                                null);
+                            break;
                         default:
                             property.SetValue(entity, dr[property.Name], null);
                             break;

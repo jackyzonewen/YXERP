@@ -14,15 +14,6 @@ namespace CloudSalesBusiness
     public class CommonBusiness
     {
         /// <summary>
-        /// 获取所有菜单
-        /// </summary>
-        /// <returns></returns>
-        public static List<Menu> GetMenus()
-        {
-            return CommonCache.Menus;
-        }
-
-        /// <summary>
         /// 获取地区列表
         /// </summary>
         /// <returns></returns>

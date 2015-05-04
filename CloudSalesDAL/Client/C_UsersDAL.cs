@@ -18,7 +18,7 @@ namespace CloudSalesDAL
                                     new SqlParameter("@LoginName",userName),
                                     new SqlParameter("@LoginPwd",pwd)
                                    };
-            return GetDataSet("P_GetC_UserToLogin", paras, CommandType.StoredProcedure, "User|Department|Role|Permission");
+            return GetDataSet("P_GetC_UserToLogin", paras, CommandType.StoredProcedure, "User|Department|Role|Permission|Modules");
         }
 
         #endregion

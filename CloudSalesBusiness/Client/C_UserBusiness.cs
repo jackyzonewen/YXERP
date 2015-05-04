@@ -39,6 +39,31 @@ namespace CloudSalesBusiness
             {
                 model = new C_Users();
                 model.FillData(ds.Tables["User"].Rows[0]);
+
+                if (CommonCache.ClientMenus.ContainsKey(model.ClientID))
+                {
+                    model.Menus = CommonCache.ClientMenus[model.ClientID];
+                }
+                else if (ds.Tables.Contains("Modules"))
+                {
+                    List<Menu> list = new List<Menu>();
+                    var modules = CommonCache.Modules;
+                    foreach (DataRow module in ds.Tables["Modules"].Rows)
+                    {
+                        if (modules.ContainsKey(module["ModulesID"].ToString()))
+                        {
+                            foreach (var item in modules[module["ModulesID"].ToString()])
+                            {
+                                if (list.Where(m => m.MenuCode == item.MenuCode).Count() == 0)
+                                {
+                                    list.Add(item);
+                                }
+                            }
+                        }
+                    }
+                    CommonCache.ClientMenus.Add(model.ClientID, list);
+                    model.Menus = list;
+                }
             }
             return model;
         }

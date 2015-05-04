@@ -13,10 +13,10 @@ namespace CloudSalesDAL
         /// 获取菜单
         /// </summary>
         /// <returns></returns>
-        public DataTable GetMenus()
+        public DataSet GetModulesMenus()
         {
-            DataTable dt = GetDataTable("select * from Menu where IsHide=0");
-            return dt;
+            DataSet ds = GetDataSet("P_GetModulesMenu", null, CommandType.StoredProcedure, "Modules|Menus");
+            return ds;
         }
 
         /// <summary>

@@ -15,12 +15,12 @@
         <div class="logo left"><img src="/modules/images/logo.gif" /></div>
         <div class="menu left">
             <ul>
-                @*@foreach (ERP.Model.MenuEntity model in ExpandClass.GetChildMenuByCode(ExpandClass.MANAGE_TOP_CODE))
+                @foreach (CloudSalesEntity.Menu model in ExpandClass.GetChildMenuByCode(HttpContext.Current, ExpandClass.MANAGE_TOP_CODE))
                 { 
                     <li class="left topMenu" data-code="@(model.MenuCode)">
-                        <a class="@Html.GetMenuSelect(HttpContext.Current,model.MenuCode,"select")" href="/Manage/ManageBase/TransCenter/@(model.MenuCode)"> @(model.MenuName)</a> 
+                        <a class="@Html.GetTopMenuActive(HttpContext.Current,model.MenuCode,"select")" href="/Base/TransCenter/@(model.MenuCode)"> @(model.Name)</a> 
                     </li>
-                }*@
+                }
             </ul>
             
         </div>
@@ -37,19 +37,19 @@
             </div>
             <div class="nav-list">
                 
-                @*@foreach (ERP.Model.MenuEntity model in ExpandClass.GetControllers(HttpContext.Current))
+                @foreach (CloudSalesEntity.Menu model in ExpandClass.GetControllers(HttpContext.Current))
                 {
                     <div class="controller @(model.Controller.ToUpper()==controller ? "select" : "")">
                         <span class="ico-img"></span>
-                        <span class="bolder menu-name">@(model.MenuName)</span>
+                        <span class="bolder menu-name">@(model.Name)</span>
                         <ul>
-                            @foreach (ERP.Model.MenuEntity child in ExpandClass.GetChildMenuByCode(model.MenuCode))
+                            @foreach (CloudSalesEntity.Menu child in ExpandClass.GetChildMenuByCode(HttpContext.Current, model.MenuCode))
                             {
-                                <li class="action "><a class="@(child.Action.ToUpper()==action ? "select" : "")" href="/Manage/@(child.Controller + "/" + child.Action)" >@(child.MenuName)</a></li>
+                                <li class="action "><a class="@(child.View.ToUpper()==action ? "select" : "")" href="/@(child.Controller + "/" + child.View)" >@(child.Name)</a></li>
                             }
                         </ul>
                     </div>
-                }*@
+                }
             </div>
             
         </nav>

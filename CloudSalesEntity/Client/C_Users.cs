@@ -15,6 +15,7 @@
 *└──────────────────────────────────┘
 */
 using System;
+using System.Collections.Generic;
 namespace CloudSalesEntity
 {
 	/// <summary>
@@ -36,7 +37,7 @@ namespace CloudSalesEntity
 		private string _officephone="";
 		private string _citycode="";
 		private string _address="";
-		private DateTime? _birthday;
+		private DateTime _birthday;
 		private int? _age=0;
 		private int? _sex=0;
 		private int? _education=0;
@@ -46,11 +47,15 @@ namespace CloudSalesEntity
 		private int? _allocation=0;
 		private int? _status=0;
 		private string _description="";
-		private DateTime? _effecttime;
-		private DateTime? _turnovertime;
-		private DateTime? _createtime= DateTime.Now;
+		private DateTime _effecttime;
+		private DateTime _turnovertime;
+		private DateTime _createtime= DateTime.Now;
 		private string _createuserid;
 		private string _clientid;
+
+
+        public List<Menu> Menus { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -134,7 +139,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? Birthday
+		public DateTime Birthday
 		{
 			set{ _birthday=value;}
 			get{return _birthday;}
@@ -214,7 +219,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? EffectTime
+		public DateTime EffectTime
 		{
 			set{ _effecttime=value;}
 			get{return _effecttime;}
@@ -222,7 +227,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? TurnoverTime
+		public DateTime TurnoverTime
 		{
 			set{ _turnovertime=value;}
 			get{return _turnovertime;}
@@ -230,7 +235,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? CreateTime
+		public DateTime CreateTime
 		{
 			set{ _createtime=value;}
 			get{return _createtime;}

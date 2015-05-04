@@ -71,4 +71,7 @@
   <ItemGroup>
     <None Include="Procedures\Client\P_GetC_UserToLogin.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\P_GetModulesMenu.sql" />
+  </ItemGroup>
 </Project>

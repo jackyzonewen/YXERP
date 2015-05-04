@@ -442,9 +442,12 @@ namespace CloudSalesDAL
                 comm.CommandTimeout = 600;
                 comm.CommandType = cmdType;
 
-                foreach (SqlParameter parm in parms)
+                if (parms != null)
                 {
-                    comm.Parameters.Add(parm);
+                    foreach (SqlParameter parm in parms)
+                    {
+                        comm.Parameters.Add(parm);
+                    }
                 }
 
                 SqlDataAdapter sda = new SqlDataAdapter(comm);
