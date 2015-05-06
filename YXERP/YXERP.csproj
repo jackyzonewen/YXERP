@@ -215,7 +215,7 @@
     <Content Include="Views\Products\Attr.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Products\ProductsAdd.cshtml" />
+    <Content Include="Views\Products\ProductAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\ProductsList.cshtml" />

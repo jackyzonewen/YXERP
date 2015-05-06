@@ -56,7 +56,7 @@ namespace YXERP.Controllers
         /// 添加产品
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProductsAdd() 
+        public ActionResult ProductAdd() 
         {
             return View();
         }
