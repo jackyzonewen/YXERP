@@ -218,7 +218,7 @@
     <Content Include="Views\Products\ProductAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Products\ProductsList.cshtml" />
+    <Content Include="Views\Products\ProductList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
