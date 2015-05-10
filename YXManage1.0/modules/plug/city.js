@@ -1,9 +1,9 @@
 ﻿/*
 --省市县插件--
 --引用
-var areaCity = require("area-city");
+var city = require("city");
 --实例化
-var city = areaCity.createArea({
+var city = areaCity.createCity({
     elementID: "" //父块状元素ID
 });
 city.getCityCode(); 获取选择地区编码

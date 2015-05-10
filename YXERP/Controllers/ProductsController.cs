@@ -26,6 +26,15 @@ namespace YXERP.Controllers
         }
 
         /// <summary>
+        /// 添加品牌
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BrandAdd() 
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 产品单位列表
         /// </summary>
         /// <returns></returns>

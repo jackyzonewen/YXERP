@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "添加品牌";
+}
+<link rel="stylesheet" href="/modules/css/products/brand.css" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/brand"], function (brand) {
+            brand.init();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">添加品牌</span>
+    <span class="ico-gonext right" onclick="history.go(1)" title="前进"></span>
+    <span class="ico-goback right" onclick="history.go(-1)" title="后退"></span>
+</div>
+<div class="content-body">
+    <ul class="table-add">
+        <li>
+            <span class="width80">品牌名称：</span><input type="text" id="brandName" data-empty="* 必填" class="input verify" />
+        </li>
+        <li>
+            <span class="width80">英文/简称：</span><input type="text" id="anotherName" class="input" />
+        </li>
+        <li>
+            <span class="width80">品牌风格：</span><input type="text" id="brandStyle" class="input" />
+        </li>
+        <li>
+            <span class="width80">品牌所在地：</span><span id="brandCity"></span>
+        </li>
+        <li>
+            <span class="width80">状态：</span>
+            <input type="checkbox" id="brandStatus" checked="checked" class="middle hand" />
+            <label for="brandStatus" class="hand">启用</label>
+        </li>
+        <li>
+            <span class="width80">商标：</span><span><input type="file" name="uploadify" id="uploadify" multiple="multiple" /></span>
+        </li>
+        <li>
+            <span class="width80">描述：</span><textarea id="description"></textarea>
+        </li>
+    </ul>
+    <img class="brand-img" id="brandImg" alt="" src="/modules/images/default.png" />
+    <div class="mTop20">
+        <input type="button" class="btn" id="btnSaveBrand" value="保存" />
+        <a href="Brand" class="btn mLeft20">返回</a>
+    </div>
+    
+</div>

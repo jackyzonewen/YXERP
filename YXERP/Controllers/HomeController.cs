@@ -22,6 +22,10 @@ namespace YXERP.Controllers
 
         public ActionResult Login()
         {
+            if (Session["ClientManager"] != null)
+            {
+                return Redirect("/Home/Index");
+            }
             return View();
         }
 

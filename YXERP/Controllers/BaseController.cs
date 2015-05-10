@@ -9,6 +9,9 @@ namespace YXERP.Controllers
     [YXERP.Common.UserAuthorize]
     public class BaseController : Controller
     {
+        /// <summary>
+        /// 当前用户
+        /// </summary>
         protected CloudSalesEntity.C_Users CurrentUser
         {
             get
@@ -24,6 +27,10 @@ namespace YXERP.Controllers
             }
             set { Session["ClientManager"] = value; }
         }
+
+
+        protected Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
+
         /// <summary>
         /// 模块跳转
         /// </summary>

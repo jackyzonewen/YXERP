@@ -99,6 +99,7 @@
     <Compile Include="Common\UserAuthorize.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlugController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -109,6 +110,8 @@
     <Content Include="Global.asax" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\login.css" />
+    <Content Include="modules\css\products\brand.css" />
+    <Content Include="modules\images\default.png" />
     <Content Include="modules\images\header.jpg" />
     <Content Include="modules\images\ico-add.png" />
     <Content Include="modules\images\ico-del-deep.png" />
@@ -152,6 +155,7 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home.js" />
     <Content Include="modules\scripts\layout.js" />
+    <Content Include="modules\scripts\products\brand.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
@@ -219,6 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\ProductList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Products\BrandAdd.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
