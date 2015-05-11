@@ -9,6 +9,10 @@ namespace YXERP.Controllers
     [YXERP.Common.UserAuthorize]
     public class BaseController : Controller
     {
+
+
+        protected string OperateIP = System.Web.HttpContext.Current.Request.UserHostAddress;
+
         /// <summary>
         /// 当前用户
         /// </summary>

@@ -1,6 +1,7 @@
 ﻿
 define(function (require, exports, module) {
     var City = require("city"), BrandCity,
+        Upload = require("upload"), BrandIco,
         Global = require("global"),
         Verify = require("verify"), VerifyObject,
         doT = require("dot");
@@ -18,7 +19,19 @@ define(function (require, exports, module) {
     }
     //绑定事件
     Brand.bindEvent = function () {
+        var _self = this;
         BrandCity = City.createCity({ elementID: "brandCity" });
+        BrandIco = Upload.createUpload({
+            element: "#brandIco",
+            buttonText: "选择商标",
+            data: { folder: '/Content/tempfile/', action: 'add', oldPath: "" },
+            success: function (data, status) {
+                if (data.Items.length > 0) {
+                    _self.IcoPath = data.Items[0];
+                    $("#brandImg").attr("src", data.Items[0]);
+                }
+            }
+        });
         $("#btnSaveBrand").on("click", function () {
             if (!VerifyObject.isPass()) {
                 return;
@@ -40,17 +53,16 @@ define(function (require, exports, module) {
             BrandID: _self.brandID,
             Name: $("#brandName").val().trim(),
             AnotherName: $("#anotherName").val().trim(),
-            IcoPath: $("#brandImg").attr("src"),
+            IcoPath: _self.IcoPath,
             CountryCode: "0086",
             CityCode: BrandCity.getCityCode(),
-            PostCode: "000000",
             Status: $("#brandStatus").prop("checked") ? 1 : 0,
             Remark: $("#description").val(),
             BrandStyle: $("#brandStyle").val().trim()
         };
         Global.post("/Products/SavaBrand", { brand: JSON.stringify(brand) }, function (data) {
             if (data.ID.length > 0) {
-                location.href="/Manage/Products/Brand"
+                location.href="/Products/Brand"
             }
         })
     }

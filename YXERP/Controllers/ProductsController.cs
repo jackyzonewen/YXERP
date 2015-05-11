@@ -1,8 +1,11 @@
-﻿using System;
+﻿using CloudSalesBusiness;
+using CloudSalesEntity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace YXERP.Controllers
 {
@@ -78,5 +81,41 @@ namespace YXERP.Controllers
         {
             return View();
         }
+
+
+        #region Ajax
+
+        /// <summary>
+        /// 保存品牌
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns></returns>
+        public JsonResult SavaBrand(string brand)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_Brand model = serializer.Deserialize<C_Brand>(brand);
+
+            string brandID = "";
+            if (string.IsNullOrEmpty(model.BrandID))
+            {
+                brandID = new ProductsBusiness().AddBrand(model.Name, model.AnotherName, model.IcoPath, model.CountryCode, model.CityCode, model.Status.Value, model.Remark, model.BrandStyle, OperateIP, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else
+            {
+                bool bl = false;//new ProductsBusiness().UpdateBrand(model.BrandID, model.Name, model.AnotherName, model.CountryCode, model.AreaCode, model.PostCode, model.Status, model.Remark, model.BrandStyle, OperateIP, CurrentManager.ManagerID);
+                if (bl)
+                {
+                    brandID = model.BrandID;
+                }
+            }
+            JsonDictionary.Add("ID", brandID);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        #endregion
     }
 }
