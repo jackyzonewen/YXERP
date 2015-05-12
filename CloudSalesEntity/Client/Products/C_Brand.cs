@@ -97,6 +97,9 @@ namespace CloudSalesEntity
 			set{ _citycode=value;}
 			get{return _citycode;}
 		}
+
+        public CityEntity City { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -162,6 +165,15 @@ namespace CloudSalesEntity
 			get{return _clientid;}
 		}
 		#endregion Model
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 	}
 }

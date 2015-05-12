@@ -134,6 +134,7 @@
     <Content Include="modules\images\ico-tree-line.png" />
     <Content Include="modules\images\ico-tree-open.png" />
     <Content Include="modules\images\ico-tree-pull.png" />
+    <Content Include="modules\images\ico_search.gif" />
     <Content Include="modules\images\loginBackground.jpg" />
     <Content Include="modules\images\loginbarBackground2.gif" />
     <Content Include="modules\images\loginMainBackground.jpg" />
@@ -151,6 +152,10 @@
     <Content Include="modules\plug\datapager\paginate.js" />
     <Content Include="modules\plug\datapager\style.css" />
     <Content Include="modules\plug\doT.js" />
+    <Content Include="modules\plug\seach_keys\seach_keys.js" />
+    <Content Include="modules\plug\seach_keys\style.css" />
+    <Content Include="modules\plug\switch\style.css" />
+    <Content Include="modules\plug\switch\switch.js" />
     <Content Include="modules\plug\upload\jquery.form.js" />
     <Content Include="modules\plug\upload\upload.js" />
     <Content Include="modules\plug\verify.js" />
@@ -158,6 +163,7 @@
     <Content Include="modules\scripts\home.js" />
     <Content Include="modules\scripts\layout.js" />
     <Content Include="modules\scripts\products\brand.js" />
+    <Content Include="modules\template\products\brand_list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
@@ -229,6 +235,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\BrandAdd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="modules\plug\seach_keys\vssver2.scc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="modules\plug\switch\vssver2.scc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

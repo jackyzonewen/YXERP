@@ -60,6 +60,7 @@
     <Folder Include="Procedures" />
     <Folder Include="Procedures\Manage" />
     <Folder Include="Procedures\Client" />
+    <Folder Include="Procedures\Client\Products" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Procedures\InitDatabase.sql" />
@@ -73,5 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Procedures\P_GetModulesMenu.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Products\P_GetBrandList.sql" />
   </ItemGroup>
 </Project>

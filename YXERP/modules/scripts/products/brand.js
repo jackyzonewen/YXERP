@@ -6,6 +6,7 @@ define(function (require, exports, module) {
         Verify = require("verify"), VerifyObject,
         doT = require("dot");
     require("pager");
+    require("switch");
     var Params = {
         keyWords: "",
         pageSize: 20,
@@ -85,8 +86,8 @@ define(function (require, exports, module) {
     Brand.getList = function () {
         var _self = this;
         $("#brand-items").nextAll().remove();
-        Global.post("/Manage/Products/GetBrandList", Params, function (data) {
-            doT.exec("/modules/manage/template/products/brand_list.html", function (templateFun) {
+        Global.post("/Products/GetBrandList", Params, function (data) {
+            doT.exec("template/products/brand_list.html", function (templateFun) {
                 var innerText = templateFun(data.Items);
                 innerText = $(innerText);
                 $("#brand-items").after(innerText);
@@ -94,7 +95,7 @@ define(function (require, exports, module) {
                 //删除事件
                 $(".ico-del").click(function () {
                     if (confirm("品牌删除后不可恢复,确认删除吗？")) {
-                        Global.post("/Manage/Products/DeleteBrand", { brandID: $(this).attr("data-id") }, function (data) {
+                        Global.post("/Products/DeleteBrand", { brandID: $(this).attr("data-id") }, function (data) {
                             if (data.Status) {
                                 _self.getList();
                             } else {
@@ -138,7 +139,7 @@ define(function (require, exports, module) {
     //更改品牌状态
     Brand.editStatus = function (obj, id, status, callback) {
         var _self = this;
-        Global.post("/Manage/Products/UpdateBrandStatus", {
+        Global.post("/Products/UpdateBrandStatus", {
             brandID: id,
             status: status ? 0 : 1
         }, function (data) {

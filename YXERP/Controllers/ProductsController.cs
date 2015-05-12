@@ -1,5 +1,6 @@
 ﻿using CloudSalesBusiness;
 using CloudSalesEntity;
+using CloudSalesEnum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +86,7 @@ namespace YXERP.Controllers
 
         #region Ajax
 
+        #region 品牌
         /// <summary>
         /// 保存品牌
         /// </summary>
@@ -115,6 +117,55 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        /// <summary>
+        /// 获取品牌列表
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetBrandList(string keyWords, int pageSize, int pageIndex, int totalCount)
+        {
+            int pageCount = 0;
+            List<C_Brand> list = new ProductsBusiness().GetBrandList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", totalCount);
+            JsonDictionary.Add("PageCount", pageCount);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 编辑品牌状态
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult UpdateBrandStatus(string brandID, int status)
+        {
+            bool bl = new ProductsBusiness().UpdateBrandStatus(brandID, (StatusEnum)status, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 删除品牌
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult DeleteBrand(string brandID)
+        {
+            bool bl = new ProductsBusiness().UpdateBrandStatus(brandID, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        #endregion
 
         #endregion
     }

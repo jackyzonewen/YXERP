@@ -1,0 +1,17 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+<tr class="list-item">
+    <td><a href="BrandEdit/{%=item.BrandID%}"><img alt="" src="{%=item.IcoPath%}" /></a></td>
+    <td><a href="BrandEdit/{%=item.BrandID%}">{%=item.Name%}</a></td>
+    <td>{%=item.AnotherName%}</td>
+    <td>{%=item.BrandStyle%}</td>
+    <td class='center'><div class="status" data-id="{%=item.BrandID%}" data-value="{%=item.Status==1%}"></div></td>
+    <td title="{%=item.Remark%}">{%=item.Remark.subString(50)%}</td>
+    <td class="center"><a class="ico-edit" title="编辑" href="BrandEdit/{%=item.BrandID%}"></a></td>
+    <td class="center">
+        <a class="ico-del" href="javascript:void(0)" title="删除" data-id="{%=item.BrandID%}"></a>
+    </td>
+</tr>
+{% } %}

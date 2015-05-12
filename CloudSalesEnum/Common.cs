@@ -24,4 +24,19 @@ namespace CloudSalesEnum
         Agent = 3
     }
 
+    /// <summary>
+    /// 状态枚举
+    /// </summary>
+    public enum StatusEnum
+    {
+        //所有（搜索）
+        All = -1,
+        //无效
+        Invalid = 0,
+        //有效
+        Valid = 1,
+        //删除
+        Delete = 9
+    }
+
 }

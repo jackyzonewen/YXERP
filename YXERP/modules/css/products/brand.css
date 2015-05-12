@@ -1,3 +1,11 @@
 ﻿
 .brand-img { position:absolute; top:80px; right:50px; width:150px; }
 .brand-img img{ width:150px;}
+
+
+/*品牌列表样式*/
+
+.s-len{ width:30px;}
+.m-len{ width:80px;}
+.l-len{ width:160px;}
+.list-item img{  height:18px; vertical-align:middle;}

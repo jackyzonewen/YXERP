@@ -9,12 +9,35 @@ namespace CloudSalesDAL
 {
     public class ProductsDAL : BaseDAL
     {
+        #region 查询
+
+        public DataSet GetBrandList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@totalCount",SqlDbType.Int),
+                                       new SqlParameter("@pageCount",SqlDbType.Int),
+                                       new SqlParameter("@keyWords",keyWords),
+                                       new SqlParameter("@pageSize",pageSize),
+                                       new SqlParameter("@pageIndex",pageIndex),
+                                       new SqlParameter("@ClientID",clientID)
+                                       
+                                   };
+            paras[0].Value = totalCount;
+            paras[1].Value = pageCount;
+            
+            paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Direction = ParameterDirection.InputOutput;
+            DataSet ds = GetDataSet("P_GetBrandList", paras, CommandType.StoredProcedure);
+            totalCount = Convert.ToInt32(paras[0].Value);
+            pageCount = Convert.ToInt32(paras[1].Value);
+            return ds;
+
+        }
+
+        #endregion
+
         #region 添加
 
-        /// <summary>
-        /// 添加品牌
-        /// </summary>
-        /// <returns>返回品牌ID</returns>
         public string AddBrand(string name, string anotherName, string icoPath, string countryCode, string cityCode, int status, string remark, string brandStyle, string operateIP, string operateID, string clientID)
         {
             string brandID = Guid.NewGuid().ToString();

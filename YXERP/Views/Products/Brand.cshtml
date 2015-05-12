@@ -1,7 +1,14 @@
 ﻿@{
     ViewBag.Title = "品牌设置";
 }
-
+<link href="/modules/css/products/brand.css" rel="stylesheet" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/brand"], function (brand) {
+            brand.initList();
+        });
+    </script>
+}
 <div class="header-box">
     <span class="header-title left">品牌设置</span>
     <a href="BrandAdd" class="ico-add left mTop4 mLeft20">添加品牌</a>
