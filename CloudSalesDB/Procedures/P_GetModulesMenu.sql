@@ -18,4 +18,4 @@ CREATE PROCEDURE [dbo].[P_GetModulesMenu]
 AS
 select * from M_Modules 
 
-select mm.ModulesID,m.* from M_ModulesMenu mm join Menu m on mm.MenuCode=m.MenuCode where m.IsHide=0 and m.Type=1
+select mm.ModulesID,m.* from M_ModulesMenu mm join Menu m on mm.MenuCode=m.MenuCode where m.IsHide=0 and m.Type=1 order by m.Sort
