@@ -2,4 +2,29 @@
     ViewBag.Title = "产品单位设置--云销科技";
 }
 
-<h2>Unit</h2>
+@section css{
+    <link rel="stylesheet" href="/modules/css/products/unit.css" />
+}
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/unit"], function (unit) {
+            unit.init();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">单位设置</span>
+    <div class="right searth-module"> </div>
+    
+</div>
+<div class="content-body">
+    <ul class="unit-list">
+        @foreach (var item in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.Items)
+        {
+            <li class="unit-item"><input type="text" data-id="@(item.UnitID)" data-value="@(item.UnitName)" value="@(item.UnitName)" /><span data-id="@(item.UnitID)" class="ico-delete"></span></li>
+        }
+       
+        <li id="addUnit"><a href="javascript:void(0)" class="ico-add left mTop4">添加</a></li>
+    </ul>
+    
+</div>

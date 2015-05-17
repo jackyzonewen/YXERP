@@ -60,6 +60,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult Unit() 
         {
+            ViewBag.Items = new ProductsBusiness().GetClientUnits(CurrentUser.ClientID);
             return View();
         }
 
@@ -196,6 +197,54 @@ namespace YXERP.Controllers
             };
         }
 
+        #endregion
+
+        #region 单位
+
+        /// <summary>
+        /// 保存单位
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        public JsonResult SaveUnit(string unit)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_ProductUnit model = serializer.Deserialize<C_ProductUnit>(unit);
+
+            string UnitID = "";
+            if (string.IsNullOrEmpty(model.UnitID))
+            {
+                UnitID = new ProductsBusiness().AddUnit(model.UnitName, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else
+            {
+                bool bl = new ProductsBusiness().UpdateUnit(model.UnitID, model.UnitName, model.Description, CurrentUser.UserID);
+                if (bl)
+                {
+                    UnitID = model.UnitID;
+                }
+            }
+            JsonDictionary.Add("ID", UnitID);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 删除单位
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult DeleteUnit(string unitID)
+        {
+            bool bl = new ProductsBusiness().UpdateUnitStatus(unitID, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
 
         #endregion

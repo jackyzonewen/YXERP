@@ -63,6 +63,25 @@ namespace CloudSalesBusiness
             return model;
         }
 
+        /// <summary>
+        /// 获取单位列表
+        /// </summary>
+        /// <returns></returns>
+        public List<C_ProductUnit> GetClientUnits(string clientid)
+        {
+            var dal = new ProductsDAL();
+            DataTable dt = dal.GetClientUnits(clientid);
+
+            List<C_ProductUnit> list = new List<C_ProductUnit>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                C_ProductUnit model = new C_ProductUnit();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
         #endregion
 
         #region 添加
@@ -100,6 +119,18 @@ namespace CloudSalesBusiness
             return new ProductsDAL().AddBrand(name, anotherName, icoPath, countryCode, cityCode, status, remark, brandStyle, operateIP, operateID, clientID);
         }
 
+        /// <summary>
+        /// 添加单位
+        /// </summary>
+        /// <param name="unitName">单位名称</param>
+        /// <param name="description">描述</param>
+        /// <returns></returns>
+        public string AddUnit(string unitName, string description,string operateid,string clientid)
+        {
+            var dal = new ProductsDAL();
+            return dal.AddUnit(unitName, description, operateid, clientid);
+        }
+
         #endregion
 
         #region 编辑、删除
@@ -135,6 +166,34 @@ namespace CloudSalesBusiness
         {
             var dal = new ProductsDAL();
             return dal.UpdateBrand(brandID, name, anotherName, countryCode, cityCode, status, remark, brandStyle, operateIP, operateID);
+        }
+
+        /// <summary>
+        /// 编辑单位
+        /// </summary>
+        /// <param name="unitID">单位ID</param>
+        /// <param name="unitName">单位名称</param>
+        /// <param name="desciption">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <returns></returns>
+        public bool UpdateUnit(string unitID, string unitName, string desciption, string operateid)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateUnit(unitID, unitName, desciption);
+        }
+
+        /// <summary>
+        /// 编辑单位状态
+        /// </summary>
+        /// <param name="unitID">单位ID</param>
+        /// <param name="status">状态</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateUnitStatus(string unitID, StatusEnum status, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateUnitStatus(unitID, (int)status);
         }
 
         #endregion

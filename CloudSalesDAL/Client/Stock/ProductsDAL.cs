@@ -41,6 +41,13 @@ namespace CloudSalesDAL
             return dt;
         }
 
+        public DataTable GetClientUnits(string clientid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@ClientID", clientid) };
+            DataTable dt = GetDataTable("select * from C_ProductUnit where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
+            return dt;
+        }
+
         #endregion
 
         #region 添加
@@ -68,6 +75,26 @@ namespace CloudSalesDAL
 
         }
 
+        public string AddUnit(string unitName, string description, string operateid, string clientid)
+        {
+            string guid = Guid.NewGuid().ToString();
+            string sqlText = "INSERT INTO C_ProductUnit([UnitID] ,[UnitName],[Description],CreateUserID,ClientID) "
+                                            + "values(@UnitID ,@UnitName,@Description,@CreateUserID,@ClientID)";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@UnitID" , guid),
+                                     new SqlParameter("@UnitName" , unitName),
+                                     new SqlParameter("@Description" , description),
+                                     new SqlParameter("@CreateUserID" , operateid),
+                                     new SqlParameter("@ClientID" , clientid),
+                                    
+                                   };
+            if (ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0)
+            {
+                return guid;
+            }
+            return "";
+        }
+
         #endregion
 
         #region 编辑
@@ -85,6 +112,27 @@ namespace CloudSalesDAL
                                      new SqlParameter("@Remark" , remark),
                                      new SqlParameter("@BrandStyle" , brandStyle),
                                      new SqlParameter("@BrandID" , brandID),
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateUnit(string unitID, string unitName, string description)
+        {
+            string sqlText = "Update C_ProductUnit set [UnitName]=@UnitName,[Description]=@Description,UpdateTime=getdate()  where [UnitID]=@UnitID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@UnitID",unitID),
+                                     new SqlParameter("@UnitName" , unitName),
+                                     new SqlParameter("@Description" , description)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateUnitStatus(string unitid, int status)
+        {
+            string sqlText = "Update C_ProductUnit set Status=@Status,UpdateTime=getdate()  where [UnitID]=@UnitID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@UnitID",unitid),
+                                     new SqlParameter("@Status" , status)
                                    };
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }

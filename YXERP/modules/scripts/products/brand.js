@@ -68,7 +68,6 @@ define(function (require, exports, module) {
             }
         })
     }
-
     //列表页初始化
     Brand.initList = function () {
         Brand.getList();
@@ -88,7 +87,7 @@ define(function (require, exports, module) {
         var _self = this;
         $("#brand-items").nextAll().remove();
         Global.post("/Products/GetBrandList", Params, function (data) {
-            doT.exec("template/products/brand_list.html?1", function (templateFun) {
+            doT.exec("template/products/brand_list.html", function (templateFun) {
                 var innerText = templateFun(data.Items);
                 innerText = $(innerText);
                 $("#brand-items").after(innerText);
@@ -147,7 +146,6 @@ define(function (require, exports, module) {
             !!callback && callback(data.Status);
         });
     }
-
     //初始化编辑页数据
     Brand.initEdit = function (model) {
         var _self = this;
@@ -172,6 +170,7 @@ define(function (require, exports, module) {
         
         
     }
+
     Brand.bindDetailEvent = function (model) {
         var _self = this, count = 1;
         BrandCity = City.createCity({
@@ -206,5 +205,6 @@ define(function (require, exports, module) {
             }
         });
     }
+
     module.exports = Brand;
 })
