@@ -25,6 +25,7 @@ define(function (require, exports, module) {
         BrandIco = Upload.createUpload({
             element: "#brandIco",
             buttonText: "选择商标",
+            className: "edit-brand",
             data: { folder: '/Content/tempfile/', action: 'add', oldPath: "" },
             success: function (data, status) {
                 if (data.Items.length > 0) {
@@ -87,7 +88,7 @@ define(function (require, exports, module) {
         var _self = this;
         $("#brand-items").nextAll().remove();
         Global.post("/Products/GetBrandList", Params, function (data) {
-            doT.exec("template/products/brand_list.html", function (templateFun) {
+            doT.exec("template/products/brand_list.html?1", function (templateFun) {
                 var innerText = templateFun(data.Items);
                 innerText = $(innerText);
                 $("#brand-items").after(innerText);
@@ -148,34 +149,40 @@ define(function (require, exports, module) {
     }
 
     //初始化编辑页数据
-    Brand.initEdit = function (brandID,callBack) {
+    Brand.initEdit = function (model) {
         var _self = this;
-        _self.brandID = brandID;
-        _self.bindEditEvent();
-        Global.post("/Manage/Products/GetBrandDetail", { brandID: brandID }, function (data) {
-            _self.bindDetail(data.Item, callBack);
-        });
+        model = JSON.parse(model.replace(/&quot;/g, '"'));
+        _self.bindDetailEvent(model);
+        _self.bindDetail(model);
     }
     //获取详细信息
-    Brand.bindDetail = function (model, callBack) {
+    Brand.bindDetail = function (model) {
+        var _self = this;
+        _self.brandID = model.BrandID;
         $("#brandName").val(model.Name);
         $("#anotherName").val(model.AnotherName);
         $("#brandStyle").val(model.BrandStyle);
-        BrandArea.setValue(model.AreaCode);
         if (model.Status == 1) {
             $("#brandStatus").prop("checked", "checked");
         }
         $("#description").val(model.Remark);
-        $("#brandImg").attr("src", model.ImgPath);
-
-        !!callBack && callBack();
+        $("#brandImg").attr("src", model.IcoPath);
+        
+        _self.IcoPath = model.IcoPath;
+        
+        
     }
-    //绑定编辑事件
-    Brand.bindEditEvent = function () {
-        BrandArea = AreaCity.createArea({ elementID: "brandArea" });
-        $("#btnSavebrand").on("click", function () {
-            if (!VerifyObject.isPass())
+    Brand.bindDetailEvent = function (model) {
+        var _self = this, count = 1;
+        BrandCity = City.createCity({
+            elementID: "brandCity",
+            cityCode: model.CityCode
+        });
+        
+        $("#btnSaveBrand").on("click", function () {
+            if (!VerifyObject.isPass()) {
                 return;
+            }
             Brand.savaBrand();
         });
 
@@ -185,7 +192,19 @@ define(function (require, exports, module) {
             verifyType: "data-type",
             regText: "data-text"
         });
-    }
 
+        BrandIco = Upload.createUpload({
+            element: "#brandIco",
+            buttonText: "更换商标",
+            className: "edit-brand",
+            data: { folder: '/Content/tempfile/', action: 'add', oldPath: model.IcoPath },
+            success: function (data, status) {
+                if (data.Items.length > 0) {
+                    _self.IcoPath = data.Items[0];
+                    $("#brandImg").attr("src", data.Items[0] + "?" + count++);
+                }
+            }
+        });
+    }
     module.exports = Brand;
 })

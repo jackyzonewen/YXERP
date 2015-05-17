@@ -37,6 +37,22 @@ namespace YXERP.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 品牌详情
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BrandDetail(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return View("Brand");
+            }
+            C_Brand model = new ProductsBusiness().GetBrandByBrandID(id);
+            ViewBag.Item = model;
+            ViewBag.ID = id;
+           
+            return View();
+        }
 
         /// <summary>
         /// 产品单位列表
@@ -104,7 +120,7 @@ namespace YXERP.Controllers
             }
             else
             {
-                bool bl = false;//new ProductsBusiness().UpdateBrand(model.BrandID, model.Name, model.AnotherName, model.CountryCode, model.AreaCode, model.PostCode, model.Status, model.Remark, model.BrandStyle, OperateIP, CurrentManager.ManagerID);
+                bool bl = new ProductsBusiness().UpdateBrand(model.BrandID, model.Name, model.AnotherName, model.CountryCode, model.CityCode, model.Status.Value, model.Remark, model.BrandStyle, OperateIP, CurrentUser.UserID);
                 if (bl)
                 {
                     brandID = model.BrandID;
@@ -158,6 +174,21 @@ namespace YXERP.Controllers
         {
             bool bl = new ProductsBusiness().UpdateBrandStatus(brandID, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 获取品牌详细信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetBrandDetail(string brandID)
+        {
+            C_Brand model = new ProductsBusiness().GetBrandByBrandID(brandID);
+            JsonDictionary.Add("Item", model);
             return new JsonResult
             {
                 Data = JsonDictionary,

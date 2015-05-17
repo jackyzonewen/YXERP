@@ -8,6 +8,7 @@ define(function (require, exports, module) {
         buttonText: "上传",         //按钮文本
         url: "/Plug/UploadFile",	//文件临时存储路径
         data: {},
+        className: "",
         beforeSubmit: function () { },
         error: function () { },
         success: function () { },		//上传成功
@@ -23,7 +24,7 @@ define(function (require, exports, module) {
         if (_self.setting.element) {
             var form = $('<form id="' + _self.setting.element + '_postForm" enctype="multipart/form-data"></form>'),
                 file = $('<input type="file" name="file" id="' + _self.setting.element + '_fileUpLoad" style="display:none;" />'),
-                button = $('<input id="' + _self.setting.element + '_buttonSubmit" type="button" value="' + _self.setting.buttonText + '" />')
+                button = $('<input id="' + _self.setting.element + '_buttonSubmit" class="' + _self.setting.className + '" type="button" value="' + _self.setting.buttonText + '" />')
             form.append(file).append(button);
 
             $(_self.setting.element).append(form);

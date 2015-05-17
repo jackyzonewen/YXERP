@@ -15,6 +15,7 @@ define(function (require, exports, module) {
     var $ = require("jquery"), Global = require("global"), Option = "<option value=''>请选择</option>";
     var Default = {
         elementID: "cityPlug",
+        cityCode: "",
         dataUrl: "/Plug/GetCityByPCode"
     };
     var City = function (options) {
@@ -30,7 +31,9 @@ define(function (require, exports, module) {
         _self.city = $("<select></select>", { id: _self.setting.elementID + "_city", "class": "" }).append(Option);
         _self.county = $("<select></select>", { id: _self.setting.elementID + "_county", "class": "" }).append(Option);
         _element.append(_self.province).append(_self.city).append(_self.county);
-        _self.getChildren(_self.province, "CHN");
+        _self.getChildren(_self.province, "CHN", function () {
+            !!_self.setting.cityCode && _self.setValue(_self.setting.cityCode)
+        });
         _self.bindEvent();
     }
     //绑定事件
@@ -97,6 +100,7 @@ define(function (require, exports, module) {
         if (cityCode.length != 6) {
             return;
         }
+       
         var _self = this, _province = cityCode.substr(0, 2), _city = cityCode.substr(2, 2), _county = cityCode.substr(4, 2);
         var province = _self.province.find("option[value^='" + _province + "']");
         province.prop("selected", "selected");

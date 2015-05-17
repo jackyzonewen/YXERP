@@ -34,6 +34,13 @@ namespace CloudSalesDAL
 
         }
 
+        public DataTable GetBrandByBrandID(string brandID)
+        {
+            SqlParameter[] paras = { new SqlParameter("@brandID", brandID) };
+            DataTable dt = GetDataTable("select * from C_Brand where BrandID=@brandID", paras, CommandType.Text);
+            return dt;
+        }
+
         #endregion
 
         #region 添加
@@ -59,6 +66,27 @@ namespace CloudSalesDAL
                                    };
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0 ? brandID : "";
 
+        }
+
+        #endregion
+
+        #region 编辑
+
+        public bool UpdateBrand(string brandID, string name, string anotherName, string countryCode, string cityCode, int status, string remark, string brandStyle, string operateIP, string operateID)
+        {
+            string sqlText = "Update C_Brand set [Name]=@Name,[AnotherName]=@AnotherName ,[CountryCode]=@CountryCode,[CityCode]=@CityCode," +
+                "[Status]=@Status,[Remark]=@Remark,[BrandStyle]=@BrandStyle,[UpdateTime]=getdate() where [BrandID]=@BrandID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@Name" , name),
+                                     new SqlParameter("@AnotherName" , anotherName),
+                                     new SqlParameter("@CountryCode" , countryCode),
+                                     new SqlParameter("@CityCode" , cityCode),
+                                     new SqlParameter("@Status" , status),
+                                     new SqlParameter("@Remark" , remark),
+                                     new SqlParameter("@BrandStyle" , brandStyle),
+                                     new SqlParameter("@BrandID" , brandID),
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
         #endregion

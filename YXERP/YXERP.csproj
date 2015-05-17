@@ -242,6 +242,9 @@
   <ItemGroup>
     <Content Include="modules\plug\switch\vssver2.scc" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Products\BrandDetail.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

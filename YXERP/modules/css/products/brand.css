@@ -2,6 +2,8 @@
 .brand-img { position:absolute; top:80px; right:50px; width:150px; }
 .brand-img img{ width:150px;}
 
+.edit-brand { height:25px;  padding:0 15px; border-radius:13px; background-color:#BFD9EA; border:1px solid #BFD9EA;
+              cursor:pointer; color:#033d91;}
 
 /*品牌列表样式*/
 

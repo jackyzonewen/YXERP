@@ -43,6 +43,26 @@ namespace CloudSalesBusiness
             }
             return list;
         }
+
+        /// <summary>
+        /// 获取品牌实体
+        /// </summary>
+        /// <param name="brandID">传入参数</param>
+        /// <returns></returns>
+        public C_Brand GetBrandByBrandID(string brandID)
+        {
+            var dal = new ProductsDAL();
+            DataTable dt = dal.GetBrandByBrandID(brandID);
+
+            C_Brand model = new C_Brand();
+            if (dt.Rows.Count > 0)
+            {
+                model.FillData(dt.Rows[0]);
+                model.City = CommonCache.Citys.Where(c => c.CityCode == model.CityCode).FirstOrDefault();
+            }
+            return model;
+        }
+
         #endregion
 
         #region 添加
@@ -95,6 +115,26 @@ namespace CloudSalesBusiness
         public bool UpdateBrandStatus(string brandID, StatusEnum status, string operateIP, string operateID)
         {
             return CommonBusiness.Update("C_Brand", "Status", ((int)status).ToString(), " BrandID='" + brandID + "'");
+        }
+
+        /// <summary>
+        /// 编辑品牌
+        /// </summary>
+        /// <param name="brandID">ID</param>
+        /// <param name="name">名称</param>
+        /// <param name="anotherName">别称</param>
+        /// <param name="countryCode">国家编码</param>
+        /// <param name="cityCode">城市编码</param>
+        /// <param name="status">状态</param>
+        /// <param name="remark">备注</param>
+        /// <param name="brandStyle"风格></param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateBrand(string brandID, string name, string anotherName, string countryCode, string cityCode, int status, string remark, string brandStyle, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateBrand(brandID, name, anotherName, countryCode, cityCode, status, remark, brandStyle, operateIP, operateID);
         }
 
         #endregion
