@@ -48,6 +48,28 @@ namespace CloudSalesDAL
             return dt;
         }
 
+        public DataSet GetAttrList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@totalCount",SqlDbType.Int),
+                                       new SqlParameter("@pageCount",SqlDbType.Int),
+                                       new SqlParameter("@keyWords",keyWords),
+                                       new SqlParameter("@pageSize",pageSize),
+                                       new SqlParameter("@pageIndex",pageIndex),
+                                       new SqlParameter("@ClientID",clientid)
+                                   };
+            paras[0].Value = totalCount;
+            paras[1].Value = pageCount;
+
+            paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Direction = ParameterDirection.InputOutput;
+            DataSet ds = GetDataSet("P_GetProductAttrList", paras, CommandType.StoredProcedure, "Attrs|Values");
+            totalCount = Convert.ToInt32(paras[0].Value);
+            pageCount = Convert.ToInt32(paras[1].Value);
+            return ds;
+
+        }
+
         #endregion
 
         #region 添加
@@ -85,14 +107,27 @@ namespace CloudSalesDAL
                                      new SqlParameter("@UnitName" , unitName),
                                      new SqlParameter("@Description" , description),
                                      new SqlParameter("@CreateUserID" , operateid),
-                                     new SqlParameter("@ClientID" , clientid),
-                                    
+                                     new SqlParameter("@ClientID" , clientid)
                                    };
             if (ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0)
             {
                 return guid;
             }
             return "";
+        }
+
+        public bool AddProductAttr(string attrID, string attrName, string description, string operateid, string clientid)
+        {
+            string sqlText = "INSERT INTO C_ProductAttr([AttrID] ,[AttrName],[Description],[Status],CreateUserID,ClientID) "
+                                             + "values(@AttrID ,@AttrName,@Description,1,@CreateUserID,@ClientID) ";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@AttrID" , attrID),
+                                     new SqlParameter("@AttrName" , attrName),
+                                     new SqlParameter("@Description" , description),
+                                     new SqlParameter("@CreateUserID" , operateid),
+                                     new SqlParameter("@ClientID" , clientid)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
         #endregion
@@ -133,6 +168,17 @@ namespace CloudSalesDAL
             SqlParameter[] paras = { 
                                      new SqlParameter("@UnitID",unitid),
                                      new SqlParameter("@Status" , status)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateProductAttr(string attrID, string attrName, string description)
+        {
+            string sqlText = "Update C_ProductAttr set [AttrName]=@AttrName,[Description]=@Description  where [AttrID]=@AttrID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@AttrID",attrID),
+                                     new SqlParameter("@AttrName" , attrName),
+                                     new SqlParameter("@Description" , description),
                                    };
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }

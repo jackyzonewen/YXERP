@@ -15,6 +15,7 @@
 *└──────────────────────────────────┘
 */
 using System;
+using System.Collections.Generic;
 namespace CloudSalesEntity
 {
 	/// <summary>
@@ -27,7 +28,7 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private int _attrid;
+		private string _attrid;
 		private string _attrname="";
 		private int? _status=1;
 		private string _description="";
@@ -36,6 +37,8 @@ namespace CloudSalesEntity
 		private DateTime? _updatetime= DateTime.Now;
 		private string _operateip="";
 		private string _clientid;
+
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -47,7 +50,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public int AttrID
+        public string AttrID
 		{
 			set{ _attrid=value;}
 			get{return _attrid;}
@@ -116,8 +119,22 @@ namespace CloudSalesEntity
 			set{ _clientid=value;}
 			get{return _clientid;}
 		}
-		#endregion Model
 
+        public string ValuesStr { get; set; }
+        /// <summary>
+        /// 属性值
+        /// </summary>
+        public List<C_AttrValue> AttrValues { get; set; }
+
+		#endregion Model
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 	}
 }
 

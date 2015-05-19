@@ -110,6 +110,7 @@
     <Content Include="Global.asax" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\login.css" />
+    <Content Include="modules\css\products\attr.css" />
     <Content Include="modules\css\products\brand.css" />
     <Content Include="modules\css\products\unit.css" />
     <Content Include="modules\images\default.png" />
@@ -153,6 +154,9 @@
     <Content Include="modules\plug\datapager\paginate.js" />
     <Content Include="modules\plug\datapager\style.css" />
     <Content Include="modules\plug\doT.js" />
+    <Content Include="modules\plug\easydialog\easydialog.css" />
+    <Content Include="modules\plug\easydialog\easydialog.js" />
+    <Content Include="modules\plug\easydialog\ico-big-close.png" />
     <Content Include="modules\plug\seach_keys\seach_keys.js" />
     <Content Include="modules\plug\seach_keys\style.css" />
     <Content Include="modules\plug\switch\style.css" />
@@ -163,8 +167,10 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home.js" />
     <Content Include="modules\scripts\layout.js" />
+    <Content Include="modules\scripts\products\attr.js" />
     <Content Include="modules\scripts\products\brand.js" />
     <Content Include="modules\scripts\products\unit.js" />
+    <Content Include="modules\template\products\attr_list.html" />
     <Content Include="modules\template\products\brand_list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
@@ -246,6 +252,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\BrandDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="modules\plug\easydialog\vssver2.scc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

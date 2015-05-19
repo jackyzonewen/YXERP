@@ -247,6 +247,107 @@ namespace YXERP.Controllers
         }
         #endregion
 
+        #region 属性
+
+        public JsonResult GetAttrList(int index, string keyWorks)
+        {
+            List<C_ProductAttr> list = new List<C_ProductAttr>();
+
+            int totalCount = 0, pageCount = 0;
+            list = new ProductsBusiness().GetAttrList(keyWorks, PageSize, index, ref totalCount, ref pageCount, CurrentUser.ClientID);
+
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", totalCount);
+            JsonDictionary.Add("PageCount", pageCount);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 保存属性
+        /// </summary>
+        /// <param name="attr"></param>
+        /// <returns></returns>
+        public JsonResult SaveAttr(string attr)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_ProductAttr model = serializer.Deserialize<C_ProductAttr>(attr);
+
+            string attrID = string.Empty;
+            if (string.IsNullOrEmpty(model.AttrID))
+            {
+                attrID = new ProductsBusiness().AddProductAttr(model.AttrName, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else if (new ProductsBusiness().UpdateProductAttr(model.AttrID, model.AttrName, model.Description, OperateIP, CurrentUser.UserID))
+            {
+                attrID = model.AttrID.ToString();
+            }
+
+
+            JsonDictionary.Add("ID", attrID);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 获取属性详情
+        /// </summary>
+        /// <param name="attr"></param>
+        /// <returns></returns>
+        public JsonResult GetAttrByID(string attrID = "")
+        {
+            //if (string.IsNullOrEmpty(attrID))
+            //{
+            //    JsonDictionary.Add("Item", null);
+            //}
+            //else
+            //{
+            //    var model = new ProductsBusiness().GetProductAttrByID(attrID);
+            //    JsonDictionary.Add("Item", model);
+            //}
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 保存属性值
+        /// </summary>
+        /// <param name="attr"></param>
+        /// <returns></returns>
+        public JsonResult SaveAttrValue(string value)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_AttrValue model = serializer.Deserialize<C_AttrValue>(value);
+
+            string valueID = string.Empty;
+            //if (model.AttrID > 0)
+            //{
+            //    if (string.IsNullOrEmpty(model.ValueID))
+            //    {
+            //        valueID = new ProductsBusiness().AddAttrValue(model.ValueName, model.AttrID);
+            //    }
+            //    else if (new ProductsBusiness().UpdateAttrValue(model.ValueID, model.ValueName))
+            //    {
+            //        valueID = model.ValueID.ToString();
+            //    }
+            //}
+
+            JsonDictionary.Add("ID", valueID);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        #endregion
+
         #endregion
     }
 }

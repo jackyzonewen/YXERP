@@ -2,4 +2,34 @@
     ViewBag.Title = "产品参数、属性设置";
 }
 
-<h2>Attr</h2>
+<link href="/modules/css/products/attr.css" rel="stylesheet" />
+
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/attr"], function (attr) {
+            attr.init();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">属性设置</span>
+    <a href="javascript:void(0)" id="addAttr" class="ico-add left mTop4 mLeft20">添加属性</a>
+    <div class="right searth-module"></div>
+</div>
+<div class="content-body">
+    <div class="attr-th"><span>属性名称</span><span>属性值列表（点击设置）</span></div>
+    <ul class="attr-list left" id="attrList" >
+        
+    </ul>
+    <div id="pager" class="mTop20"></div>
+    <div class="attr-value-box" id="attrValueBox">
+        <div class="title">
+            <span class="header-title">颜色</span>
+            <div class="add-value"><input class="value-name" id="valueName" placeholder="添加属性值" /><span class="ico-input-add"></span></div>
+        </div>
+        
+        <ul id="attrValues">
+            
+        </ul>
+    </div>
+</div>

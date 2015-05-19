@@ -82,6 +82,66 @@ namespace CloudSalesBusiness
             return list;
         }
 
+        /// <summary>
+        /// 获取属性列表
+        /// </summary>
+        /// <param name="keyWords"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="totalCount"></param>
+        /// <param name="pageCount"></param>
+        /// <returns></returns>
+        public List<C_ProductAttr> GetAttrList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
+        {
+            var dal = new ProductsDAL();
+            DataSet ds = dal.GetAttrList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientid);
+
+            List<C_ProductAttr> list = new List<C_ProductAttr>();
+            if (ds.Tables.Contains("Attrs"))
+            {
+                foreach (DataRow dr in ds.Tables["Attrs"].Rows)
+                {
+                    C_ProductAttr model = new C_ProductAttr();
+                    model.FillData(dr);
+
+                    List<C_AttrValue> valueList = new List<C_AttrValue>();
+                    StringBuilder build = new StringBuilder();
+                    foreach (DataRow drValue in ds.Tables["Values"].Select("AttrID='" + model.AttrID + "'"))
+                    {
+                        C_AttrValue valueModel = new C_AttrValue();
+                        valueModel.FillData(drValue);
+                        valueList.Add(valueModel);
+                        build.Append(valueModel.ValueName + ",");
+                    }
+                    model.AttrValues = valueList;
+                    if (string.IsNullOrEmpty(build.ToString()))
+                    {
+                        model.ValuesStr = "暂无属性值(单击添加)";
+                    }
+                    else
+                    {
+                        if (build.ToString().Length > 50)
+                        {
+                            if (build.ToString().Substring(49, 1).ToString() != ",")
+                            {
+                                model.ValuesStr = build.ToString() + "...";
+                            }
+                            else
+                            {
+                                model.ValuesStr = build.ToString().Substring(0, 49) + " ...";
+                            }
+                        }
+                        else
+                        {
+                            model.ValuesStr = build.ToString().Substring(0, build.ToString().Length - 1);
+                        }
+                    }
+                    list.Add(model);
+                }
+            }
+            return list;
+        }
+
         #endregion
 
         #region 添加
@@ -129,6 +189,24 @@ namespace CloudSalesBusiness
         {
             var dal = new ProductsDAL();
             return dal.AddUnit(unitName, description, operateid, clientid);
+        }
+        /// <summary>
+        /// 添加属性
+        /// </summary>
+        /// <param name="attrName">属性名称</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public string AddProductAttr(string attrName, string description, string operateid, string clientid)
+        {
+            var attrID = Guid.NewGuid().ToString();
+            var dal = new ProductsDAL();
+            if (dal.AddProductAttr(attrID, attrName, description, operateid, clientid))
+            {
+                return attrID.ToString();
+            }
+            return string.Empty;
         }
 
         #endregion
@@ -194,6 +272,18 @@ namespace CloudSalesBusiness
         {
             var dal = new ProductsDAL();
             return dal.UpdateUnitStatus(unitID, (int)status);
+        }
+        /// <summary>
+        /// 编辑属性信息
+        /// </summary>
+        /// <param name="attrID">属性ID</param>
+        /// <param name="attrName">属性名称</param>
+        /// <param name="description">描述</param>
+        /// <returns></returns>
+        public bool UpdateProductAttr(string attrID, string attrName, string description, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateProductAttr(attrID, attrName, description);
         }
 
         #endregion

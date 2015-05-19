@@ -11,6 +11,8 @@ namespace YXERP.Controllers
     {
 
 
+        protected int PageSize = 20;
+
         protected string OperateIP = System.Web.HttpContext.Current.Request.UserHostAddress;
 
         /// <summary>

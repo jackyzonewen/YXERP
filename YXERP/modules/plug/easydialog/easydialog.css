@@ -1,0 +1,27 @@
+button::-moz-focus-inner { border: 0; padding: 0; margin: 0; }
+.easyDialog_wrapper { color: #444; border:1px solid #A2C2E1;background-color:#fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
+                       -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); display: none; }
+.easyDialog_wrapper .easyDialog_content { -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; background: #fff; }
+
+.easyDialog_wrapper .easyDialog_title { margin: 0px 0px!important; height: 30px; line-height: 25px; overflow: hidden; 
+                                        color: #7faaca;font-size: 11pt; border-bottom: 1px solid #e5e5e5; }
+
+.easyDialog_title span { border-left: solid #7faaca 5px; height:20px; display:inline-block; }
+
+.easyDialog_wrapper .close_btn { background:#fff url(ico-big-close.png) no-repeat; height:48px; width:48px; border-radius:24px;  position:absolute; right:-20px;top:-20px;}
+
+.easyDialog_wrapper .easyDialog_text { padding: 15px 10px 0px 10px;font-size: 12px; line-height: 22px; }
+
+.easyDialog_wrapper { padding: 10px 20px; *zoom: 1; }
+
+.easyDialog_wrapper .easyDialog_footer:after { content: ''; display: block; height: 0; overflow: hidden; visibility: hidden; clear: both; }
+
+.easyDialog_wrapper .btn_highlight,
+.easyDialog_wrapper .btn_normal { border: 1px solid; border-radius: 2px; cursor: pointer; font-family: "Microsoft yahei", Arial; float: right; 
+                                  font-size: 12px; padding: 0 12px; height: 25px; line-height: 25px; margin-bottom: 10px; }
+.easyDialog_wrapper .btn_highlight {margin-left: 10px; background: #7faaca; background: -webkit-gradient(linear, center bottom, center top, from(#7faaca), to(#7faaca)); 
+                                    background: -moz-linear-gradient(90deg,#7faaca, #7faaca); border-color: #7faaca; color: #fff; }
+
+.btn_normal{border-color: white!important;background-color: white!important;}
+
+.easyDialog_footer{margin-bottom: 10px;  padding: 10px 10px;}

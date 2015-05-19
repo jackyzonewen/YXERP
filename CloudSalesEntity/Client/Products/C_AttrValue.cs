@@ -27,7 +27,7 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private int _valueid;
+		private string _valueid;
 		private string _valuename="";
 		private int? _attrid;
 		private int? _status=1;
@@ -47,7 +47,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public int ValueID
+        public string ValueID
 		{
 			set{ _valueid=value;}
 			get{return _valueid;}
@@ -117,6 +117,15 @@ namespace CloudSalesEntity
 			get{return _clientid;}
 		}
 		#endregion Model
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 	}
 }
