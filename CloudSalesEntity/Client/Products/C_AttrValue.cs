@@ -29,7 +29,7 @@ namespace CloudSalesEntity
 		private int _autoid;
 		private string _valueid;
 		private string _valuename="";
-		private int? _attrid;
+        private string _attrid;
 		private int? _status=1;
 		private string _createuserid;
 		private DateTime? _createtime= DateTime.Now;
@@ -63,7 +63,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? AttrID
+        public string AttrID
 		{
 			set{ _attrid=value;}
 			get{return _attrid;}

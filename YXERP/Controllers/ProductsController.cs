@@ -249,6 +249,12 @@ namespace YXERP.Controllers
 
         #region 属性
 
+        /// <summary>
+        /// 获取属性列表
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="keyWorks"></param>
+        /// <returns></returns>
         public JsonResult GetAttrList(int index, string keyWorks)
         {
             List<C_ProductAttr> list = new List<C_ProductAttr>();
@@ -294,6 +300,7 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         /// <summary>
         /// 获取属性详情
         /// </summary>
@@ -301,21 +308,22 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult GetAttrByID(string attrID = "")
         {
-            //if (string.IsNullOrEmpty(attrID))
-            //{
-            //    JsonDictionary.Add("Item", null);
-            //}
-            //else
-            //{
-            //    var model = new ProductsBusiness().GetProductAttrByID(attrID);
-            //    JsonDictionary.Add("Item", model);
-            //}
+            if (string.IsNullOrEmpty(attrID))
+            {
+                JsonDictionary.Add("Item", null);
+            }
+            else
+            {
+                var model = new ProductsBusiness().GetProductAttrByID(attrID);
+                JsonDictionary.Add("Item", model);
+            }
             return new JsonResult
             {
                 Data = JsonDictionary,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         /// <summary>
         /// 保存属性值
         /// </summary>
@@ -327,17 +335,17 @@ namespace YXERP.Controllers
             C_AttrValue model = serializer.Deserialize<C_AttrValue>(value);
 
             string valueID = string.Empty;
-            //if (model.AttrID > 0)
-            //{
-            //    if (string.IsNullOrEmpty(model.ValueID))
-            //    {
-            //        valueID = new ProductsBusiness().AddAttrValue(model.ValueName, model.AttrID);
-            //    }
-            //    else if (new ProductsBusiness().UpdateAttrValue(model.ValueID, model.ValueName))
-            //    {
-            //        valueID = model.ValueID.ToString();
-            //    }
-            //}
+            if (!string.IsNullOrEmpty(model.AttrID))
+            {
+                if (string.IsNullOrEmpty(model.ValueID))
+                {
+                    valueID = new ProductsBusiness().AddAttrValue(model.ValueName, model.AttrID, CurrentUser.UserID, CurrentUser.ClientID);
+                }
+                else if (new ProductsBusiness().UpdateAttrValue(model.ValueID, model.ValueName, OperateIP, CurrentUser.UserID))
+                {
+                    valueID = model.ValueID.ToString();
+                }
+            }
 
             JsonDictionary.Add("ID", valueID);
             return new JsonResult
@@ -346,6 +354,39 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        /// <summary>
+        /// 删除属性
+        /// </summary>
+        /// <param name="attrid"></param>
+        /// <returns></returns>
+        public JsonResult DeleteProductAttr(string attrid)
+        {
+            bool bl = new ProductsBusiness().UpdateProductAttrStatus(attrid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 删除属性值
+        /// </summary>
+        /// <param name="valueid"></param>
+        /// <returns></returns>
+        public JsonResult DeleteAttrValue(string valueid)
+        {
+            bool bl = new ProductsBusiness().UpdateAttrValueStatus(valueid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         #endregion
 
         #endregion

@@ -40,7 +40,8 @@
         //搜索
         require.async("search", function () {
             $(".searth-module").searchKeys(function (keyWords) {
-                
+                Params.KeyWord = keyWords;
+                ObjectJS.getList();
             });
         });
 
@@ -59,24 +60,6 @@
                 });
             }
         })
-    }
-    ObjectJS.showValues = function (attrID) {
-        var height = document.documentElement.clientHeight - 84;
-        $("#attrValueBox").css("height", height + "px");
-        $("#attrValueBox").animate({ right: "0px" }, "fast");
-        Value.AttrID = attrID;
-        ObjectJS.getAttrDetail();
-    }
-    ObjectJS.getAttrDetail = function () {
-        Global.post("/Products/GetAttrByID", { attrID: Value.AttrID }, function (data) {
-            $("#attrValueBox").find(".header-title").html(data.Item.AttrName);
-            ObjectJS.innerValuesItems(data.Item.AttrValues, true);
-            
-        });
-    }
-
-    ObjectJS.hideValues = function () {
-        $("#attrValueBox").animate({ right: "-302px" }, "fast");
     }
     //获取属性列表
     ObjectJS.getList = function () {
@@ -119,7 +102,7 @@
             $("#attrList").prepend(inner);
             //点击编辑
             inner.find(".ico-edit").click(function () {
-                var _this = $(this), _prev = _this.prev();
+                var _this = $(this), _prev = _this.prevAll(".attr-name");
                 Attr.AttrID = _this.data("id");
                 Attr.AttrName = _prev.html();
                 Attr.Description = _prev.attr("title");
@@ -127,6 +110,17 @@
                     _prev.html(Attr.AttrName);
                     _prev.attr("title", Attr.Description);
                 });
+            });
+            inner.find(".ico-del").click(function () {
+                var _this = $(this);
+                if (confirm("属性删除后不可恢复,确认删除吗？")) {
+                    Global.post("/Products/DeleteProductAttr", { attrid: _this.data("id") }, function (data) {
+                        if (data.Status) {
+                            _self.getList();
+                        }
+                    });
+                }
+                
             });
 
             inner.find(".attr-values").click(function () {
@@ -136,6 +130,26 @@
         })
     }
 
+    //显示属性值悬浮层
+    ObjectJS.showValues = function (attrID) {
+        var height = document.documentElement.clientHeight - 84;
+        $("#attrValueBox").css("height", height + "px");
+        $("#attrValueBox").animate({ right: "0px" }, "fast");
+        Value.AttrID = attrID;
+        ObjectJS.getAttrDetail();
+    }
+    ObjectJS.getAttrDetail = function () {
+        Global.post("/Products/GetAttrByID", { attrID: Value.AttrID }, function (data) {
+            $("#attrValueBox").find(".header-title").html(data.Item.AttrName);
+            ObjectJS.innerValuesItems(data.Item.AttrValues, true);
+            
+        });
+    }
+    //隐藏属性值悬浮层
+    ObjectJS.hideValues = function () {
+        $("#attrValueBox").animate({ right: "-302px" }, "fast");
+    }
+
     //加载值数据
     ObjectJS.innerValuesItems = function (items, clear) {
         var _self = this;
@@ -143,10 +157,53 @@
             $("#attrValues").empty();
         }
         for (var i = 0, j = items.length; i < j; i++) {
-            $("#attrValues").prepend('<li data-id="' + items[i].ValueID + '" class="item">' + items[i].ValueName + '</li>');
+            var item = $('<li data-id="' + items[i].ValueID + '" class="item">' +
+                               '<input type="text" data-id="' + items[i].ValueID + '" data-value="' + items[i].ValueName + '" value="' + items[i].ValueName + '" />' +
+                               '<span data-id="' + items[i].ValueID + '" class="ico-delete"></span>' +
+                         '</li>');
+            _self.bindElementEvent(item);
+            $("#attrValues").prepend(item);
         }
     }
+    //元素绑定事件
+    ObjectJS.bindElementEvent = function (elments) {
+        var _self = this;
+        elments.find("input").focus(function () {
+            var _this = $(this);
+            _this.select();
+        });
+        elments.find("input").blur(function () {
+            var _this = $(this);
+            //为空
+            if (_this.val() == "") {
+                if (_this.data("id") == "") {
+                    _this.parent().remove();
+                } else {
+                    _this.val(_this.data("value"));
+                }
+            } else if (_this.val() != _this.data("value")) {
 
+                Value.ValueID = _this.data("id");
+                Value.ValueName = _this.val();
+                //保存属性值
+                _self.saveValue(function () {
+                    _this.data("value", Value.ValueName);
+                });
+            }
+        });
+        elments.find(".ico-delete").click(function () {
+            var _this = $(this);
+            if (_this.data("id") != "") {
+                if (confirm("删除后不可恢复,确认删除吗？")) {
+                    _self.deleteValue(_this.data("id"), function (status) {
+                        status && _this.parent().remove();
+                    });
+                }
+            } else {
+                _this.parent().remove();
+            }
+        })
+    }
     //添加子类弹出层
     ObjectJS.addAttr = function (editback) {
         var _self = this;
@@ -198,6 +255,7 @@
             }
         });
     }
+
     //保存属性值
     ObjectJS.saveValue = function (editback) {
         var _self = this;
@@ -214,5 +272,11 @@
         });
     }
 
+    //删除属性值
+    ObjectJS.deleteValue = function (valueid, callback) {
+        Global.post("/Products/DeleteAttrValue", { valueid: valueid }, function (data) {
+            !!callback && callback(data.Status);
+        });
+    }
     module.exports = ObjectJS;
 });

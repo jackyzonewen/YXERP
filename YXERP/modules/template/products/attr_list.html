@@ -3,7 +3,11 @@
 	var item = $data[i];
 %}
 <li>
-    <div class="name left"><span class="left" title="{%=item.Description%}">{%=item.AttrName%}</span> <span title="编辑" data-id="{%=item.AttrID%}" class="ico-edit mTop3 right"></span></div>
+    <div class="name left">
+        <span class="left attr-name" title="{%=item.Description%}">{%=item.AttrName%}</span> 
+        <span class="ico-del mTop3 right"  title="删除" data-id="{%=item.AttrID%}"></span>
+        <span title="编辑" data-id="{%=item.AttrID%}" class="ico-edit mTop3 right"></span>
+    </div>
     <div class="attr-values left" title="点击设置属性值" data-id="{%=item.AttrID%}">{%=item.ValuesStr%}</div>
 </li>
 {% } %}

@@ -142,6 +142,34 @@ namespace CloudSalesBusiness
             return list;
         }
 
+
+        /// <summary>
+        /// 根据属性ID获取属性
+        /// </summary>
+        /// <param name="attrID"></param>
+        /// <returns></returns>
+        public C_ProductAttr GetProductAttrByID(string attrID)
+        {
+            var dal = new ProductsDAL();
+            DataSet ds = dal.GetProductAttrByID(attrID);
+
+            C_ProductAttr model = new C_ProductAttr();
+            if (ds.Tables.Contains("Attrs") && ds.Tables["Attrs"].Rows.Count > 0)
+            {
+                model.FillData(ds.Tables["Attrs"].Rows[0]);
+                List<C_AttrValue> list = new List<C_AttrValue>();
+                foreach (DataRow item in ds.Tables["Values"].Rows)
+                {
+                    C_AttrValue attrValue = new C_AttrValue();
+                    attrValue.FillData(item);
+                    list.Add(attrValue);
+                }
+                model.AttrValues = list;
+            }
+            
+            
+            return model;
+        }
         #endregion
 
         #region 添加
@@ -205,6 +233,23 @@ namespace CloudSalesBusiness
             if (dal.AddProductAttr(attrID, attrName, description, operateid, clientid))
             {
                 return attrID.ToString();
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// 添加属性值
+        /// </summary>
+        /// <param name="valueName">值</param>
+        /// <param name="attrID">属性ID</param>
+        /// <returns></returns>
+        public string AddAttrValue(string valueName, string attrID, string operateid, string clientid)
+        {
+            var valueID = Guid.NewGuid().ToString();
+            var dal = new ProductsDAL();
+            if (dal.AddAttrValue(valueID, valueName, attrID, operateid, clientid))
+            {
+                return valueID.ToString();
             }
             return string.Empty;
         }
@@ -279,6 +324,8 @@ namespace CloudSalesBusiness
         /// <param name="attrID">属性ID</param>
         /// <param name="attrName">属性名称</param>
         /// <param name="description">描述</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
         /// <returns></returns>
         public bool UpdateProductAttr(string attrID, string attrName, string description, string operateIP, string operateID)
         {
@@ -286,6 +333,45 @@ namespace CloudSalesBusiness
             return dal.UpdateProductAttr(attrID, attrName, description);
         }
 
+        /// <summary>
+        /// 编辑属性值
+        /// </summary>
+        /// <param name="valueID">值ID</param>
+        /// <param name="valueName">名称</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateAttrValue(string valueID, string valueName, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateAttrValue(valueID, valueName);
+        }
+        /// <summary>
+        /// 编辑属性状态
+        /// </summary>
+        /// <param name="attrid">属性ID</param>
+        /// <param name="status">状态</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateProductAttrStatus(string attrid, StatusEnum status, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateProductAttrStatus(attrid, (int)status);
+        }
+        /// <summary>
+        /// 编辑属性值状态
+        /// </summary>
+        /// <param name="valueid">属性值ID</param>
+        /// <param name="status">状态</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateAttrValueStatus(string valueid, StatusEnum status, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateAttrValueStatus(valueid, (int)status);
+        }
         #endregion
     }
 }

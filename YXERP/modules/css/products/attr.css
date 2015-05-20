@@ -1,15 +1,15 @@
 ﻿
 
 .attr-th span{ height:30px; line-height:30px; display:inline-block; padding-left:10px; color:#666; }
-.attr-th span:first-child{width:160px; }
+.attr-th span:first-child{width:200px; }
 
 .attr-list {  width:100%; min-height:300px;}
 .attr-list li{ height:40px; line-height:40px; width:99%;  border:solid 1px #ccc; margin-top:10px; border-radius:5px; }
 .attr-list li:hover{ border:solid 1px #7faaca; cursor:pointer;}
 
-.attr-list li .name{ height:30px; line-height:30px; display:inline-block; width:160px;  border-right:solid 1px #ccc; margin:5px 10px; }
-.attr-list li .name .ico-edit{ display:none; }
-.attr-list li .name:hover .ico-edit{ display:inline-block; margin-right:10px; }
+.attr-list li .name{ height:30px; line-height:30px; display:inline-block; width:200px;  border-right:solid 1px #ccc; margin:5px 10px; }
+.attr-list li .name .ico-edit,.attr-list li .name .ico-del{ display:none; }
+.attr-list li .name:hover .ico-edit,.attr-list li .name:hover .ico-del{ display:inline-block; margin-right:10px; }
 .attr-list li span{ height:30px; line-height:30px; display:inline-block;  }
 .attr-list li input{ height:30px; line-height:30px; width:100px; }
 
@@ -27,7 +27,11 @@
 .attr-value-box .add-value { position:relative; margin-left:19px; height:30px;  width:200px;margin-bottom:10px;}
 .attr-value-box .value-name { height:30px; line-height:30px; width:200px; }
 .attr-value-box .ico-input-add { position:absolute; right:-3px; top:5px; border-left:solid 1px #ccc;}
+
 .attr-value-box ul{ width:300px; margin-top:20px; padding-bottom:30px; }
-.attr-value-box ul li{ width:220px; height:30px; margin-left:39px; border:solid 1px #ccc; border-radius:5px; line-height:30px; margin-top:10px; text-align:center; cursor:pointer;}
-
-
+.attr-value-box ul li{ width:220px; height:30px; margin-left:39px; border:solid 1px #ccc; border-radius:5px; line-height:30px; margin-top:10px; text-align:center; cursor:pointer;position:relative;}
+.attr-value-box ul li input{ height:30px; line-height:30px; width:50px; text-align:center; border:none !important; cursor:pointer; }
+.attr-value-box ul li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
+.attr-value-box ul li:hover span{ display:inline-block; }
+.attr-value-box ul .unit-item { border:solid 1px #ccc; border-radius:5px; }
+.attr-value-box ul .unit-item:hover{ border:solid 1px #7faaca; }

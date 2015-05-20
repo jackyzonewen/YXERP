@@ -70,6 +70,13 @@ namespace CloudSalesDAL
 
         }
 
+        public DataSet GetProductAttrByID(string attrID)
+        {
+            SqlParameter[] paras = { new SqlParameter("@AttrID", attrID) };
+            DataSet ds = GetDataSet("P_GetProductAttrByID", paras, CommandType.StoredProcedure, "Attrs|Values");
+            return ds;
+        }
+
         #endregion
 
         #region 添加
@@ -130,6 +137,20 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
+        public bool AddAttrValue(string valueID, string valueName, string attrID, string operateid, string clientid)
+        {
+            string sqlText = "INSERT INTO C_AttrValue([ValueID] ,[ValueName],[Status],[AttrID],CreateUserID,ClientID) "
+                                             + "values(@ValueID ,@ValueName,1,@AttrID,@CreateUserID,@ClientID) ";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@ValueID" , valueID),
+                                     new SqlParameter("@ValueName" , valueName),
+                                     new SqlParameter("@AttrID" , attrID),
+                                     new SqlParameter("@CreateUserID" , operateid),
+                                     new SqlParameter("@ClientID" , clientid)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
         #endregion
 
         #region 编辑
@@ -183,6 +204,35 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
+        public bool UpdateAttrValue(string ValueID, string ValueName)
+        {
+            string sqlText = "Update C_AttrValue set [ValueName]=@ValueName  where [ValueID]=@ValueID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@ValueID",ValueID),
+                                     new SqlParameter("@ValueName" , ValueName),
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateProductAttrStatus(string attrid, int status)
+        {
+            string sqlText = "Update C_ProductAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@AttrID",attrid),
+                                     new SqlParameter("@Status" , status)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateAttrValueStatus(string valueid, int status)
+        {
+            string sqlText = "Update C_AttrValue set Status=@Status,UpdateTime=getdate()  where [ValueID]=@ValueID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@ValueID",valueid),
+                                     new SqlParameter("@Status" , status)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
         #endregion
     }
 }

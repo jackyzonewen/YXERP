@@ -35,14 +35,14 @@ AS
 	set @condition=' ClientID='''+@ClientID+''' and Status<>9 '
 	if(@keyWords <> '')
 	begin
-		set @condition=' AttrName like ''%'
+		set @condition +=' and AttrName like ''%'+@keyWords+'%'' or  Description like ''%'+@keyWords+'%'''
 	end
 
 	declare @total int,@page int
 	insert into #Attrs exec P_GetPagerData @tableName,@columns,@condition,@key,@orderColumn,@pageSize,@pageIndex,@total out,@page out,@isAsc
 	
 	select * from #Attrs
-	select * from C_AttrValue where AttrID in (select AttrID from #Attrs)
+	select * from C_AttrValue where AttrID in (select AttrID from #Attrs) and Status<>9
 	
 	select @totalCount=@total,@pageCount =@page
  
