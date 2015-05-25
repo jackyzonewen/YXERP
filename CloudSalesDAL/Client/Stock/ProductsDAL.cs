@@ -151,6 +151,28 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
+        public string AddCategory(string categoryCode, string categoryName, string pid, string attrlist, string saleattr, string description, string operateid, string clientid)
+        {
+            string id = "";
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@CategoryID",SqlDbType.NVarChar,64),
+                                       new SqlParameter("@CategoryCode",categoryCode),
+                                       new SqlParameter("@CategoryName",categoryName),
+                                       new SqlParameter("@PID",pid),
+                                       new SqlParameter("@AttrList",attrlist),
+                                       new SqlParameter("@SaleAttr",saleattr),
+                                       new SqlParameter("@Description",description),
+                                       new SqlParameter("@CreateUserID",operateid),
+                                       new SqlParameter("@ClientID",clientid)
+                                   };
+            paras[0].Value = id;
+            paras[0].Direction = ParameterDirection.InputOutput;
+
+            ExecuteNonQuery("P_InsertCategory", paras, CommandType.StoredProcedure);
+            id = paras[0].Value.ToString();
+            return id;
+        }
+
         #endregion
 
         #region 编辑

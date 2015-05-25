@@ -113,6 +113,7 @@
     <Content Include="modules\css\products\attr.css" />
     <Content Include="modules\css\products\brand.css" />
     <Content Include="modules\css\products\unit.css" />
+    <Content Include="modules\css\products\category.css" />
     <Content Include="modules\images\default.png" />
     <Content Include="modules\images\header.jpg" />
     <Content Include="modules\images\ico-add.png" />
@@ -169,6 +170,7 @@
     <Content Include="modules\scripts\layout.js" />
     <Content Include="modules\scripts\products\attr.js" />
     <Content Include="modules\scripts\products\brand.js" />
+    <Content Include="modules\scripts\products\category.js" />
     <Content Include="modules\scripts\products\unit.js" />
     <Content Include="modules\template\products\attr_list.html" />
     <Content Include="modules\template\products\brand_list.html" />

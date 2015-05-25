@@ -254,6 +254,24 @@ namespace CloudSalesBusiness
             return string.Empty;
         }
 
+        /// <summary>
+        /// 添加产品分类
+        /// </summary>
+        /// <param name="categoryCode">编码</param>
+        /// <param name="categoryName">名称</param>
+        /// <param name="pid">上级ID</param>
+        /// <param name="attrlist">规格参数</param>
+        /// <param name="saleattr">销售属性</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public string AddCategory(string categoryCode, string categoryName, string pid, List<string> attrlist, List<string> saleattr, string description, string operateid, string clientid)
+        {
+            var dal = new ProductsDAL();
+            return dal.AddCategory(categoryCode, categoryName, pid, string.Join(",", attrlist), string.Join(",", saleattr), description, operateid, clientid);
+        }
+
         #endregion
 
         #region 编辑、删除

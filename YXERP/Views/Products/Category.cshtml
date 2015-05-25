@@ -1,5 +1,27 @@
 ﻿@{
-    ViewBag.Title = "产品类别设置--云销科技";
+    ViewBag.Title = "产品类别设置";
 }
+<link href="/modules/css/products/category.css" rel="stylesheet" />
 
-<h2>Category</h2>
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/category"], function (category) {
+            category.init();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">产品类别设置</span>
+    @*<div class="right searth-module"></div>*@
+</div>
+<div class="content-body">
+    <div>
+        <div class="category-header">全部分类 <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加分类</a></div>
+        <ul class="category-list">
+            <li>
+                <span class="category-name">服装1</span>
+                <span>></span>
+            </li>
+        </ul>
+    </div>
+</div>

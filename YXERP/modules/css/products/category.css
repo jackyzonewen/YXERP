@@ -1,0 +1,10 @@
+﻿
+
+.category-header { background-color:#e7f5fd; height:30px; width:180px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
+.category-list { width:200px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; }
+.category-list li { height:30px; width:180px; line-height:30px; padding:0 10px; cursor:pointer; }
+.category-list li:hover { background-color:#eee; }
+.category-list li span{ float:left;}
+.category-list li .category-name{ width:170px;}
+.category-bottom { background-color:#e7f5fd; height:30px; width:180px; line-height:30px;padding:0 10px; 
+                   border:solid 1px #c5dceb; text-align:center; }
