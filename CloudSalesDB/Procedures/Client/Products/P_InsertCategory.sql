@@ -20,6 +20,7 @@ CREATE PROCEDURE [dbo].[P_InsertCategory]
 @PID nvarchar(64),
 @AttrList nvarchar(4000),
 @SaleAttr nvarchar(4000),
+@Status int,
 @Description nvarchar(4000),
 @CreateUserID nvarchar(64),
 @ClientID nvarchar(64),
@@ -28,12 +29,21 @@ AS
 
 begin tran
 
-set @CategoryID=NEWID()
-
-declare @Err int 
-
+declare @Err int,@PIDList nvarchar(max),@Layers int=0 
 set @Err=0
+set @CategoryID=NEWID()
+if(@PID is not null and @PID<>'')
+begin
+	select @PIDList=PIDList+','+@CategoryID,@Layers=Layers from C_Category where CategoryID=@PID
+end
+else
+begin
+	set @PIDList=@CategoryID
+	set @Layers=1
+end
 
+insert into C_Category(CategoryID,CategoryCode,CategoryName,PID,PIDList,Layers,SaleAttr,AttrList,Status,Description,CreateUserID,ClientID)
+				values(@CategoryID,@CategoryCode,@CategoryName,@PID,@PIDList,@Layers,@SaleAttr,@AttrList,@Status,@Description,@CreateUserID,@ClientID)
 
 if(@Err>0)
 begin

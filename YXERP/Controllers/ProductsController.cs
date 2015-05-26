@@ -271,6 +271,22 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        /// <summary>
+        /// 获取所有属性
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetAllAttrList()
+        {
+            List<C_ProductAttr> list = new List<C_ProductAttr>();
+            list = new ProductsBusiness().GetAttrList(CurrentUser.ClientID);
+
+            JsonDictionary.Add("Items", list);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
         /// <summary>
         /// 保存属性
@@ -380,6 +396,43 @@ namespace YXERP.Controllers
         {
             bool bl = new ProductsBusiness().UpdateAttrValueStatus(valueid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        #endregion
+
+        #region 分类
+
+        /// <summary>
+        /// 保存分类
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="saleattr"></param>
+        /// <param name="attrlist"></param>
+        /// <returns></returns>
+        public JsonResult SavaCategory(string category, List<string> saleattr, List<string> attrlist)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_Category model = serializer.Deserialize<C_Category>(category);
+
+            string caregoryid = "";
+            if (string.IsNullOrEmpty(model.CategoryID))
+            {
+                caregoryid = new ProductsBusiness().AddCategory(model.CategoryCode, model.CategoryName, model.PID, model.Status.Value, attrlist, saleattr, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else
+            {
+                bool bl = true;
+                if (bl)
+                {
+                    caregoryid = model.CategoryID;
+                }
+            }
+            JsonDictionary.Add("ID", caregoryid);
             return new JsonResult
             {
                 Data = JsonDictionary,

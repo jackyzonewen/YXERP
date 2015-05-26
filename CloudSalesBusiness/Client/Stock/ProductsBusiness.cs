@@ -142,6 +142,25 @@ namespace CloudSalesBusiness
             return list;
         }
 
+        /// <summary>
+        /// 获取属性列表
+        /// </summary>
+        /// <returns></returns>
+        public List<C_ProductAttr> GetAttrList(string clientid)
+        {
+            var dal = new ProductsDAL();
+            DataTable dt = dal.GetAttrList(clientid);
+
+            List<C_ProductAttr> list = new List<C_ProductAttr>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                C_ProductAttr model = new C_ProductAttr();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
 
         /// <summary>
         /// 根据属性ID获取属性
@@ -260,16 +279,17 @@ namespace CloudSalesBusiness
         /// <param name="categoryCode">编码</param>
         /// <param name="categoryName">名称</param>
         /// <param name="pid">上级ID</param>
+        /// <param name="status">状态</param>
         /// <param name="attrlist">规格参数</param>
         /// <param name="saleattr">销售属性</param>
         /// <param name="description">描述</param>
         /// <param name="operateid">操作人</param>
         /// <param name="clientid">客户端ID</param>
         /// <returns></returns>
-        public string AddCategory(string categoryCode, string categoryName, string pid, List<string> attrlist, List<string> saleattr, string description, string operateid, string clientid)
+        public string AddCategory(string categoryCode, string categoryName, string pid, int status, List<string> attrlist, List<string> saleattr, string description, string operateid, string clientid)
         {
             var dal = new ProductsDAL();
-            return dal.AddCategory(categoryCode, categoryName, pid, string.Join(",", attrlist), string.Join(",", saleattr), description, operateid, clientid);
+            return dal.AddCategory(categoryCode, categoryName, pid, status, string.Join(",", attrlist), string.Join(",", saleattr), description, operateid, clientid);
         }
 
         #endregion

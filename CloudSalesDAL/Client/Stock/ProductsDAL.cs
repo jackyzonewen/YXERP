@@ -70,6 +70,14 @@ namespace CloudSalesDAL
 
         }
 
+        public DataTable GetAttrList(string clientid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@ClientID", clientid) };
+
+            return GetDataTable("select AttrID,AttrName,Description from C_ProductAttr where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
+
+        }
+
         public DataSet GetProductAttrByID(string attrID)
         {
             SqlParameter[] paras = { new SqlParameter("@AttrID", attrID) };
@@ -151,7 +159,7 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
-        public string AddCategory(string categoryCode, string categoryName, string pid, string attrlist, string saleattr, string description, string operateid, string clientid)
+        public string AddCategory(string categoryCode, string categoryName, string pid, int status, string attrlist, string saleattr, string description, string operateid, string clientid)
         {
             string id = "";
             SqlParameter[] paras = { 
@@ -159,6 +167,7 @@ namespace CloudSalesDAL
                                        new SqlParameter("@CategoryCode",categoryCode),
                                        new SqlParameter("@CategoryName",categoryName),
                                        new SqlParameter("@PID",pid),
+                                       new SqlParameter("@Status",status),
                                        new SqlParameter("@AttrList",attrlist),
                                        new SqlParameter("@SaleAttr",saleattr),
                                        new SqlParameter("@Description",description),

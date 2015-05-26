@@ -1,0 +1,31 @@
+﻿
+<ul class="table-add category-add">
+    <li>
+        <span class="column-name">分类名称：</span>
+        <span>
+            <input type="text" id="categoryName" />
+        </span>
+    </li>
+    <li>
+        <span class="column-name">状态：</span>
+        <span>
+            <input type="checkbox" id="categoryStatus" checked="checked" class="middle hand" />
+            <label for="categoryStatus" class="hand">启用</label>
+        </span>
+    </li>
+    <li>
+        <span class="column-name">产品参数：</span>
+        <span id="attrList">
+            {%
+	            for(var i=0, j=$data.length; i < j; i++){
+	            var item = $data[i];
+            %}
+            <label title="{%=item.Description%}"><input type="checkbox" name="attrList" class="attr-item" data-id="{%=item.AttrID%}" />{%=item.AttrName%}</label>
+            {% } %}
+        </span>
+    </li>
+    <li>
+        <span class="column-name">产品属性：</span>
+        <textarea id="description"></textarea>
+    </li>
+</ul>
