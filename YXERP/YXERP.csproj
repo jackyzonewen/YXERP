@@ -175,6 +175,7 @@
     <Content Include="modules\template\products\attr_list.html" />
     <Content Include="modules\template\products\brand_list.html" />
     <Content Include="modules\template\products\category_add.html" />
+    <Content Include="modules\template\products\category_list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

@@ -1,0 +1,14 @@
+﻿<div class="category-layer">
+    <div class="category-header"><span>全部分类</span> <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加子类</a></div>
+    <ul class="category-list">
+        {%
+	        for(var i=0, j=$data.length; i < j; i++){
+	        var item = $data[i];
+        %}
+        <li data-id="{%=item.CategoryID%}" title="{%=item.Description%}">
+            <span class="category-name">{%=item.CategoryName%}</span>
+            <span>></span>
+        </li>
+        {% } %}
+    </ul>
+</div>

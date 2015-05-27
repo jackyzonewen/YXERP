@@ -189,6 +189,29 @@ namespace CloudSalesBusiness
             
             return model;
         }
+
+        /// <summary>
+        /// 获取下级分类
+        /// </summary>
+        /// <param name="categoryid">分类ID</param>
+        /// <returns></returns>
+        public List<C_Category> GetChildCategorysByID(string categoryid)
+        {
+            var dal = new ProductsDAL();
+            DataTable dt = dal.GetChildCategorysByID(categoryid);
+
+            List<C_Category> list = new List<C_Category>();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                C_Category model = new C_Category();
+                model.FillData(dr);
+                list.Add(model);
+            }
+
+
+            return list;
+        }
         #endregion
 
         #region 添加

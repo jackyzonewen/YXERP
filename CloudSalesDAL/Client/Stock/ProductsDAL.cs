@@ -85,6 +85,13 @@ namespace CloudSalesDAL
             return ds;
         }
 
+        public DataTable GetChildCategorysByID(string categoryid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@PID", categoryid) };
+            DataTable dt = GetDataTable("select * from C_Category where PID=@PID", paras, CommandType.Text);
+            return dt;
+        }
+
         #endregion
 
         #region 添加

@@ -15,13 +15,16 @@
     @*<div class="right searth-module"></div>*@
 </div>
 <div class="content-body">
-    <div>
-        <div class="category-header">全部分类 <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加分类</a></div>
+    <div class="category-layer">
+        <div class="category-header">全部分类 <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加子类</a></div>
         <ul class="category-list">
-            <li>
-                <span class="category-name">服装1</span>
-                <span>></span>
-            </li>
+            @foreach (CloudSalesEntity.C_Category model in (List<CloudSalesEntity.C_Category>)ViewBag.Items)
+            { 
+                <li data-id="@(model.CategoryID)" title="@(model.Description)">
+                    <span class="category-name">@(model.CategoryName)</span>
+                    <span>></span>
+                </li>
+            }
         </ul>
     </div>
 </div>

@@ -5,6 +5,7 @@ define(function (require, exports, module) {
     var $ = require("jquery"),
         Global = require("global"),
         doT = require("dot"),
+        Verify = require("verify"), VerifyObject,
         Easydialog = require("easydialog");
     var Category = {
         CategoryID: "",
@@ -38,19 +39,33 @@ define(function (require, exports, module) {
         $(window).resize(function () {
             ObjectJS.bindStyle();
         });
-        $(".ico-add").click(function () {
+        _self.addBindEvent($(".ico-add"));
+        _self.bindElementEvent($(".category-list li"));
+        
+    }
+    //添加分类绑定事件并处理回调
+    ObjectJS.addBindEvent = function (ele) {
+        var _self = this;
+        ele.click(function () {
             var _this = $(this);
             Category.CategoryID
             Category.PID = _this.data("id");
-            _self.showCategory();
+            _self.showCategory(function (model) {
+                var ele = $('<li data-id="' + model.CategoryID + '" title="' + model.Description + '">' +
+                                '<span class="category-name">' + model.CategoryName + '</span>' +
+                                '<span>></span>' +
+                            '</li>');
+                _self.bindElementEvent(ele);
+                _this.parent().next("ul").append(ele);
+            });
         });
     }
     //添加分类弹出层
-    ObjectJS.showCategory = function () {
+    ObjectJS.showCategory = function (callback) {
+        var _self = this;
         doT.exec("template/products/category_add.html", function (templateFun) {
             var html = templateFun(CacheAttrs);
-            //html = $(html);
-
+            
             Easydialog.open({
                 container: {
                     id: "category-add-div",
@@ -60,18 +75,77 @@ define(function (require, exports, module) {
                         if (!VerifyObject.isPass()) {
                             return false;
                         }
-
-                        _self.saveCategory(editback);
+                        var model = {
+                            CategoryID: Category.CategoryID,
+                            CategoryCode: "",
+                            CategoryName: $("#categoryName").val(),
+                            PID: Category.PID,
+                            Status: $("#categoryStatus").prop("checked") ? 1 : 0,
+                            Description: $("#description").val()
+                        };
+                        //属性
+                        var attrs = "";
+                        $(".attr-item").each(function () {
+                            if ($(this).prop("checked")) {
+                                attrs += $(this).data("id") + ",";
+                            }
+                        });
+                        _self.saveCategory(model, attrs, callback);
                     },
                     callback: function () {
 
                     }
                 }
             });
+
+            $("#categoryName").focus();
+
+            VerifyObject = Verify.createVerify({
+                element: ".verify",
+                emptyAttr: "data-empty",
+                verifyType: "data-type",
+                regText: "data-text"
+            });
         });
     }
-    ObjectJS.saveCategory = function () {
+    //元素绑定事件
+    ObjectJS.bindElementEvent = function (element) {
+        var _self = this;
+        element.click(function () {
+            var _this = $(this);
+            _this.siblings().removeClass("hover");
+            _this.addClass("hover");
+            _this.parents(".category-layer").nextAll().remove();
+            Global.post("/Products/GetChildCategorysByID", {
+                categoryid: _this.data("id")
+            }, function (data) {
+                doT.exec("template/products/category_list.html", function (templateFun) {
+                    var html = templateFun(data.Items);
+                    html = $(html);
+                    //绑定添加事件
+                    html.find(".category-header span").html(_this.find(".category-name").html());
+                    _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")));
+                    
+                    _self.bindElementEvent(html.find("li"));
 
+                    _this.parents(".category-layer").after(html);
+                    _self.bindStyle();
+                });
+            });
+        });
+    }
+
+    //保存分类
+    ObjectJS.saveCategory = function (category, attrs, callback) {
+        Global.post("/Products/SavaCategory", {
+            category: JSON.stringify(category),
+            attrlist: attrs
+        }, function (data) {
+            if (data.ID) {
+                category.CategoryID = data.ID;
+                !!callback && callback(category);
+            }
+        });
     };
 
     module.exports = ObjectJS;

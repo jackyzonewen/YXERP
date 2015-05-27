@@ -70,6 +70,8 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult Category() 
         {
+            var list = new ProductsBusiness().GetChildCategorysByID("");
+            ViewBag.Items = list;
             return View();
         }
 
@@ -411,18 +413,20 @@ namespace YXERP.Controllers
         /// 保存分类
         /// </summary>
         /// <param name="category"></param>
-        /// <param name="saleattr"></param>
         /// <param name="attrlist"></param>
         /// <returns></returns>
-        public JsonResult SavaCategory(string category, List<string> saleattr, List<string> attrlist)
+        public JsonResult SavaCategory(string category, string attrlist)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             C_Category model = serializer.Deserialize<C_Category>(category);
-
+            if (!string.IsNullOrEmpty(attrlist))
+            {
+                attrlist = attrlist.Substring(0, attrlist.Length - 1);
+            }
             string caregoryid = "";
             if (string.IsNullOrEmpty(model.CategoryID))
             {
-                caregoryid = new ProductsBusiness().AddCategory(model.CategoryCode, model.CategoryName, model.PID, model.Status.Value, attrlist, saleattr, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+                caregoryid = new ProductsBusiness().AddCategory(model.CategoryCode, model.CategoryName, model.PID, model.Status.Value, attrlist.Split(',').ToList(), new List<string>(), model.Description, CurrentUser.UserID, CurrentUser.ClientID);
             }
             else
             {
@@ -440,6 +444,21 @@ namespace YXERP.Controllers
             };
         }
 
+        /// <summary>
+        /// 获取下级分类
+        /// </summary>
+        /// <param name="categoryid"></param>
+        /// <returns></returns>
+        public JsonResult GetChildCategorysByID(string categoryid)
+        {
+            var list = new ProductsBusiness().GetChildCategorysByID(categoryid);
+            JsonDictionary.Add("Items", list);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
 
         #endregion

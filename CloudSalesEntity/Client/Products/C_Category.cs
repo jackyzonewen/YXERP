@@ -174,6 +174,16 @@ namespace CloudSalesEntity
         }
         #endregion Model
 
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
+
     }
 }
 
