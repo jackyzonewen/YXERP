@@ -208,7 +208,7 @@
     ObjectJS.addAttr = function (editback) {
         var _self = this;
         var html = '<ul class="create-attr">' +
-                        '<li><span class="left">名称：</span><input type="text" id="attrName" value="' + Attr.AttrName + '" class="input verify " data-empty="*必填" /></li>' +
+                        '<li><span class="left">名称：</span><input type="text" id="attrName" maxlength="10" value="' + Attr.AttrName + '" class="input verify " data-empty="*必填" /></li>' +
                         '<li><span class="left">描述：</span><textarea id="attrDescription">' + Attr.Description + '</textarea></li>' +
                    '</ul>'
         Easydialog.open({
