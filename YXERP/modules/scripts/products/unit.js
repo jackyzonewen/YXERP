@@ -18,7 +18,7 @@
         var _self = this;
         $("#addUnit").click(function () {
             var _this = $(this);
-            var _ele = $('<li class="unit-item"><input type="text" data-id="" data-value="" value="" /><span data-id="" class="ico-delete"></span></li>');
+            var _ele = $('<li class="unit-item"><input type="text" maxlength="4" data-id="" data-value="" value="" /><span data-id="" class="ico-delete"></span></li>');
             _self.bindElementEvent(_ele);
             _this.before(_ele);
             _ele.find("input").focus();
