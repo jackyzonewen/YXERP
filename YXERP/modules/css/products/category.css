@@ -3,14 +3,18 @@
 .category-layer { width:200px; float:left; }
 
 .category-header { background-color:#e7f5fd; height:30px; width:180px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
+.category-header span { width:100px; }
+
 .category-list { width:200px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; }
 .category-list li { height:30px; width:180px; line-height:30px; padding:0 10px; cursor:pointer; }
 .category-list li:hover { background-color:#c5dceb; }
 .category-list .hover { background-color:#c5dceb; }
 .category-list li span{ float:left;}
-.category-list li .category-name{ width:170px;}
+.category-list li  .category-name{ width:155px;}
+.ico-edit { margin-top:3px; }
 
 .category-add li {  }
 .category-add .column-name{ width:80px; }
 .category-add input[type="checkbox"] { vertical-align:middle; margin:0 2px; }
+
 

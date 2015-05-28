@@ -3,7 +3,7 @@
     <li>
         <span class="column-name">分类名称：</span>
         <span>
-            <input type="text" class="verify" data-empty="*必填" id="categoryName" />
+            <input type="text" class="verify" data-empty="*必填" maxlength="10" id="categoryName" />
         </span>
     </li>
     <li>
@@ -14,6 +14,7 @@
         </span>
     </li>
     <li>
+        
         <span class="column-name">产品参数：</span>
         <span id="attrList">
             {%
@@ -27,5 +28,12 @@
     <li>
         <span class="column-name">描述：</span>
         <textarea id="description"></textarea>
+    </li>
+    <li style="margin-bottom:20px;">
+        <span class="column-name red">参数说明：</span>
+        <span>
+            1：若当前分类无直属产品，则可不勾选产品参数；<br />
+            2：若勾选产品参数，则当前分类添加的直属产品默认具有选择的参数
+        </span>
     </li>
 </ul>

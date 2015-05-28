@@ -212,6 +212,25 @@ namespace CloudSalesBusiness
 
             return list;
         }
+
+        /// <summary>
+        /// 获取产品分类
+        /// </summary>
+        /// <param name="categoryid">分类ID</param>
+        /// <returns></returns>
+        public C_Category GetCategoryByID(string categoryid)
+        {
+            var dal = new ProductsDAL();
+            DataTable dt = dal.GetCategoryByID(categoryid);
+
+            C_Category model = new C_Category();
+            if (dt.Rows.Count > 0)
+            {
+                model.FillData(dt.Rows[0]);
+            }
+
+            return model;
+        }
         #endregion
 
         #region 添加
@@ -433,6 +452,22 @@ namespace CloudSalesBusiness
             var dal = new ProductsDAL();
             return dal.UpdateAttrValueStatus(valueid, (int)status);
         }
+        /// <summary>
+        /// 编辑分类信息
+        /// </summary>
+        /// <param name="categoryid">分类ID</param>
+        /// <param name="categoryName">名称</param>
+        /// <param name="status">状态</param>
+        /// <param name="attrlist">属性列表</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <returns></returns>
+        public bool UpdateCategory(string categoryid, string categoryName,int status, List<string> attrlist, string description, string operateid)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateCategory(categoryid, categoryName, status, string.Join(",", attrlist), description);
+        }
+
         #endregion
     }
 }

@@ -137,6 +137,7 @@
     <Content Include="modules\images\ico-tree-line.png" />
     <Content Include="modules\images\ico-tree-open.png" />
     <Content Include="modules\images\ico-tree-pull.png" />
+    <Content Include="modules\images\ico-help.png" />
     <Content Include="modules\images\ico_search.gif" />
     <Content Include="modules\images\loginBackground.jpg" />
     <Content Include="modules\images\loginbarBackground2.gif" />

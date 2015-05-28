@@ -34,7 +34,7 @@ set @Err=0
 set @CategoryID=NEWID()
 if(@PID is not null and @PID<>'')
 begin
-	select @PIDList=PIDList+','+@CategoryID,@Layers=Layers from C_Category where CategoryID=@PID
+	select @PIDList=PIDList+','+@CategoryID,@Layers=Layers+1 from C_Category where CategoryID=@PID
 end
 else
 begin

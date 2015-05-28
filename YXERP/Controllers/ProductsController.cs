@@ -430,7 +430,7 @@ namespace YXERP.Controllers
             }
             else
             {
-                bool bl = true;
+                bool bl = new ProductsBusiness().UpdateCategory(model.CategoryID, model.CategoryName, model.Status.Value, attrlist.Split(',').ToList(), model.Description, CurrentUser.UserID);
                 if (bl)
                 {
                     caregoryid = model.CategoryID;
@@ -453,6 +453,21 @@ namespace YXERP.Controllers
         {
             var list = new ProductsBusiness().GetChildCategorysByID(categoryid);
             JsonDictionary.Add("Items", list);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 获取分类详情
+        /// </summary>
+        /// <param name="categoryid"></param>
+        /// <returns></returns>
+        public JsonResult GetCategoryByID(string categoryid)
+        {
+            var model = new ProductsBusiness().GetCategoryByID(categoryid);
+            JsonDictionary.Add("Model", model);
             return new JsonResult
             {
                 Data = JsonDictionary,

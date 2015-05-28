@@ -65,7 +65,7 @@ define(function (require, exports, module) {
         var _self = this;
         doT.exec("template/products/category_add.html", function (templateFun) {
             var html = templateFun(CacheAttrs);
-            
+
             Easydialog.open({
                 container: {
                     id: "category-add-div",
@@ -97,6 +97,16 @@ define(function (require, exports, module) {
                     }
                 }
             });
+            //编辑填充数据
+            if (Category.CategoryID) {
+                $("#categoryName").val(Category.CategoryName);
+                $("#categoryStatus").prop("checked", Category.Status == 1);
+                $("#description").val(Category.Description);
+                $(".attr-item").each(function () {
+                    var _this = $(this);
+                    _this.prop("checked", Category.AttrList.indexOf(_this.data("id")) >= 0);
+                });
+            }
 
             $("#categoryName").focus();
 
@@ -111,6 +121,37 @@ define(function (require, exports, module) {
     //元素绑定事件
     ObjectJS.bindElementEvent = function (element) {
         var _self = this;
+        //鼠标悬浮
+        element.mouseover(function () {
+            var _this = $(this);
+            _this.find(".edit").addClass("ico-edit").html("");
+        });
+        //鼠标悬浮
+        element.mouseout(function () {
+            var _this = $(this);
+            _this.find(".edit").removeClass("ico-edit").html(">");
+        });
+        //编辑
+        element.find(".edit").click(function () {
+            var _this = $(this);
+            Global.post("/Products/GetCategoryByID", {
+                categoryid: _this.parent().data("id")
+            }, function (data) {
+                Category = data.Model;
+                _self.showCategory(function (model) {
+                    _this.prev().html(model.CategoryName);
+                    if (model.Status == 1) {
+                        _this.prev().removeClass("colorccc");
+                    } else {
+                        _this.prev().addClass("colorccc");
+                    }
+                    _this.parent().attr("title", model.Description);
+                });
+            });
+            return false;
+        })
+
+        //点击
         element.click(function () {
             var _this = $(this);
             _this.siblings().removeClass("hover");

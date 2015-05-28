@@ -24,6 +24,8 @@ select{ border:solid 1px #ccc; border-radius:5px;height:25px; line-height:25px; 
 .hide { display:none; }
 
 
+.long { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 .red { color:red !important;}
 
 /*按钮和图标*/
@@ -46,13 +48,18 @@ select{ border:solid 1px #ccc; border-radius:5px;height:25px; line-height:25px; 
 
 .ico-input-add{ background:url(../images/ico-input-add.png) no-repeat 4px ; height:20px; width:23px; line-height:20px; display:inline-block; cursor:pointer; }
 
+.ico-help{ background:url(../images/ico-help.png) no-repeat; height:20px; min-width:20px; line-height:20px; 
+          display:inline-block; cursor:pointer;}
 /*字体*/
 .font14 {font-size:14px; }
 .font16 {font-size:16px; }
 .font18 {font-size:18px; }
 .font20 {font-size:20px; }
 
-
+.color333 { color:#333 !important; }
+.color666 { color:#666 !important; }
+.color999 { color:#999 !important; }
+.colorccc { color:#ccc !important; }
 
 .lineHeight15 { height:15px; line-height:15px;}
 .lineHeight20 { height:20px; line-height:20px;}

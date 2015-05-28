@@ -88,7 +88,14 @@ namespace CloudSalesDAL
         public DataTable GetChildCategorysByID(string categoryid)
         {
             SqlParameter[] paras = { new SqlParameter("@PID", categoryid) };
-            DataTable dt = GetDataTable("select * from C_Category where PID=@PID", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from C_Category where PID=@PID Order by CreateTime", paras, CommandType.Text);
+            return dt;
+        }
+
+        public DataTable GetCategoryByID(string categoryid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@CategoryID", categoryid) };
+            DataTable dt = GetDataTable("select * from C_Category where CategoryID=@CategoryID", paras, CommandType.Text);
             return dt;
         }
 
@@ -270,6 +277,21 @@ namespace CloudSalesDAL
                                      new SqlParameter("@Status" , status)
                                    };
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateCategory(string categoryid, string categoryName,  int status, string attrlist, string description)
+        {
+            string sql = "Update C_Category set CategoryName=@CategoryName,Status=@Status,AttrList=@AttrList,Description=@Description,UpdateTime=getdate() where CategoryID=@CategoryID";
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@CategoryID",categoryid),
+                                       new SqlParameter("@CategoryName",categoryName),
+                                       new SqlParameter("@Status",status),
+                                       new SqlParameter("@AttrList",attrlist),
+                                       new SqlParameter("@Description",description)
+                                   };
+
+            return ExecuteNonQuery(sql, paras, CommandType.Text) > 0;
+           
         }
         #endregion
     }
