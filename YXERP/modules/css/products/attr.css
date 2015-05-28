@@ -30,7 +30,7 @@
 
 .attr-value-box ul{ width:300px; margin-top:20px; padding-bottom:30px; }
 .attr-value-box ul li{ width:220px; height:30px; margin-left:39px; border:solid 1px #ccc; border-radius:5px; line-height:30px; margin-top:10px; text-align:center; cursor:pointer;position:relative;}
-.attr-value-box ul li input{ height:30px; line-height:30px; width:50px; text-align:center; border:none !important; cursor:pointer; }
+.attr-value-box ul li input{ height:28px; line-height:30px; width:50px; text-align:center; border:none !important; cursor:pointer; }
 .attr-value-box ul li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
 .attr-value-box ul li:hover span{ display:inline-block; }
 .attr-value-box ul .unit-item { border:solid 1px #ccc; border-radius:5px; }
