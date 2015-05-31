@@ -415,22 +415,28 @@ namespace YXERP.Controllers
         /// <param name="category"></param>
         /// <param name="attrlist"></param>
         /// <returns></returns>
-        public JsonResult SavaCategory(string category, string attrlist)
+        public JsonResult SavaCategory(string category, string attrlist, string saleattr)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             C_Category model = serializer.Deserialize<C_Category>(category);
+            //参数
             if (!string.IsNullOrEmpty(attrlist))
             {
                 attrlist = attrlist.Substring(0, attrlist.Length - 1);
             }
+            //规格
+            if (!string.IsNullOrEmpty(saleattr))
+            {
+                saleattr = saleattr.Substring(0, saleattr.Length - 1);
+            }
             string caregoryid = "";
             if (string.IsNullOrEmpty(model.CategoryID))
             {
-                caregoryid = new ProductsBusiness().AddCategory(model.CategoryCode, model.CategoryName, model.PID, model.Status.Value, attrlist.Split(',').ToList(), new List<string>(), model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+                caregoryid = new ProductsBusiness().AddCategory(model.CategoryCode, model.CategoryName, model.PID, model.Status.Value, attrlist.Split(',').ToList(), saleattr.Split(',').ToList(), model.Description, CurrentUser.UserID, CurrentUser.ClientID);
             }
             else
             {
-                bool bl = new ProductsBusiness().UpdateCategory(model.CategoryID, model.CategoryName, model.Status.Value, attrlist.Split(',').ToList(), model.Description, CurrentUser.UserID);
+                bool bl = new ProductsBusiness().UpdateCategory(model.CategoryID, model.CategoryName, model.Status.Value, attrlist.Split(',').ToList(), saleattr.Split(',').ToList(), model.Description, CurrentUser.UserID);
                 if (bl)
                 {
                     caregoryid = model.CategoryID;

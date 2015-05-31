@@ -48,12 +48,12 @@ define(function (require, exports, module) {
         var _self = this;
         ele.click(function () {
             var _this = $(this);
-            Category.CategoryID
+            Category.CategoryID = "";
             Category.PID = _this.data("id");
             _self.showCategory(function (model) {
                 var ele = $('<li data-id="' + model.CategoryID + '" title="' + model.Description + '">' +
-                                '<span class="category-name">' + model.CategoryName + '</span>' +
-                                '<span>></span>' +
+                                '<span class="category-name long">' + model.CategoryName + '</span>' +
+                                '<span class="edit right">></span>' +
                             '</li>');
                 _self.bindElementEvent(ele);
                 _this.parent().next("ul").append(ele);
@@ -85,12 +85,19 @@ define(function (require, exports, module) {
                         };
                         //属性
                         var attrs = "";
-                        $(".attr-item").each(function () {
+                        $("#attrList .attr-item").each(function () {
                             if ($(this).prop("checked")) {
                                 attrs += $(this).data("id") + ",";
                             }
                         });
-                        _self.saveCategory(model, attrs, callback);
+                        //规格
+                        var saleattrs = "";
+                        $("#saleAttr .attr-item").each(function () {
+                            if ($(this).prop("checked")) {
+                                saleattrs += $(this).data("id") + ",";
+                            }
+                        });
+                        _self.saveCategory(model, attrs, saleattrs, callback);
                     },
                     callback: function () {
 
@@ -102,9 +109,15 @@ define(function (require, exports, module) {
                 $("#categoryName").val(Category.CategoryName);
                 $("#categoryStatus").prop("checked", Category.Status == 1);
                 $("#description").val(Category.Description);
-                $(".attr-item").each(function () {
+                //绑定属性
+                $("#attrList .attr-item").each(function () {
                     var _this = $(this);
                     _this.prop("checked", Category.AttrList.indexOf(_this.data("id")) >= 0);
+                });
+                //绑定规格
+                $("#saleAttr .attr-item").each(function () {
+                    var _this = $(this);
+                    _this.prop("checked", Category.SaleAttr.indexOf(_this.data("id")) >= 0);
                 });
             }
 
@@ -177,10 +190,11 @@ define(function (require, exports, module) {
     }
 
     //保存分类
-    ObjectJS.saveCategory = function (category, attrs, callback) {
+    ObjectJS.saveCategory = function (category, attrs, saleattrs, callback) {
         Global.post("/Products/SavaCategory", {
             category: JSON.stringify(category),
-            attrlist: attrs
+            attrlist: attrs,
+            saleattr: saleattrs
         }, function (data) {
             if (data.ID) {
                 category.CategoryID = data.ID;

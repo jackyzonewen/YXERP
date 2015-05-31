@@ -279,14 +279,15 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
-        public bool UpdateCategory(string categoryid, string categoryName,  int status, string attrlist, string description)
+        public bool UpdateCategory(string categoryid, string categoryName, int status, string attrlist, string saleattr, string description)
         {
-            string sql = "Update C_Category set CategoryName=@CategoryName,Status=@Status,AttrList=@AttrList,Description=@Description,UpdateTime=getdate() where CategoryID=@CategoryID";
+            string sql = "Update C_Category set CategoryName=@CategoryName,Status=@Status,AttrList=@AttrList,SaleAttr=@SaleAttr,Description=@Description,UpdateTime=getdate() where CategoryID=@CategoryID";
             SqlParameter[] paras = { 
                                        new SqlParameter("@CategoryID",categoryid),
                                        new SqlParameter("@CategoryName",categoryName),
                                        new SqlParameter("@Status",status),
                                        new SqlParameter("@AttrList",attrlist),
+                                       new SqlParameter("@SaleAttr",saleattr),
                                        new SqlParameter("@Description",description)
                                    };
 

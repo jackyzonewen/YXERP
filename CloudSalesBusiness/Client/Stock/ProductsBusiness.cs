@@ -462,10 +462,10 @@ namespace CloudSalesBusiness
         /// <param name="description">描述</param>
         /// <param name="operateid">操作人</param>
         /// <returns></returns>
-        public bool UpdateCategory(string categoryid, string categoryName,int status, List<string> attrlist, string description, string operateid)
+        public bool UpdateCategory(string categoryid, string categoryName, int status, List<string> attrlist, List<string> saleattr, string description, string operateid)
         {
             var dal = new ProductsDAL();
-            return dal.UpdateCategory(categoryid, categoryName, status, string.Join(",", attrlist), description);
+            return dal.UpdateCategory(categoryid, categoryName, status, string.Join(",", attrlist), string.Join(",", saleattr), description);
         }
 
         #endregion

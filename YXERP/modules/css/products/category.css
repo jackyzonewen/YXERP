@@ -13,8 +13,10 @@
 .category-list li  .category-name{ width:155px;}
 .ico-edit { margin-top:3px; }
 
-.category-add li {  }
+.category-add { }
+.category-add li { height:auto; }
 .category-add .column-name{ width:80px; }
 .category-add input[type="checkbox"] { vertical-align:middle; margin:0 2px; }
+
 
 
