@@ -88,8 +88,16 @@ namespace YXERP.Controllers
         /// 添加产品
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProductAdd() 
+        public ActionResult ProductAdd(string id) 
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                var list = new ProductsBusiness().GetChildCategorysByID("");
+                ViewBag.Items = list;
+                return View("ChooseCategory");
+            }
+            var model = new ProductsBusiness().GetCategoryDetailByID(id);
+            ViewBag.Model = model;
             return View();
         }
 

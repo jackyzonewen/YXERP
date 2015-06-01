@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "添加新品";
+}
+<link href="/modules/css/products/category.css" rel="stylesheet" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/choosecategory"], function (category) {
+            category.init();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">选择产品分类</span>
+</div>
+<div class="content-body">
+    <div class="category-layer">
+        <div class="category-header">全部分类</div>
+        <ul class="category-list">
+            @foreach (CloudSalesEntity.C_Category model in (List<CloudSalesEntity.C_Category>)ViewBag.Items)
+            { 
+                <li data-id="@(model.CategoryID)" title="@(model.Description)">
+                    <span class="category-name long @(model.Status.Value==1?"":"colorccc")">@(model.CategoryName)</span>
+                    <span style="padding-left:0;" title="添加新品" class="add-product right">></span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

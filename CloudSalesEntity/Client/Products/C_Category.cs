@@ -15,6 +15,7 @@
 *└──────────────────────────────────┘
 */
 using System;
+using System.Collections.Generic;
 namespace CloudSalesEntity
 {
 	/// <summary>
@@ -30,11 +31,11 @@ namespace CloudSalesEntity
         private string _categorycode;
         private string _categoryname = "";
         private string _pcode = "";
-        private string _pcodelist = ",";
+        private string _pcodelist = "";
         private int? _layers = 1;
-        private string _saleattr = ",";
-        private string _attrlist = ",";
-        private string _brandlist = ",";
+        private string _saleattr = "";
+        private string _attrlist = "";
+        private string _brandlist = "";
         private int? _status = 1;
         private string _description = "";
         private string _createuserid;
@@ -100,6 +101,9 @@ namespace CloudSalesEntity
             set { _saleattr = value; }
             get { return _saleattr; }
         }
+
+        public List<C_ProductAttr> SaleAttrs { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -108,6 +112,9 @@ namespace CloudSalesEntity
             set { _attrlist = value; }
             get { return _attrlist; }
         }
+
+        public List<C_ProductAttr> AttrLists { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

@@ -99,6 +99,13 @@ namespace CloudSalesDAL
             return dt;
         }
 
+        public DataSet GetCategoryDetailByID(string categoryid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@CategoryID", categoryid) };
+            DataSet ds = GetDataSet("P_GetCategoryDetailByID", paras, CommandType.StoredProcedure, "Category|Attrs|Values");
+            return ds;
+        }
+
         #endregion
 
         #region 添加

@@ -1,5 +1,39 @@
 ﻿@{
-    ViewBag.Title = "添加新品--云销科技";
+    ViewBag.Title = "添加新品";
+    var model = (CloudSalesEntity.C_Category)ViewBag.Model;
 }
-
-<h2>ProductsAdd</h2>
+<link href="/modules/css/products/product.css" rel="stylesheet" />
+<div class="header-box">
+    <span class="header-title left">添加新品 >> @(model.CategoryName) <a href="/Products/ProductAdd">返回更换分类</a></span>
+</div>
+<div class="content-body">
+    <ul class="table-add product-add">
+        <li>
+            <span class="width80">产品名称：</span><input type="text" maxlength="20" id="productName" data-empty="* 必填" class="input verify" />
+        </li>
+        @foreach (CloudSalesEntity.C_ProductAttr attr in model.AttrLists)
+        {
+            <li data-id="@attr.AttrID">
+                <span class="width80">@attr.AttrName：</span>
+                <select>
+                    @foreach (CloudSalesEntity.C_AttrValue value in attr.AttrValues)
+                    {
+                        <option value="@value.ValueID">@value.ValueName</option> 
+                    }
+                </select>
+            </li>
+        }
+        @foreach (CloudSalesEntity.C_ProductAttr attr in model.SaleAttrs)
+        {
+            <li data-id="@attr.AttrID">
+                <span class="width80">@attr.AttrName：</span>
+                @foreach (CloudSalesEntity.C_AttrValue value in attr.AttrValues)
+                {
+                   <span class="width80">
+                        <label><input type="checkbox" value="@value.ValueID" />@value.ValueName</label>
+                   </span> 
+                }
+            </li>
+        }
+    </ul>
+</div>

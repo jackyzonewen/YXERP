@@ -231,6 +231,57 @@ namespace CloudSalesBusiness
 
             return model;
         }
+
+        /// <summary>
+        /// 获取产品分类详情（包括属性和值）
+        /// </summary>
+        /// <param name="categoryid">分类ID</param>
+        /// <returns></returns>
+        public C_Category GetCategoryDetailByID(string categoryid)
+        {
+            var dal = new ProductsDAL();
+            DataSet ds = dal.GetCategoryDetailByID(categoryid);
+
+            C_Category model = new C_Category();
+            if (ds.Tables.Contains("Category") && ds.Tables["Category"].Rows.Count > 0)
+            {
+                model.FillData(ds.Tables["Category"].Rows[0]);
+                List<C_ProductAttr> salelist = new List<C_ProductAttr>();
+                List<C_ProductAttr> attrlist = new List<C_ProductAttr>();
+                bool bl = false;
+                foreach (DataRow attr in ds.Tables["Attrs"].Rows)
+                {
+                    bl = false;
+                    C_ProductAttr modelattr = new C_ProductAttr();
+                    modelattr.FillData(attr);
+                    if (model.AttrList.ToLower().IndexOf(modelattr.AttrID.ToLower()) >= 0)
+                    {
+                        bl = true;
+                        attrlist.Add(modelattr);
+                    }
+                    if (model.SaleAttr.ToLower().IndexOf(modelattr.AttrID.ToLower()) >= 0)
+                    {
+                        bl = true;
+                        salelist.Add(modelattr);
+                    }
+                    if (bl)
+                    {
+                        modelattr.AttrValues = new List<C_AttrValue>();
+                        foreach (DataRow value in ds.Tables["Values"].Select("AttrID='" + modelattr.AttrID + "'"))
+                        {
+                            C_AttrValue valuemodel = new C_AttrValue();
+                            valuemodel.FillData(value);
+                            modelattr.AttrValues.Add(valuemodel);
+                        }
+                    }
+                }
+
+                model.SaleAttrs = salelist;
+                model.AttrLists = attrlist;
+            }
+
+            return model;
+        }
         #endregion
 
         #region 添加

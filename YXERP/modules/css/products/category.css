@@ -11,7 +11,7 @@
 .category-list .hover { background-color:#c5dceb; }
 .category-list li span{ float:left;}
 .category-list li  .category-name{ width:155px;}
-.ico-edit { margin-top:3px; }
+.ico-edit, .ico-add{ margin-top:3px; }
 
 .category-add { }
 .category-add li { height:auto; }
