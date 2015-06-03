@@ -3,18 +3,40 @@
     var model = (CloudSalesEntity.C_Category)ViewBag.Model;
 }
 <link href="/modules/css/products/product.css" rel="stylesheet" />
+
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/product"], function (product) {
+            product.init();
+        });
+    </script>
+}
+
 <div class="header-box">
     <span class="header-title left">添加新品 >> @(model.CategoryName) <a href="/Products/ProductAdd">返回更换分类</a></span>
 </div>
 <div class="content-body">
     <ul class="table-add product-add">
         <li>
-            <span class="width80">产品名称：</span><input type="text" maxlength="20" id="productName" data-empty="* 必填" class="input verify" />
+            <span class="column-name">产品名称：</span><input type="text" maxlength="50" id="productName" data-empty="* 必填" class="input verify" />
         </li>
+         <li>
+            <span class="column-name">常用名：</span><input type="text" maxlength="50" id="generalName" class="input" />
+        </li>
+        <li>
+            <span class="column-name">品牌：</span>
+            <select id="brand">
+            @foreach (CloudSalesEntity.C_Brand brand in (List<CloudSalesEntity.C_Brand>)ViewBag.BrandList)
+            {
+                <option value="@brand.BrandID">@brand.Name</option> 
+            }
+            </select>
+        </li>
+        
         @foreach (CloudSalesEntity.C_ProductAttr attr in model.AttrLists)
         {
             <li data-id="@attr.AttrID">
-                <span class="width80">@attr.AttrName：</span>
+                <span class="column-name">@attr.AttrName：</span>
                 <select>
                     @foreach (CloudSalesEntity.C_AttrValue value in attr.AttrValues)
                     {
@@ -23,17 +45,49 @@
                 </select>
             </li>
         }
-        @foreach (CloudSalesEntity.C_ProductAttr attr in model.SaleAttrs)
-        {
-            <li data-id="@attr.AttrID">
-                <span class="width80">@attr.AttrName：</span>
-                @foreach (CloudSalesEntity.C_AttrValue value in attr.AttrValues)
-                {
-                   <span class="width80">
-                        <label><input type="checkbox" value="@value.ValueID" />@value.ValueName</label>
-                   </span> 
-                }
-            </li>
-        }
+        <li>
+            <span class="column-name">单位：</span>
+            <select id="smallUnit">
+            @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
+            {
+                <option value="@unit.UnitID">@unit.UnitName</option> 
+            }
+            </select>
+            （大 =
+            <input type="text" maxlength="3" id="bigSmallMultiple" value="1" class="input width30" /> *
+            小）
+            <select id="bigUnit">
+            @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
+            {
+                <option value="@unit.UnitID">@unit.UnitName</option> 
+            }
+            </select>
+        </li>
+        <li>
+            <span class="column-name">正常价：</span><input type="text" maxlength="10" id="price" class="input width50" />
+        </li>
+        <li>
+            <span class="column-name">优惠价：</span><input type="text" maxlength="10" id="preferentialPrice" class="input width50" />
+        </li>
+        <li>
+            <span class="column-name">缩略图：</span><span id="productIco"></span>
+        </li>
+        <li>
+            <span class="column-name">重量：</span><input type="text" maxlength="10" id="weight" class="input width50" />
+        </li>
+        <li>
+            <span class="column-name">是否上架：</span><label><input type="checkbox" id="status" />是</label> 
+        </li>
+        <li>
+            <span class="column-name">是否新品：</span><label><input type="checkbox" id="isNew" />是</label> 
+        </li>
+        <li>
+            <span class="column-name">是否推荐：</span><label><input type="checkbox" id="isRecommend" />是</label> 
+        </li>
+
     </ul>
+    <img class="product-img" id="productImg" alt="" src="/modules/images/default.png" />
+    <div class="mTop20">
+        <input type="button" class="btn" id="btnSaveProduct" value="保存" />
+    </div>
 </div>

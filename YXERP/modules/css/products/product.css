@@ -2,8 +2,11 @@
 
 .product-add { }
 .product-add li { height:auto; }
-.product-add .column-name{ width:80px; }
+.product-add .column-name{ width:80px; float:left; }
 .product-add input[type="checkbox"] { vertical-align:middle; margin:0 2px; }
+
+.product-img { position:absolute; top:80px; right:50px; width:150px; }
+.product-img img{ width:150px;}
 
 
 

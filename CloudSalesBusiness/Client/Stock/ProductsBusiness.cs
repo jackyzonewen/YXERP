@@ -44,6 +44,21 @@ namespace CloudSalesBusiness
             return list;
         }
 
+        public List<C_Brand> GetBrandList(string clientID)
+        {
+            var dal = new ProductsDAL();
+            DataTable dt = dal.GetBrandList(clientID);
+
+            List<C_Brand> list = new List<C_Brand>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                C_Brand model = new C_Brand();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
         /// <summary>
         /// 获取品牌实体
         /// </summary>

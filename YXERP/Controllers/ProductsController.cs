@@ -96,8 +96,9 @@ namespace YXERP.Controllers
                 ViewBag.Items = list;
                 return View("ChooseCategory");
             }
-            var model = new ProductsBusiness().GetCategoryDetailByID(id);
-            ViewBag.Model = model;
+            ViewBag.Model = new ProductsBusiness().GetCategoryDetailByID(id);
+            ViewBag.BrandList = new ProductsBusiness().GetBrandList(CurrentUser.ClientID);
+            ViewBag.UnitList = new ProductsBusiness().GetClientUnits(CurrentUser.ClientID);
             return View();
         }
 

@@ -34,6 +34,14 @@ namespace CloudSalesDAL
 
         }
 
+        public DataTable GetBrandList(string clientID)
+        {
+            SqlParameter[] paras = { new SqlParameter("@clientID", clientID) };
+            DataTable dt = GetDataTable("select BrandID,Name from C_Brand where ClientID=@clientID and Status<>9", paras, CommandType.Text);
+            return dt;
+
+        }
+
         public DataTable GetBrandByBrandID(string brandID)
         {
             SqlParameter[] paras = { new SqlParameter("@brandID", brandID) };

@@ -175,6 +175,7 @@
     <Content Include="modules\scripts\products\category.js" />
     <Content Include="modules\scripts\products\unit.js" />
     <Content Include="modules\scripts\products\choosecategory.js" />
+    <Content Include="modules\scripts\products\product.js" />
     <Content Include="modules\template\products\attr_list.html" />
     <Content Include="modules\template\products\brand_list.html" />
     <Content Include="modules\template\products\category_add.html" />

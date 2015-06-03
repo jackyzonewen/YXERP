@@ -37,11 +37,11 @@ namespace CloudSalesEntity
 		private string _smallunitid;
 		private int? _bigsmallmultiple=1;
 		private string _categorycode="";
-		private string _categorycodelist=",";
-		private string _saleattr=",";
-		private string _attrlist=",";
-		private string _valuelist=",";
-		private string _attrvaluelist=",";
+		private string _categorycodelist="";
+		private string _saleattr="";
+		private string _attrlist="";
+		private string _valuelist="";
+		private string _attrvaluelist="";
 		private decimal? _commonprice=0M;
 		private decimal? _preferentialprice=0M;
 		private decimal? _preferentialpv=0M;
@@ -148,7 +148,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string CategoryCode
+		public string CategoryID
 		{
 			set{ _categorycode=value;}
 			get{return _categorycode;}
@@ -156,7 +156,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string CategoryCodeList
+		public string CategoryIDList
 		{
 			set{ _categorycodelist=value;}
 			get{return _categorycodelist;}
@@ -378,6 +378,15 @@ namespace CloudSalesEntity
 			get{return _clientid;}
 		}
 		#endregion Model
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 	}
 }

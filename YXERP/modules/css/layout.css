@@ -11,7 +11,8 @@ input[type="text"]:focus { border:solid 1px #06C; }
 input[type="password"] { border:solid 1px #ccc; border-radius:5px;height:25px; line-height:25px; padding:0 5px; }
 input[type="password"]:focus { border:solid 1px #06C; }
 
-select{ border:solid 1px #ccc; border-radius:5px;height:25px; line-height:25px; padding:0 5px; }
+select{ border:solid 1px #ccc; border-radius:5px;height:25px; line-height:25px; padding:0 5px;}
+select option{ padding:2px; }
 
 .left { float:left !important; }
 .right { float:right !important; }
@@ -125,11 +126,13 @@ select{ border:solid 1px #ccc; border-radius:5px;height:25px; line-height:25px; 
 .mBottom50 {margin-bottom:50px;}
 
 /*常用宽度*/
-.width80 { width:80px; }
-.width100 { width:100px; }
-.width120 { width:120px; }
-.width150 { width:150px; }
-.width200 { width:200px; }
+.width30 { width:30px !important; }
+.width50 { width:50px !important; }
+.width80 { width:80px !important; }
+.width100 { width:100px !important; }
+.width120 { width:120px !important; }
+.width150 { width:150px !important; }
+.width200 { width:200px !important; }
 
 /*header样式*/
 header { height:55px; width:100%; padding-top:25px; background:url(../images/header.jpg) no-repeat left top; position:relative; }
