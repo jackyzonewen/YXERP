@@ -5,6 +5,8 @@
 .product-add .column-name{ width:80px; float:left; }
 .product-add input[type="checkbox"] { vertical-align:middle; margin:0 2px; }
 
+#remark { min-width:700px; min-height:300px; }
+
 .product-img { position:absolute; top:80px; right:50px; width:150px; }
 .product-img img{ width:150px;}
 
