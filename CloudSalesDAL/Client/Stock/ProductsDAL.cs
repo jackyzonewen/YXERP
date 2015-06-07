@@ -211,6 +211,46 @@ namespace CloudSalesDAL
             return id;
         }
 
+        public string AddProduct(string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple, 
+                                 string categoryid, int status, string attrlist, string valuelist, string attrvaluelist, double commonprice, double price,
+                                 double weight, bool isnew, bool isRecommend, int effectiveDays, double discountValue, string productImg, string description, string operateid, string clientid)
+        {
+            string id = "";
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@ProductID",SqlDbType.NVarChar,64),
+                                       new SqlParameter("@ProductCode",productCode),
+                                       new SqlParameter("@ProductName",productName),
+                                       new SqlParameter("@GeneralName",generalName),
+                                       new SqlParameter("@IsCombineProduct",iscombineproduct),
+                                       new SqlParameter("@BrandID",brandid),
+                                       new SqlParameter("@BigUnitID",bigunitid),
+                                       new SqlParameter("@SmallUnitID",smallunitid),
+                                       new SqlParameter("@BigSmallMultiple",bigSmallMultiple),
+                                       new SqlParameter("@CategoryID",categoryid),
+                                       new SqlParameter("@Status",status),
+                                       new SqlParameter("@AttrList",attrlist),
+                                       new SqlParameter("@ValueList",valuelist),
+                                       new SqlParameter("@AttrValueList",attrvaluelist),
+                                       new SqlParameter("@CommonPrice",commonprice),
+                                       new SqlParameter("@Price",price),
+                                       new SqlParameter("@Weight",weight),
+                                       new SqlParameter("@Isnew",isnew ? 1 :0),
+                                       new SqlParameter("@IsRecommend",isRecommend ? 1 : 0),
+                                       new SqlParameter("@EffectiveDays",effectiveDays),
+                                       new SqlParameter("@DiscountValue",discountValue),
+                                       new SqlParameter("@ProductImg",productImg),
+                                       new SqlParameter("@Description",description),
+                                       new SqlParameter("@CreateUserID",operateid),
+                                       new SqlParameter("@ClientID",clientid)
+                                   };
+            paras[0].Value = id;
+            paras[0].Direction = ParameterDirection.InputOutput;
+
+            ExecuteNonQuery("P_InsertProduct", paras, CommandType.StoredProcedure);
+            id = paras[0].Value.ToString();
+            return id;
+        }
+
         #endregion
 
         #region 编辑

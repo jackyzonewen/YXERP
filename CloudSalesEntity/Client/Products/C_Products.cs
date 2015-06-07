@@ -43,8 +43,8 @@ namespace CloudSalesEntity
 		private string _valuelist="";
 		private string _attrvaluelist="";
 		private decimal? _commonprice=0M;
-		private decimal? _preferentialprice=0M;
-		private decimal? _preferentialpv=0M;
+		private decimal _preferentialprice=0M;
+		private decimal _preferentialpv=0M;
 		private decimal? _taxrate=1M;
 		private int? _status=1;
 		private DateTime? _onlinetime= DateTime.Now;
@@ -206,7 +206,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? PreferentialPrice
+		public decimal Price
 		{
 			set{ _preferentialprice=value;}
 			get{return _preferentialprice;}
@@ -214,7 +214,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? PreferentialPV
+		public decimal PV
 		{
 			set{ _preferentialpv=value;}
 			get{return _preferentialpv;}
