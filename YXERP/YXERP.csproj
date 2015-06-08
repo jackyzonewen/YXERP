@@ -149,6 +149,7 @@
     <Content Include="modules\images\submenu.gif" />
     <Content Include="modules\images\topLine.gif" />
     <Content Include="modules\images\topmenu.gif" />
+    <Content Include="modules\images\logo.png" />
     <Content Include="modules\plug\city.js" />
     <Content Include="modules\plug\datapager\images\next.png" />
     <Content Include="modules\plug\datapager\images\previous.png" />

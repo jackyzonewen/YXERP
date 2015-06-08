@@ -48,13 +48,15 @@ define(function (require, exports, module) {
             verifyType: "data-type",
             regText: "data-text"
         });
+
+        $("#productName").focus();
     }
     //保存产品
     Product.savaProduct = function () {
         var _self = this;
         var Product = {
             ProductID: _self.ProductID,
-            Name: $("#ProductName").val().trim(),
+            Name: $("#productName").val().trim(),
             AnotherName: $("#anotherName").val().trim(),
             IcoPath: _self.IcoPath,
             CountryCode: "0086",

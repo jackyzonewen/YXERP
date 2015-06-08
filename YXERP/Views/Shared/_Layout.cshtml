@@ -12,7 +12,7 @@
         string action = Url.RequestContext.RouteData.Values["action"].ToString().ToUpper();
     }
     <header>
-        <div class="logo left"><img src="/modules/images/logo.gif" /></div>
+        <div class="logo left"><img src="/modules/images/logo.png" /></div>
         <div class="menu left">
             <ul>
                 @foreach (CloudSalesEntity.Menu model in ExpandClass.GetChildMenuByCode(HttpContext.Current, ExpandClass.MANAGE_TOP_CODE))
