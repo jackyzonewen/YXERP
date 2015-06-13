@@ -31,6 +31,8 @@ define(function (require, exports, module) {
         _this.setting.type = [];
         _this.setting.type["mobile"] = /^1[3|5|6|8]\d{9}$/;
         _this.setting.type["email"] = /^\w+(.\w+)+@\w+.\w+$/;
+        _this.setting.type["double"] = /^\d+(.\d+)?$/;
+        _this.setting.type["int"] = /^[1-9]\d*$/;
     }
 
     //默认参数
@@ -58,7 +60,7 @@ define(function (require, exports, module) {
                 //_this.val("");
                 if (_this.next().attr("class") != "verify-fail-err") {
                     _this.css("border-color", "red");
-                    _this.after($("<span class=\"verify-fail-err\">" + _this.attr(_self.setting.regText) + "</span>").css("color", "red"));
+                    _this.after($("<span class=\"verify-fail-err\">" + (_this.attr(_self.setting.regText) || "") + "</span>").css("color", "red"));
                 } else {
                     _this.next().html(_this.attr(_self.setting.regText));
                 }

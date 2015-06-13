@@ -5,10 +5,33 @@
 <link href="/modules/css/products/product.css" rel="stylesheet" />
 
 @section scripts{
+    <script src="/modules/plug/kindeditor-4.1.7/kindeditor.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/products/product"], function (product) {
-            product.init();
+            KindEditor.ready(function (K) {
+                var editor = K.create('#remark');
+                product.init(editor);
+            });
         });
+        //KindEditor.ready(function (K) {
+        //    var editor1 = K.create('#remark', {
+        //        cssPath: '../kindeditor-4.1.7/plugins/code/prettify.css',
+        //        uploadJson: '../kindeditor-4.1.7/asp.net/upload_json.ashx',
+        //        fileManagerJson: '../kindeditor-4.1.7/asp.net/file_manager_json.ashx',
+        //        allowFileManager: true,
+        //        afterCreate: function () {
+        //            var self = this;
+        //            K.ctrl(document, 13, function () {
+        //                self.sync();
+        //                K('form[name=example]')[0].submit();
+        //            });
+        //            K.ctrl(self.edit.doc, 13, function () {
+        //                self.sync();
+        //                K('form[name=example]')[0].submit();
+        //            });
+        //        }
+        //    });
+        //});
     </script>
 }
 
@@ -19,6 +42,9 @@
     <ul class="table-add product-add">
         <li>
             <span class="column-name">产品名称：</span><input type="text" maxlength="50" id="productName" data-empty="* 必填" class="input verify" />
+        </li>
+        <li>
+            <span class="column-name">产品编码：</span><input type="text" maxlength="50" id="productCode" data-empty="* 必填" class="input verify" />
         </li>
          <li>
             <span class="column-name">常用名：</span><input type="text" maxlength="50" id="generalName" class="input" />
@@ -54,7 +80,7 @@
             }
             </select>
             （大 =
-            <input type="text" maxlength="3" id="bigSmallMultiple" value="1" class="input width30" /> *
+            <input type="text" maxlength="3" id="bigSmallMultiple" value="1" data-empty="*" data-type="int"  class="input verify width30" /> *
             小）
             <select id="bigUnit">
             @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
@@ -64,16 +90,19 @@
             </select>
         </li>
         <li>
-            <span class="column-name">正常价：</span><input type="text" maxlength="10" id="price" class="input width50" />
+            <span class="column-name">正常价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="price" class="input verify width80" />
         </li>
         <li>
-            <span class="column-name">优惠价：</span><input type="text" maxlength="10" id="preferentialPrice" class="input width50" />
+            <span class="column-name">优惠价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="preferentialPrice" class="input verify width80" />
         </li>
         <li>
             <span class="column-name">缩略图：</span><span id="productIco"></span>
         </li>
         <li>
-            <span class="column-name">重量：</span><input type="text" maxlength="10" id="weight" class="input width50" />
+            <span class="column-name">重量(kg)：</span><input type="text" maxlength="10" value="0" data-empty="*" data-type="double" data-text="请输入数字!" id="weight" class="input verify width50" />
+        </li>
+        <li>
+            <span class="column-name">有效期（天）：</span><input type="text" maxlength="10" value="0" data-empty="*" data-type="int" data-text="请输入数字!" id="effectiveDays" class="input verify width50" />
         </li>
         <li>
             <span class="column-name">是否上架：</span><label><input type="checkbox" id="status" />是</label> 
@@ -83,6 +112,9 @@
         </li>
         <li>
             <span class="column-name">是否推荐：</span><label><input type="checkbox" id="isRecommend" />是</label> 
+        </li>
+        <li>
+            <span class="column-name">产品说明：</span><textarea id="remark"></textarea>
         </li>
 
     </ul>

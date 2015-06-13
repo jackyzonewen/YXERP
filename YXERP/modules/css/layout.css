@@ -207,5 +207,5 @@ nav .action .select{background:url(../images/submenu.gif) no-repeat left top;fon
 .table-add li{ line-height:25px; margin-top:5px;  padding: 2px 20px;}
 .table-add li input[type="text"] { height:20px; line-height:20px; padding:2px 5px; width:150px; }
 .table-add li textarea { height:80px; line-height:20px; padding:1px 5px; border:solid 1px #ccc; width:350px; border-radius:5px;}
-.table-add span { height:25px; line-height:25px; display:inline-block; color:#333; vertical-align:top;}
+.table-add span {  display:inline-block; color:#333; vertical-align:top;}
 

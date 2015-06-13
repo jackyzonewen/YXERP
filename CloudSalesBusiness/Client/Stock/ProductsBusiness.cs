@@ -400,6 +400,58 @@ namespace CloudSalesBusiness
             return dal.AddCategory(categoryCode, categoryName, pid, status, string.Join(",", attrlist), string.Join(",", saleattr), description, operateid, clientid);
         }
 
+        /// <summary>
+        /// 添加产品
+        /// </summary>
+        /// <param name="productCode">产品编码</param>
+        /// <param name="productName">产品名称</param>
+        /// <param name="generalName">常用名</param>
+        /// <param name="iscombineproduct">是否组合产品</param>
+        /// <param name="brandid">品牌ID</param>
+        /// <param name="bigunitid">大单位</param>
+        /// <param name="smallunitid">小单位</param>
+        /// <param name="bigSmallMultiple">大小单位比例</param>
+        /// <param name="categoryid">分类ID</param>
+        /// <param name="status">状态</param>
+        /// <param name="attrlist">属性列表</param>
+        /// <param name="valuelist">值列表</param>
+        /// <param name="attrvaluelist">属性值键值对</param>
+        /// <param name="commonprice">原价</param>
+        /// <param name="price">优惠价</param>
+        /// <param name="weight">重量</param>
+        /// <param name="isnew">是否新品</param>
+        /// <param name="isRecommend">是否推荐</param>
+        /// <param name="effectiveDays">有效期天数</param>
+        /// <param name="discountValue">折扣</param>
+        /// <param name="productImg">产品图片</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public string AddProduct(string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple, 
+                                 string categoryid, int status, string attrlist, string valuelist, string attrvaluelist, double commonprice, double price, double weight, bool isnew, 
+                                 bool isRecommend, int effectiveDays, double discountValue, string productImg, string description, string operateid, string clientid)
+        {
+
+            if (!string.IsNullOrEmpty(productImg) && productImg != "/modules/images/default.png")
+            {
+                if (productImg.IndexOf("?") > 0)
+                {
+                    productImg = productImg.Substring(0, productImg.IndexOf("?"));
+                }
+                FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath(productImg));
+                productImg = "/Content/uploadFiles/" + file.Name;
+                if (file.Exists)
+                {
+                    file.MoveTo(HttpContext.Current.Server.MapPath(productImg));
+                }
+            }
+
+            var dal = new ProductsDAL();
+            return dal.AddProduct(productCode, productName, generalName, iscombineproduct, brandid, bigunitid, smallunitid, bigSmallMultiple, categoryid, status, attrlist,
+                                    valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, productImg, description, operateid, clientid);
+        }
+
         #endregion
 
         #region 编辑、删除

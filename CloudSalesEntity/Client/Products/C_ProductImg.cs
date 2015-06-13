@@ -27,7 +27,7 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private string _productcode;
+		private string _productid;
 		private string _imgs="";
 		private string _imgm="";
 		private int? _status=1;
@@ -48,10 +48,10 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ProductCode
+        public string ProductID
 		{
-			set{ _productcode=value;}
-			get{return _productcode;}
+			set{ _productid=value;}
+			get{return _productid;}
 		}
 		/// <summary>
 		/// 

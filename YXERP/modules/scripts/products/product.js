@@ -3,7 +3,7 @@ define(function (require, exports, module) {
     var City = require("city"), ProductCity,
         Upload = require("upload"), ProductIco,
         Global = require("global"),
-        Verify = require("verify"), VerifyObject,
+        Verify = require("verify"), VerifyObject, editor,
         doT = require("dot");
     require("pager");
     require("switch");
@@ -15,7 +15,8 @@ define(function (require, exports, module) {
     };
     var Product = {};
     //添加页初始化
-    Product.init = function () {
+    Product.init = function (KindEditor) {
+        editor = KindEditor;
         Product.bindEvent();
     }
     //绑定事件
@@ -47,13 +48,15 @@ define(function (require, exports, module) {
             verifyType: "data-type",
             regText: "data-text"
         });
+
+        $("#productName").focus();
     }
     //保存产品
     Product.savaProduct = function () {
         var _self = this;
         var Product = {
             ProductID: _self.ProductID,
-            Name: $("#ProductName").val().trim(),
+            Name: $("#productName").val().trim(),
             AnotherName: $("#anotherName").val().trim(),
             IcoPath: _self.IcoPath,
             CountryCode: "0086",
