@@ -93,4 +93,7 @@
   <ItemGroup>
     <None Include="Procedures\Client\Products\P_InsertProduct.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Products\P_GetProductList.sql" />
+  </ItemGroup>
 </Project>

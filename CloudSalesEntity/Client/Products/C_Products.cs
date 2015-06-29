@@ -42,19 +42,19 @@ namespace CloudSalesEntity
 		private string _attrlist="";
 		private string _valuelist="";
 		private string _attrvaluelist="";
-		private decimal? _commonprice=0M;
-		private decimal _preferentialprice=0M;
-		private decimal _preferentialpv=0M;
-		private decimal? _taxrate=1M;
+		private decimal? _commonprice=0;
+		private decimal _preferentialprice=0;
+		private decimal _preferentialpv=0;
+        private double? _taxrate = 0;
 		private int? _status=1;
 		private DateTime? _onlinetime= DateTime.Now;
 		private int? _usetype=0;
 		private int? _isnew=0;
 		private int? _isrecommend=0;
 		private int? _isdiscount=0;
-		private decimal? _discountvalue=1M;
+		private decimal? _discountvalue=1;
 		private int? _salecount=0;
-		private decimal? _weight=0M;
+		private decimal? _weight=0;
 		private string _productimage="";
 		private int? _effectivedays=0;
 		private string _shapecode="";
@@ -222,7 +222,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? TaxRate
+		public double? TaxRate
 		{
 			set{ _taxrate=value;}
 			get{return _taxrate;}
@@ -379,7 +379,12 @@ namespace CloudSalesEntity
 			set{ _clientid=value;}
 			get{return _clientid;}
 		}
+
 		#endregion Model
+
+        public string BrandName { get; set; }
+
+        public string CategoryName { get; set; }
 
         /// <summary>
         /// 填充数据

@@ -297,6 +297,22 @@ namespace CloudSalesBusiness
 
             return model;
         }
+
+
+        public List<C_Products> GetProductList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        {
+            var dal = new ProductsDAL();
+            DataSet ds = dal.GetProductList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
+
+            List<C_Products> list = new List<C_Products>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                C_Products model = new C_Products();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
         #endregion
 
         #region 添加
@@ -428,9 +444,9 @@ namespace CloudSalesBusiness
         /// <param name="operateid">操作人</param>
         /// <param name="clientid">客户端ID</param>
         /// <returns></returns>
-        public string AddProduct(string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple, 
-                                 string categoryid, int status, string attrlist, string valuelist, string attrvaluelist, double commonprice, double price, double weight, bool isnew, 
-                                 bool isRecommend, int effectiveDays, double discountValue, string productImg, string description, string operateid, string clientid)
+        public string AddProduct(string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple,
+                                 string categoryid, int status, string attrlist, string valuelist, string attrvaluelist, decimal commonprice, decimal price, decimal weight, bool isnew,
+                                 bool isRecommend, int effectiveDays, decimal discountValue, string productImg, string shapeCode, string description, string operateid, string clientid)
         {
 
             if (!string.IsNullOrEmpty(productImg) && productImg != "/modules/images/default.png")
@@ -449,7 +465,7 @@ namespace CloudSalesBusiness
 
             var dal = new ProductsDAL();
             return dal.AddProduct(productCode, productName, generalName, iscombineproduct, brandid, bigunitid, smallunitid, bigSmallMultiple, categoryid, status, attrlist,
-                                    valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, productImg, description, operateid, clientid);
+                                    valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, productImg, shapeCode, description, operateid, clientid);
         }
 
         #endregion

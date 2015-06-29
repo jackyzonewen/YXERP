@@ -114,6 +114,29 @@ namespace CloudSalesDAL
             return ds;
         }
 
+        public DataSet GetProductList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@totalCount",SqlDbType.Int),
+                                       new SqlParameter("@pageCount",SqlDbType.Int),
+                                       new SqlParameter("@keyWords",keyWords),
+                                       new SqlParameter("@pageSize",pageSize),
+                                       new SqlParameter("@pageIndex",pageIndex),
+                                       new SqlParameter("@ClientID",clientID)
+                                       
+                                   };
+            paras[0].Value = totalCount;
+            paras[1].Value = pageCount;
+
+            paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Direction = ParameterDirection.InputOutput;
+            DataSet ds = GetDataSet("P_GetProductList", paras, CommandType.StoredProcedure);
+            totalCount = Convert.ToInt32(paras[0].Value);
+            pageCount = Convert.ToInt32(paras[1].Value);
+            return ds;
+
+        }
+
         #endregion
 
         #region 添加
@@ -211,9 +234,9 @@ namespace CloudSalesDAL
             return id;
         }
 
-        public string AddProduct(string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple, 
-                                 string categoryid, int status, string attrlist, string valuelist, string attrvaluelist, double commonprice, double price,
-                                 double weight, bool isnew, bool isRecommend, int effectiveDays, double discountValue, string productImg, string description, string operateid, string clientid)
+        public string AddProduct(string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple,
+                                 string categoryid, int status, string attrlist, string valuelist, string attrvaluelist, decimal commonprice, decimal price,
+                                 decimal weight, bool isnew, bool isRecommend, int effectiveDays, decimal discountValue, string productImg, string shapeCode, string description, string operateid, string clientid)
         {
             string id = "";
             SqlParameter[] paras = { 
@@ -239,6 +262,7 @@ namespace CloudSalesDAL
                                        new SqlParameter("@EffectiveDays",effectiveDays),
                                        new SqlParameter("@DiscountValue",discountValue),
                                        new SqlParameter("@ProductImg",productImg),
+                                       new SqlParameter("@ShapeCode",shapeCode),
                                        new SqlParameter("@Description",description),
                                        new SqlParameter("@CreateUserID",operateid),
                                        new SqlParameter("@ClientID",clientid)

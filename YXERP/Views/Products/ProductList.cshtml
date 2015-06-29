@@ -1,5 +1,36 @@
 ﻿@{
-    ViewBag.Title = "产品列表--云销科技";
+    ViewBag.Title = "产品列表";
 }
 
-<h2>ProductsList</h2>
+<link href="/modules/css/products/product.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="/modules/plug/kindeditor-4.1.7/kindeditor.js"></script>
+    <script type="text/javascript">
+        seajs.use(["scripts/products/product"], function (obj) {
+            obj.initList();
+        });
+    </script>
+}
+
+<div class="header-box">
+    <span class="header-title left">产品列表</span>
+    <a href="ProductAdd" class="ico-add left mTop4 mLeft20">添加新品</a>
+    <div class="right searth-module"> </div> 
+</div>
+<div class="content-body">
+    <table class="table-list">
+        <tr class="tr-header" id="product-items">
+            <td class="m-len">产品编码</td>
+            <td>产品名称</td>
+            <td class="m-len">分类名称</td>
+            <td class="m-len">品牌</td>
+            <td class="m-len">优惠价</td>
+            <td class="m-len">是否上架</td>
+            <td class="m-len">是否新品</td>
+            <td class="m-len">是否推荐</td>
+            <td class="s-len">编辑</td>
+        </tr>
+    </table>
+    <div id="pager" class="mTop20"></div>
+</div>

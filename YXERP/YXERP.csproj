@@ -434,6 +434,7 @@
     <Content Include="modules\template\products\category_add.html" />
     <Content Include="modules\template\products\category_list.html" />
     <Content Include="modules\template\products\choose_category.html" />
+    <Content Include="modules\template\products\product_list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

@@ -491,6 +491,67 @@ namespace YXERP.Controllers
         }
         #endregion
 
+        #region 产品
+
+        /// <summary>
+        /// 保存产品
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public JsonResult SavaProduct(string product)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_Products model = serializer.Deserialize<C_Products>(product);
+
+            if (!string.IsNullOrEmpty(model.AttrList))
+            {
+                model.AttrList = model.AttrList.Substring(0, model.AttrList.Length - 1);
+            }
+            if (!string.IsNullOrEmpty(model.ValueList))
+            {
+                model.ValueList = model.ValueList.Substring(0, model.ValueList.Length - 1);
+            }
+            if (!string.IsNullOrEmpty(model.AttrValueList))
+            {
+                model.AttrValueList = model.AttrValueList.Substring(0, model.AttrValueList.Length - 1);
+            }
+
+            string id = "";
+            if (string.IsNullOrEmpty(model.ProductID))
+            {
+                id = new ProductsBusiness().AddProduct(model.ProductCode, model.ProductName, model.GeneralName, model.IsCombineProduct.Value == 1, model.BrandID, model.BigUnitID, model.SmallUnitID,
+                                                        model.BigSmallMultiple.Value, model.CategoryID, model.Status.Value, model.AttrList, model.ValueList, model.AttrValueList,
+                                                        model.CommonPrice.Value, model.Price, model.Weight.Value, model.IsNew.Value == 1, model.IsRecommend.Value == 1, model.EffectiveDays.Value,
+                                                        model.DiscountValue.Value, model.ProductImage, model.ShapeCode, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else
+            {
+
+            }
+            JsonDictionary.Add("ID", id);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult GetProductList(string keyWords, int pageIndex, int totalCount)
+        {
+            int pageCount = 0;
+            List<C_Products> list = new ProductsBusiness().GetProductList(keyWords, PageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", totalCount);
+            JsonDictionary.Add("PageCount", pageCount);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        #endregion
+
         #endregion
     }
 }

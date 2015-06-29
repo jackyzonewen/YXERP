@@ -55,6 +55,12 @@ namespace YXERP.Controllers
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 HttpPostedFileBase file = Request.Files[i];
+                //判断图片类型
+                string ContentType = file.ContentType;
+                if (ContentType != "image/x-png" && ContentType != "image/gif" && ContentType != "image/jpeg" && ContentType != "image/tiff" && ContentType != "application/x-MS-bmp" && ContentType != "image/pjpeg")
+                {
+                    continue;
+                }
                 if (string.IsNullOrEmpty(oldPath) || oldPath == "/modules/images/default.png")
                 {
                     string[] arr = file.FileName.Split('.');

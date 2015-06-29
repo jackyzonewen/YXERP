@@ -9,7 +9,6 @@ define(function (require, exports, module) {
     require("switch");
     var Params = {
         keyWords: "",
-        pageSize: 20,
         pageIndex: 1,
         totalCount: 0
     };
@@ -30,7 +29,7 @@ define(function (require, exports, module) {
             data: { folder: '/Content/tempfile/', action: 'add', oldPath: "" },
             success: function (data, status) {
                 if (data.Items.length > 0) {
-                    _self.IcoPath = data.Items[0];
+                    _self.ProductImage = data.Items[0];
                     $("#productImg").attr("src", data.Items[0]);
                 }
             }
@@ -53,21 +52,46 @@ define(function (require, exports, module) {
     }
     //保存产品
     Product.savaProduct = function () {
-        var _self = this;
+        var _self = this, attrlist = "", valuelist = "", attrvaluelist = "";
+
+        $(".productattr").each(function () {
+            var _this = $(this);
+            attrlist += _this.data("id") + ",";
+            valuelist += _this.find("select").val() + ",";
+            attrvaluelist += _this.data("id") + ":" + _this.find("select").val() + ",";
+        });
+
         var Product = {
             ProductID: _self.ProductID,
-            Name: $("#productName").val().trim(),
-            AnotherName: $("#anotherName").val().trim(),
-            IcoPath: _self.IcoPath,
-            CountryCode: "0086",
-            CityCode: ProductCity.getCityCode(),
-            Status: $("#ProductStatus").prop("checked") ? 1 : 0,
-            Remark: $("#description").val(),
-            ProductStyle: $("#ProductStyle").val().trim()
+            ProductCode: $("#productCode").val().trim(),
+            ProductName: $("#productName").val().trim(),
+            GeneralName: $("#generalName").val().trim(),
+            IsCombineProduct: 0,
+            BrandID: $("#brand").val(),
+            BigUnitID: $("#bigUnit").val().trim(),
+            SmallUnitID: $("#smallUnit").val().trim(),
+            BigSmallMultiple: $("#bigSmallMultiple").val().trim(),
+            CategoryID: $("#categoryID").val(),
+            Status: $("#status").prop("checked") ? 1 : 0,
+            AttrList: attrlist,
+            ValueList: valuelist,
+            AttrValueList: attrvaluelist,
+            CommonPrice: $("#commonprice").val(),
+            Price: $("#price").val(),
+            Weight: $("#weight").val(),
+            IsNew: $("#isNew").prop("checked") ? 1 : 0,
+            IsRecommend: $("#isRecommend").prop("checked") ? 1 : 0,
+            EffectiveDays: $("#effectiveDays").val(),
+            DiscountValue:1,
+            ProductImage: _self.ProductImage,
+            ShapeCode: $("#shapeCode").val(),
+            Description: encodeURI(editor.html())
         };
-        Global.post("/Products/SavaProduct", { Product: JSON.stringify(Product) }, function (data) {
+        Global.post("/Products/SavaProduct", {
+            product: JSON.stringify(Product)
+        }, function (data) {
             if (data.ID.length > 0) {
-                location.href="/Products/Product"
+                location.href = "/Products/ProductList";
             }
         })
     }
@@ -90,23 +114,11 @@ define(function (require, exports, module) {
         var _self = this;
         $("#Product-items").nextAll().remove();
         Global.post("/Products/GetProductList", Params, function (data) {
-            doT.exec("template/products/Product_list.html", function (templateFun) {
+            doT.exec("template/products/product_list.html", function (templateFun) {
                 var innerText = templateFun(data.Items);
                 innerText = $(innerText);
-                $("#Product-items").after(innerText);
+                $("#product-items").after(innerText);
 
-                //删除事件
-                $(".ico-del").click(function () {
-                    if (confirm("品牌删除后不可恢复,确认删除吗？")) {
-                        Global.post("/Products/DeleteProduct", { ProductID: $(this).attr("data-id") }, function (data) {
-                            if (data.Status) {
-                                _self.getList();
-                            } else {
-                                alert("删除失败！");
-                            }
-                        });
-                    }
-                });
                 //绑定启用插件
                 innerText.find(".status").switch({
                     open_title: "点击启用",

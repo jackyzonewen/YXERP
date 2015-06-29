@@ -37,6 +37,7 @@ CREATE PROCEDURE [dbo].[P_InsertProduct]
 @DiscountValue decimal(5,4),
 @ProductImg nvarchar(4000),
 @Description text,
+@ShapeCode nvarchar(50),
 @CreateUserID nvarchar(64),
 @ClientID nvarchar(64),
 @ProductID nvarchar(64) output 
@@ -50,6 +51,16 @@ set @ProductID=NEWID()
 
 select @PIDList=PIDList,@SaleAttr=SaleAttr from C_Category where CategoryID=@CategoryID
 
+INSERT INTO [C_Products]([ProductID],[ProductCode],[ProductName],[GeneralName],[IsCombineProduct],[BrandID],[BigUnitID],[SmallUnitID],[BigSmallMultiple] ,
+						[CategoryID],[CategoryIDList],[SaleAttr],[AttrList],[ValueList],[AttrValueList],[CommonPrice],[Price],[PV],[TaxRate],[Status],
+						[OnlineTime],[UseType],[IsNew],[IsRecommend] ,[IsDiscount],[DiscountValue],[SaleCount],[Weight] ,[ProductImage],[EffectiveDays],
+						[ShapeCode] ,[ProdiverID],[Description],[CreateUserID],[CreateTime] ,[UpdateTime],[OperateIP] ,[ClientID])
+				 VALUES(@ProductID,@ProductCode,@ProductName,@GeneralName,@IsCombineProduct,@BrandID,@BigUnitID,@SmallUnitID,@BigSmallMultiple,
+						@CategoryID,@PIDList,@SaleAttr,@AttrList,@ValueList,@AttrValueList,@CommonPrice,@Price,@Price,0,0,
+						getdate(),0,@Isnew,@IsRecommend,1,@DiscountValue,0,@Weight,@ProductImg,@EffectiveDays,@ShapeCode,'',@Description,@CreateUserID,
+						getdate(),getdate(),'',@ClientID)
+
+set @Err+=@@Error
 
 if(@Err>0)
 begin

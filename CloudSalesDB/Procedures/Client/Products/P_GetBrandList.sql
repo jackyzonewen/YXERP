@@ -33,7 +33,7 @@ AS
 	set @condition=' ClientID='''+@ClientID+''' and Status<>9 '
 	if(@keyWords <> '')
 	begin
-		set @condition +=' and Name like ''%'+@keyWords+'%'' or  AnotherName like ''%'+@keyWords+'%'' or  BrandStyle like ''%'+@keyWords+'%'' '
+		set @condition +=' and (Name like ''%'+@keyWords+'%'' or  AnotherName like ''%'+@keyWords+'%'' or  BrandStyle like ''%'+@keyWords+'%'') '
 	end
 
 	declare @total int,@page int

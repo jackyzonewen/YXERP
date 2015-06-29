@@ -32,7 +32,7 @@ define(function (require, exports, module) {
         _this.setting.type["mobile"] = /^1[3|5|6|8]\d{9}$/;
         _this.setting.type["email"] = /^\w+(.\w+)+@\w+.\w+$/;
         _this.setting.type["double"] = /^\d+(.\d+)?$/;
-        _this.setting.type["int"] = /^[1-9]\d*$/;
+        _this.setting.type["int"] = /^(0|([1-9]\d*))$/;
     }
 
     //默认参数

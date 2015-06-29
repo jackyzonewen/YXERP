@@ -13,30 +13,14 @@
                 product.init(editor);
             });
         });
-        //KindEditor.ready(function (K) {
-        //    var editor1 = K.create('#remark', {
-        //        cssPath: '../kindeditor-4.1.7/plugins/code/prettify.css',
-        //        uploadJson: '../kindeditor-4.1.7/asp.net/upload_json.ashx',
-        //        fileManagerJson: '../kindeditor-4.1.7/asp.net/file_manager_json.ashx',
-        //        allowFileManager: true,
-        //        afterCreate: function () {
-        //            var self = this;
-        //            K.ctrl(document, 13, function () {
-        //                self.sync();
-        //                K('form[name=example]')[0].submit();
-        //            });
-        //            K.ctrl(self.edit.doc, 13, function () {
-        //                self.sync();
-        //                K('form[name=example]')[0].submit();
-        //            });
-        //        }
-        //    });
-        //});
     </script>
 }
 
 <div class="header-box">
-    <span class="header-title left">添加新品 >> @(model.CategoryName) <a href="/Products/ProductAdd">返回更换分类</a></span>
+    <span class="header-title left">添加新品 >> @(model.CategoryName)
+         <a href="/Products/ProductAdd">返回更换分类</a>
+        <input type="hidden" id="categoryID" value="@(model.CategoryID)" />
+    </span>
 </div>
 <div class="content-body">
     <ul class="table-add product-add">
@@ -50,6 +34,9 @@
             <span class="column-name">常用名：</span><input type="text" maxlength="50" id="generalName" class="input" />
         </li>
         <li>
+            <span class="column-name">条形码：</span><input type="text" maxlength="50" id="shapeCode" class="input" />
+        </li>
+        <li>
             <span class="column-name">品牌：</span>
             <select id="brand">
             @foreach (CloudSalesEntity.C_Brand brand in (List<CloudSalesEntity.C_Brand>)ViewBag.BrandList)
@@ -61,7 +48,7 @@
         
         @foreach (CloudSalesEntity.C_ProductAttr attr in model.AttrLists)
         {
-            <li data-id="@attr.AttrID">
+            <li data-id="@attr.AttrID" class="productattr">
                 <span class="column-name">@attr.AttrName：</span>
                 <select>
                     @foreach (CloudSalesEntity.C_AttrValue value in attr.AttrValues)
@@ -90,10 +77,10 @@
             </select>
         </li>
         <li>
-            <span class="column-name">正常价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="price" class="input verify width80" />
+            <span class="column-name">正常价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="commonprice" class="input verify width80" />
         </li>
         <li>
-            <span class="column-name">优惠价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="preferentialPrice" class="input verify width80" />
+            <span class="column-name">优惠价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="price" class="input verify width80" />
         </li>
         <li>
             <span class="column-name">缩略图：</span><span id="productIco"></span>
@@ -105,7 +92,7 @@
             <span class="column-name">有效期（天）：</span><input type="text" maxlength="10" value="0" data-empty="*" data-type="int" data-text="请输入数字!" id="effectiveDays" class="input verify width50" />
         </li>
         <li>
-            <span class="column-name">是否上架：</span><label><input type="checkbox" id="status" />是</label> 
+            <span class="column-name">是否上架：</span><label><input type="checkbox" checked="checked" id="status" />是</label> 
         </li>
         <li>
             <span class="column-name">是否新品：</span><label><input type="checkbox" id="isNew" />是</label> 
