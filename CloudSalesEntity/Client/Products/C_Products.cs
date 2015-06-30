@@ -384,6 +384,8 @@ namespace CloudSalesEntity
 
         public string BrandName { get; set; }
 
+        public C_Category Category { get; set; }
+
         public string CategoryName { get; set; }
 
         /// <summary>

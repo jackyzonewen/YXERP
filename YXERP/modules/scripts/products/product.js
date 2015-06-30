@@ -1,7 +1,6 @@
 ﻿
 define(function (require, exports, module) {
-    var City = require("city"), ProductCity,
-        Upload = require("upload"), ProductIco,
+    var Upload = require("upload"), ProductIco,
         Global = require("global"),
         Verify = require("verify"), VerifyObject, editor,
         doT = require("dot");
@@ -21,7 +20,6 @@ define(function (require, exports, module) {
     //绑定事件
     Product.bindEvent = function () {
         var _self = this;
-        ProductCity = City.createCity({ elementID: "ProductCity" });
         ProductIco = Upload.createUpload({
             element: "#productIco",
             buttonText: "选择产品图片",
@@ -109,7 +107,7 @@ define(function (require, exports, module) {
             });
         });
     }
-    //获取品牌列表
+    //获取产品列表
     Product.getList = function () {
         var _self = this;
         $("#Product-items").nextAll().remove();
@@ -121,11 +119,27 @@ define(function (require, exports, module) {
 
                 //绑定启用插件
                 innerText.find(".status").switch({
-                    open_title: "点击启用",
-                    close_title: "点击禁用",
+                    open_title: "点击上架",
+                    close_title: "点击下架",
                     value_key: "value",
                     change: function (data,callback) {
                         _self.editStatus(data, data.data("id"), data.data("value"), callback);
+                    }
+                });
+                innerText.find(".isnew").switch({
+                    open_title: "设为新品",
+                    close_title: "取消新品",
+                    value_key: "value",
+                    change: function (data, callback) {
+                        _self.editIsNew(data, data.data("id"), data.data("value"), callback);
+                    }
+                });
+                innerText.find(".isrecommend").switch({
+                    open_title: "点击推荐",
+                    close_title: "取消推荐",
+                    value_key: "value",
+                    change: function (data, callback) {
+                        _self.editIsRecommend(data, data.data("id"), data.data("value"), callback);
                     }
                 });
             });
@@ -151,22 +165,44 @@ define(function (require, exports, module) {
             });
         });
     }
-    //更改品牌状态
+    //更改产品状态
     Product.editStatus = function (obj, id, status, callback) {
         var _self = this;
         Global.post("/Products/UpdateProductStatus", {
-            ProductID: id,
+            productid: id,
             status: status ? 0 : 1
         }, function (data) {
             !!callback && callback(data.Status);
         });
     }
-    //初始化编辑页数据
-    Product.initEdit = function (model) {
+    //更改产品是否新品
+    Product.editIsNew = function (obj, id, status, callback) {
         var _self = this;
+        Global.post("/Products/UpdateProductIsNew", {
+            productid: id,
+            isnew: !status
+        }, function (data) {
+            !!callback && callback(data.Status);
+        });
+    }
+    //更改产品是否推荐
+    Product.editIsRecommend = function (obj, id, status, callback) {
+        var _self = this;
+        Global.post("/Products/UpdateProductIsRecommend", {
+            productid: id,
+            isRecommend: !status
+        }, function (data) {
+            !!callback && callback(data.Status);
+        });
+    }
+
+    //初始化编辑页数据
+    Product.initEdit = function (model, KindEditor) {
+        var _self = this;
+        editor = KindEditor;
         model = JSON.parse(model.replace(/&quot;/g, '"'));
         _self.bindDetailEvent(model);
-        _self.bindDetail(model);
+        //_self.bindDetail(model);
     }
     //获取详细信息
     Product.bindDetail = function (model) {
@@ -181,17 +217,13 @@ define(function (require, exports, module) {
         $("#description").val(model.Remark);
         $("#ProductImg").attr("src", model.IcoPath);
         
-        _self.IcoPath = model.IcoPath;
+        _self.ProductImage = model.ProductImage;
         
         
     }
 
     Product.bindDetailEvent = function (model) {
         var _self = this, count = 1;
-        ProductCity = City.createCity({
-            elementID: "ProductCity",
-            cityCode: model.CityCode
-        });
         
         $("#btnSaveProduct").on("click", function () {
             if (!VerifyObject.isPass()) {
@@ -208,14 +240,14 @@ define(function (require, exports, module) {
         });
 
         ProductIco = Upload.createUpload({
-            element: "#ProductIco",
-            buttonText: "更换商标",
+            element: "#productIco",
+            buttonText: "更换产品图片",
             className: "edit-Product",
-            data: { folder: '/Content/tempfile/', action: 'add', oldPath: model.IcoPath },
+            data: { folder: '/Content/tempfile/', action: 'add', oldPath: model.ProductImage },
             success: function (data, status) {
                 if (data.Items.length > 0) {
-                    _self.IcoPath = data.Items[0];
-                    $("#ProductImg").attr("src", data.Items[0] + "?" + count++);
+                    _self.ProductImage = data.Items[0];
+                    $("#productImg").attr("src", data.Items[0] + "?" + count++);
                 }
             }
         });

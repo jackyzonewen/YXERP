@@ -509,16 +509,7 @@
     <Content Include="Views\Products\BrandAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\plug\seach_keys\vssver2.scc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="modules\plug\switch\vssver2.scc" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Products\BrandDetail.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="modules\plug\easydialog\vssver2.scc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\ChooseCategory.cshtml" />
@@ -529,6 +520,9 @@
     <Content Include="modules\plug\kindeditor-4.1.7\jsp\demo.jsp" />
     <Content Include="modules\plug\kindeditor-4.1.7\jsp\file_manager_json.jsp" />
     <Content Include="modules\plug\kindeditor-4.1.7\jsp\upload_json.jsp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Products\ProductDetail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

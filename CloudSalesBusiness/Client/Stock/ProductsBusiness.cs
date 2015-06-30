@@ -602,6 +602,43 @@ namespace CloudSalesBusiness
             return dal.UpdateCategory(categoryid, categoryName, status, string.Join(",", attrlist), string.Join(",", saleattr), description);
         }
 
+        /// <summary>
+        /// 编辑产品状态
+        /// </summary>
+        /// <param name="productid">产品ID</param>
+        /// <param name="status">状态</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateProductStatus(string productid, StatusEnum status, string operateIP, string operateID)
+        {
+            return CommonBusiness.Update("C_Products", "Status", ((int)status).ToString(), " ProductID='" + productid + "'");
+        }
+        /// <summary>
+        /// 编辑产品是否新品
+        /// </summary>
+        /// <param name="productid">产品ID</param>
+        /// <param name="isNew">true 新品</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateProductIsNew(string productid, bool isNew, string operateIP, string operateID)
+        {
+            return CommonBusiness.Update("C_Products", "IsNew", isNew ? "1" : "0", " ProductID='" + productid + "'");
+        }
+        /// <summary>
+        /// 编辑产品是否推荐
+        /// </summary>
+        /// <param name="productid">产品ID</param>
+        /// <param name="isRecommend">true 推荐</param>
+        /// <param name="operateIP">操作IP</param>
+        /// <param name="operateID">操作人</param>
+        /// <returns></returns>
+        public bool UpdateProductIsRecommend(string productid, bool isRecommend, string operateIP, string operateID)
+        {
+            return CommonBusiness.Update("C_Products", "IsRecommend", isRecommend ? "1" : "0", " ProductID='" + productid + "'");
+        }
+
         #endregion
     }
 }

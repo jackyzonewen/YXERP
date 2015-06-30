@@ -9,8 +9,8 @@
     <td>{%=item.BrandName%}</td>
     <td class="tRight">{%=item.Price.toFixed(2)%}</td>
     <td class='center'><div class="status" data-id="{%=item.ProductID%}" data-value="{%=item.Status==1%}"></div></td>
-    <td class='center'><div class="status" data-id="{%=item.ProductID%}" data-value="{%=item.IsNew==1%}"></div></td>
-    <td class='center'><div class="status" data-id="{%=item.ProductID%}" data-value="{%=item.IsRecommend==1%}"></div></td>
+    <td class='center'><div class="isnew" data-id="{%=item.ProductID%}" data-value="{%=item.IsNew==1%}"></div></td>
+    <td class='center'><div class="isrecommend" data-id="{%=item.ProductID%}" data-value="{%=item.IsRecommend==1%}"></div></td>
     <td class="center"><a class="ico-edit" title="编辑" href="ProductDetail/{%=item.ProductID%}"></a></td>
 </tr>
 {% } %}

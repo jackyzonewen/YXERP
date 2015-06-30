@@ -31,9 +31,9 @@ namespace CloudSalesEnum
     {
         //所有（搜索）
         All = -1,
-        //无效
+        //无效（未审核）
         Invalid = 0,
-        //有效
+        //有效(上架、已审核)
         Valid = 1,
         //删除
         Delete = 9

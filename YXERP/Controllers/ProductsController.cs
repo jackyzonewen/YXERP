@@ -103,6 +103,21 @@ namespace YXERP.Controllers
         }
 
         /// <summary>
+        /// 产品详情页
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ProductDetail(string id)
+        {
+            var model = new C_Products();
+            model.Category = new ProductsBusiness().GetCategoryDetailByID("992B96BC-760E-4776-BC05-3997D6EA65D0");
+            ViewBag.Model = model;
+            ViewBag.BrandList = new ProductsBusiness().GetBrandList(CurrentUser.ClientID);
+            ViewBag.UnitList = new ProductsBusiness().GetClientUnits(CurrentUser.ClientID);
+            return View();
+        }
+
+        /// <summary>
         /// 产品列表
         /// </summary>
         /// <returns></returns>
@@ -536,6 +551,10 @@ namespace YXERP.Controllers
             };
         }
 
+        /// <summary>
+        /// 获取产品列表
+        /// </summary>
+        /// <returns></returns>
         public JsonResult GetProductList(string keyWords, int pageIndex, int totalCount)
         {
             int pageCount = 0;
@@ -550,6 +569,54 @@ namespace YXERP.Controllers
             };
         }
 
+        /// <summary>
+        /// 编辑产品状态
+        /// </summary>
+        /// <param name="productid"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public JsonResult UpdateProductStatus(string productid, int status)
+        {
+            bool bl = new ProductsBusiness().UpdateProductStatus(productid, (StatusEnum)status, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 编辑产品是否新品
+        /// </summary>
+        /// <param name="productid"></param>
+        /// <param name="isnew"></param>
+        /// <returns></returns>
+        public JsonResult UpdateProductIsNew(string productid, bool isnew)
+        {
+            bool bl = new ProductsBusiness().UpdateProductIsNew(productid, isnew, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 编辑产品是否推荐
+        /// </summary>
+        /// <param name="productid"></param>
+        /// <param name="isRecommend"></param>
+        /// <returns></returns>
+        public JsonResult UpdateProductIsRecommend(string productid, bool isRecommend)
+        {
+            bool bl = new ProductsBusiness().UpdateProductIsRecommend(productid, isRecommend, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
 
         #endregion
