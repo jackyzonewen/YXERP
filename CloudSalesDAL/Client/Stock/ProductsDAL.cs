@@ -137,6 +137,13 @@ namespace CloudSalesDAL
 
         }
 
+        public DataSet GetProductByID(string productid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@ProductID", productid) };
+            DataSet ds = GetDataSet("P_GetProductByID", paras, CommandType.StoredProcedure, "Product|Details");
+            return ds;
+        }
+
         #endregion
 
         #region 添加
@@ -373,6 +380,43 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sql, paras, CommandType.Text) > 0;
            
         }
+
+        public bool UpdateProduct(string productid, string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple,
+                                 int status, string categoryid, string attrlist, string valuelist, string attrvaluelist, decimal commonprice, decimal price,
+                                 decimal weight, bool isnew, bool isRecommend, int effectiveDays, decimal discountValue, string shapeCode, string description, string operateid, string clientid)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@ProductID",productid),
+                                       new SqlParameter("@ProductCode",productCode),
+                                       new SqlParameter("@ProductName",productName),
+                                       new SqlParameter("@GeneralName",generalName),
+                                       new SqlParameter("@IsCombineProduct",iscombineproduct),
+                                       new SqlParameter("@BrandID",brandid),
+                                       new SqlParameter("@BigUnitID",bigunitid),
+                                       new SqlParameter("@SmallUnitID",smallunitid),
+                                       new SqlParameter("@BigSmallMultiple",bigSmallMultiple),
+                                       new SqlParameter("@Status",status),
+                                       new SqlParameter("@CategoryID",categoryid),
+                                       new SqlParameter("@AttrList",attrlist),
+                                       new SqlParameter("@ValueList",valuelist),
+                                       new SqlParameter("@AttrValueList",attrvaluelist),
+                                       new SqlParameter("@CommonPrice",commonprice),
+                                       new SqlParameter("@Price",price),
+                                       new SqlParameter("@Weight",weight),
+                                       new SqlParameter("@Isnew",isnew ? 1 :0),
+                                       new SqlParameter("@IsRecommend",isRecommend ? 1 : 0),
+                                       new SqlParameter("@EffectiveDays",effectiveDays),
+                                       new SqlParameter("@DiscountValue",discountValue),
+                                       new SqlParameter("@ShapeCode",shapeCode),
+                                       new SqlParameter("@Description",description),
+                                       new SqlParameter("@CreateUserID",operateid),
+                                       new SqlParameter("@ClientID",clientid)
+                                   };
+
+            return ExecuteNonQuery("P_UpdateProduct", paras, CommandType.StoredProcedure) > 0;
+
+        }
+
         #endregion
     }
 }

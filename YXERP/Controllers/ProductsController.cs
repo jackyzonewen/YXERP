@@ -109,8 +109,8 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult ProductDetail(string id)
         {
-            var model = new C_Products();
-            model.Category = new ProductsBusiness().GetCategoryDetailByID("992B96BC-760E-4776-BC05-3997D6EA65D0");
+            var model = new ProductsBusiness().GetProductByID(id);
+            model.Category = new ProductsBusiness().GetCategoryDetailByID(model.CategoryID);
             ViewBag.Model = model;
             ViewBag.BrandList = new ProductsBusiness().GetBrandList(CurrentUser.ClientID);
             ViewBag.UnitList = new ProductsBusiness().GetClientUnits(CurrentUser.ClientID);
@@ -541,7 +541,14 @@ namespace YXERP.Controllers
             }
             else
             {
-
+                bool bl = new ProductsBusiness().UpdateProduct(model.ProductID,model.ProductCode, model.ProductName, model.GeneralName, model.IsCombineProduct.Value == 1, model.BrandID, model.BigUnitID, model.SmallUnitID,
+                                                        model.BigSmallMultiple.Value, model.Status.Value, model.CategoryID, model.AttrList, model.ValueList, model.AttrValueList,
+                                                        model.CommonPrice.Value, model.Price, model.Weight.Value, model.IsNew.Value == 1, model.IsRecommend.Value == 1, model.EffectiveDays.Value,
+                                                        model.DiscountValue.Value,model.ShapeCode, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+                if (bl)
+                {
+                    id = model.ProductID;
+                }
             }
             JsonDictionary.Add("ID", id);
             return new JsonResult

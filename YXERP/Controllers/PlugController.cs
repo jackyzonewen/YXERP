@@ -27,7 +27,10 @@ namespace YXERP.Controllers
             };
         }
 
-
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <returns></returns>
         public JsonResult UploadFile()
         {
             string oldPath = "",
@@ -57,7 +60,15 @@ namespace YXERP.Controllers
                 HttpPostedFileBase file = Request.Files[i];
                 //判断图片类型
                 string ContentType = file.ContentType;
-                if (ContentType != "image/x-png" && ContentType != "image/gif" && ContentType != "image/jpeg" && ContentType != "image/tiff" && ContentType != "application/x-MS-bmp" && ContentType != "image/pjpeg")
+                Dictionary<string, string> types = new Dictionary<string, string>();
+                types.Add("image/x-png", "1");
+                types.Add("image/png", "1");
+                types.Add("image/gif", "1");
+                types.Add("image/jpeg", "1");
+                types.Add("image/tiff", "1");
+                types.Add("application/x-MS-bmp", "1");
+                types.Add("image/pjpeg", "1");
+                if (!types.ContainsKey(ContentType))
                 {
                     continue;
                 }

@@ -202,26 +202,44 @@ define(function (require, exports, module) {
         editor = KindEditor;
         model = JSON.parse(model.replace(/&quot;/g, '"'));
         _self.bindDetailEvent(model);
-        //_self.bindDetail(model);
+        _self.bindDetail(model);
     }
     //获取详细信息
     Product.bindDetail = function (model) {
         var _self = this;
         _self.ProductID = model.ProductID;
-        $("#ProductName").val(model.Name);
-        $("#anotherName").val(model.AnotherName);
-        $("#ProductStyle").val(model.ProductStyle);
-        if (model.Status == 1) {
-            $("#ProductStatus").prop("checked", "checked");
+        $("#productName").val(model.ProductName);
+        $("#productCode").text(model.ProductCode);
+        $("#generalName").val(model.GeneralName);
+        $("#shapeCode").val(model.ShapeCode);
+
+        //截取绑定属性值
+        var list = model.AttrValueList.split(',');
+        for (var i = 0, j = list.length; i < j; i++) {
+            $("#" + list[i].split(':')[0]).val(list[i].split(':')[1]);
         }
-        $("#description").val(model.Remark);
-        $("#ProductImg").attr("src", model.IcoPath);
+
+        $("#brand").val(model.BrandID);
+        $("#smallUnit").val(model.SmallUnitID);
+        $("#bigUnit").val(model.BigUnitID);
+
+        $("#bigSmallMultiple").val(model.BigSmallMultiple);
+        $("#commonprice").val(model.CommonPrice);
+        $("#price").val(model.Price);
+        $("#weight").val(model.Weight);
+        $("#effectiveDays").val(model.EffectiveDays);
+
+        $("#status").prop("checked", model.Status == 1);
+        $("#isNew").prop("checked", model.IsNew == 1);
+        $("#isRecommend").prop("checked", model.IsRecommend == 1);
+
+        $("#productImg").attr("src", model.ProductImage);
         
         _self.ProductImage = model.ProductImage;
         
-        
+        editor.html(decodeURI(model.Description))
     }
-
+    //详情页事件
     Product.bindDetailEvent = function (model) {
         var _self = this, count = 1;
         

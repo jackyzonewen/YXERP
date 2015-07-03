@@ -15,6 +15,7 @@
 *└──────────────────────────────────┘
 */
 using System;
+using System.Collections.Generic;
 namespace CloudSalesEntity
 {
 	/// <summary>
@@ -84,7 +85,7 @@ namespace CloudSalesEntity
 			get{return _productcode;}
 		}
 		/// <summary>
-		/// 
+		/// 产品名称
 		/// </summary>
 		public string ProductName
 		{
@@ -387,6 +388,11 @@ namespace CloudSalesEntity
         public C_Category Category { get; set; }
 
         public string CategoryName { get; set; }
+
+        /// <summary>
+        /// 子产品列表
+        /// </summary>
+        public List<C_ProductDetail> ProductDetails { get; set; }
 
         /// <summary>
         /// 填充数据

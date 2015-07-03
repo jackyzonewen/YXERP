@@ -15,6 +15,12 @@ namespace CloudSalesBusiness
 {
     public class ProductsBusiness
     {
+        /// <summary>
+        /// 文件默认存储路径
+        /// </summary>
+        public const string FILEPATH = "/Content/uploadFiles/";
+
+        public static object SingleLock = new object();
 
         #region 查询
 
@@ -298,7 +304,16 @@ namespace CloudSalesBusiness
             return model;
         }
 
-
+        /// <summary>
+        /// 获取产品列表
+        /// </summary>
+        /// <param name="keyWords">关键词</param>
+        /// <param name="pageSize">页Size</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="totalCount">总数</param>
+        /// <param name="pageCount">总页数</param>
+        /// <param name="clientID">客户端ID</param>
+        /// <returns></returns>
         public List<C_Products> GetProductList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
@@ -313,6 +328,34 @@ namespace CloudSalesBusiness
             }
             return list;
         }
+
+        /// <summary>
+        /// 根据产品ID获取产品信息
+        /// </summary>
+        /// <param name="productid"></param>
+        /// <returns></returns>
+        public C_Products GetProductByID(string productid)
+        {
+            var dal = new ProductsDAL();
+            DataSet ds = dal.GetProductByID(productid);
+
+            C_Products model = new C_Products();
+            if (ds.Tables.Contains("Product") && ds.Tables["Product"].Rows.Count > 0)
+            {
+                model.FillData(ds.Tables["Product"].Rows[0]);
+                List<C_ProductDetail> list = new List<C_ProductDetail>();
+                foreach (DataRow item in ds.Tables["Details"].Rows)
+                {
+                    C_ProductDetail detail = new C_ProductDetail();
+                    detail.FillData(item);
+                    list.Add(detail);
+                }
+                model.ProductDetails = list;
+            }
+
+            return model;
+        }
+
         #endregion
 
         #region 添加
@@ -334,20 +377,27 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public string AddBrand(string name, string anotherName, string icoPath, string countryCode, string cityCode, int status, string remark, string brandStyle, string operateIP, string operateID, string clientID)
         {
-            if (!string.IsNullOrEmpty(icoPath) && icoPath != "/modules/images/default.png")
+            lock (SingleLock)
             {
-                if (icoPath.IndexOf("?") > 0)
+                if (!string.IsNullOrEmpty(icoPath))
                 {
-                    icoPath = icoPath.Substring(0, icoPath.IndexOf("?"));
+                    if (icoPath.IndexOf("?") > 0)
+                    {
+                        icoPath = icoPath.Substring(0, icoPath.IndexOf("?"));
+                    }
+                    FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath(icoPath));
+                    icoPath = FILEPATH + file.Name;
+                    if (file.Exists)
+                    {
+                        file.MoveTo(HttpContext.Current.Server.MapPath(icoPath));
+                    }
                 }
-                FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath(icoPath));
-                icoPath = "/Content/uploadFiles/" + file.Name;
-                if (file.Exists)
+                else
                 {
-                    file.MoveTo(HttpContext.Current.Server.MapPath(icoPath));
+                    icoPath = FILEPATH + DateTime.Now.ToString("yyyyMMddHHmmssms") + new Random().Next(1000, 9999).ToString() + ".png";
                 }
+                return new ProductsDAL().AddBrand(name, anotherName, icoPath, countryCode, cityCode, status, remark, brandStyle, operateIP, operateID, clientID);
             }
-            return new ProductsDAL().AddBrand(name, anotherName, icoPath, countryCode, cityCode, status, remark, brandStyle, operateIP, operateID, clientID);
         }
 
         /// <summary>
@@ -448,24 +498,30 @@ namespace CloudSalesBusiness
                                  string categoryid, int status, string attrlist, string valuelist, string attrvaluelist, decimal commonprice, decimal price, decimal weight, bool isnew,
                                  bool isRecommend, int effectiveDays, decimal discountValue, string productImg, string shapeCode, string description, string operateid, string clientid)
         {
-
-            if (!string.IsNullOrEmpty(productImg) && productImg != "/modules/images/default.png")
+            lock (SingleLock)
             {
-                if (productImg.IndexOf("?") > 0)
+                if (!string.IsNullOrEmpty(productImg))
                 {
-                    productImg = productImg.Substring(0, productImg.IndexOf("?"));
+                    if (productImg.IndexOf("?") > 0)
+                    {
+                        productImg = productImg.Substring(0, productImg.IndexOf("?"));
+                    }
+                    FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath(productImg));
+                    productImg = FILEPATH + file.Name;
+                    if (file.Exists)
+                    {
+                        file.MoveTo(HttpContext.Current.Server.MapPath(productImg));
+                    }
                 }
-                FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath(productImg));
-                productImg = "/Content/uploadFiles/" + file.Name;
-                if (file.Exists)
+                else
                 {
-                    file.MoveTo(HttpContext.Current.Server.MapPath(productImg));
+                    productImg = FILEPATH + DateTime.Now.ToString("yyyyMMddHHmmssms") + new Random().Next(1000, 9999).ToString() + ".png";
                 }
-            }
 
-            var dal = new ProductsDAL();
-            return dal.AddProduct(productCode, productName, generalName, iscombineproduct, brandid, bigunitid, smallunitid, bigSmallMultiple, categoryid, status, attrlist,
-                                    valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, productImg, shapeCode, description, operateid, clientid);
+                var dal = new ProductsDAL();
+                return dal.AddProduct(productCode, productName, generalName, iscombineproduct, brandid, bigunitid, smallunitid, bigSmallMultiple, categoryid, status, attrlist,
+                                        valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, productImg, shapeCode, description, operateid, clientid);
+            }
         }
 
         #endregion
@@ -637,6 +693,43 @@ namespace CloudSalesBusiness
         public bool UpdateProductIsRecommend(string productid, bool isRecommend, string operateIP, string operateID)
         {
             return CommonBusiness.Update("C_Products", "IsRecommend", isRecommend ? "1" : "0", " ProductID='" + productid + "'");
+        }
+
+        /// <summary>
+        /// 编辑产品信息
+        /// </summary>
+        /// <param name="productid">产品ID</param>
+        /// <param name="productCode">产品编码</param>
+        /// <param name="productName">产品名称</param>
+        /// <param name="generalName">常用名</param>
+        /// <param name="iscombineproduct">是否组合产品</param>
+        /// <param name="brandid">品牌ID</param>
+        /// <param name="bigunitid">大单位</param>
+        /// <param name="smallunitid">小单位</param>
+        /// <param name="bigSmallMultiple">大小单位比例</param>
+        /// <param name="status">状态</param>
+        /// <param name="attrlist">属性列表</param>
+        /// <param name="valuelist">值列表</param>
+        /// <param name="attrvaluelist">属性值键值对</param>
+        /// <param name="commonprice">原价</param>
+        /// <param name="price">优惠价</param>
+        /// <param name="weight">重量</param>
+        /// <param name="isnew">是否新品</param>
+        /// <param name="isRecommend">是否推荐</param>
+        /// <param name="effectiveDays">有效期天数</param>
+        /// <param name="discountValue">折扣</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public bool UpdateProduct(string productid,string productCode, string productName, string generalName, bool iscombineproduct, string brandid, string bigunitid, string smallunitid, int bigSmallMultiple,
+                         int status, string categoryid, string attrlist, string valuelist, string attrvaluelist, decimal commonprice, decimal price, decimal weight, bool isnew,
+                         bool isRecommend, int effectiveDays, decimal discountValue, string shapeCode, string description, string operateid, string clientid)
+        {
+
+            var dal = new ProductsDAL();
+            return dal.UpdateProduct(productid, productCode, productName, generalName, iscombineproduct, brandid, bigunitid, smallunitid, bigSmallMultiple, status, categoryid,attrlist,
+                                    valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, shapeCode, description, operateid, clientid);
         }
 
         #endregion
