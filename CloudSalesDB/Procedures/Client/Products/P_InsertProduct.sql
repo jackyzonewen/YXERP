@@ -40,7 +40,8 @@ CREATE PROCEDURE [dbo].[P_InsertProduct]
 @ShapeCode nvarchar(50),
 @CreateUserID nvarchar(64),
 @ClientID nvarchar(64),
-@ProductID nvarchar(64) output 
+@ProductID nvarchar(64) output,
+@Result int output--1：成功；0失败
 AS
 
 begin tran
@@ -51,6 +52,8 @@ set @ProductID=NEWID()
 
 select @PIDList=PIDList,@SaleAttr=SaleAttr from C_Category where CategoryID=@CategoryID
 
+IF(NOT EXISTS(SELECT 1 FROM [C_Products] WHERE [ProductCode]=@ProductCode))--产品编号唯一，编号不存在时才能执行插入
+BEGIN
 INSERT INTO [C_Products]([ProductID],[ProductCode],[ProductName],[GeneralName],[IsCombineProduct],[BrandID],[BigUnitID],[SmallUnitID],[BigSmallMultiple] ,
 						[CategoryID],[CategoryIDList],[SaleAttr],[AttrList],[ValueList],[AttrValueList],[CommonPrice],[Price],[PV],[TaxRate],[Status],
 						[OnlineTime],[UseType],[IsNew],[IsRecommend] ,[IsDiscount],[DiscountValue],[SaleCount],[Weight] ,[ProductImage],[EffectiveDays],
@@ -58,7 +61,14 @@ INSERT INTO [C_Products]([ProductID],[ProductCode],[ProductName],[GeneralName],[
 				 VALUES(@ProductID,@ProductCode,@ProductName,@GeneralName,@IsCombineProduct,@BrandID,@BigUnitID,@SmallUnitID,@BigSmallMultiple,
 						@CategoryID,@PIDList,@SaleAttr,@AttrList,@ValueList,@AttrValueList,@CommonPrice,@Price,@Price,0,@Status,
 						getdate(),0,@Isnew,@IsRecommend,1,@DiscountValue,0,@Weight,@ProductImg,@EffectiveDays,@ShapeCode,'',@Description,@CreateUserID,
-						getdate(),getdate(),'',@ClientID)
+						getdate(),getdate(),'',@ClientID);
+		set @Result=1;
+END
+ELSE
+BEGIN
+	set @ProductID='';
+	set @Result=0;
+END
 
 set @Err+=@@Error
 
