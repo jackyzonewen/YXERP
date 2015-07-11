@@ -109,7 +109,6 @@
                 _this.text(obj.TypeName);
                 _this.attr("title", obj.Description);
                 _this.attr("data-value", obj.TypeName);
-                console.log(_this.data("value"));
             });
         });
         //删除
