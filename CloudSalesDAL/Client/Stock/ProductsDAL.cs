@@ -246,8 +246,10 @@ namespace CloudSalesDAL
                                  decimal weight, bool isnew, bool isRecommend, int effectiveDays, decimal discountValue, string productImg, string shapeCode, string description, string operateid, string clientid)
         {
             string id = "";
+            int result = 0;
             SqlParameter[] paras = { 
                                        new SqlParameter("@ProductID",SqlDbType.NVarChar,64),
+                                       new SqlParameter("@Result",SqlDbType.Int),
                                        new SqlParameter("@ProductCode",productCode),
                                        new SqlParameter("@ProductName",productName),
                                        new SqlParameter("@GeneralName",generalName),
@@ -276,9 +278,12 @@ namespace CloudSalesDAL
                                    };
             paras[0].Value = id;
             paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Value = result;
+            paras[1].Direction = ParameterDirection.InputOutput;
 
             ExecuteNonQuery("P_InsertProduct", paras, CommandType.StoredProcedure);
             id = paras[0].Value.ToString();
+            result = Convert.ToInt32(paras[1].Value);
             return id;
         }
 
