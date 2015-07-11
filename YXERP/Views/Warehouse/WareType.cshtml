@@ -6,7 +6,7 @@
 }
 @section scripts{
     <script type="text/javascript">
-        seajs.use(["scripts/warehouse/warehouse"], function (obj) {
+        seajs.use(["scripts/warehouse/warehousetype"], function (obj) {
             obj.init();
         });
     </script>
@@ -18,12 +18,11 @@
     
 </div>
 <div class="content-body">
-    <ul class="unit-list">
-@*        @foreach (var item in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.Items)
+    <ul class="obj-list">
+        @foreach (var item in (List<CloudSalesEntity.C_WareHouseType>)ViewBag.Items)
         {
-            <li class="unit-item"><input type="text" data-id="@(item.UnitID)" data-value="@(item.UnitName)" value="@(item.UnitName)" /><span data-id="@(item.UnitID)" class="ico-delete"></span></li>
-        }*@
-       
+            <li class="obj-item" ><label data-id="@(item.TypeID)" data-value="@(item.TypeName)" title="@(item.Description)">@(item.TypeName)</label><span data-id="@(item.TypeID)" class="ico-delete"></span></li>
+        }
     </ul>
     
 </div>

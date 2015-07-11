@@ -50,7 +50,7 @@
     <Compile Include="Client\Products\C_AttrValue.cs" />
     <Compile Include="Client\Products\C_Brand.cs" />
     <Compile Include="Client\Products\C_Category.cs" />
-    <Compile Include="Client\Products\C_DepotSeat.cs" />
+    <Compile Include="Client\Warehouse\C_DepotSeat.cs" />
     <Compile Include="Client\Products\C_ProductAttr.cs" />
     <Compile Include="Client\Products\C_ProductDetail.cs" />
     <Compile Include="Client\Products\C_ProductImg.cs" />
@@ -62,9 +62,9 @@
     <Compile Include="Client\Products\C_StorageInDoc.cs" />
     <Compile Include="Client\Products\C_StorageOutDetail.cs" />
     <Compile Include="Client\Products\C_StorageOutDoc.cs" />
-    <Compile Include="Client\Products\C_WareAreaRel.cs" />
-    <Compile Include="Client\Products\C_WareHouse.cs" />
-    <Compile Include="Client\Products\C_WareHouseType.cs" />
+    <Compile Include="Client\Warehouse\C_WareAreaRel.cs" />
+    <Compile Include="Client\Warehouse\C_WareHouse.cs" />
+    <Compile Include="Client\Warehouse\C_WareHouseType.cs" />
     <Compile Include="Common\City.cs" />
     <Compile Include="Common\Country.cs" />
     <Compile Include="Common\Menu.cs" />

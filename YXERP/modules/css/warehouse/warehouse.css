@@ -1,9 +1,17 @@
 ﻿
-.unit-list { width:100%; }
+.obj-list { width:100%; }
 
-.unit-list li{ height:30px; line-height:30px; width:60px; padding:0 15px; float:left; margin: 10px 10px;  text-align:center; position:relative;  }
-.unit-list li input{ height:28px; line-height:30px; width:50px; text-align:center; border:none !important; cursor:pointer; }
-.unit-list li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
-.unit-list li:hover span{ display:inline-block; }
-.unit-list .unit-item { border:solid 1px #ccc; border-radius:5px; }
-.unit-list .unit-item:hover{ border:solid 1px #7faaca; }
+.obj-list li{ height:30px; line-height:30px; width:60px; padding:0 15px; float:left; margin: 10px 10px;  text-align:center; position:relative; }
+.obj-list li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
+.obj-list li:hover label{ cursor:pointer; }
+.obj-list li:hover span{ display:inline-block; }
+.obj-list .obj-item { border:solid 1px #ccc; border-radius:5px; }
+.obj-list .obj-item:hover{ border:solid 1px #7faaca;  }
+
+
+.create-obj { width:300px; }
+.create-obj li { margin-top:20px; line-height:30px;}
+.create-obj li span{ color:#333; display:inline-block; line-height:30px; height:30px;}
+
+.create-obj .input { height:25px; line-height:25px; padding:2px 5px; width:200px;}
+.create-obj textarea{  width:260px;}

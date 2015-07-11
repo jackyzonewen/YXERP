@@ -44,6 +44,7 @@
     <Compile Include="Client\C_RoleBusiness.cs" />
     <Compile Include="Client\C_UserBusiness.cs" />
     <Compile Include="Client\Stock\ProductsBusiness.cs" />
+    <Compile Include="Client\Stock\WarehouseBusiness.cs" />
     <Compile Include="CommonBusiness.cs" />
     <Compile Include="CommonCache.cs" />
     <Compile Include="Manage\M_ClientBusiness.cs" />

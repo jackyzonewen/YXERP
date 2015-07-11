@@ -47,7 +47,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string TypeCode
+		public string TypeID
 		{
 			set{ _typecode=value;}
 			get{return _typecode;}
@@ -117,6 +117,15 @@ namespace CloudSalesEntity
 			get{return _clientid;}
 		}
 		#endregion Model
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 	}
 }
