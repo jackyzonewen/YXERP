@@ -47,6 +47,8 @@ define(function (require, exports, module) {
             verifyType: "data-type",
             regText: "data-text"
         });
+
+        $("#brandName").focus();
     }
     //保存品牌
     Brand.savaBrand = function () {
