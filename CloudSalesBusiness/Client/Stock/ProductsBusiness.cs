@@ -356,6 +356,17 @@ namespace CloudSalesBusiness
             return model;
         }
 
+        /// <summary>
+        /// 是否存在产品编码
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public bool IsExistProductCode(string code, string clientid)
+        {
+            object obj = CommonBusiness.Select("C_Products", " Count(0) ", "ClientID='" + clientid + "' and ProductCode='" + code + "'");
+            return Convert.ToInt32(obj) > 0;
+        }
+
         #endregion
 
         #region 添加

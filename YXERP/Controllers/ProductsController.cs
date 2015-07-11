@@ -624,6 +624,22 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        /// <summary>
+        /// 产品编码是否存在
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public JsonResult IsExistsProductCode(string code)
+        {
+            bool bl = new ProductsBusiness().IsExistProductCode(code, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
 
         #endregion

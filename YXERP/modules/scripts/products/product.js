@@ -46,6 +46,21 @@ define(function (require, exports, module) {
             regText: "data-text"
         });
 
+        //编码是否重复
+        $("#productCode").blur(function () {
+            var _this = $(this);
+            if (_this.val().trim() != "") {
+                Global.post("/Products/IsExistsProductCode", {
+                    code: _this.val()
+                }, function (data) {
+                    if (data.Status) {
+                        _this.val("");
+                        alert("产品编码已存在,请重新输入!");
+                    }
+                });
+            }
+        })
+
         $("#productName").focus();
     }
     //保存产品
