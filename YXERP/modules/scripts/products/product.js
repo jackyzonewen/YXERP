@@ -56,6 +56,7 @@ define(function (require, exports, module) {
                     if (data.Status) {
                         _this.val("");
                         alert("产品编码已存在,请重新输入!");
+                        _this.focus();
                     }
                 });
             }
