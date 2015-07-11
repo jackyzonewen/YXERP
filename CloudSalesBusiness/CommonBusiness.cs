@@ -30,9 +30,9 @@ namespace CloudSalesBusiness
         /// <param name="columnValue">字段值</param>
         /// <param name="where">条件</param>
         /// <returns></returns>
-        public static bool Update(string tableName, string columnName, string columnValue, string where)
+        public static bool Update(string tableName, string columnName, object columnValue, string where)
         {
-            int obj = CommonDAL.Update(tableName, columnName, columnValue, where);
+            int obj = CommonDAL.Update(tableName, columnName, columnValue.ToString(), where);
             return obj > 0;
         }
 
