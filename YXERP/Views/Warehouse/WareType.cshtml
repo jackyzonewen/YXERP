@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "仓库类别设置";
+}
+@section css{
+    <link rel="stylesheet" href="/modules/css/warehouse/warehouse.css" />
+}
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/warehouse/warehouse"], function (obj) {
+            obj.init();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">仓库类别设置</span>
+    <a href="javascript:void(0)" id="addType" class="ico-add left mTop4 mLeft20">添加库别</a>
+    <div class="right searth-module"> </div>
+    
+</div>
+<div class="content-body">
+    <ul class="unit-list">
+@*        @foreach (var item in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.Items)
+        {
+            <li class="unit-item"><input type="text" data-id="@(item.UnitID)" data-value="@(item.UnitName)" value="@(item.UnitName)" /><span data-id="@(item.UnitID)" class="ico-delete"></span></li>
+        }*@
+       
+    </ul>
+    
+</div>

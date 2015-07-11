@@ -110,7 +110,7 @@ define(function (require, exports, module) {
     //获取产品列表
     Product.getList = function () {
         var _self = this;
-        $("#Product-items").nextAll().remove();
+        $("#product-items").nextAll().remove();
         Global.post("/Products/GetProductList", Params, function (data) {
             doT.exec("template/products/product_list.html", function (templateFun) {
                 var innerText = templateFun(data.Items);
