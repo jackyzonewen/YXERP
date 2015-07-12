@@ -5,7 +5,7 @@
     "use strict";
     var doT = {
         basepath: '/modules/',//template/
-        version: '1.0.1',
+        version: '?1.0.1',
         cache:{},
         templateSettings: {
             evaluate: /\{\%([\s\S]+?(\}?)+)\%\}/g,
@@ -135,7 +135,7 @@
         return doT.template(tmpl, null, def);
     };
     doT.exec = function (url, callback) {
-        url = this.basepath + url;
+        url = this.basepath + url + this.version;
         if (doT.cache[url]) {
             callback(doT.cache[url]);
         } else {

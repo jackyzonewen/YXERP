@@ -56,7 +56,7 @@ namespace CloudSalesDAL
             return dt;
         }
 
-        public DataSet GetAttrList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
+        public DataSet GetAttrList(string categoryid, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
         {
             SqlParameter[] paras = { 
                                        new SqlParameter("@totalCount",SqlDbType.Int),
@@ -64,6 +64,7 @@ namespace CloudSalesDAL
                                        new SqlParameter("@keyWords",keyWords),
                                        new SqlParameter("@pageSize",pageSize),
                                        new SqlParameter("@pageIndex",pageIndex),
+                                       new SqlParameter("@CategoryID", categoryid),
                                        new SqlParameter("@ClientID",clientid)
                                    };
             paras[0].Value = totalCount;
@@ -78,11 +79,14 @@ namespace CloudSalesDAL
 
         }
 
-        public DataTable GetAttrList(string clientid)
+        public DataTable GetAttrList(string categoryid, string clientid)
         {
-            SqlParameter[] paras = { new SqlParameter("@ClientID", clientid) };
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@CategoryID", categoryid),
+                                       new SqlParameter("@ClientID", clientid) 
+                                   };
 
-            return GetDataTable("select AttrID,AttrName,Description from C_ProductAttr where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
+            return GetDataTable("select AttrID,AttrName,Description from C_ProductAttr where ClientID=@ClientID and CategoryID=@CategoryID and Status<>9", paras, CommandType.Text);
 
         }
 
@@ -190,18 +194,18 @@ namespace CloudSalesDAL
             return "";
         }
 
-        public bool AddProductAttr(string attrID, string attrName, string description, string operateid, string clientid)
+        public bool AddProductAttr(string attrID, string attrName, string description, string categoryID, string operateid, string clientid)
         {
-            string sqlText = "INSERT INTO C_ProductAttr([AttrID] ,[AttrName],[Description],[Status],CreateUserID,ClientID) "
-                                             + "values(@AttrID ,@AttrName,@Description,1,@CreateUserID,@ClientID) ";
+            string sqlText = "P_InsertAttr";
             SqlParameter[] paras = { 
                                      new SqlParameter("@AttrID" , attrID),
                                      new SqlParameter("@AttrName" , attrName),
                                      new SqlParameter("@Description" , description),
+                                     new SqlParameter("@CategoryID" , categoryID),
                                      new SqlParameter("@CreateUserID" , operateid),
                                      new SqlParameter("@ClientID" , clientid)
                                    };
-            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+            return ExecuteNonQuery(sqlText, paras, CommandType.StoredProcedure) > 0;
         }
 
         public bool AddAttrValue(string valueID, string valueName, string attrID, string operateid, string clientid)

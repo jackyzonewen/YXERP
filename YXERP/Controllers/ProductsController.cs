@@ -286,7 +286,7 @@ namespace YXERP.Controllers
             List<C_ProductAttr> list = new List<C_ProductAttr>();
 
             int totalCount = 0, pageCount = 0;
-            list = new ProductsBusiness().GetAttrList(keyWorks, PageSize, index, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            list = new ProductsBusiness().GetAttrList("", keyWorks, PageSize, index, ref totalCount, ref pageCount, CurrentUser.ClientID);
 
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
@@ -304,7 +304,7 @@ namespace YXERP.Controllers
         public JsonResult GetAllAttrList()
         {
             List<C_ProductAttr> list = new List<C_ProductAttr>();
-            list = new ProductsBusiness().GetAttrList(CurrentUser.ClientID);
+            list = new ProductsBusiness().GetAttrList("", CurrentUser.ClientID);
 
             JsonDictionary.Add("Items", list);
             return new JsonResult
@@ -327,7 +327,7 @@ namespace YXERP.Controllers
             string attrID = string.Empty;
             if (string.IsNullOrEmpty(model.AttrID))
             {
-                attrID = new ProductsBusiness().AddProductAttr(model.AttrName, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+                attrID = new ProductsBusiness().AddProductAttr(model.AttrName, model.Description, model.CategoryID, CurrentUser.UserID, CurrentUser.ClientID);
             }
             else if (new ProductsBusiness().UpdateProductAttr(model.AttrID, model.AttrName, model.Description, OperateIP, CurrentUser.UserID))
             {

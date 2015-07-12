@@ -204,7 +204,7 @@
             }
         })
     }
-    //添加子类弹出层
+    //添加属性弹出层
     ObjectJS.addAttr = function (editback) {
         var _self = this;
         var html = '<ul class="create-attr">' +
@@ -223,6 +223,7 @@
                     
                     Attr.AttrName = $("#attrName").val();
                     Attr.Description = $("#attrDescription").val();
+                    Attr.CategoryID = "";
                     _self.saveAttr(editback);
                 },
                 callback: function () {

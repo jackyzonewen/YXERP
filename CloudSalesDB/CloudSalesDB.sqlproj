@@ -102,4 +102,7 @@
   <ItemGroup>
     <None Include="Procedures\Client\Products\P_UpdateProduct.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Products\P_InsertAttr.sql" />
+  </ItemGroup>
 </Project>

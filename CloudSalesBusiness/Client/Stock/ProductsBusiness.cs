@@ -112,10 +112,10 @@ namespace CloudSalesBusiness
         /// <param name="totalCount"></param>
         /// <param name="pageCount"></param>
         /// <returns></returns>
-        public List<C_ProductAttr> GetAttrList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
+        public List<C_ProductAttr> GetAttrList(string categoryid, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
         {
             var dal = new ProductsDAL();
-            DataSet ds = dal.GetAttrList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientid);
+            DataSet ds = dal.GetAttrList(categoryid, keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientid);
 
             List<C_ProductAttr> list = new List<C_ProductAttr>();
             if (ds.Tables.Contains("Attrs"))
@@ -166,11 +166,13 @@ namespace CloudSalesBusiness
         /// <summary>
         /// 获取属性列表
         /// </summary>
+        /// <param name="categoryid">产品分类ID</param>
+        /// <param name="clientid">客户端ID</param>
         /// <returns></returns>
-        public List<C_ProductAttr> GetAttrList(string clientid)
+        public List<C_ProductAttr> GetAttrList(string categoryid, string clientid)
         {
             var dal = new ProductsDAL();
-            DataTable dt = dal.GetAttrList(clientid);
+            DataTable dt = dal.GetAttrList(categoryid, clientid);
 
             List<C_ProductAttr> list = new List<C_ProductAttr>();
             foreach (DataRow dr in dt.Rows)
@@ -430,11 +432,11 @@ namespace CloudSalesBusiness
         /// <param name="operateid">操作人</param>
         /// <param name="clientid">客户端ID</param>
         /// <returns></returns>
-        public string AddProductAttr(string attrName, string description, string operateid, string clientid)
+        public string AddProductAttr(string attrName, string description, string categoryID, string operateid, string clientid)
         {
             var attrID = Guid.NewGuid().ToString();
             var dal = new ProductsDAL();
-            if (dal.AddProductAttr(attrID, attrName, description, operateid, clientid))
+            if (dal.AddProductAttr(attrID, attrName, description, categoryID, operateid, clientid))
             {
                 return attrID.ToString();
             }

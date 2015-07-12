@@ -20,7 +20,7 @@
         <ul class="category-list">
             @foreach (CloudSalesEntity.C_Category model in (List<CloudSalesEntity.C_Category>)ViewBag.Items)
             { 
-                <li data-id="@(model.CategoryID)" title="@(model.Description)">
+                <li data-id="@(model.CategoryID)" title="@(model.Description)" data-layer="@(model.Layers)">
                     <span class="category-name long @(model.Status.Value==1?"":"colorccc")">@(model.CategoryName)</span>
                     <span class="edit right">></span>
                 </li>

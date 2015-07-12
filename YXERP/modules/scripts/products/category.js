@@ -12,6 +12,7 @@ define(function (require, exports, module) {
         PID: ""
     };
     var CacheAttrs = [];
+
     var ObjectJS = {};
     //初始化数据
     ObjectJS.init = function () {
@@ -166,29 +167,52 @@ define(function (require, exports, module) {
 
         //点击
         element.click(function () {
-            var _this = $(this);
+            var _this = $(this), layer = _this.data("layer");
             _this.siblings().removeClass("hover");
             _this.addClass("hover");
             _this.parents(".category-layer").nextAll().remove();
-            Global.post("/Products/GetChildCategorysByID", {
-                categoryid: _this.data("id")
-            }, function (data) {
-                doT.exec("template/products/category_list.html", function (templateFun) {
-                    var html = templateFun(data.Items);
-                    html = $(html);
-                    //绑定添加事件
-                    html.find(".category-header span").html(_this.find(".category-name").html());
-                    _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")));
-                    
-                    _self.bindElementEvent(html.find("li"));
+            if (layer < 3) {
+                Global.post("/Products/GetChildCategorysByID", {
+                    categoryid: _this.data("id")
+                }, function (data) {
+                    doT.exec("template/products/category_list.html", function (templateFun) {
+                        var html = templateFun(data.Items);
+                        html = $(html);
+                        //绑定添加事件
+                        html.find(".category-header span").html(_this.find(".category-name").html());
+                        if (layer < 2) {
+                            _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")));
+                        } else {
+                            html.find(".ico-add").remove();
+                        }
 
-                    _this.parents(".category-layer").after(html);
-                    _self.bindStyle();
+                        _self.bindElementEvent(html.find("li"));
+
+                        _this.parents(".category-layer").after(html);
+                        _self.bindStyle();
+                    });
                 });
-            });
+            } else {
+                Global.post("/Products/GetChildCategorysByID", {
+                    categoryid: _this.data("id")
+                }, function (data) {
+                    doT.exec("template/products/category_attr_list.html", function (templateFun) {
+                        var html = templateFun(data.Items);
+                        html = $(html);
+                        //绑定添加事件
+                        html.find(".category-header span").html(_this.find(".category-name").html() + "-属性列表");
+                        _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")));
+
+                        _self.bindElementEvent(html.find("li"));
+
+                        _this.parents(".category-layer").after(html);
+                        _self.bindStyle();
+                    });
+                });
+            }
         });
     }
-
+   
     //保存分类
     ObjectJS.saveCategory = function (category, attrs, saleattrs, callback) {
         Global.post("/Products/SavaCategory", {

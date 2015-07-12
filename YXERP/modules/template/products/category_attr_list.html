@@ -1,11 +1,11 @@
 ﻿<div class="category-layer">
-    <div class="category-header"><span class="long">全部分类</span> <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加子类</a></div>
+    <div class="category-header"><span class="long">全部分类</span> <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加属性</a></div>
     <ul class="category-list">
         {%
 	        for(var i=0, j=$data.length; i < j; i++){
 	        var item = $data[i];
         %}
-        <li data-id="{%=item.CategoryID%}" title="{%=item.Description%}" data-layer="{%=item.Layers%}">
+        <li data-id="{%=item.CategoryID%}" title="{%=item.Description%}">
             <span class="category-name long {%=item.Status==1?'':'colorccc'%}">{%=item.CategoryName%}</span>
             <span class="edit right">></span>
         </li>

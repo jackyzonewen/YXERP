@@ -126,6 +126,11 @@ namespace CloudSalesEntity
         /// </summary>
         public List<C_AttrValue> AttrValues { get; set; }
 
+        /// <summary>
+        /// 产品分类ID
+        /// </summary>
+        public string CategoryID { get; set; }
+
 		#endregion Model
         /// <summary>
         /// 填充数据

@@ -20,6 +20,7 @@ CREATE PROCEDURE [dbo].[P_GetProductAttrList]
 	@pageIndex int,
 	@totalCount int output ,
 	@pageCount int output,
+	@CategoryID nvarchar(64),
 	@ClientID nvarchar(64)
 AS
 	declare @tableName nvarchar(4000),
@@ -32,7 +33,7 @@ AS
 	create table #Attrs(AttrID nvarchar(64),AttrName nvarchar(200),Description nvarchar(4000))
 	
 	select @tableName=' C_ProductAttr ',@columns='AttrID,AttrName,Description',@key='AutoID',@orderColumn='',@isAsc=0
-	set @condition=' ClientID='''+@ClientID+''' and Status<>9 '
+	set @condition=' ClientID='''+@ClientID+''' and CategoryID='''+@CategoryID+''' and Status<>9 '
 	if(@keyWords <> '')
 	begin
 		set @condition +=' and AttrName like ''%'+@keyWords+'%'' or  Description like ''%'+@keyWords+'%'''
