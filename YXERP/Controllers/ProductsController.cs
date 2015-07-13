@@ -301,10 +301,10 @@ namespace YXERP.Controllers
         /// 获取所有属性
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetAllAttrList()
+        public JsonResult GetAttrsByCategoryID(string categoryid)
         {
             List<C_ProductAttr> list = new List<C_ProductAttr>();
-            list = new ProductsBusiness().GetAttrList("", CurrentUser.ClientID);
+            list = new ProductsBusiness().GetAttrList(categoryid, CurrentUser.ClientID);
 
             JsonDictionary.Add("Items", list);
             return new JsonResult

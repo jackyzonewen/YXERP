@@ -13,12 +13,6 @@
 .attr-list li span{ height:30px; line-height:30px; display:inline-block;  }
 .attr-list li input{ height:30px; line-height:30px; width:100px; }
 
-.create-attr { width:300px; }
-.create-attr li { margin-top:20px; line-height:30px;}
-.create-attr li span{ color:#333; display:inline-block; line-height:30px; height:30px;}
-
-.create-attr .input { height:25px; line-height:25px; padding:2px 5px; width:200px;}
-.create-attr textarea{  width:260px;}
 
 /*属性值*/
 .attr-value-box { border:solid 1px #7faaca; width:300px; overflow-x:hidden; overflow-y:auto; background-color:#fff; position:fixed; top:84px; right:-302px; z-index:666; }

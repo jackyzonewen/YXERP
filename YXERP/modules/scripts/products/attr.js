@@ -2,14 +2,10 @@
     var Global = require("global"),
         Verify = require("verify"), VerifyObject,
         doT = require("dot"),
+        AttrPlug = require("scripts/products/attrplug"),
         Easydialog = require("easydialog");
     require("pager");
-    var Attr = {
-        AttrID: "",
-        AttrName: "",
-        Description: ""
-    },
-    Value = {
+    var Value = {
         AttrID: "",
         ValueID: "",
         ValueName: ""
@@ -31,10 +27,13 @@
     ObjectJS.bindEvent = function () {
         var _self = this;
         $("#addAttr").click(function () {
-            Attr.AttrID = "";
-            Attr.AttrName = "";
-            Attr.Description = "";
-            _self.addAttr();
+            AttrPlug.init({
+                attrid: "",
+                categoryid: "",
+                callback: function (Attr) {
+                    _self.innerItems([Attr], false);
+                }
+            });
         });
 
         //搜索
@@ -89,7 +88,6 @@
             });
         });
     }
-
     //加载属性数据
     ObjectJS.innerItems = function (items, clear) {
         var _self = this;
@@ -103,12 +101,12 @@
             //点击编辑
             inner.find(".ico-edit").click(function () {
                 var _this = $(this), _prev = _this.prevAll(".attr-name");
-                Attr.AttrID = _this.data("id");
-                Attr.AttrName = _prev.html();
-                Attr.Description = _prev.attr("title");
-                _self.addAttr(function () {
-                    _prev.html(Attr.AttrName);
-                    _prev.attr("title", Attr.Description);
+                AttrPlug.init({
+                    attrid: _this.data("id"),
+                    callback: function (Attr) {
+                        _prev.html(Attr.AttrName);
+                        _prev.attr("title", Attr.Description);
+                    }
                 });
             });
             inner.find(".ico-del").click(function () {
@@ -120,7 +118,6 @@
                         }
                     });
                 }
-                
             });
 
             inner.find(".attr-values").click(function () {
@@ -129,7 +126,6 @@
             });
         })
     }
-
     //显示属性值悬浮层
     ObjectJS.showValues = function (attrID) {
         var height = document.documentElement.clientHeight - 84;
@@ -138,6 +134,7 @@
         Value.AttrID = attrID;
         ObjectJS.getAttrDetail();
     }
+    //获取属性明细
     ObjectJS.getAttrDetail = function () {
         Global.post("/Products/GetAttrByID", { attrID: Value.AttrID }, function (data) {
             $("#attrValueBox").find(".header-title").html(data.Item.AttrName);
@@ -149,7 +146,6 @@
     ObjectJS.hideValues = function () {
         $("#attrValueBox").animate({ right: "-302px" }, "fast");
     }
-
     //加载值数据
     ObjectJS.innerValuesItems = function (items, clear) {
         var _self = this;
@@ -204,59 +200,6 @@
             }
         })
     }
-    //添加属性弹出层
-    ObjectJS.addAttr = function (editback) {
-        var _self = this;
-        var html = '<ul class="create-attr">' +
-                        '<li><span class="left">名称：</span><input type="text" id="attrName" maxlength="10" value="' + Attr.AttrName + '" class="input verify " data-empty="*必填" /></li>' +
-                        '<li><span class="left">描述：</span><textarea id="attrDescription">' + Attr.Description + '</textarea></li>' +
-                   '</ul>'
-        Easydialog.open({
-            container: {
-                id: "show-add-attr",
-                header: Attr.AttrID == "" ? "添加属性" : "编辑属性",
-                content: html,
-                yesFn: function () {
-                    if (!VerifyObject.isPass()) {
-                        return false;
-                    }
-                    
-                    Attr.AttrName = $("#attrName").val();
-                    Attr.Description = $("#attrDescription").val();
-                    Attr.CategoryID = "";
-                    _self.saveAttr(editback);
-                },
-                callback: function () {
-                    
-                }
-            }
-        });
-        $("#attrName").focus();
-        VerifyObject = Verify.createVerify({
-            element: ".verify",
-            emptyAttr: "data-empty",
-            verifyType: "data-type",
-            regText: "data-text"
-        });
-    }
-
-    //保存属性
-    ObjectJS.saveAttr = function (editback) {
-        var _self = this;
-        Global.post("/Products/SaveAttr", { attr: JSON.stringify(Attr) }, function (data) {
-            if (data.ID.length > 0) {
-                if (!Attr.AttrID) {
-                    Attr.AttrID = data.ID;
-                    Attr.ValuesStr = "暂无属性值(单击添加)";
-                    _self.innerItems([Attr], false);
-                }
-                !!editback && editback();
-            } else {
-                alert("操作失败,请稍后重试!");
-            }
-        });
-    }
-
     //保存属性值
     ObjectJS.saveValue = function (editback) {
         var _self = this;
@@ -272,7 +215,6 @@
             }
         });
     }
-
     //删除属性值
     ObjectJS.deleteValue = function (valueid, callback) {
         Global.post("/Products/DeleteAttrValue", { valueid: valueid }, function (data) {

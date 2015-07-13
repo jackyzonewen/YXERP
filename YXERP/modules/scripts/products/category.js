@@ -6,6 +6,7 @@ define(function (require, exports, module) {
         Global = require("global"),
         doT = require("dot"),
         Verify = require("verify"), VerifyObject,
+        AttrPlug = require("scripts/products/attrplug"),
         Easydialog = require("easydialog");
     var Category = {
         CategoryID: "",
@@ -23,7 +24,9 @@ define(function (require, exports, module) {
     //缓存数据
     ObjectJS.cache = function () {
         //获取所有属性
-        Global.post("/Products/GetAllAttrList", "", function (data) {
+        Global.post("/Products/GetAttrsByCategoryID", {
+            categoryid: ""
+        }, function (data) {
             CacheAttrs = data.Items;
         });
     }
@@ -65,7 +68,7 @@ define(function (require, exports, module) {
     ObjectJS.showCategory = function (callback) {
         var _self = this;
         doT.exec("template/products/category_add.html", function (templateFun) {
-            var html = templateFun(CacheAttrs);
+            var html = templateFun();
 
             Easydialog.open({
                 container: {
@@ -86,18 +89,18 @@ define(function (require, exports, module) {
                         };
                         //属性
                         var attrs = "";
-                        $("#attrList .attr-item").each(function () {
-                            if ($(this).prop("checked")) {
-                                attrs += $(this).data("id") + ",";
-                            }
-                        });
+                        //$("#attrList .attr-item").each(function () {
+                        //    if ($(this).prop("checked")) {
+                        //        attrs += $(this).data("id") + ",";
+                        //    }
+                        //});
                         //规格
                         var saleattrs = "";
-                        $("#saleAttr .attr-item").each(function () {
-                            if ($(this).prop("checked")) {
-                                saleattrs += $(this).data("id") + ",";
-                            }
-                        });
+                        //$("#saleAttr .attr-item").each(function () {
+                        //    if ($(this).prop("checked")) {
+                        //        saleattrs += $(this).data("id") + ",";
+                        //    }
+                        //});
                         _self.saveCategory(model, attrs, saleattrs, callback);
                     },
                     callback: function () {
@@ -105,6 +108,9 @@ define(function (require, exports, module) {
                     }
                 }
             });
+
+            $("#categoryName").focus();
+
             //编辑填充数据
             if (Category.CategoryID) {
                 $("#categoryName").val(Category.CategoryName);
@@ -121,8 +127,6 @@ define(function (require, exports, module) {
                     _this.prop("checked", Category.SaleAttr.indexOf(_this.data("id")) >= 0);
                 });
             }
-
-            $("#categoryName").focus();
 
             VerifyObject = Verify.createVerify({
                 element: ".verify",
@@ -193,7 +197,7 @@ define(function (require, exports, module) {
                     });
                 });
             } else {
-                Global.post("/Products/GetChildCategorysByID", {
+                Global.post("/Products/GetAttrsByCategoryID", {
                     categoryid: _this.data("id")
                 }, function (data) {
                     doT.exec("template/products/category_attr_list.html", function (templateFun) {
@@ -201,9 +205,16 @@ define(function (require, exports, module) {
                         html = $(html);
                         //绑定添加事件
                         html.find(".category-header span").html(_this.find(".category-name").html() + "-属性列表");
-                        _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")));
 
-                        _self.bindElementEvent(html.find("li"));
+                        html.find(".ico-add").click(function () {
+                            AttrPlug.init({
+                                attrid: "",
+                                categoryid: _this.data("id"),
+                                callback: function (Attr) {
+                                    
+                                }
+                            });
+                        });
 
                         _this.parents(".category-layer").after(html);
                         _self.bindStyle();

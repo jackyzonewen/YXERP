@@ -14,49 +14,7 @@
         </span>
     </li>
     <li>
-        
-        <span class="column-name">产品属性：</span>
-        <span style="max-width:500px; height:auto;" id="attrList">
-            {%
-	            for(var i=0, j=$data.length; i < j; i++){
-	            var item = $data[i];
-            %}
-            <span style="width:80px;">
-                <label title="{%=item.Description%}"><input type="checkbox" name="attrList" class="attr-item" data-id="{%=item.AttrID%}" />{%=item.AttrName%}</label>
-            </span>
-            {% } %}
-        </span>
-    </li>
-    <li>
-        
-        <span class="column-name">产品规格：</span>
-        <span style="max-width:500px; height:auto;" id="saleAttr">
-            {%
-	            for(var i=0, j=$data.length; i < j; i++){
-	            var item = $data[i];
-            %}
-            <span style="width:80px;">
-                <label title="{%=item.Description%}"><input type="checkbox" name="saleAttr" class="attr-item" data-id="{%=item.AttrID%}" />{%=item.AttrName%}</label>
-            </span>
-            {% } %}
-        </span>
-    </li>
-    <li>
         <span class="column-name">描述：</span>
         <textarea id="description"></textarea>
-    </li>
-    <li style="height:50px;">
-        <span class="column-name red">属性说明：</span>
-        <span>
-            1：若当前分类无直属产品，则可不勾选产品属性；<br />
-            2：若勾选产品属性，则当前分类添加的直属产品默认具有选择的属性
-        </span>
-    </li>
-    <li style="height:50px;">
-        <span class="column-name red">规格说明：</span>
-        <span>
-            1：若当前分类无直属产品或直属产品不存在规格差异，则可不勾选产品规格；<br />
-            2：若勾选产品规格，则当前分类添加的直属产品可通过不同规格组合出不同子产品
-        </span>
     </li>
 </ul>

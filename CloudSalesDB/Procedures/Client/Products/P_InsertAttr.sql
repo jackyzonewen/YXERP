@@ -34,8 +34,8 @@ set @Err+=@@error
 
 if(@CategoryID is not null and @CategoryID<>'')
 begin
-	insert into C_CategoryAttr(CategoryID,AttrID,Status,CreateUserID)
-	values(@CategoryID,@AttrID,1,@CreateUserID)
+	insert into C_CategoryAttr(CategoryID,AttrID,Status,[Type],CreateUserID)
+	values(@CategoryID,@AttrID,1,1,@CreateUserID)
 end
 
 if(@Err>0)
