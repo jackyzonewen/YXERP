@@ -3,7 +3,8 @@
 .create-attr { width:300px; }
 .create-attr li { margin-top:20px; line-height:30px;}
 .create-attr li span{ color:#333; display:inline-block; line-height:30px; height:30px;}
+.create-attr li label input{ vertical-align:middle; }
 
-.create-attr .input { height:25px; line-height:25px; padding:2px 5px; width:200px;}
+.create-attr .input { height:25px; line-height:25px; padding:2px 5px; width:200px; }
 .create-attr textarea{  width:260px;}
 

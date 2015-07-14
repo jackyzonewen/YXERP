@@ -105,4 +105,7 @@
   <ItemGroup>
     <None Include="Procedures\Client\Products\P_InsertAttr.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Products\P_GetAttrsByCategoryID.sql" />
+  </ItemGroup>
 </Project>

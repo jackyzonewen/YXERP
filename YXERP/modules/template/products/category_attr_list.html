@@ -1,14 +1,31 @@
-﻿<div class="category-layer">
-    <div class="category-header"><span class="long">全部分类</span> <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加属性</a></div>
-    <ul class="category-list">
+﻿<div class="category-attr-layer">
+    <div class="category-attr-header"><span class="long">全部分类</span> <a href="javascript:void(0);" data-id="" class="ico-add right mTop3">添加属性</a></div>
+    <ul class="category-attr-list"  data-type="1">
+        <li class="center header">产品参数</li>
         {%
 	        for(var i=0, j=$data.length; i < j; i++){
 	        var item = $data[i];
+            if(item.Type==1){
         %}
-        <li data-id="{%=item.AttrID%}" title="{%=item.Description%}">
-            <span class="category-name long">{%=item.AttrName%}</span>
-            <span class="ico-edit right"></span>
-        </li>
-        {% } %}
+                <li class="attritem" data-id="{%=item.AttrID%}" data-category="{%=item.CategoryID%}" title="{%=item.Description%}">
+                    <span class="category-attr-name long">{%=item.AttrName%}</span>
+                    <span data-id="{%=item.AttrID%}" class="ico-del right"></span>
+                    <span data-id="{%=item.AttrID%}" class="ico-edit right"></span>
+                </li>
+        {% }} %}
+    </ul>
+    <ul class="category-attr-list" data-type="2">
+        <li class="center header">产品规格</li>
+        {%
+	        for(var i=0, j=$data.length; i < j; i++){
+	        var item = $data[i];
+            if(item.Type==2){
+        %}
+            <li class="attritem" data-id="{%=item.AttrID%}"  data-category="{%=item.CategoryID%}" title="{%=item.Description%}">
+                <span class="category-attr-name long">{%=item.AttrName%}</span>
+                <span data-id="{%=item.AttrID%}" class="ico-del right"></span>
+                <span data-id="{%=item.AttrID%}" class="ico-edit right"></span>
+            </li>
+        {% }} %}
     </ul>
 </div>

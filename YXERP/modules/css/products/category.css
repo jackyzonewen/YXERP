@@ -1,5 +1,5 @@
 ﻿
-
+/*分类*/
 .category-layer { width:200px; float:left; }
 
 .category-header { background-color:#e7f5fd; height:30px; width:180px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
@@ -8,10 +8,34 @@
 .category-list { width:200px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; }
 .category-list li { height:30px; width:180px; line-height:30px; padding:0 10px; cursor:pointer; }
 .category-list li:hover { background-color:#c5dceb; }
+
+
+
 .category-list .hover { background-color:#c5dceb; }
 .category-list li span{ float:left;}
 .category-list li  .category-name{ width:155px;}
-.ico-edit, .ico-add{ margin-top:3px; }
+
+
+/*分类属性*/
+.category-attr-layer { width:230px; float:left; }
+
+.category-attr-header { background-color:#e7f5fd; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
+.category-attr-header span { width:100px; }
+
+.category-attr-list { width:230px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; margin-bottom:5px; }
+.category-attr-list li { height:30px; width:210px; line-height:30px; padding:0 10px; cursor:pointer; }
+.category-attr-list li .ico-edit,.category-attr-list li .ico-del{ display:none;}
+
+.category-attr-list li:hover { background-color:#c5dceb; }
+.category-attr-list li:hover .ico-edit,.category-attr-list li:hover .ico-del{ display:inline-block; margin-right:5px; }
+
+.category-attr-list .header { background-color:#c5dceb; }
+.category-attr-list .hover { background-color:#c5dceb; }
+.category-attr-list li span{ float:left;}
+.category-attr-list li  .category-name{ width:155px;}
+
+
+.ico-edit, .ico-add, .ico-del{ margin-top:3px; }
 
 .category-add { }
 .category-add li { height:auto; }

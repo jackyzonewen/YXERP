@@ -131,6 +131,8 @@ namespace CloudSalesEntity
         /// </summary>
         public string CategoryID { get; set; }
 
+        public int Type { get; set; }
+
 		#endregion Model
         /// <summary>
         /// 填充数据
@@ -139,6 +141,7 @@ namespace CloudSalesEntity
         public void FillData(System.Data.DataRow dr)
         {
             dr.FillData(this);
+
         }
 	}
 }

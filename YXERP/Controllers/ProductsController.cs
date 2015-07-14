@@ -327,7 +327,7 @@ namespace YXERP.Controllers
             string attrID = string.Empty;
             if (string.IsNullOrEmpty(model.AttrID))
             {
-                attrID = new ProductsBusiness().AddProductAttr(model.AttrName, model.Description, model.CategoryID, CurrentUser.UserID, CurrentUser.ClientID);
+                attrID = new ProductsBusiness().AddProductAttr(model.AttrName, model.Description, model.CategoryID, model.Type, CurrentUser.UserID, CurrentUser.ClientID);
             }
             else if (new ProductsBusiness().UpdateProductAttr(model.AttrID, model.AttrName, model.Description, OperateIP, CurrentUser.UserID))
             {
@@ -390,6 +390,18 @@ namespace YXERP.Controllers
             }
 
             JsonDictionary.Add("ID", valueID);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+
+        public JsonResult DeleteCategoryAttr(string categoryid, string attrid)
+        {
+            bool bl = new ProductsBusiness().UpdateCategoryAttrStatus(categoryid, attrid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
                 Data = JsonDictionary,

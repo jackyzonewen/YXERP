@@ -86,7 +86,7 @@ namespace CloudSalesDAL
                                        new SqlParameter("@ClientID", clientid) 
                                    };
 
-            return GetDataTable("select AttrID,AttrName,Description from C_ProductAttr where ClientID=@ClientID and CategoryID=@CategoryID and Status<>9", paras, CommandType.Text);
+            return GetDataTable("P_GetAttrsByCategoryID", paras, CommandType.StoredProcedure);
 
         }
 
@@ -194,7 +194,7 @@ namespace CloudSalesDAL
             return "";
         }
 
-        public bool AddProductAttr(string attrID, string attrName, string description, string categoryID, string operateid, string clientid)
+        public bool AddProductAttr(string attrID, string attrName, string description, string categoryID, int type, string operateid, string clientid)
         {
             string sqlText = "P_InsertAttr";
             SqlParameter[] paras = { 
@@ -202,6 +202,7 @@ namespace CloudSalesDAL
                                      new SqlParameter("@AttrName" , attrName),
                                      new SqlParameter("@Description" , description),
                                      new SqlParameter("@CategoryID" , categoryID),
+                                     new SqlParameter("@Type" , type),
                                      new SqlParameter("@CreateUserID" , operateid),
                                      new SqlParameter("@ClientID" , clientid)
                                    };
@@ -358,6 +359,17 @@ namespace CloudSalesDAL
         {
             string sqlText = "Update C_ProductAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID";
             SqlParameter[] paras = { 
+                                     new SqlParameter("@AttrID",attrid),
+                                     new SqlParameter("@Status" , status)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, int status)
+        {
+            string sqlText = "Update C_CategoryAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID and CategoryID=@CategoryID";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@CategoryID",categoryid),
                                      new SqlParameter("@AttrID",attrid),
                                      new SqlParameter("@Status" , status)
                                    };

@@ -19,6 +19,7 @@ CREATE PROCEDURE [dbo].[P_InsertAttr]
 @AttrName nvarchar(200),
 @Description nvarchar(4000),
 @CategoryID nvarchar(64),
+@Type int=1,
 @CreateUserID nvarchar(64),
 @ClientID nvarchar(64)
 AS
@@ -35,7 +36,7 @@ set @Err+=@@error
 if(@CategoryID is not null and @CategoryID<>'')
 begin
 	insert into C_CategoryAttr(CategoryID,AttrID,Status,[Type],CreateUserID)
-	values(@CategoryID,@AttrID,1,1,@CreateUserID)
+	values(@CategoryID,@AttrID,1,@Type,@CreateUserID)
 end
 
 if(@Err>0)

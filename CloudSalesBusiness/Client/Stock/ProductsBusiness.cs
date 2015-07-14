@@ -432,11 +432,11 @@ namespace CloudSalesBusiness
         /// <param name="operateid">操作人</param>
         /// <param name="clientid">客户端ID</param>
         /// <returns></returns>
-        public string AddProductAttr(string attrName, string description, string categoryID, string operateid, string clientid)
+        public string AddProductAttr(string attrName, string description, string categoryID, int type, string operateid, string clientid)
         {
             var attrID = Guid.NewGuid().ToString();
             var dal = new ProductsDAL();
-            if (dal.AddProductAttr(attrID, attrName, description, categoryID, operateid, clientid))
+            if (dal.AddProductAttr(attrID, attrName, description, categoryID, type, operateid, clientid))
             {
                 return attrID.ToString();
             }
@@ -642,6 +642,21 @@ namespace CloudSalesBusiness
             var dal = new ProductsDAL();
             return dal.UpdateProductAttrStatus(attrid, (int)status);
         }
+        /// <summary>
+        /// 编辑产品分类属性状态
+        /// </summary>
+        /// <param name="categoryid">分类ID</param>
+        /// <param name="attrid">属性ID</param>
+        /// <param name="status"></param>
+        /// <param name="operateIP"></param>
+        /// <param name="operateID"></param>
+        /// <returns></returns>
+        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, StatusEnum status, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.UpdateCategoryAttrStatus(categoryid, attrid, (int)status);
+        }
+
         /// <summary>
         /// 编辑属性值状态
         /// </summary>

@@ -22,7 +22,7 @@ select option{ padding:2px; }
 .clear { clear:both; }
 .center { text-align:center; }
 .tRight { text-align:right;}
-.hide { display:none; }
+.hide { display:none !important; }
 
 
 .long { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

@@ -18,6 +18,7 @@ define(function (require, exports, module) {
     var Attr = {
         AttrID: "",
         AttrName: "",
+        Type: 1,
         Description: "",
         CategoryID: ""
     }, Default = {
@@ -62,9 +63,15 @@ define(function (require, exports, module) {
     ObjectJS.prototype.addAttr = function () {
         var _self = this;
         var html = '<ul class="create-attr">' +
-                        '<li><span class="left">名称：</span><input type="text" id="attrName" maxlength="10" value="" class="input verify " data-empty=" *必填" /></li>' +
-                        '<li><span class="left">描述：</span><textarea id="attrDescription">' + Attr.Description + '</textarea></li>' +
-                   '</ul>'
+                        '<li><span class="left">名称：</span><input type="text" id="attrName" maxlength="10" value="" class="input verify " data-empty=" *必填" /></li>';
+        if (!!Attr.CategoryID && !Attr.AttrID) {
+            html += '<li><span class="left">类型：</span>' +
+                        '<label><input type="radio" name="type" checked="checked" id="parameter" value="1" />参数</label>' +
+                        '<label class="mLeft20"><input type="radio" name="type" id="specification" value="2" />规格</label>' +
+                    '</li>';
+        }
+        html += '<li><span class="left">描述：</span><textarea id="attrDescription">' + Attr.Description + '</textarea></li></ul>';
+
         Easydialog.open({
             container: {
                 id: "show-add-attr",
@@ -74,7 +81,7 @@ define(function (require, exports, module) {
                     if (!VerifyObject.isPass()) {
                         return false;
                     }
-                    
+                    Attr.Type = $("#parameter").prop("checked") ? 1 : 2;
                     Attr.AttrName = $("#attrName").val();
                     Attr.Description = $("#attrDescription").val();
                     _self.saveAttr();

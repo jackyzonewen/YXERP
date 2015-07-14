@@ -55,7 +55,7 @@ define(function (require, exports, module) {
             Category.CategoryID = "";
             Category.PID = _this.data("id");
             _self.showCategory(function (model) {
-                var ele = $('<li data-id="' + model.CategoryID + '" title="' + model.Description + '">' +
+                var ele = $('<li data-id="' + model.CategoryID + '" title="' + model.Description + '" data-layer="' + _this.data("layer") + '">' +
                                 '<span class="category-name long">' + model.CategoryName + '</span>' +
                                 '<span class="edit right">></span>' +
                             '</li>');
@@ -87,20 +87,9 @@ define(function (require, exports, module) {
                             Status: $("#categoryStatus").prop("checked") ? 1 : 0,
                             Description: $("#description").val()
                         };
-                        //属性
                         var attrs = "";
-                        //$("#attrList .attr-item").each(function () {
-                        //    if ($(this).prop("checked")) {
-                        //        attrs += $(this).data("id") + ",";
-                        //    }
-                        //});
-                        //规格
                         var saleattrs = "";
-                        //$("#saleAttr .attr-item").each(function () {
-                        //    if ($(this).prop("checked")) {
-                        //        saleattrs += $(this).data("id") + ",";
-                        //    }
-                        //});
+
                         _self.saveCategory(model, attrs, saleattrs, callback);
                     },
                     callback: function () {
@@ -116,16 +105,6 @@ define(function (require, exports, module) {
                 $("#categoryName").val(Category.CategoryName);
                 $("#categoryStatus").prop("checked", Category.Status == 1);
                 $("#description").val(Category.Description);
-                //绑定属性
-                $("#attrList .attr-item").each(function () {
-                    var _this = $(this);
-                    _this.prop("checked", Category.AttrList.indexOf(_this.data("id")) >= 0);
-                });
-                //绑定规格
-                $("#saleAttr .attr-item").each(function () {
-                    var _this = $(this);
-                    _this.prop("checked", Category.SaleAttr.indexOf(_this.data("id")) >= 0);
-                });
             }
 
             VerifyObject = Verify.createVerify({
@@ -184,11 +163,8 @@ define(function (require, exports, module) {
                         html = $(html);
                         //绑定添加事件
                         html.find(".category-header span").html(_this.find(".category-name").html());
-                        if (layer < 2) {
-                            _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")));
-                        } else {
-                            html.find(".ico-add").remove();
-                        }
+
+                        _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")).data("layer", _this.data("layer") * 1 + 1));
 
                         _self.bindElementEvent(html.find("li"));
 
@@ -196,7 +172,7 @@ define(function (require, exports, module) {
                         _self.bindStyle();
                     });
                 });
-            } else {
+            } else { //属性列表
                 Global.post("/Products/GetAttrsByCategoryID", {
                     categoryid: _this.data("id")
                 }, function (data) {
@@ -204,18 +180,27 @@ define(function (require, exports, module) {
                         var html = templateFun(data.Items);
                         html = $(html);
                         //绑定添加事件
-                        html.find(".category-header span").html(_this.find(".category-name").html() + "-属性列表");
+                        html.find(".category-attr-header span").html(_this.find(".category-name").html() + "-属性列表");
 
                         html.find(".ico-add").click(function () {
+                            var _attrdiv = $(this);
                             AttrPlug.init({
                                 attrid: "",
                                 categoryid: _this.data("id"),
                                 callback: function (Attr) {
-                                    
+                                    var ele = $('<li data-id="' + Attr.AttrID + '" data-category="' + Attr.CategoryID + '" title="' + Attr.Description + '">' +
+                                                    '<span class="category-attr-name long">' + Attr.AttrName + '</span>' +
+                                                    '<span data-id="' + Attr.AttrID + '" class="ico-del right"></span>' +
+                                                    '<span data-id="' + Attr.AttrID + '" class="ico-edit right"></span>' +
+                                                '</li>');
+                                     _self.bindAttrElementEvent(ele);
+                                     _attrdiv.parent().siblings("[data-type=" + Attr.Type + "]").append(ele);
                                 }
                             });
                         });
 
+                        _self.bindAttrElementEvent(html.find(".attritem"));
+                        
                         _this.parents(".category-layer").after(html);
                         _self.bindStyle();
                     });
@@ -223,7 +208,34 @@ define(function (require, exports, module) {
             }
         });
     }
-   
+    ObjectJS.bindAttrElementEvent = function (element) {
+        var _self = this;
+        element.find(".ico-edit").click(function () {
+            var _this = $(this);
+            AttrPlug.init({
+                attrid: _this.data("id"),
+                categoryid:"",
+                callback: function (Attr) {
+                    _this.parent().attr("title", Attr.Description);
+                    _this.parent().find(".category-attr-name").html(Attr.AttrName);
+                }
+            });
+        });
+        element.find(".ico-del").click(function () {
+            var _this = $(this);
+            if (confirm("删除后不可恢复,确认删除吗?")) {
+                Global.post("/Products/DeleteCategoryAttr", {
+                    categoryid: _this.parent().data("category"),
+                    attrid: _this.data("id")
+                }, function (data) {
+                    if (data.Status) {
+                        _this.parent().remove();
+                    }
+                });
+                
+            }
+        });
+    }
     //保存分类
     ObjectJS.saveCategory = function (category, attrs, saleattrs, callback) {
         Global.post("/Products/SavaCategory", {
