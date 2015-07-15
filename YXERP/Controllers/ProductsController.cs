@@ -397,7 +397,12 @@ namespace YXERP.Controllers
             };
         }
 
-
+        /// <summary>
+        /// 删除分类属性
+        /// </summary>
+        /// <param name="categoryid"></param>
+        /// <param name="attrid"></param>
+        /// <returns></returns>
         public JsonResult DeleteCategoryAttr(string categoryid, string attrid)
         {
             bool bl = new ProductsBusiness().UpdateCategoryAttrStatus(categoryid, attrid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);

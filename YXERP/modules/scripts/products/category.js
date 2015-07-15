@@ -61,15 +61,20 @@ define(function (require, exports, module) {
                             '</li>');
                 _self.bindElementEvent(ele);
                 _this.parent().next("ul").append(ele);
-            });
+            }, _this.data("layer"));
         });
     }
     //添加分类弹出层
-    ObjectJS.showCategory = function (callback) {
+    ObjectJS.showCategory = function (callback, Layers) {
         var _self = this;
         doT.exec("template/products/category_add.html", function (templateFun) {
-            var html = templateFun();
-
+            var html;
+            if (Layers == 3) {
+                html = templateFun(CacheAttrs);
+            } else {
+                html = templateFun([]);
+            }
+            
             Easydialog.open({
                 container: {
                     id: "category-add-div",
@@ -88,8 +93,17 @@ define(function (require, exports, module) {
                             Description: $("#description").val()
                         };
                         var attrs = "";
+                        $("#attrList .attr-item").each(function () {
+                            if ($(this).prop("checked")) {
+                                attrs += $(this).data("id") + ",";
+                            }
+                        });
                         var saleattrs = "";
-
+                        $("#saleAttr .attr-item").each(function () {
+                            if ($(this).prop("checked")) {
+                                saleattrs += $(this).data("id") + ",";
+                            }
+                        });
                         _self.saveCategory(model, attrs, saleattrs, callback);
                     },
                     callback: function () {
@@ -97,7 +111,9 @@ define(function (require, exports, module) {
                     }
                 }
             });
-
+            if (Layers != 3) {
+                $(".category-attrs").hide();
+            }
             $("#categoryName").focus();
 
             //编辑填充数据
@@ -105,6 +121,16 @@ define(function (require, exports, module) {
                 $("#categoryName").val(Category.CategoryName);
                 $("#categoryStatus").prop("checked", Category.Status == 1);
                 $("#description").val(Category.Description);
+                //绑定属性
+                $("#attrList .attr-item").each(function () {
+                    var _this = $(this);
+                    _this.prop("checked", Category.AttrList.indexOf(_this.data("id")) >= 0);
+                });
+                //绑定规格
+                $("#saleAttr .attr-item").each(function () {
+                    var _this = $(this);
+                    _this.prop("checked", Category.SaleAttr.indexOf(_this.data("id")) >= 0);
+                });
             }
 
             VerifyObject = Verify.createVerify({
@@ -143,7 +169,7 @@ define(function (require, exports, module) {
                         _this.prev().addClass("colorccc");
                     }
                     _this.parent().attr("title", model.Description);
-                });
+                }, Category.Layers);
             });
             return false;
         })
