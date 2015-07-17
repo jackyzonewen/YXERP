@@ -18,9 +18,9 @@
         <ul class="category-list">
             @foreach (CloudSalesEntity.C_Category model in (List<CloudSalesEntity.C_Category>)ViewBag.Items)
             { 
-                <li data-id="@(model.CategoryID)" title="@(model.Description)">
+                <li data-id="@(model.CategoryID)" data-layer="@(model.Layers)" title="@(model.Description)">
                     <span class="category-name long @(model.Status.Value==1?"":"colorccc")">@(model.CategoryName)</span>
-                    <span style="padding-left:0;" title="添加新品" class="add-product right">></span>
+                    <span style="padding-left:0;" class="right">></span>
                 </li>
             }
         </ul>

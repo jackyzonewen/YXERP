@@ -42,5 +42,21 @@
 .category-add .column-name{ width:80px; }
 .category-add input[type="checkbox"] { vertical-align:middle; margin:0 2px; }
 
+/*属性值*/
+.attr-value-box { border:solid 1px #7faaca; width:300px; overflow-x:hidden; overflow-y:auto; background-color:#fff; position:fixed; top:84px; right:-302px; z-index:666; }
+.attr-value-box .title { margin:20px 20px 0 20px; border-bottom:solid 1px #7faaca; padding-bottom:5px; }
+.attr-value-box .header-title {display:block; margin-bottom:10px;}
+.attr-value-box .add-value { position:relative; margin-left:19px; height:30px;  width:200px;margin-bottom:10px;}
+.attr-value-box .value-name { height:30px; line-height:30px; width:200px; }
+.attr-value-box .ico-input-add { position:absolute; right:-3px; top:5px; border-left:solid 1px #ccc;}
+
+.attr-value-box ul{ width:300px; margin-top:20px; padding-bottom:30px; }
+.attr-value-box ul li{ width:220px; height:30px; margin-left:39px; border:solid 1px #ccc; border-radius:5px; line-height:30px; margin-top:10px; text-align:center; cursor:pointer;position:relative;}
+.attr-value-box ul li input{ height:28px; line-height:30px; width:50px; text-align:center; border:none !important; cursor:pointer; }
+.attr-value-box ul li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
+.attr-value-box ul li:hover span{ display:inline-block; }
+.attr-value-box ul .unit-item { border:solid 1px #ccc; border-radius:5px; }
+.attr-value-box ul .unit-item:hover{ border:solid 1px #7faaca; }
+
 
 

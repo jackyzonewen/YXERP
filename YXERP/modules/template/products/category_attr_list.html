@@ -8,7 +8,7 @@
             if(item.Type==1){
         %}
                 <li class="attritem" data-id="{%=item.AttrID%}" data-category="{%=item.CategoryID%}" title="{%=item.Description%}">
-                    <span class="category-attr-name long">{%=item.AttrName%}</span>
+                    <span data-id="{%=item.AttrID%}" class="category-attr-name long">{%=item.AttrName%}</span>
                     <span data-id="{%=item.AttrID%}" class="ico-del right"></span>
                     <span data-id="{%=item.AttrID%}" class="ico-edit right"></span>
                 </li>
@@ -22,7 +22,7 @@
             if(item.Type==2){
         %}
             <li class="attritem" data-id="{%=item.AttrID%}"  data-category="{%=item.CategoryID%}" title="{%=item.Description%}">
-                <span class="category-attr-name long">{%=item.AttrName%}</span>
+                <span data-id="{%=item.AttrID%}"  class="category-attr-name long">{%=item.AttrName%}</span>
                 <span data-id="{%=item.AttrID%}" class="ico-del right"></span>
                 <span data-id="{%=item.AttrID%}" class="ico-edit right"></span>
             </li>

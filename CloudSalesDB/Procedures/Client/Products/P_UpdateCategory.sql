@@ -37,7 +37,7 @@ set @Err+=@@error
 
 if(@Layers=3)
 begin
-
+	--删除原本通用属性
 	update a set Status=9,UpdateTime=getdate() from C_CategoryAttr a join C_ProductAttr p on a.AttrID=p.AttrID and p.CategoryID='' where a.CategoryID=@CategoryID and a.Status<>9
 
 	set @AttrList=replace(@AttrList,',',''',''')

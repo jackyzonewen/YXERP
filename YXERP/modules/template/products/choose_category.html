@@ -5,7 +5,7 @@
 	        for(var i=0, j=$data.length; i < j; i++){
 	        var item = $data[i];
         %}
-        <li data-id="{%=item.CategoryID%}" title="{%=item.Description%}">
+        <li data-id="{%=item.CategoryID%}" data-layer="{%=item.Layers%}" title="{%=item.Description%}">
             <span class="category-name long {%=item.Status==1?'':'colorccc'%}">{%=item.CategoryName%}</span>
             <span style="padding-left:0;" title="添加新品"  class="add-product right">></span>
         </li>
