@@ -9,7 +9,7 @@
         %}
                 <li class="attritem" data-id="{%=item.AttrID%}" data-category="{%=item.CategoryID%}" title="{%=item.Description%}">
                     <span data-id="{%=item.AttrID%}" class="category-attr-name long">{%=item.AttrName%}</span>
-                    <span data-id="{%=item.AttrID%}" class="ico-del right"></span>
+                    <span data-id="{%=item.AttrID%}" data-type="{%=item.Type%}" class="ico-del right"></span>
                     <span data-id="{%=item.AttrID%}" class="ico-edit right"></span>
                 </li>
         {% }} %}
@@ -23,7 +23,7 @@
         %}
             <li class="attritem" data-id="{%=item.AttrID%}"  data-category="{%=item.CategoryID%}" title="{%=item.Description%}">
                 <span data-id="{%=item.AttrID%}"  class="category-attr-name long">{%=item.AttrName%}</span>
-                <span data-id="{%=item.AttrID%}" class="ico-del right"></span>
+                <span data-id="{%=item.AttrID%}" data-type="{%=item.Type%}" class="ico-del right"></span>
                 <span data-id="{%=item.AttrID%}" class="ico-edit right"></span>
             </li>
         {% }} %}

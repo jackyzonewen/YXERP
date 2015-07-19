@@ -5,7 +5,7 @@ define(function (require, exports, module) {
     var $ = require("jquery"),
         Global = require("global"),
         doT = require("dot"),
-        Verify = require("verify"), VerifyObject,
+        Verify = require("verify"), VerifyObject, CategoryVerifyObject,
         AttrPlug = require("scripts/products/attrplug"),
         Easydialog = require("easydialog");
     var Category = {
@@ -49,7 +49,7 @@ define(function (require, exports, module) {
         });
 
         $(document).click(function (e) {
-            if (!$(e.target).hasClass("category-attr-name") && !$(e.target).hasClass("attr-value-box") && !$(e.target).parents().hasClass("attr-value-box")) {
+            if (!$(e.target).hasClass("attritem") && !$(e.target).hasClass("attr-value-box") && !$(e.target).parents().hasClass("attr-value-box")) {
                 _self.hideValues();
             }
         });
@@ -101,9 +101,11 @@ define(function (require, exports, module) {
                     header: Category.CategoryID == "" ? "添加分类" : "编辑分类",
                     content: html,
                     yesFn: function () {
-                        if (!VerifyObject.isPass()) {
+
+                        if (!CategoryVerifyObject.isPass("#category-add-div")) {
                             return false;
                         }
+
                         var model = {
                             CategoryID: Category.CategoryID,
                             CategoryCode: "",
@@ -112,6 +114,7 @@ define(function (require, exports, module) {
                             Status: $("#categoryStatus").prop("checked") ? 1 : 0,
                             Description: $("#description").val()
                         };
+
                         var attrs = "";
                         $("#attrList .attr-item").each(function () {
                             if ($(this).prop("checked")) {
@@ -153,7 +156,7 @@ define(function (require, exports, module) {
                 });
             }
 
-            VerifyObject = Verify.createVerify({
+            CategoryVerifyObject = Verify.createVerify({
                 element: ".verify",
                 emptyAttr: "data-empty",
                 verifyType: "data-type",
@@ -199,7 +202,7 @@ define(function (require, exports, module) {
             var _this = $(this), layer = _this.data("layer");
             _this.siblings().removeClass("hover");
             _this.addClass("hover");
-            _this.parents(".category-layer").nextAll(".category-layer").remove();
+            _this.parents(".category-layer").nextAll(".category-layer,.category-attr-layer").remove();
             if (layer < 3) {
                 Global.post("/Products/GetChildCategorysByID", {
                     categoryid: _this.data("id")
@@ -234,9 +237,9 @@ define(function (require, exports, module) {
                                 attrid: "",
                                 categoryid: _this.data("id"),
                                 callback: function (Attr) {
-                                    var ele = $('<li data-id="' + Attr.AttrID + '" data-category="' + Attr.CategoryID + '" title="' + Attr.Description + '">' +
+                                    var ele = $('<li class="attritem" data-id="' + Attr.AttrID + '" data-category="' + Attr.CategoryID + '" title="' + Attr.Description + '">' +
                                                     '<span class="category-attr-name long">' + Attr.AttrName + '</span>' +
-                                                    '<span data-id="' + Attr.AttrID + '" class="ico-del right"></span>' +
+                                                    '<span data-id="' + Attr.AttrID + '"  data-type="' + Attr.Type + '" class="ico-del right"></span>' +
                                                     '<span data-id="' + Attr.AttrID + '" class="ico-edit right"></span>' +
                                                 '</li>');
                                      _self.bindAttrElementEvent(ele);
@@ -246,11 +249,6 @@ define(function (require, exports, module) {
                         });
 
                         _self.bindAttrElementEvent(html.find(".attritem"));
-                        
-                        //绑定属性值
-                        html.find(".category-attr-name").click(function () {
-                            _self.showValues($(this).data("id"));
-                        });
 
                         _this.parents(".category-layer").after(html);
                         _self.bindStyle();
@@ -272,13 +270,15 @@ define(function (require, exports, module) {
                     _this.parent().find(".category-attr-name").html(Attr.AttrName);
                 }
             });
+            return false;
         });
         element.find(".ico-del").click(function () {
             var _this = $(this);
             if (confirm("删除后不可恢复,确认删除吗?")) {
                 Global.post("/Products/DeleteCategoryAttr", {
                     categoryid: _this.parent().data("category"),
-                    attrid: _this.data("id")
+                    attrid: _this.data("id"),
+                    type: _this.data("type")
                 }, function (data) {
                     if (data.Status) {
                         _this.parent().remove();
@@ -286,7 +286,11 @@ define(function (require, exports, module) {
                 });
                 
             }
+            return false;
         });
+        element.click(function () {
+            _self.showValues($(this).data("id"));
+        })
     }
     //保存分类
     ObjectJS.saveCategory = function (category, attrs, saleattrs, callback) {
@@ -303,7 +307,6 @@ define(function (require, exports, module) {
     };
     //显示属性值悬浮层
     ObjectJS.showValues = function (attrID) {
-        console.log(attrID);
         var height = document.documentElement.clientHeight - 84;
         $("#attrValueBox").css("height", height + "px");
         $("#attrValueBox").animate({ right: "0px" }, "fast");
@@ -315,7 +318,6 @@ define(function (require, exports, module) {
         Global.post("/Products/GetAttrByID", { attrID: Value.AttrID }, function (data) {
             $("#attrValueBox").find(".header-title").html(data.Item.AttrName);
             ObjectJS.innerValuesItems(data.Item.AttrValues, true);
-
         });
     }
     //加载值数据

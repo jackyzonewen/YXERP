@@ -14,7 +14,7 @@
         regText: "data-text"            //匹配失败提示
     });
     
-    VerifyObject.isPass()              //判断是否通过
+    VerifyObject.isPass(parent)              //判断是否通过
 
 */
 define(function (require, exports, module) {
@@ -72,10 +72,14 @@ define(function (require, exports, module) {
         });
     }
     //提交验证
-    Verify.prototype.isPass = function () {
+    Verify.prototype.isPass = function (parent) {
         var _self = this;
         $(_self.setting.element).blur();
-        return $(".verify-fail-err").length == 0;
+        if (!parent) {
+            return $(".verify-fail-err").length == 0;
+        } else {
+            return $(parent).find(".verify-fail-err").length == 0;
+        }
     }
     exports.createVerify = function (options) {
         return new Verify(options);

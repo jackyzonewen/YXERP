@@ -365,13 +365,14 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
-        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, int status)
+        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, int status, int type)
         {
-            string sqlText = "Update C_CategoryAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID and CategoryID=@CategoryID";
+            string sqlText = "Update C_CategoryAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID and CategoryID=@CategoryID and Type=@Type";
             SqlParameter[] paras = { 
                                      new SqlParameter("@CategoryID",categoryid),
                                      new SqlParameter("@AttrID",attrid),
-                                     new SqlParameter("@Status" , status)
+                                     new SqlParameter("@Status" , status),
+                                     new SqlParameter("@Type" , type)
                                    };
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }

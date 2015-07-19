@@ -271,31 +271,26 @@ namespace CloudSalesBusiness
                 model.FillData(ds.Tables["Category"].Rows[0]);
                 List<C_ProductAttr> salelist = new List<C_ProductAttr>();
                 List<C_ProductAttr> attrlist = new List<C_ProductAttr>();
-                bool bl = false;
+
                 foreach (DataRow attr in ds.Tables["Attrs"].Rows)
                 {
-                    bl = false;
+
                     C_ProductAttr modelattr = new C_ProductAttr();
                     modelattr.FillData(attr);
-                    if (model.AttrList.ToLower().IndexOf(modelattr.AttrID.ToLower()) >= 0)
+                    if (modelattr.Type==1)
                     {
-                        bl = true;
                         attrlist.Add(modelattr);
                     }
-                    if (model.SaleAttr.ToLower().IndexOf(modelattr.AttrID.ToLower()) >= 0)
+                    else if (modelattr.Type == 2)
                     {
-                        bl = true;
                         salelist.Add(modelattr);
                     }
-                    if (bl)
+                    modelattr.AttrValues = new List<C_AttrValue>();
+                    foreach (DataRow value in ds.Tables["Values"].Select("AttrID='" + modelattr.AttrID + "'"))
                     {
-                        modelattr.AttrValues = new List<C_AttrValue>();
-                        foreach (DataRow value in ds.Tables["Values"].Select("AttrID='" + modelattr.AttrID + "'"))
-                        {
-                            C_AttrValue valuemodel = new C_AttrValue();
-                            valuemodel.FillData(value);
-                            modelattr.AttrValues.Add(valuemodel);
-                        }
+                        C_AttrValue valuemodel = new C_AttrValue();
+                        valuemodel.FillData(value);
+                        modelattr.AttrValues.Add(valuemodel);
                     }
                 }
 
@@ -651,10 +646,10 @@ namespace CloudSalesBusiness
         /// <param name="operateIP"></param>
         /// <param name="operateID"></param>
         /// <returns></returns>
-        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, StatusEnum status, string operateIP, string operateID)
+        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, StatusEnum status, int type,string operateIP, string operateID)
         {
             var dal = new ProductsDAL();
-            return dal.UpdateCategoryAttrStatus(categoryid, attrid, (int)status);
+            return dal.UpdateCategoryAttrStatus(categoryid, attrid, (int)status, type);
         }
 
         /// <summary>

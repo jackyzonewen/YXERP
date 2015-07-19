@@ -403,9 +403,9 @@ namespace YXERP.Controllers
         /// <param name="categoryid"></param>
         /// <param name="attrid"></param>
         /// <returns></returns>
-        public JsonResult DeleteCategoryAttr(string categoryid, string attrid)
+        public JsonResult DeleteCategoryAttr(string categoryid, string attrid, int type)
         {
-            bool bl = new ProductsBusiness().UpdateCategoryAttrStatus(categoryid, attrid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateCategoryAttrStatus(categoryid, attrid, StatusEnum.Delete, type, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
