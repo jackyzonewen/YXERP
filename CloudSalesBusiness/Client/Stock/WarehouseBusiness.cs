@@ -18,7 +18,7 @@ namespace CloudSalesBusiness
 
         public static object SingleLock = new object();
 
-        #region 查询
+        #region 库别-弃用
 
         /// <summary>
         /// 获取库别列表
@@ -26,7 +26,7 @@ namespace CloudSalesBusiness
         /// <param name="clientid"></param>
         /// <returns></returns>
         public List<C_WareHouseType> GetWarehouseTypes(string clientid)
-        { 
+        {
             var dal = new WarehouseDAL();
             DataTable dt = dal.GetWarehouseTypes(clientid);
             List<C_WareHouseType> list = new List<C_WareHouseType>();
@@ -38,10 +38,6 @@ namespace CloudSalesBusiness
             }
             return list;
         }
-
-        #endregion
-
-        #region 添加
 
         /// <summary>
         /// 添加库别
@@ -62,10 +58,6 @@ namespace CloudSalesBusiness
             return string.Empty;
         }
 
-        #endregion
-
-        #region 编辑、删除
-
         /// <summary>
         /// 编辑库别
         /// </summary>
@@ -79,7 +71,7 @@ namespace CloudSalesBusiness
         {
             var dal = new WarehouseDAL();
             return dal.UpdateWarehouseType(id, name, description);
-           
+
         }
         /// <summary>
         /// 删除库别
@@ -91,6 +83,72 @@ namespace CloudSalesBusiness
         public bool DeleteWarehouseType(string id, string operateid, string clientid)
         {
             return CommonBusiness.Update("C_WareHouseType", "Status", (int)CloudSalesEnum.StatusEnum.Delete, " TypeID='" + id + "'");
+        }
+        #endregion
+
+        #region 查询
+
+
+
+        #endregion
+
+        #region 添加
+
+        /// <summary>
+        /// 添加仓库
+        /// </summary>
+        /// <param name="warecode">仓库编码</param>
+        /// <param name="name">名称</param>
+        /// <param name="shortname">简称</param>
+        /// <param name="citycode">所在地区编码</param>
+        /// <param name="status">状态</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public string AddWareHouse(string warecode, string name, string shortname, string citycode, int status, string description, string operateid, string clientid)
+        {
+            var id = Guid.NewGuid().ToString();
+            var dal = new WarehouseDAL();
+            if (dal.AddWareHouse(id, warecode, name, shortname, citycode, status, description, operateid, clientid))
+            {
+                return id.ToString();
+            }
+            return string.Empty;
+        }
+        #endregion
+
+        #region 编辑、删除
+        /// <summary>
+        /// 编辑仓库
+        /// </summary>
+        /// <param name="id">仓库ID</param>
+        /// <param name="name">名称</param>
+        /// <param name="shortname">简称</param>
+        /// <param name="citycode">地区编码</param>
+        /// <param name="status">状态</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public bool UpdateWareHouse(string id, string name, string shortname, string citycode, int status, string description, string operateid, string clientid)
+        {
+
+            var dal = new WarehouseDAL();
+            return dal.UpdateWareHouse(id, name, shortname, citycode, status, description);
+        }
+
+        /// <summary>
+        /// 编辑仓库状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <param name="operateid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool UpdateWareHouseStatus(string id, StatusEnum status, string operateid, string clientid)
+        {
+            return CommonBusiness.Update("C_WareHouse", "Status", (int)status, " WareID='" + id + "'");
         }
 
         #endregion

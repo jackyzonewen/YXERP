@@ -211,7 +211,6 @@ define(function (require, exports, module) {
             !!callback && callback(data.Status);
         });
     }
-
     //初始化编辑页数据
     Product.initEdit = function (model, KindEditor) {
         var _self = this;

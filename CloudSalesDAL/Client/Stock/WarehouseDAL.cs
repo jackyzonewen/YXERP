@@ -37,6 +37,24 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
+        public bool AddWareHouse(string id, string warecode, string name, string shortname, string citycode, int status,string description, string operateid, string clientid)
+        {
+            string sqlText = "insert into C_WareHouse(WareID,WareCode,Name,ShortName,CityCode,Status,Description,CreateUserID,ClientID) "+
+                                            " values(@WareID,@WareCode,@Name,@ShortName,@CityCode,@Status,@Description,@CreateUserID,@ClientID) ";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@WareID" , id),
+                                     new SqlParameter("@WareCode" , warecode),
+                                     new SqlParameter("@Name" , name),
+                                     new SqlParameter("@ShortName" , shortname),
+                                     new SqlParameter("@CityCode" , citycode),
+                                     new SqlParameter("@Status" , status),
+                                     new SqlParameter("@Description" , description),
+                                     new SqlParameter("@CreateUserID" , operateid),
+                                     new SqlParameter("@ClientID" , clientid)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
         #endregion
 
         #region 编辑、删除
@@ -48,6 +66,21 @@ namespace CloudSalesDAL
             SqlParameter[] paras = { 
                                      new SqlParameter("@TypeID" , id),
                                      new SqlParameter("@TypeName" , name),
+                                     new SqlParameter("@Description" , description)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateWareHouse(string id, string name, string shortname, string citycode, int status, string description)
+        {
+            string sqlText = "Update C_WareHouse set Name=@Name,ShortName=@ShortName,CityCode=@CityCode,Status=@Status,Description=@Description,UpdateTime=getdate() " +
+                            "  where WareID=@WareID ";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@WareID" , id),
+                                     new SqlParameter("@Name" , name),
+                                     new SqlParameter("@ShortName" , shortname),
+                                     new SqlParameter("@CityCode" , citycode),
+                                     new SqlParameter("@Status" , status),
                                      new SqlParameter("@Description" , description)
                                    };
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;

@@ -48,6 +48,9 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
+
+        public string WareID { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
