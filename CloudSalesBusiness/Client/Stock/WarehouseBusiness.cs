@@ -88,7 +88,31 @@ namespace CloudSalesBusiness
 
         #region 查询
 
+        /// <summary>
+        /// 获取仓库列表
+        /// </summary>
+        /// <param name="keyWords">关键词</param>
+        /// <param name="pageSize">每页条数</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="totalCount">总记录数</param>
+        /// <param name="pageCount">总页数</param>
+        /// <param name="clientID">客户端ID</param>
+        /// <returns></returns>
+        public List<C_WareHouse> GetWareHouses(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        {
+            var dal = new WarehouseDAL();
+            DataSet ds = dal.GetWareHouses(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
+            List<C_WareHouse> list = new List<C_WareHouse>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                C_WareHouse model = new C_WareHouse();
+                model.FillData(dr);
+                model.City = CommonCache.Citys.Where(c => c.CityCode == model.CityCode).FirstOrDefault();
+                list.Add(model);
+            }
+            return list;
+        }
 
         #endregion
 

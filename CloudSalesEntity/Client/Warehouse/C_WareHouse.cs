@@ -157,6 +157,13 @@ namespace CloudSalesEntity
 		}
 		#endregion Model
 
+        public CityEntity City { get; set; }
+
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
+
 	}
 }
 

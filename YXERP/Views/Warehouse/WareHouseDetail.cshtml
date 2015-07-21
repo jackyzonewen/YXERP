@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "仓库详情页";
+}
+<link rel="stylesheet" href="/modules/css/warehouse/warehouse.css" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/warehouse/warehouse"], function (obj) {
+            obj.init();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">仓库详情页</span>
+    <span class="ico-gonext right" onclick="history.go(1)" title="前进"></span>
+    <span class="ico-goback right" onclick="history.go(-1)" title="后退"></span>
+</div>
+<div class="content-body">
+    <ul class="table-add">
+        
+        <li>
+            <span class="width80">仓库名称：</span><input type="text" maxlength="50" id="warehouseName" data-empty="* 必填" class="input verify" />
+        </li>
+        <li>
+            <span class="width80">仓库编码：</span><input type="text" maxlength="50" id="warehouseCode"  class="input" />
+        </li>
+        <li>
+            <span class="width80">简称：</span><input type="text" maxlength="20" id="shortName" class="input" />
+        </li>
+        <li>
+            <span class="width80">仓库所在地：</span><span id="warehouseCity"></span>
+        </li>
+        <li>
+            <span class="width80">状态：</span>
+            <input type="checkbox" id="warehouseStatus" checked="checked" class="middle hand" />
+            <label for="warehouseStatus" class="hand">启用</label>
+        </li>
+        <li>
+            <span class="width80">描述：</span><textarea id="description"></textarea>
+        </li>
+    </ul>
+    <div class="mTop20">
+        <input type="button" class="btn" id="btnSave" value="保存" />
+        <a href="/WareHouse/WareHouse" class="btn mLeft20">返回</a>
+    </div>
+    
+</div>

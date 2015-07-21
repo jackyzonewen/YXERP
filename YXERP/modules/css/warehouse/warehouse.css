@@ -1,17 +1,10 @@
 ﻿
-.obj-list { width:100%; }
 
-.obj-list li{ height:30px; line-height:30px; width:60px; padding:0 15px; float:left; margin: 10px 10px;  text-align:center; position:relative; }
-.obj-list li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
-.obj-list li:hover label{ cursor:pointer; }
-.obj-list li:hover span{ display:inline-block; }
-.obj-list .obj-item { border:solid 1px #ccc; border-radius:5px; }
-.obj-list .obj-item:hover{ border:solid 1px #7faaca;  }
+.edit-warehouse { height:25px;  padding:0 15px; border-radius:13px; background-color:#BFD9EA; border:1px solid #BFD9EA;
+              cursor:pointer; color:#033d91;}
 
+/*列表样式*/
 
-.create-obj { width:300px; }
-.create-obj li { margin-top:20px; line-height:30px;}
-.create-obj li span{ color:#333; display:inline-block; line-height:30px; height:30px;}
-
-.create-obj .input { height:25px; line-height:25px; padding:2px 5px; width:200px;}
-.create-obj textarea{  width:260px;}
+.s-len{ width:30px;}
+.m-len{ width:80px;}
+.l-len{ width:160px;}

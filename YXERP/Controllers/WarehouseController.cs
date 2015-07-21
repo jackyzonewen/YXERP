@@ -36,6 +36,16 @@ namespace YXERP.Controllers
         {
             return View();
         }
+
+        public ActionResult WareHouseAdd()
+        {
+            return View();
+        }
+
+        public ActionResult WareHouseDetail(string id)
+        {
+            return View();
+        }
         /// <summary>
         /// 货位设置
         /// </summary>
@@ -86,6 +96,24 @@ namespace YXERP.Controllers
         {
             bool bl = new WarehouseBusiness().DeleteWarehouseType(id, CurrentUser.UserID, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 获取仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetWareHouses(string keyWords, int pageSize, int pageIndex, int totalCount)
+        {
+            int pageCount = 0;
+            List<C_WareHouse> list = new WarehouseBusiness().GetWareHouses(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", totalCount);
+            JsonDictionary.Add("PageCount", pageCount);
             return new JsonResult
             {
                 Data = JsonDictionary,

@@ -1,0 +1,17 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+<tr class="list-item">
+    <td><a href="WareHouseDetail/{%=item.WareID%}">{%=item.WareCode%}</a></td>
+    <td><a href="WareHouseDetail/{%=item.WareID%}">{%=item.Name%}</a></td>
+    <td class="center">{%=item.ShortName%}</td>
+    <td class="center">{%=(!!item.City?(item.City.Province+" "+item.City.City+" "+item.City.Counties):"")%}</td>
+    <td class='center'><div class="status" data-id="{%=item.WareID%}" data-value="{%=item.Status==1%}"></div></td>
+    <td title="{%=item.Description%}">{%=item.Description%}</td>
+    <td class="center"><a class="ico-edit" title="编辑" href="WareHouseDetail/{%=item.WareID%}"></a></td>
+    <td class="center">
+        <a class="ico-del" href="javascript:void(0)" title="删除" data-id="{%=item.WareID%}"></a>
+    </td>
+</tr>
+{% } %}

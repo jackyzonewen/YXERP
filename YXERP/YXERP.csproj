@@ -118,6 +118,7 @@
     <Content Include="modules\css\products\product.css" />
     <Content Include="modules\css\products\attrplug.css" />
     <Content Include="modules\css\warehouse\warehouse.css" />
+    <Content Include="modules\css\warehouse\warehousetype.css" />
     <Content Include="modules\images\default.png" />
     <Content Include="modules\images\header.jpg" />
     <Content Include="modules\images\ico-add.png" />
@@ -433,6 +434,7 @@
     <Content Include="modules\scripts\products\choosecategory.js" />
     <Content Include="modules\scripts\products\product.js" />
     <Content Include="modules\scripts\products\attrplug.js" />
+    <Content Include="modules\scripts\warehouse\warehouse.js" />
     <Content Include="modules\scripts\warehouse\warehousetype.js" />
     <Content Include="modules\template\products\attr_list.html" />
     <Content Include="modules\template\products\brand_list.html" />
@@ -441,6 +443,7 @@
     <Content Include="modules\template\products\choose_category.html" />
     <Content Include="modules\template\products\product_list.html" />
     <Content Include="modules\template\products\category_attr_list.html" />
+    <Content Include="modules\template\warehouse\warehouse_list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
@@ -543,6 +546,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Warehouse\DepotSeat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Warehouse\WareHouseAdd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Warehouse\WareHouseDetail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

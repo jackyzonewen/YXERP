@@ -61,6 +61,7 @@
     <Folder Include="Procedures\Manage" />
     <Folder Include="Procedures\Client" />
     <Folder Include="Procedures\Client\Products" />
+    <Folder Include="Procedures\Client\Warehouse" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Procedures\InitDatabase.sql" />
@@ -110,5 +111,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Procedures\Client\Products\P_UpdateCategory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Warehouse\P_GetWareHouses.sql" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,31 @@
 ﻿@{
-    ViewBag.Title = "WareHouse";
+    ViewBag.Title = "仓库设置";
 }
-
-<h2>WareHouse</h2>
+<link href="/modules/css/warehouse/warehouse.css" rel="stylesheet" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/warehouse/warehouse"], function (brand) {
+            brand.initList();
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">仓库设置</span>
+    <a href="WareHouseAdd" class="ico-add left mTop4 mLeft20">添加仓库</a>
+    <div class="right searth-module"> </div> 
+</div>
+<div class="content-body">
+    <table class="table-list">
+        <tr class="tr-header" id="warehouse-items">
+            <td class="l-len">仓库编码</td>
+            <td>仓库名称</td>
+            <td class="m-len">简称</td>
+            <td class="l-len">所在地</td>
+            <td class="m-len">启用/禁用</td>
+            <td class="">描述</td>
+            <td class="s-len">编辑</td>
+            <td class="s-len">删除</td>
+        </tr>
+    </table>
+    <div id="pager" class="mTop20"></div>
+</div>
