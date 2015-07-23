@@ -55,10 +55,12 @@ namespace CloudSalesEntity
 			set{ _depotcode=value;}
 			get{return _depotcode;}
 		}
+
+        public string WareID { set; get; }
 		/// <summary>
 		/// 
 		/// </summary>
-		public string WareCode
+        public string WareCode
 		{
 			set{ _warecode=value;}
 			get{return _warecode;}

@@ -41,6 +41,13 @@ namespace CloudSalesDAL
 
         }
 
+        public DataTable GetWareByID(string wareid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@WareID", wareid) };
+            DataTable dt = GetDataTable("select * from C_WareHouse where WareID=@WareID", paras, CommandType.Text);
+            return dt;
+        }
+
         #endregion
 
         #region 添加
@@ -78,6 +85,24 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
         }
 
+        public bool AddDepotSeat(string id, string depotcode, string wareid, string name, int status, string description, string operateid, string clientid)
+        {
+            string sqlText = "insert into C_DepotSeat(DepotID,DepotCode,WareID,Name,Status,Description,CreateUserID,ClientID) " +
+                                            " values(@DepotID,@DepotCode,@WareID,@Name,@Status,@Description,@CreateUserID,@ClientID) ";
+            SqlParameter[] paras = { 
+                                    
+                                     new SqlParameter("@DepotID" , id),
+                                     new SqlParameter("@DepotCode" , name),
+                                     new SqlParameter("@WareID" , id),
+                                     new SqlParameter("@Name" , name),
+                                     new SqlParameter("@Status" , status),
+                                     new SqlParameter("@Description" , description),
+                                     new SqlParameter("@CreateUserID" , operateid),
+                                     new SqlParameter("@ClientID" , clientid)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
         #endregion
 
         #region 编辑、删除
@@ -103,6 +128,19 @@ namespace CloudSalesDAL
                                      new SqlParameter("@Name" , name),
                                      new SqlParameter("@ShortName" , shortname),
                                      new SqlParameter("@CityCode" , citycode),
+                                     new SqlParameter("@Status" , status),
+                                     new SqlParameter("@Description" , description)
+                                   };
+            return ExecuteNonQuery(sqlText, paras, CommandType.Text) > 0;
+        }
+
+        public bool UpdateDepotSeat(string id, string name, int status, string description)
+        {
+            string sqlText = "Update C_DepotSeat set Name=@Name,Status=@Status,Description=@Description,UpdateTime=getdate() " +
+                            "  where DepotID=@DepotID ";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@DepotID" , id),
+                                     new SqlParameter("@Name" , name),
                                      new SqlParameter("@Status" , status),
                                      new SqlParameter("@Description" , description)
                                    };

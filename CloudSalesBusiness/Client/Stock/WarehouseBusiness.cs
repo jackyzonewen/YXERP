@@ -114,6 +114,25 @@ namespace CloudSalesBusiness
             return list;
         }
 
+        /// <summary>
+        /// 根据ID获取仓库详情
+        /// </summary>
+        /// <param name="wareid"></param>
+        /// <returns></returns>
+        public C_WareHouse GetWareByID(string wareid)
+        {
+            var dal = new WarehouseDAL();
+            DataTable dt = dal.GetWareByID(wareid);
+
+            C_WareHouse model = new C_WareHouse();
+            if (dt.Rows.Count > 0)
+            {
+                model.FillData(dt.Rows[0]);
+                model.City = CommonCache.Citys.Where(c => c.CityCode == model.CityCode).FirstOrDefault();
+            }
+            return model;
+        }
+
         #endregion
 
         #region 添加
@@ -140,6 +159,27 @@ namespace CloudSalesBusiness
             }
             return string.Empty;
         }
+        /// <summary>
+        /// 添加货位
+        /// </summary>
+        /// <param name="depotcode">货位编码</param>
+        /// <param name="wareid">仓库ID</param>
+        /// <param name="name">名称</param>
+        /// <param name="status">状态</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public string AddDepotSeat(string depotcode, string wareid, string name, int status, string description, string operateid, string clientid)
+        {
+            var id = Guid.NewGuid().ToString();
+            var dal = new WarehouseDAL();
+            if (dal.AddDepotSeat(id, depotcode, wareid, name, status, description, operateid, clientid))
+            {
+                return id.ToString();
+            }
+            return string.Empty;
+        }
         #endregion
 
         #region 编辑、删除
@@ -157,7 +197,6 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateWareHouse(string id, string name, string shortname, string citycode, int status, string description, string operateid, string clientid)
         {
-
             var dal = new WarehouseDAL();
             return dal.UpdateWareHouse(id, name, shortname, citycode, status, description);
         }
@@ -173,6 +212,22 @@ namespace CloudSalesBusiness
         public bool UpdateWareHouseStatus(string id, StatusEnum status, string operateid, string clientid)
         {
             return CommonBusiness.Update("C_WareHouse", "Status", (int)status, " WareID='" + id + "'");
+        }
+
+        /// <summary>
+        /// 编辑货位
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="name">名称</param>
+        /// <param name="status">状态</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool UpdateDepotSeat(string id, string name, int status, string description, string operateid, string clientid)
+        {
+            var dal = new WarehouseDAL();
+            return dal.UpdateDepotSeat(id, name, status, description);
         }
 
         #endregion

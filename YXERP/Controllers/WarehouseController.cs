@@ -44,6 +44,14 @@ namespace YXERP.Controllers
 
         public ActionResult WareHouseDetail(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return View("WareHouse");
+            }
+            C_WareHouse model = new WarehouseBusiness().GetWareByID(id);
+            ViewBag.Item = model;
+            ViewBag.ID = id;
+
             return View();
         }
         /// <summary>
@@ -159,6 +167,21 @@ namespace YXERP.Controllers
         public JsonResult UpdateWareHouseStatus(string id, int status)
         {
             bool bl = new WarehouseBusiness().UpdateWareHouseStatus(id, (CloudSalesEnum.StatusEnum)status, CurrentUser.UserID, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 删除仓库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult DeleteWareHouse(string id)
+        {
+            bool bl = new WarehouseBusiness().UpdateWareHouseStatus(id, CloudSalesEnum.StatusEnum.Delete, CurrentUser.UserID, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {

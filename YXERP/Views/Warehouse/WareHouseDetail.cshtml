@@ -1,11 +1,12 @@
 ﻿@{
     ViewBag.Title = "仓库详情页";
+    CloudSalesEntity.C_WareHouse model = (CloudSalesEntity.C_WareHouse)ViewBag.Item;
 }
 <link rel="stylesheet" href="/modules/css/warehouse/warehouse.css" />
 @section scripts{
     <script type="text/javascript">
         seajs.use(["scripts/warehouse/warehouse"], function (obj) {
-            obj.init();
+            obj.initEdit('@Html.ToJSONString(model)');
         });
     </script>
 }
@@ -16,12 +17,11 @@
 </div>
 <div class="content-body">
     <ul class="table-add">
-        
         <li>
-            <span class="width80">仓库名称：</span><input type="text" maxlength="50" id="warehouseName" data-empty="* 必填" class="input verify" />
+            <span class="width80">仓库编码：</span><label  id="warehouseCode" ></label> 
         </li>
         <li>
-            <span class="width80">仓库编码：</span><input type="text" maxlength="50" id="warehouseCode"  class="input" />
+            <span class="width80">仓库名称：</span><input type="text" maxlength="50" id="warehouseName" data-empty="* 必填" class="input verify" />
         </li>
         <li>
             <span class="width80">简称：</span><input type="text" maxlength="20" id="shortName" class="input" />
@@ -31,7 +31,7 @@
         </li>
         <li>
             <span class="width80">状态：</span>
-            <input type="checkbox" id="warehouseStatus" checked="checked" class="middle hand" />
+            <input type="checkbox" id="warehouseStatus" class="middle hand" />
             <label for="warehouseStatus" class="hand">启用</label>
         </li>
         <li>

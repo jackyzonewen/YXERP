@@ -71,7 +71,7 @@ define(function (require, exports, module) {
             });
         });
     }
-    //获取品牌列表
+    //获取仓库列表
     ObjectJS.getList = function () {
         var _self = this;
         $("#warehouse-items").nextAll().remove();
@@ -84,7 +84,7 @@ define(function (require, exports, module) {
                 //删除事件
                 $(".ico-del").click(function () {
                     if (confirm("仓库删除后不可恢复,确认删除吗？")) {
-                        Global.post("/Warehouse/DeleteBrand", { brandID: $(this).attr("data-id") }, function (data) {
+                        Global.post("/Warehouse/DeleteWareHouse", { id: $(this).attr("data-id") }, function (data) {
                             if (data.Status) {
                                 _self.getList();
                             } else {
@@ -125,11 +125,11 @@ define(function (require, exports, module) {
             });
         });
     }
-    //更改品牌状态
+    //更改仓库状态
     ObjectJS.editStatus = function (obj, id, status, callback) {
         var _self = this;
-        Global.post("/Products/UpdateBrandStatus", {
-            brandID: id,
+        Global.post("/Warehouse/UpdateWareHouseStatus", {
+            id: id,
             status: status ? 0 : 1
         }, function (data) {
             !!callback && callback(data.Status);
@@ -145,28 +145,32 @@ define(function (require, exports, module) {
     //获取详细信息
     ObjectJS.bindDetail = function (model) {
         var _self = this;
-        _self.wareID = model.BrandID;
-        $("#brandName").val(model.Name);
-        $("#anotherName").val(model.AnotherName);
-        $("#brandStyle").val(model.BrandStyle);
-        if (model.Status == 1) {
-            $("#brandStatus").prop("checked", "checked");
-        }
-        $("#description").val(model.Remark); 
-    }
+        _self.wareID = model.WareID;
+        $("#warehouseCode").text(model.WareCode);
 
+        $("#warehouseName").val(model.Name);
+
+        $("#shortName").val(model.ShortName);
+        if (model.Status == 1) {
+            $("#warehouseStatus").prop("checked", "checked");
+        }
+        $("#description").val(model.Description);
+
+        
+    }
+    //绑定详情事件
     ObjectJS.bindDetailEvent = function (model) {
         var _self = this;
-        BrandCity = City.createCity({
-            elementID: "brandCity",
+        CityObj = City.createCity({
+            elementID: "warehouseCity",
             cityCode: model.CityCode
         });
         
-        $("#btnSaveBrand").on("click", function () {
+        $("#btnSave").on("click", function () {
             if (!VerifyObject.isPass()) {
                 return;
             }
-            _self.savaBrand();
+            _self.savaEntity();
         });
 
         VerifyObject = Verify.createVerify({
@@ -175,7 +179,7 @@ define(function (require, exports, module) {
             verifyType: "data-type",
             regText: "data-text"
         });
-
+       
     }
 
     module.exports = ObjectJS;
