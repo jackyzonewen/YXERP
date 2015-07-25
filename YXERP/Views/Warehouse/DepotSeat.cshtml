@@ -1,5 +1,31 @@
 ﻿@{
-    ViewBag.Title = "DepotSeat";
+    ViewBag.Title = "货位设置";
 }
 
-<h2>DepotSeat</h2>
+<link href="/modules/css/warehouse/warehouse.css" rel="stylesheet" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/warehouse/depotseat"], function (obj) {
+            obj.initList('@Html.ToJSONString((List<CloudSalesEntity.C_WareHouse>)ViewBag.Wares)');
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">货位设置</span>
+    <a href="javascript:void(0);" class="ico-add left mTop4 mLeft20">添加货位</a>
+    <div class="right searth-module"> </div> 
+</div>
+<div class="content-body">
+    <table class="table-list">
+        <tr class="tr-header" id="warehouse-items">
+            <td class="l-len">货位编码</td>
+            <td>货位名称</td>
+            <td>仓库名称</td>
+            <td class="m-len">启用/禁用</td>
+            <td class="">描述</td>
+            <td class="s-len">编辑</td>
+            <td class="s-len">删除</td>
+        </tr>
+    </table>
+    <div id="pager" class="mTop20"></div>
+</div>

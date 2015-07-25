@@ -28,7 +28,6 @@ namespace CloudSalesEntity
 		#region Model
 		private int _autoid;
 		private string _depotcode;
-		private string _warecode;
 		private string _name="";
 		private int? _uplimit=0;
 		private int? _downlimit=0;
@@ -47,6 +46,7 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
+        public string DepotID { set; get; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -60,11 +60,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-        public string WareCode
-		{
-			set{ _warecode=value;}
-			get{return _warecode;}
-		}
+        public string WareName { set; get; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -146,6 +142,11 @@ namespace CloudSalesEntity
 			get{return _clientid;}
 		}
 		#endregion Model
+
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 	}
 }

@@ -60,6 +60,13 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult DepotSeat()
         {
+            ViewBag.Wares = new WarehouseBusiness().GetWareHouses(CurrentUser.ClientID);
+
+            return View();
+        }
+
+        public ActionResult WareArea()
+        {
             return View();
         }
 
@@ -189,7 +196,103 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        /// <summary>
+        /// 保存货位
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public JsonResult SaveDepotSeat(string obj)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_DepotSeat model = serializer.Deserialize<C_DepotSeat>(obj);
 
+            string id = string.Empty;
+            if (string.IsNullOrEmpty(model.DepotID))
+            {
+                id = new WarehouseBusiness().AddDepotSeat(model.DepotCode, model.WareID, model.Name, model.Status.Value, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else if (new WarehouseBusiness().UpdateDepotSeat(model.DepotID, model.Name, model.Status.Value, model.Description, CurrentUser.UserID, CurrentUser.ClientID))
+            {
+                id = model.WareID;
+            }
+
+
+            JsonDictionary.Add("ID", id);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 获取货位列表
+        /// </summary>
+        /// <param name="keyWords"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="totalCount"></param>
+        /// <returns></returns>
+        public JsonResult GetDepotSeats(string keyWords, int pageSize, int pageIndex, int totalCount)
+        {
+            int pageCount = 0;
+            List<C_DepotSeat> list = new WarehouseBusiness().GetDepotSeats(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", totalCount);
+            JsonDictionary.Add("PageCount", pageCount);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 获取货位详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult GetDepotByID(string id = "")
+        {
+            var model = new WarehouseBusiness().GetDepotByID(id);
+            JsonDictionary.Add("Item", model);
+
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 删除货位
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult DeleteDepotSeat(string id)
+        {
+            bool bl = new WarehouseBusiness().UpdateDepotSeatStatus(id, CloudSalesEnum.StatusEnum.Delete, CurrentUser.UserID, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 编辑货位状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public JsonResult UpdateDepotSeatStatus(string id, int status)
+        {
+            bool bl = new WarehouseBusiness().UpdateDepotSeatStatus(id, (CloudSalesEnum.StatusEnum)status, CurrentUser.UserID, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
     }
 }

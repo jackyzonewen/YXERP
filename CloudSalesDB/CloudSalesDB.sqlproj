@@ -115,4 +115,7 @@
   <ItemGroup>
     <None Include="Procedures\Client\Warehouse\P_GetWareHouses.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Warehouse\P_GetDepotSeats.sql" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,39 @@
+﻿
+<ul class="table-add">
+    <li>
+        <span class="column-name">货位名称：</span>
+        <span>
+            <input type="text" class="verify" data-empty="*必填" maxlength="10" id="name" />
+        </span>
+    </li>
+   <li>
+        <span class="column-name">货位编码：</span>
+        <span>
+            <input type="text" class="verify" data-empty="*必填" maxlength="10" id="depotcode" />
+        </span>
+    </li>
+    <li class="category-attrs">
+        <span class="column-name">仓库：</span>
+        <span>
+            <select id="wareid">
+                {%
+	            for(var i=0, j=$data.length; i < j; i++){
+	                var item = $data[i];
+                %}
+                     <option value="{%=item.WareID%}">{%=item.Name%}</option>
+                {% } %}
+            </select>
+        </span>
+    </li>
+     <li>
+        <span class="column-name">状态：</span>
+        <span>
+            <input type="checkbox" id="status" checked="checked" class="middle hand" />
+            <label for="status" class="hand">启用</label>
+        </span>
+    </li>
+    <li>
+        <span class="column-name">描述：</span>
+        <textarea id="description"></textarea>
+    </li>
+</ul>

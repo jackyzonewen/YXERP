@@ -41,10 +41,48 @@ namespace CloudSalesDAL
 
         }
 
+        public DataTable GetWareHouses(string clientID)
+        {
+            SqlParameter[] paras = { new SqlParameter("@ClientID", clientID) };
+            DataTable dt = GetDataTable("select WareID,Name from C_WareHouse where Status<>9 and ClientID=@ClientID", paras, CommandType.Text);
+            return dt;
+        }
+
         public DataTable GetWareByID(string wareid)
         {
             SqlParameter[] paras = { new SqlParameter("@WareID", wareid) };
             DataTable dt = GetDataTable("select * from C_WareHouse where WareID=@WareID", paras, CommandType.Text);
+            return dt;
+        }
+
+        public DataSet GetDepotSeats(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID, string wareid = "")
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@totalCount",SqlDbType.Int),
+                                       new SqlParameter("@pageCount",SqlDbType.Int),
+                                       new SqlParameter("@keyWords",keyWords),
+                                       new SqlParameter("@pageSize",pageSize),
+                                       new SqlParameter("@pageIndex",pageIndex),
+                                       new SqlParameter("@ClientID",clientID),
+                                       new SqlParameter("@WareID",wareid)
+                                       
+                                   };
+            paras[0].Value = totalCount;
+            paras[1].Value = pageCount;
+
+            paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Direction = ParameterDirection.InputOutput;
+            DataSet ds = GetDataSet("P_GetDepotSeats", paras, CommandType.StoredProcedure);
+            totalCount = Convert.ToInt32(paras[0].Value);
+            pageCount = Convert.ToInt32(paras[1].Value);
+            return ds;
+
+        }
+
+        public DataTable GetDepotByID(string depotid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@DepotID", depotid) };
+            DataTable dt = GetDataTable("select * from C_DepotSeat where DepotID=@DepotID", paras, CommandType.Text);
             return dt;
         }
 
@@ -92,8 +130,8 @@ namespace CloudSalesDAL
             SqlParameter[] paras = { 
                                     
                                      new SqlParameter("@DepotID" , id),
-                                     new SqlParameter("@DepotCode" , name),
-                                     new SqlParameter("@WareID" , id),
+                                     new SqlParameter("@DepotCode" , depotcode),
+                                     new SqlParameter("@WareID" , wareid),
                                      new SqlParameter("@Name" , name),
                                      new SqlParameter("@Status" , status),
                                      new SqlParameter("@Description" , description),

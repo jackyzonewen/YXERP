@@ -115,6 +115,26 @@ namespace CloudSalesBusiness
         }
 
         /// <summary>
+        /// 获取所有仓库（ID和Name）
+        /// </summary>
+        /// <param name="clientID"></param>
+        /// <returns></returns>
+        public List<C_WareHouse> GetWareHouses(string clientID)
+        {
+            var dal = new WarehouseDAL();
+            DataTable dt = dal.GetWareHouses(clientID);
+
+            List<C_WareHouse> list = new List<C_WareHouse>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                C_WareHouse model = new C_WareHouse();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
+        /// <summary>
         /// 根据ID获取仓库详情
         /// </summary>
         /// <param name="wareid"></param>
@@ -129,6 +149,49 @@ namespace CloudSalesBusiness
             {
                 model.FillData(dt.Rows[0]);
                 model.City = CommonCache.Citys.Where(c => c.CityCode == model.CityCode).FirstOrDefault();
+            }
+            return model;
+        }
+
+        /// <summary>
+        /// 获取仓库列表
+        /// </summary>
+        /// <param name="keyWords">关键词</param>
+        /// <param name="pageSize">每页条数</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="totalCount">总记录数</param>
+        /// <param name="pageCount">总页数</param>
+        /// <param name="clientID">客户端ID</param>
+        /// <returns></returns>
+        public List<C_DepotSeat> GetDepotSeats(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID, string wareid = "")
+        {
+            var dal = new WarehouseDAL();
+            DataSet ds = dal.GetDepotSeats(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID, wareid);
+
+            List<C_DepotSeat> list = new List<C_DepotSeat>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                C_DepotSeat model = new C_DepotSeat();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 获取货位详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public C_DepotSeat GetDepotByID(string depotid)
+        {
+            var dal = new WarehouseDAL();
+            DataTable dt = dal.GetDepotByID(depotid);
+
+            C_DepotSeat model = new C_DepotSeat();
+            if (dt.Rows.Count > 0)
+            {
+                model.FillData(dt.Rows[0]);
             }
             return model;
         }
@@ -228,6 +291,19 @@ namespace CloudSalesBusiness
         {
             var dal = new WarehouseDAL();
             return dal.UpdateDepotSeat(id, name, status, description);
+        }
+
+        /// <summary>
+        /// 编辑货位状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <param name="operateid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool UpdateDepotSeatStatus(string id, StatusEnum status, string operateid, string clientid)
+        {
+            return CommonBusiness.Update("C_DepotSeat", "Status", (int)status, " DepotID='" + id + "'");
         }
 
         #endregion

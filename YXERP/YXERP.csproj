@@ -436,6 +436,7 @@
     <Content Include="modules\scripts\products\attrplug.js" />
     <Content Include="modules\scripts\warehouse\warehouse.js" />
     <Content Include="modules\scripts\warehouse\warehousetype.js" />
+    <Content Include="modules\scripts\warehouse\depotseat.js" />
     <Content Include="modules\template\products\attr_list.html" />
     <Content Include="modules\template\products\brand_list.html" />
     <Content Include="modules\template\products\category_add.html" />
@@ -443,7 +444,9 @@
     <Content Include="modules\template\products\choose_category.html" />
     <Content Include="modules\template\products\product_list.html" />
     <Content Include="modules\template\products\category_attr_list.html" />
+    <Content Include="modules\template\warehouse\depotseat_add.html" />
     <Content Include="modules\template\warehouse\warehouse_list.html" />
+    <Content Include="modules\template\warehouse\depotseat_list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
@@ -552,6 +555,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Warehouse\WareHouseDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Warehouse\WareArea.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
