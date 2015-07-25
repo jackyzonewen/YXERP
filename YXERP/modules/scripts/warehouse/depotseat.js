@@ -65,7 +65,8 @@ define(function (require, exports, module) {
 
             //编辑填充数据
             if (EntityModel.DepotID) {
-                $("#depotcode").prop("readonly", true);
+                $("#depotcode").prop("disabled", true);
+                $("#wareid").prop("disabled", true);
                 $("#name").val(EntityModel.Name);
                 $("#depotcode").val(EntityModel.DepotCode);
                 $("#wareid").val(EntityModel.WareID);
