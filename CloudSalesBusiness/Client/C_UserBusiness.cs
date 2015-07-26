@@ -61,6 +61,7 @@ namespace CloudSalesBusiness
                             }
                         }
                     }
+                    list = list.OrderBy(m => m.Sort).ToList();
                     CommonCache.ClientMenus.Add(model.ClientID, list);
                     model.Menus = list;
                 }

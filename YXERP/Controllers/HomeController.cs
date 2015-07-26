@@ -28,6 +28,11 @@ namespace YXERP.Controllers
             }
             return View();
         }
+        public ActionResult Logout()
+        {
+            Session["ClientManager"] = null;
+            return Redirect("/Home/Login");
+        }
 
 
         /// <summary>
