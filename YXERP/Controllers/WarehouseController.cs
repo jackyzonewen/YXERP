@@ -58,10 +58,10 @@ namespace YXERP.Controllers
         /// 货位设置
         /// </summary>
         /// <returns></returns>
-        public ActionResult DepotSeat()
+        public ActionResult DepotSeat(string id = "-1")
         {
             ViewBag.Wares = new WarehouseBusiness().GetWareHouses(CurrentUser.ClientID);
-
+            ViewBag.WareID = id;
             return View();
         }
 
@@ -232,10 +232,10 @@ namespace YXERP.Controllers
         /// <param name="pageIndex"></param>
         /// <param name="totalCount"></param>
         /// <returns></returns>
-        public JsonResult GetDepotSeats(string keyWords, int pageSize, int pageIndex, int totalCount)
+        public JsonResult GetDepotSeats(string wareid, string keyWords, int pageSize, int pageIndex, int totalCount)
         {
             int pageCount = 0;
-            List<C_DepotSeat> list = new WarehouseBusiness().GetDepotSeats(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            List<C_DepotSeat> list = new WarehouseBusiness().GetDepotSeats(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID, wareid);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);
@@ -293,6 +293,7 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         #endregion
     }
 }

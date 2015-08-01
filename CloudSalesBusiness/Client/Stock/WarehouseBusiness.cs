@@ -154,7 +154,7 @@ namespace CloudSalesBusiness
         }
 
         /// <summary>
-        /// 获取仓库列表
+        /// 获取货位列表
         /// </summary>
         /// <param name="keyWords">关键词</param>
         /// <param name="pageSize">每页条数</param>

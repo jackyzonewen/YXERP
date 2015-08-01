@@ -37,9 +37,9 @@ AS
 		set @condition +=' and (d.Name like ''%'+@keyWords+'%'' or  DepotCode like ''%'+@keyWords+'%'') '
 	end
 
-	if(@WareID<>'')
+	if(@WareID<>'' and @WareID<>'-1')
 	begin
-		set @condition+=' and d.wareid='''+@WareID+''
+		set @condition+=' and d.wareid='''+@WareID+''''
 	end
 
 	declare @total int,@page int
