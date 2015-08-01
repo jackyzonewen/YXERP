@@ -122,6 +122,7 @@
     <Content Include="modules\images\default.png" />
     <Content Include="modules\images\header.jpg" />
     <Content Include="modules\images\ico-add.png" />
+    <Content Include="modules\images\ico-back.png" />
     <Content Include="modules\images\ico-del-deep.png" />
     <Content Include="modules\images\ico-del-light.png" />
     <Content Include="modules\images\ico-delete.png" />
@@ -135,8 +136,11 @@
     <Content Include="modules\images\ico-left-openL.png" />
     <Content Include="modules\images\ico-left-pull.png" />
     <Content Include="modules\images\ico-left-pullL.png" />
+    <Content Include="modules\images\ico-logout.png" />
+    <Content Include="modules\images\ico-name.png" />
     <Content Include="modules\images\ico-open.png" />
     <Content Include="modules\images\ico-pull.png" />
+    <Content Include="modules\images\ico-pwd.png" />
     <Content Include="modules\images\ico-tree-full.png" />
     <Content Include="modules\images\ico-tree-last.png" />
     <Content Include="modules\images\ico-tree-line.png" />
@@ -148,12 +152,12 @@
     <Content Include="modules\images\loginbarBackground2.gif" />
     <Content Include="modules\images\loginMainBackground.jpg" />
     <Content Include="modules\images\logo.gif" />
-    <Content Include="modules\images\logoLogin.jpg" />
+    <Content Include="modules\images\logo.png" />
     <Content Include="modules\images\sidebar.gif" />
     <Content Include="modules\images\submenu.gif" />
     <Content Include="modules\images\topLine.gif" />
     <Content Include="modules\images\topmenu.gif" />
-    <Content Include="modules\images\logo.png" />
+    <Content Include="modules\images\logo-1.png" />
     <Content Include="modules\plug\city.js" />
     <Content Include="modules\plug\datapager\images\next.png" />
     <Content Include="modules\plug\datapager\images\previous.png" />

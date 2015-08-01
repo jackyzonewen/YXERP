@@ -27,28 +27,37 @@ body{ background:url(../images/loginMainBackground.jpg) repeat-x left top;color:
 
 #container{margin:0 auto;width:1000px; height:500px;padding-top:130px;background:url(../images/loginBackground.jpg) no-repeat center top;}
 
-#container .main{margin:0 auto;width:608px;height:340px;background:url(../images/contentBackground.gif) no-repeat;}
-#container .main .logo{margin:0 auto;width:460px;height:70px;}
-#container .main .content{width:470px;float:left;margin-left:65px;display:inline;}
-#container .main .logoLanSan{ float:left;margin-top:69px;}
+#container .main{margin:0 auto;width:608px;height:340px; background-color:#D9EFFA;}
+#container .main .title{width:100%;height:70px; color:#033d91; text-align:center; font-size:32px;line-height:70px; border-bottom:solid 1px #fff;}
+#container .main .content{width:530px;float:left;margin-left:35px;display:inline;}
+
 /**/
-#container .main .login{ width:220px;float:right;margin-top:41px;}
-#container .main .login .loginbar{width:220px;height:30px; float:left;margin:4px 0px;}
-#container .loginbar input{ width:140px;height:28px;float:left;line-height:28px;border:solid 1px #ccc; border-radius:5px; color:#333; padding-left:5px;}
-#container .loginbar .userName{ width:40px; float:left; line-height:30px; font-weight:bold; z-index:100; }
+#container .main .login{ width:300px;float:left;margin-top:41px;}
+#container .main .login .loginbar{width:100%;height:45px; margin:10px 0px; }
+
+#container .loginbar input{ width:300px;height:40px; border:solid 1px #ccc; border-radius:0px; color:#333; background-color:#fff; text-indent:30px;}
+#iptUserName { background:url(../images/ico-name.png) no-repeat 5px 5px; }
+#iptPwd { background:url(../images/ico-pwd.png) no-repeat 5px 5px; }
+
+
+/**/
+#container #loginBtn{width:200px; float:right; padding-top:30px; height:50px;}
+
+
+#btnLogin { height:35px;line-height:35px; background-color:#BFD9EA ; color:#033d91; 
+       border:none; font-weight:bold; cursor:pointer; display:inline-block; border-radius:0; width:200px;}
+
+.logo {  height:150px; width:150px; float:right; margin:40px 20px 0 0 ;}
+
 
 /**/
 #container  #preservation{ width:180px; float:left; margin-top:10px;}
 #container  #preservation input{ float:left; margin-right:5px; display:inline; margin-left:9px;}
 #container  #preservation label{float:left; padding-top:4px; color:#5f7688;}
-/**/
-#container #loginBtn{width:180px; float:left; margin-top:12px;}
-
-#container #loginBtn a{ float:left; color:#5f7688; padding-top:3px; text-decoration:underline; padding-left:8px;}
-
 
 #container .copyright{margin:0 auto;width:608px;margin-top:35px;font-family:Arial;position:relative;}
 #container .copyright p{text-align:center; float:left;width:608px;color:#fff;}
 #container .copyright span{ position:absolute; width:608px; left:-1px; top:-1px; color:#033d91; }
+
 
 

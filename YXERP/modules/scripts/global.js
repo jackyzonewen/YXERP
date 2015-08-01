@@ -57,5 +57,27 @@
         return this;
     }
 
+    /*重写alert*/
+    window.alert = function (msg) {
+
+        $("#window_alert").remove();
+        var left = 0, top = 250, alertwidth = 0,
+            alert = $("<div />").attr("id", "window_alert").addClass("alert"),
+            wrap = $("<div/>").addClass("alertwrap"),
+            close = $("<div/>").text("×").addClass("close");
+        alert.appendTo($("body"));
+        wrap.append(close);
+        wrap.append(msg);
+        alert.append(wrap);
+
+        left = $(window).width() / 2 - (alert.width() / 2);
+        top = $(window).scrollTop() + top;
+        alert.show();
+        alert.offset({ left: left });
+
+        close.click(function () { alert.remove() });
+        setTimeout(function () { alert.remove(); }, 5000);
+    }
+
     module.exports = Global;
 });

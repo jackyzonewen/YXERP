@@ -5,8 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>后台管理系统</title>
-    <link href="/modules/css/login.css" rel="stylesheet" />
     <link href="/modules/css/layout.css" rel="stylesheet" />
+    <link href="/modules/css/login.css" rel="stylesheet" />
+    
     <script src="/Scripts/sea.js"></script>
     <script src="/Scripts/sea-config.js"></script>
     <script type="text/javascript">
@@ -18,22 +19,20 @@
 <body>
     <div id="container">
         <div class="main">
-        <div class="logo"><img src="/modules/images/logoLogin.jpg" width="460" height="70" /></div>
+        <div class="title">云销管理后台登录</div>
         <div class="content">
-            <div class="logoLanSan"><img src="/modules/images/logo.gif" width="243" height="55" /></div>
             <div class="login">
-            <div class="loginbar">
-                <div class="userName">账号：</div>
-                <input type="text" id="iptUserName" class="verify"  data-empty="*" maxlength="25"/>
+                <div class="loginbar">
+                    <input type="text" id="iptUserName" placeholder="请输入账号" class="verify"  data-empty="*" maxlength="25"/>
+                </div>
+                <div class="loginbar">
+                    <input type="password"  class="verify" placeholder="请输入密码"  data-empty="*" id="iptPwd"/>
+                </div>
+                <div id="loginBtn"> 
+                    <input class="btnLogin" id="btnLogin" type="button" value="登录"/>
+                </div>
             </div>
-            <div class="loginbar">
-                <div class="userName">密码：</div>
-                <input type="password"  class="verify"  data-empty="*" id="iptPwd"/>
-            </div>
-            <div id="loginBtn"> 
-                <input class="btn" id="btnLogin" type="button" value="登录"/>
-            </div>
-            </div>
+            <img class="logo" src="../../modules/images/logo.png" />
         </div>
         </div>
         <div class="copyright">

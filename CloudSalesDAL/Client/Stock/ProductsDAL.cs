@@ -97,10 +97,13 @@ namespace CloudSalesDAL
             return ds;
         }
 
-        public DataTable GetChildCategorysByID(string categoryid)
+        public DataTable GetChildCategorysByID(string categoryid, string clientid)
         {
-            SqlParameter[] paras = { new SqlParameter("@PID", categoryid) };
-            DataTable dt = GetDataTable("select * from C_Category where PID=@PID Order by CreateTime", paras, CommandType.Text);
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@PID", categoryid) ,
+                                       new SqlParameter("@ClientID", clientid) 
+                                   };
+            DataTable dt = GetDataTable("select * from C_Category where PID=@PID and ClientID=@ClientID Order by CreateTime", paras, CommandType.Text);
             return dt;
         }
 

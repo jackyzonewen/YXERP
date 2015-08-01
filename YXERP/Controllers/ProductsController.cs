@@ -70,7 +70,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult Category() 
         {
-            var list = new ProductsBusiness().GetChildCategorysByID("");
+            var list = new ProductsBusiness().GetChildCategorysByID("", CurrentUser.ClientID);
             ViewBag.Items = list;
             return View();
         }
@@ -92,7 +92,7 @@ namespace YXERP.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                var list = new ProductsBusiness().GetChildCategorysByID("");
+                var list = new ProductsBusiness().GetChildCategorysByID("", CurrentUser.ClientID);
                 ViewBag.Items = list;
                 return View("ChooseCategory");
             }
@@ -498,7 +498,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult GetChildCategorysByID(string categoryid)
         {
-            var list = new ProductsBusiness().GetChildCategorysByID(categoryid);
+            var list = new ProductsBusiness().GetChildCategorysByID(categoryid, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             return new JsonResult
             {

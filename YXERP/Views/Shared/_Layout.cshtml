@@ -8,6 +8,7 @@
 </head>
 <body>
     @{
+        CloudSalesEntity.C_Users CurrentUser = (CloudSalesEntity.C_Users)Session["ClientManager"];
         string controller =  Url.RequestContext.RouteData.Values["controller"].ToString().ToUpper();
         string action = Url.RequestContext.RouteData.Values["action"].ToString().ToUpper();
     }
@@ -21,18 +22,22 @@
                         <a class="@Html.GetTopMenuActive(HttpContext.Current,model.MenuCode,"select")" href="/Base/TransCenter/@(model.MenuCode)"> @(model.Name)</a> 
                     </li>
                 }
-                <li class="left topMenu">
-                    <a  href="/Home/Logout">退出</a> 
-                </li>
             </ul>
             
+        </div>
+        <div class="help right">
+            <ul>
+                <li class="left">
+                    <a class="ico-logout" href="/Home/Logout">退出</a> 
+                </li>
+            </ul>
         </div>
     </header>
     <div class="topLine"></div>
     <div class="main-body">
         <nav>
             <div class="admin-name">
-                <span class="bolder">Admin</span> 欢迎您！
+                <span class="bolder long">@CurrentUser.LoginName</span> 欢迎您！
             </div>
             <div class="top-nav">
                 <img alt="首页" src="/modules/images/ico-home.png"/>

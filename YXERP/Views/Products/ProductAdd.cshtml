@@ -17,10 +17,9 @@
 }
 
 <div class="header-box">
-    <span class="header-title left">添加新品 >> @(model.CategoryName)
-         <a href="/Products/ProductAdd">返回更换分类</a>
-        <input type="hidden" id="categoryID" value="@(model.CategoryID)" />
-    </span>
+    <span class="header-title left">添加新品 >> @(model.CategoryName)</span>
+    <a class="ico-back left mLeft5" href="/Products/ProductAdd"></a>
+    <input type="hidden" id="categoryID" value="@(model.CategoryID)" />
 </div>
 <div class="content-body">
     <ul class="table-add product-add">

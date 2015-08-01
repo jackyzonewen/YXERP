@@ -218,10 +218,10 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="categoryid">分类ID</param>
         /// <returns></returns>
-        public List<C_Category> GetChildCategorysByID(string categoryid)
+        public List<C_Category> GetChildCategorysByID(string categoryid, string clientid)
         {
             var dal = new ProductsDAL();
-            DataTable dt = dal.GetChildCategorysByID(categoryid);
+            DataTable dt = dal.GetChildCategorysByID(categoryid, clientid);
 
             List<C_Category> list = new List<C_Category>();
 
