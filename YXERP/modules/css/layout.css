@@ -196,6 +196,8 @@ nav .action .select{background:url(../images/submenu.gif) no-repeat left top;fon
 .ico-gonext { background:url(../images/ico-gonext.png) no-repeat; width:32px; height:32px; cursor:pointer; display:inline-block; }
 .header-title { height:20px; line-height:20px; padding-left:10px; margin-top:6px; border-left:solid 5px #7faaca; font-weight:bold; color:#7faaca; }
 
+/*搜索样式*/
+.search-box { margin:20px; }
 
 .content-body{ margin:0 20px; padding-bottom:50px; overflow:auto; }
 

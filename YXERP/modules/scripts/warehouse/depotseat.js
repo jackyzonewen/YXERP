@@ -8,6 +8,7 @@ define(function (require, exports, module) {
     require("switch");
     var Params = {
         keyWords: "",
+        wareid: "-1",
         pageSize: 20,
         pageIndex: 1,
         totalCount: 0
@@ -23,6 +24,7 @@ define(function (require, exports, module) {
     ObjectJS.initList = function (wares, wareid) {
         var _self = this;
         WareCache = JSON.parse(wares.replace(/&quot;/g, '"'));
+        Params.wareid = wareid;
         EntityModel.WareID = wareid;
         _self.getList();
         _self.bindListEvent();
@@ -99,9 +101,18 @@ define(function (require, exports, module) {
         require.async("search", function () {
             $(".searth-module").searchKeys(function (keyWords) {
                 Params.keyWords = keyWords;
+                Params.pageIndex = 1;
                 _self.getList();
             });
         });
+
+        $("#sltWareID").val(Params.wareid);
+
+        $("#sltWareID").change(function () {
+            Params.wareid = $("#sltWareID").val();
+            _self.getList();
+        })
+
         $(".ico-add").on("click", function () {
             EntityModel.DepotID = "";
             _self.showCreate(WareCache);

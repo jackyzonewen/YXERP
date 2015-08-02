@@ -1,12 +1,13 @@
 ﻿@{
     ViewBag.Title = "货位设置";
+    var wares = (List<CloudSalesEntity.C_WareHouse>)ViewBag.Wares;
 }
 
 <link href="/modules/css/warehouse/warehouse.css" rel="stylesheet" />
 @section scripts{
     <script type="text/javascript">
         seajs.use(["scripts/warehouse/depotseat"], function (obj) {
-            obj.initList('@Html.ToJSONString((List<CloudSalesEntity.C_WareHouse>)ViewBag.Wares)');
+            obj.initList('@Html.ToJSONString(wares)', '@ViewBag.WareID');
         });
     </script>
 }
@@ -15,6 +16,17 @@
     <a href="javascript:void(0);" class="ico-add left mTop4 mLeft20">添加货位</a>
     <div class="right searth-module"> </div> 
 </div>
+<ul class="search-box">
+    <li>
+        仓库：<select id="sltWareID">
+                    <option selected="selected" value="-1">全部</option> 
+                    @foreach (CloudSalesEntity.C_WareHouse model in wares)
+                    {
+                        <option value="@(model.WareID)">@(model.Name)</option> 
+                    }
+              </select>
+    </li>
+</ul>
 <div class="content-body">
     <table class="table-list">
         <tr class="tr-header" id="warehouse-items">
