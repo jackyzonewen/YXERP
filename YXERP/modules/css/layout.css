@@ -47,7 +47,7 @@ select option{ padding:2px; }
           display:inline-block; cursor:pointer; color:#666; padding-left:25px; }
 
 .ico-logout{ background:url(../images/ico-logout.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
-          display:inline-block; cursor:pointer; color:#666; padding-left:25px; }
+          display:inline-block; cursor:pointer; color:#666; padding-left:25px;}
 
 .ico-del:hover{ background:url(../images/ico-del-deep.png) no-repeat;}
 
