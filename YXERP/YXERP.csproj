@@ -448,6 +448,7 @@
     <Content Include="modules\template\products\choose_category.html" />
     <Content Include="modules\template\products\product_list.html" />
     <Content Include="modules\template\products\category_attr_list.html" />
+    <Content Include="modules\template\products\common_attr_list.html" />
     <Content Include="modules\template\warehouse\depotseat_add.html" />
     <Content Include="modules\template\warehouse\warehouse_list.html" />
     <Content Include="modules\template\warehouse\depotseat_list.html" />

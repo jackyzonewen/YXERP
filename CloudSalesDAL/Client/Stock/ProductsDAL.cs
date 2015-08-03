@@ -295,6 +295,17 @@ namespace CloudSalesDAL
             return id;
         }
 
+        public bool AddCategoryAttr(string categoryid, string attrid, int type, string operateid)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@CategoryID",categoryid),
+                                     new SqlParameter("@AttrID",attrid),
+                                     new SqlParameter("@Type" , type),
+                                     new SqlParameter("@CreateUserID" , operateid)
+                                   };
+            return ExecuteNonQuery("P_AddCategoryAttr", paras, CommandType.StoredProcedure) > 0;
+        }
+
         #endregion
 
         #region 编辑

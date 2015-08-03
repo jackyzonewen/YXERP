@@ -17,7 +17,7 @@
 
 
 /*分类属性*/
-.category-attr-layer { width:230px; float:left; }
+.category-attr-layer { width:230px; float:left; margin-left:10px; }
 
 .category-attr-header { background-color:#e7f5fd; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
 .category-attr-header span { width:100px; }
@@ -34,6 +34,25 @@
 .category-attr-list li span{ float:left;}
 .category-attr-list li  .category-name{ width:155px;}
 
+/*通用属性*/
+.common-attr-layer { width:230px; float:left;}
+
+.common-attr-header { background-color:#e7f5fd; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
+.common-attr-header span { width:100px; }
+
+.common-attr-list { width:230px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; margin-bottom:5px; }
+.common-attr-list li { height:30px; width:210px; line-height:30px; padding:0 10px; cursor:pointer; }
+.common-attr-list li .ico-edit,.category-attr-list li .ico-del{ display:none;}
+
+.common-attr-list li:hover { background-color:#c5dceb; }
+
+.common-attr-list .header { background-color:#c5dceb; }
+.common-attr-list .hover { background-color:#c5dceb; }
+.common-attr-list li span{ float:left;}
+.common-attr-list li  .category-name{ width:155px;}
+
+.common-attr-list a {text-decoration:underline;}
+.common-attr-list a:hover {color:red; }
 
 .ico-edit, .ico-add, .ico-del{ margin-top:3px; }
 

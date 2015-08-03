@@ -35,21 +35,21 @@ Update C_Category set CategoryName=@CategoryName,Status=@Status,AttrList=@AttrLi
 where CategoryID=@CategoryID
 set @Err+=@@error
 
-if(@Layers=3)
-begin
-	--删除原本通用属性
-	update a set Status=9,UpdateTime=getdate() from C_CategoryAttr a join C_ProductAttr p on a.AttrID=p.AttrID and p.CategoryID='' where a.CategoryID=@CategoryID and a.Status<>9
+--if(@Layers=3)
+--begin
+--	--删除原本通用属性
+--	update a set Status=9,UpdateTime=getdate() from C_CategoryAttr a join C_ProductAttr p on a.AttrID=p.AttrID and p.CategoryID='' where a.CategoryID=@CategoryID and a.Status<>9
 
-	set @AttrList=replace(@AttrList,',',''',''')
-	update C_CategoryAttr set Status=9 where CategoryID=@CategoryID
-	exec( 'insert into C_CategoryAttr(CategoryID,AttrID,Status,Type,CreateUserID) select '''+@CategoryID+''',AttrID,1,1,'''+@UserID+''' from C_ProductAttr where AttrID in('''+@AttrList+''')')
-	set @Err+=@@error
+--	set @AttrList=replace(@AttrList,',',''',''')
+--	update C_CategoryAttr set Status=9 where CategoryID=@CategoryID
+--	exec( 'insert into C_CategoryAttr(CategoryID,AttrID,Status,Type,CreateUserID) select '''+@CategoryID+''',AttrID,1,1,'''+@UserID+''' from C_ProductAttr where AttrID in('''+@AttrList+''')')
+--	set @Err+=@@error
 
-	set @SaleAttr=replace(@SaleAttr,',',''',''')
-	exec( 'insert into C_CategoryAttr(CategoryID,AttrID,Status,Type,CreateUserID) select '''+@CategoryID+''',AttrID,1,2,'''+@UserID+''' from C_ProductAttr where AttrID in('''+@SaleAttr+''')')
-	set @Err+=@@error
+--	set @SaleAttr=replace(@SaleAttr,',',''',''')
+--	exec( 'insert into C_CategoryAttr(CategoryID,AttrID,Status,Type,CreateUserID) select '''+@CategoryID+''',AttrID,1,2,'''+@UserID+''' from C_ProductAttr where AttrID in('''+@SaleAttr+''')')
+--	set @Err+=@@error
 
-end
+--end
 
 if(@Err>0)
 begin

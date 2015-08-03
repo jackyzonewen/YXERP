@@ -118,4 +118,7 @@
   <ItemGroup>
     <None Include="Procedures\Client\Warehouse\P_GetDepotSeats.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Products\P_AddCategoryAttr.sql" />
+  </ItemGroup>
 </Project>

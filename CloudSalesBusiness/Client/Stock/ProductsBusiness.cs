@@ -531,6 +531,20 @@ namespace CloudSalesBusiness
                                         valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, productImg, shapeCode, description, operateid, clientid);
             }
         }
+        /// <summary>
+        /// 添加分类通用属性
+        /// </summary>
+        /// <param name="categoryid"></param>
+        /// <param name="attrid"></param>
+        /// <param name="type"></param>
+        /// <param name="operateIP"></param>
+        /// <param name="operateID"></param>
+        /// <returns></returns>
+        public bool AddCategoryAttr(string categoryid, string attrid, int type, string operateIP, string operateID)
+        {
+            var dal = new ProductsDAL();
+            return dal.AddCategoryAttr(categoryid, attrid, type, operateID);
+        }
 
         #endregion
 

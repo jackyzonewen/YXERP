@@ -415,6 +415,24 @@ namespace YXERP.Controllers
         }
 
         /// <summary>
+        /// 添加分类通用属性
+        /// </summary>
+        /// <param name="categoryid"></param>
+        /// <param name="attrid"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public JsonResult AddCategoryAttr(string categoryid, string attrid, int type)
+        {
+            bool bl = new ProductsBusiness().AddCategoryAttr(categoryid, attrid, type, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        } 
+
+        /// <summary>
         /// 删除属性
         /// </summary>
         /// <param name="attrid"></param>

@@ -1,0 +1,15 @@
+﻿<div class="common-attr-layer">
+    <div class="common-attr-header"><span class="long">快捷添加属性</span> </div>
+    <ul class="common-attr-list">
+        {%
+	        for(var i=0, j=$data.length; i < j; i++){
+	        var item = $data[i];
+        %}
+                <li class="attritem" data-id="{%=item.AttrID%}" data-category="{%=item.CategoryID%}" >
+                    <span data-id="{%=item.AttrID%}" class="category-attr-name long" title="{%=item.Description%}">{%=item.AttrName%}</span>
+                    <a data-id="{%=item.AttrID%}" data-name="{%=item.AttrName%}" data-type="2" class="right addcommon mLeft10">加入规格</a>
+                    <a data-id="{%=item.AttrID%}" data-name="{%=item.AttrName%}" data-type="1" class="right addcommon ">加入参数</a>
+                </li>
+        {% }%}
+    </ul>
+</div>
