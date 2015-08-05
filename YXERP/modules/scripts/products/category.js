@@ -49,7 +49,7 @@ define(function (require, exports, module) {
         });
 
         $(document).click(function (e) {
-            if (!$(e.target).hasClass("attritem") && !$(e.target).hasClass("attr-value-box") && !$(e.target).parents().hasClass("attr-value-box")) {
+            if (!$(e.target).hasClass("attritem") && !$(e.target).parents().hasClass("attritem") && !$(e.target).hasClass("attr-value-box") && !$(e.target).parents().hasClass("attr-value-box")) {
                 _self.hideValues();
             }
         });
