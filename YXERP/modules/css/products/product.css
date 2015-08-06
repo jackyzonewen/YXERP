@@ -11,5 +11,7 @@
 .product-img { position:absolute; top:80px; right:50px; width:150px; }
 .product-img img{ width:150px;}
 
+.salesattr .salesattr-values span{ min-width:80px;}
+
 
 

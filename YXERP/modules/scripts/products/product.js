@@ -105,7 +105,11 @@ define(function (require, exports, module) {
             product: JSON.stringify(Product)
         }, function (data) {
             if (data.ID.length > 0) {
-                location.href = "/Products/ProductList";
+                if (!_self.ProductID && confirm("产品添加成功，是否继续设置子产品？")) {
+                    location.href = "/Products/ProductDetails/" + data.ID;
+                } else {
+                    location.href = "/Products/ProductList";
+                }
             }
         })
     }

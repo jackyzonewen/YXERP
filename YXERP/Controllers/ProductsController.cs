@@ -116,6 +116,18 @@ namespace YXERP.Controllers
             ViewBag.UnitList = new ProductsBusiness().GetClientUnits(CurrentUser.ClientID);
             return View();
         }
+        /// <summary>
+        /// 子产品列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ProductDetails(string id)
+        {
+            var model = new ProductsBusiness().GetProductByID(id);
+            model.Category = new ProductsBusiness().GetCategoryDetailByID(model.CategoryID);
+            ViewBag.Model = model;
+            return View();
+        }
 
         /// <summary>
         /// 产品列表
