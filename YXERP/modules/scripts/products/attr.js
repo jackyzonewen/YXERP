@@ -2,8 +2,7 @@
     var Global = require("global"),
         Verify = require("verify"), VerifyObject,
         doT = require("dot"),
-        AttrPlug = require("scripts/products/attrplug"),
-        Easydialog = require("easydialog");
+        AttrPlug = require("scripts/products/attrplug");
     require("pager");
     var Value = {
         AttrID: "",

@@ -20,7 +20,8 @@ AS
 
 select * from C_Category where CategoryID=@CategoryID
 
-select p.*,c.Type into #AttrTable from C_ProductAttr p join C_CategoryAttr c on p.AttrID=c.AttrID where c.Status=1 and c.CategoryID= @CategoryID and p.Status=1
+select p.*,c.Type into #AttrTable from C_ProductAttr p join C_CategoryAttr c on p.AttrID=c.AttrID 
+where c.Status=1 and c.CategoryID= @CategoryID and p.Status=1 order by p.AutoID
 --属性
 select * from #AttrTable
 --属性值

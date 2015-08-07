@@ -117,7 +117,7 @@ namespace YXERP.Controllers
             return View();
         }
         /// <summary>
-        /// 子产品列表
+        /// 设置子产品
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

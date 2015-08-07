@@ -14,4 +14,10 @@
 .salesattr .salesattr-values span{ min-width:80px;}
 
 
+/*添加子产品*/
+.product-details-add { width:500px; }
+.product-details-add li { height:auto; }
+.product-details-add .column-name{ width:85px; float:left; }
+
+
 
