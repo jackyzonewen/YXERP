@@ -28,10 +28,9 @@ namespace CloudSalesEntity
 		#region Model
 		private int _autoid;
 		private string _productid;
-		private string _detailid;
-		private string _saleattr=",";
-		private string _attrvalue=",";
-		private string _saleattrvalue=",";
+		private string _saleattr="";
+		private string _attrvalue="";
+		private string _saleattrvalue="";
 		private long? _salecount=0;
 		private long? _stockin=0;
 		private long? _logicout=0;
@@ -56,11 +55,11 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
-        public string DetailID
-        {
-            set { _detailid = value; }
-            get { return _detailid; }
-        }
+        public string ProductDetailID { set; get; }
+
+
+        public string DetailsCode { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -93,6 +92,10 @@ namespace CloudSalesEntity
 			set{ _saleattrvalue=value;}
 			get{return _saleattrvalue;}
 		}
+
+        public string UnitID { get; set; }
+
+
 		/// <summary>
 		/// 
 		/// </summary>
