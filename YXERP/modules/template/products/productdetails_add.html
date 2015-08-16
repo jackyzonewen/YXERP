@@ -1,27 +1,31 @@
 ﻿
 <ul class="table-add product-details-add">
     <li>
-        <span class="column-name">产品编码：</span><input type="text" placeholder="保存后不能变更!" maxlength="50" id="productCode" data-empty="* 必填" class="input verify" />
+        <span class="column-name">子产品编码：</span><input type="text" placeholder="保存后不能变更!" maxlength="50" id="productCode" data-empty="* 必填" class="input verify" />
     </li>
-    <li>
+<!--    <li>
         <span class="column-name">条形码：</span><input type="text" maxlength="50" id="shapeCode" class="input" />
-    </li>
+    </li>-->
     {%
 	    for(var i=0, j=$data.length; i < j; i++){
 	    var item = $data[i];
     %}
         <li data-id="{%=item.AttrID%}" class="productattr">
                 <span class="column-name">{%=item.AttrName%}：</span>
-                <select>
+                <select id="{%=item.AttrID%}">
                     {%
 	                    for(var ii=0, jj=item.AttrValues.length; ii < jj; ii++){
 	                    var value = item.AttrValues[ii];
                     %}
-                        <option value="@value.ValueID">{%=value.ValueName%}</option> 
+                        <option value="{%=value.ValueID%}">{%=value.ValueName%}</option> 
                     {% } %}
                 </select>
         </li>
     {% } %}
+    <li>
+        <span class="column-name">单位：</span>
+        <select id="unitid"></select>
+    </li>
     <li>
         <span class="column-name">价格：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="price" class="input verify width80" />
     </li>

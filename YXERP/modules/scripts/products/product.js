@@ -111,7 +111,7 @@ define(function (require, exports, module) {
                     location.href = "/Products/ProductList";
                 }
             }
-        })
+        });
     }
     //列表页初始化
     Product.initList = function () {

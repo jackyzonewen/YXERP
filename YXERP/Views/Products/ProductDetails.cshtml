@@ -8,7 +8,7 @@
 @section scripts{
     <script type="text/javascript">
         seajs.use(["scripts/products/productdetails"], function (obj) {
-            obj.init('@Html.ToJSONString(model.Category)');
+            obj.init('@Html.ToJSONString(model)');
         });
     </script>
 }
@@ -23,10 +23,10 @@
         <tr class="tr-header" id="header-items">
             <td>编码</td>
             <td class="">规格</td>
+            <td class="s-len">单位</td>
             <td class="m-len">价格</td>
             <td class="m-len">启用/禁用</td>
             <td class="s-len">编辑</td>
-            <td class="s-len">删除</td>
         </tr>
     </table>
 </div>

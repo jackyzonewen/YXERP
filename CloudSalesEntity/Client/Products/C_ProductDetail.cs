@@ -93,8 +93,11 @@ namespace CloudSalesEntity
 			get{return _saleattrvalue;}
 		}
 
+        public string SaleAttrValueString { get; set; }
+
         public string UnitID { get; set; }
 
+        public C_ProductUnit Unit { get; set; }
 
 		/// <summary>
 		/// 
@@ -201,6 +204,13 @@ namespace CloudSalesEntity
 			get{return _clientid;}
 		}
 		#endregion Model
+
+
+        public string ShapeCode { get; set; }
+
+        public decimal Price { get; set; }
+
+        public decimal Weight { get; set; }
 
         /// <summary>
         /// 填充数据

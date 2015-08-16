@@ -45,18 +45,6 @@ end
 insert into C_Category(CategoryID,CategoryCode,CategoryName,PID,PIDList,Layers,SaleAttr,AttrList,Status,Description,CreateUserID,ClientID)
 				values(@CategoryID,@CategoryCode,@CategoryName,@PID,@PIDList,@Layers,@SaleAttr,@AttrList,@Status,@Description,@CreateUserID,@ClientID)
 set @Err+=@@error
---if(@Layers=3 and @AttrList <> '')
---begin
---	set @AttrList=replace(@AttrList,',',''',''')
---	exec( 'insert into C_CategoryAttr(CategoryID,AttrID,Status,Type,CreateUserID) select '''+@CategoryID+''',AttrID,1,1,'''+@CreateUserID+''' from C_ProductAttr where AttrID in('''+@AttrList+''')')
---	set @Err+=@@error
---end
---if(@Layers=3 and @SaleAttr <> '')
---begin
---	set @SaleAttr=replace(@SaleAttr,',',''',''')
---	exec( 'insert into C_CategoryAttr(CategoryID,AttrID,Status,Type,CreateUserID) select '''+@CategoryID+''',AttrID,1,2,'''+@CreateUserID+''' from C_ProductAttr where AttrID in('''+@SaleAttr+''')')
---	set @Err+=@@error
---end
 
 if(@Err>0)
 begin

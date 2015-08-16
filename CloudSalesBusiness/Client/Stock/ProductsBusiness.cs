@@ -340,11 +340,37 @@ namespace CloudSalesBusiness
             if (ds.Tables.Contains("Product") && ds.Tables["Product"].Rows.Count > 0)
             {
                 model.FillData(ds.Tables["Product"].Rows[0]);
+                model.Category = GetCategoryDetailByID(model.CategoryID);
+                var unit = new C_ProductUnit();
+                unit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
+                model.BigUnit = unit;
+
+                unit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
+                model.SmallUnit = unit;
                 List<C_ProductDetail> list = new List<C_ProductDetail>();
                 foreach (DataRow item in ds.Tables["Details"].Rows)
                 {
+                    //子产品
                     C_ProductDetail detail = new C_ProductDetail();
                     detail.FillData(item);
+                    unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
+                    detail.Unit = unit;
+                    Dictionary<string, string> attrs = new Dictionary<string, string>();
+                    foreach (string attr in detail.SaleAttrValue.Split(','))
+                    {
+                        attrs.Add(attr.Split(':')[0], attr.Split(':')[1]);
+                    }
+                    detail.SaleAttrValueString = "";
+                    foreach (var attr in model.Category.SaleAttrs)
+                    {
+                        detail.SaleAttrValueString += attr.AttrName + ":" + attr.AttrValues.Where(a => a.ValueID.ToLower() == attrs[attr.AttrID].ToLower()).FirstOrDefault().ValueName + ",";
+                    }
+
+                    if (detail.SaleAttrValueString.Length > 0)
+                    {
+                        detail.SaleAttrValueString = detail.SaleAttrValueString.Substring(0, detail.SaleAttrValueString.Length - 1);
+                    }
+
                     list.Add(detail);
                 }
                 model.ProductDetails = list;
@@ -544,6 +570,50 @@ namespace CloudSalesBusiness
         {
             var dal = new ProductsDAL();
             return dal.AddCategoryAttr(categoryid, attrid, type, operateID);
+        }
+
+        /// <summary>
+        /// 添加子产品
+        /// </summary>
+        /// <param name="productid">产品ID</param>
+        /// <param name="productCode">产品Code</param>
+        /// <param name="shapeCode">条形码</param>
+        /// <param name="attrlist">规格</param>
+        /// <param name="valuelist">值</param>
+        /// <param name="attrvaluelist"></param>
+        /// <param name="price">价格</param>
+        /// <param name="weight">重量</param>
+        /// <param name="unitid">单位</param>
+        /// <param name="productImg">图片</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public string AddProductDetails(string productid, string productCode, string shapeCode, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string unitid, string productImg, string description, string operateid, string clientid)
+        {
+            lock (SingleLock)
+            {
+                if (!string.IsNullOrEmpty(productImg))
+                {
+                    if (productImg.IndexOf("?") > 0)
+                    {
+                        productImg = productImg.Substring(0, productImg.IndexOf("?"));
+                    }
+                    FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath(productImg));
+                    productImg = FILEPATH + file.Name;
+                    if (file.Exists)
+                    {
+                        file.MoveTo(HttpContext.Current.Server.MapPath(productImg));
+                    }
+                }
+                else
+                {
+                    productImg = FILEPATH + DateTime.Now.ToString("yyyyMMddHHmmssms") + new Random().Next(1000, 9999).ToString() + ".png";
+                }
+
+                var dal = new ProductsDAL();
+                return dal.AddProductDetails(productid, productCode, shapeCode, attrlist, valuelist, attrvaluelist, price, weight, unitid, productImg, description, operateid, clientid);
+            }
         }
 
         #endregion
@@ -767,6 +837,45 @@ namespace CloudSalesBusiness
             var dal = new ProductsDAL();
             return dal.UpdateProduct(productid, productCode, productName, generalName, iscombineproduct, brandid, bigunitid, smallunitid, bigSmallMultiple, status, categoryid,attrlist,
                                     valuelist, attrvaluelist, commonprice, price, weight, isnew, isRecommend, effectiveDays, discountValue, shapeCode, description, operateid, clientid);
+        }
+
+        /// <summary>
+        /// 编辑子产品状态
+        /// </summary>
+        /// <param name="productdetailid"></param>
+        /// <param name="status"></param>
+        /// <param name="operateIP"></param>
+        /// <param name="operateID"></param>
+        /// <returns></returns>
+        public bool UpdateProductDetailsStatus(string productdetailid, StatusEnum status, string operateIP, string operateID)
+        {
+            return CommonBusiness.Update("C_ProductDetail", "Status", (int)status, " ProductDetailID='" + productdetailid + "'");
+        }
+
+
+        /// <summary>
+        /// 添加子产品
+        /// </summary>
+        /// <param name="detailid">子产品ID</param>
+        /// <param name="productid">产品ID</param>
+        /// <param name="productCode">产品Code</param>
+        /// <param name="shapeCode">条形码</param>
+        /// <param name="attrlist">规格</param>
+        /// <param name="valuelist">值</param>
+        /// <param name="attrvaluelist"></param>
+        /// <param name="price">价格</param>
+        /// <param name="weight">重量</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, string unitid, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description, string operateid, string clientid)
+        {
+            lock (SingleLock)
+            {
+                var dal = new ProductsDAL();
+                return dal.UpdateProductDetails(detailid, productid, productCode, shapeCode, unitid, attrlist, valuelist, attrvaluelist, price, weight, description);
+            }
         }
 
         #endregion

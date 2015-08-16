@@ -52,7 +52,7 @@ set @ProductID=NEWID()
 
 select @PIDList=PIDList,@SaleAttr=SaleAttr from C_Category where CategoryID=@CategoryID
 
-IF(NOT EXISTS(SELECT 1 FROM [C_Products] WHERE [ProductCode]=@ProductCode))--产品编号唯一，编号不存在时才能执行插入
+IF(NOT EXISTS(SELECT 1 FROM [C_Products] WHERE [ProductCode]=@ProductCode and ClientID=@ClientID))--产品编号唯一，编号不存在时才能执行插入
 BEGIN
 INSERT INTO [C_Products]([ProductID],[ProductCode],[ProductName],[GeneralName],[IsCombineProduct],[BrandID],[BigUnitID],[SmallUnitID],[BigSmallMultiple] ,
 						[CategoryID],[CategoryIDList],[SaleAttr],[AttrList],[ValueList],[AttrValueList],[CommonPrice],[Price],[PV],[TaxRate],[Status],

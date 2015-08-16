@@ -132,6 +132,8 @@ namespace CloudSalesEntity
 			set{ _bigunitid=value;}
 			get{return _bigunitid;}
 		}
+        public C_ProductUnit BigUnit { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -140,6 +142,9 @@ namespace CloudSalesEntity
 			set{ _smallunitid=value;}
 			get{return _smallunitid;}
 		}
+
+        public C_ProductUnit SmallUnit { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>

@@ -110,7 +110,6 @@ namespace YXERP.Controllers
         public ActionResult ProductDetail(string id)
         {
             var model = new ProductsBusiness().GetProductByID(id);
-            model.Category = new ProductsBusiness().GetCategoryDetailByID(model.CategoryID);
             ViewBag.Model = model;
             ViewBag.BrandList = new ProductsBusiness().GetBrandList(CurrentUser.ClientID);
             ViewBag.UnitList = new ProductsBusiness().GetClientUnits(CurrentUser.ClientID);
@@ -124,7 +123,6 @@ namespace YXERP.Controllers
         public ActionResult ProductDetails(string id)
         {
             var model = new ProductsBusiness().GetProductByID(id);
-            model.Category = new ProductsBusiness().GetCategoryDetailByID(model.CategoryID);
             ViewBag.Model = model;
             return View();
         }
@@ -687,6 +685,70 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        /// <summary>
+        /// 保存子产品
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public JsonResult SavaProductDetail(string product)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_ProductDetail model = serializer.Deserialize<C_ProductDetail>(product);
+
+            if (!string.IsNullOrEmpty(model.SaleAttr))
+            {
+                model.SaleAttr = model.SaleAttr.Substring(0, model.SaleAttr.Length - 1);
+            }
+            if (!string.IsNullOrEmpty(model.AttrValue))
+            {
+                model.AttrValue = model.AttrValue.Substring(0, model.AttrValue.Length - 1);
+            }
+            if (!string.IsNullOrEmpty(model.SaleAttrValue))
+            {
+                model.SaleAttrValue = model.SaleAttrValue.Substring(0, model.SaleAttrValue.Length - 1);
+            }
+
+            string id = "";
+            if (string.IsNullOrEmpty(model.ProductDetailID))
+            {
+                id = new ProductsBusiness().AddProductDetails(model.ProductID, model.DetailsCode, model.ShapeCode, model.SaleAttr, model.AttrValue, model.SaleAttrValue,
+                                                              model.Price, model.Weight, model.UnitID, model.ImgS, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else
+            {
+                bool bl = new ProductsBusiness().UpdateProductDetails(model.ProductDetailID, model.ProductID, model.DetailsCode, model.ShapeCode, model.UnitID, model.SaleAttr, model.AttrValue, model.SaleAttrValue,
+                                                              model.Price, model.Weight, model.Description, CurrentUser.UserID, CurrentUser.ClientID); 
+                if (bl)
+                {
+                    id = model.ProductDetailID;
+                }
+            }
+            JsonDictionary.Add("ID", id);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 编辑子产品状态
+        /// </summary>
+        /// <param name="productdetailid"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public JsonResult UpdateProductDetailsStatus(string productdetailid, int status)
+        {
+            bool bl = new ProductsBusiness().UpdateProductDetailsStatus(productdetailid, (StatusEnum)status, OperateIP, CurrentUser.UserID);
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         #endregion
 
         #endregion

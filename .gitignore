@@ -25,5 +25,6 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 tempFiles
+tempfile
 uploadFiles
 *.dbmdl

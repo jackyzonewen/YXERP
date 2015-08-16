@@ -121,4 +121,10 @@
   <ItemGroup>
     <None Include="Procedures\Client\Products\P_AddCategoryAttr.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Products\P_InsertProductDetail.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Client\Products\P_UpdateProductDetail.sql" />
+  </ItemGroup>
 </Project>

@@ -147,7 +147,7 @@ namespace CloudSalesDAL
         public DataSet GetProductByID(string productid)
         {
             SqlParameter[] paras = { new SqlParameter("@ProductID", productid) };
-            DataSet ds = GetDataSet("P_GetProductByID", paras, CommandType.StoredProcedure, "Product|Details");
+            DataSet ds = GetDataSet("P_GetProductByID", paras, CommandType.StoredProcedure, "Product|Details|Unit");
             return ds;
         }
 
@@ -306,6 +306,38 @@ namespace CloudSalesDAL
             return ExecuteNonQuery("P_AddCategoryAttr", paras, CommandType.StoredProcedure) > 0;
         }
 
+        public string AddProductDetails(string productid, string productCode, string shapeCode, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string unitid, string productImg, string description, string operateid, string clientid)
+        {
+            string id = "";
+            int result = 0;
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@DetailID",SqlDbType.NVarChar,64),
+                                       new SqlParameter("@Result",SqlDbType.Int),
+                                       new SqlParameter("@ProductCode",productCode),
+                                       new SqlParameter("@UnitID",unitid),
+                                       new SqlParameter("@ProductID",productid),
+                                       new SqlParameter("@AttrList",attrlist),
+                                       new SqlParameter("@ValueList",valuelist),
+                                       new SqlParameter("@AttrValueList",attrvaluelist),
+                                       new SqlParameter("@Price",price),
+                                       new SqlParameter("@Weight",weight),
+                                       new SqlParameter("@ProductImg",productImg),
+                                       new SqlParameter("@ShapeCode",shapeCode),
+                                       new SqlParameter("@Description",description),
+                                       new SqlParameter("@CreateUserID",operateid),
+                                       new SqlParameter("@ClientID",clientid)
+                                   };
+            paras[0].Value = id;
+            paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Value = result;
+            paras[1].Direction = ParameterDirection.InputOutput;
+
+            ExecuteNonQuery("P_InsertProductDetail", paras, CommandType.StoredProcedure);
+            id = paras[0].Value.ToString();
+            result = Convert.ToInt32(paras[1].Value);
+            return id;
+        }
+
         #endregion
 
         #region 编辑
@@ -452,6 +484,32 @@ namespace CloudSalesDAL
 
             return ExecuteNonQuery("P_UpdateProduct", paras, CommandType.StoredProcedure) > 0;
 
+        }
+
+        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, string unitid, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description)
+        {
+            int result = 0;
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@Result",SqlDbType.Int),
+                                       new SqlParameter("@DetailID",detailid),
+                                       new SqlParameter("@ProductID",productid),
+                                       new SqlParameter("@UnitID",unitid),
+                                       new SqlParameter("@ProductCode",productCode),
+                                       new SqlParameter("@AttrList",attrlist),
+                                       new SqlParameter("@ValueList",valuelist),
+                                       new SqlParameter("@AttrValueList",attrvaluelist),
+                                       new SqlParameter("@Price",price),
+                                       new SqlParameter("@Weight",weight),
+                                       new SqlParameter("@ShapeCode",shapeCode),
+                                       new SqlParameter("@Description",description)
+                                   };
+            paras[0].Value = result;
+            paras[0].Direction = ParameterDirection.InputOutput;
+
+
+            ExecuteNonQuery("P_UpdateProductDetail", paras, CommandType.StoredProcedure);
+            result = Convert.ToInt32(paras[0].Value);
+            return result == 1;
         }
 
         #endregion
