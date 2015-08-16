@@ -341,18 +341,20 @@ namespace CloudSalesBusiness
             {
                 model.FillData(ds.Tables["Product"].Rows[0]);
                 model.Category = GetCategoryDetailByID(model.CategoryID);
-                var unit = new C_ProductUnit();
-                unit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
-                model.BigUnit = unit;
+                var bigunit = new C_ProductUnit();
+                bigunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
+                model.BigUnit = bigunit;
 
-                unit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
-                model.SmallUnit = unit;
+                var smallunit = new C_ProductUnit();
+                smallunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
+                model.SmallUnit = smallunit;
                 List<C_ProductDetail> list = new List<C_ProductDetail>();
                 foreach (DataRow item in ds.Tables["Details"].Rows)
                 {
                     //子产品
                     C_ProductDetail detail = new C_ProductDetail();
                     detail.FillData(item);
+                    var unit = new C_ProductUnit();
                     unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
                     detail.Unit = unit;
                     Dictionary<string, string> attrs = new Dictionary<string, string>();

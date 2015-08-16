@@ -12,7 +12,7 @@ GO
 参数说明：	 
 编写日期： 2015/7/1
 程序作者： Allen
-调试记录： exec P_GetProductByID 'C6A1626D-871A-47EA-8E8C-40CC05626C94'
+调试记录： exec P_GetProductByID 'CD867D63-B61D-47DE-9C63-0B1A56D68486'
 ************************************************************/
 CREATE PROCEDURE [dbo].[P_GetProductByID]
 	@ProductID nvarchar(64)

@@ -58,9 +58,9 @@ define(function (require, exports, module) {
             _this.addClass("hover");
             _this.parents(".category-layer").nextAll().remove();
 
-            if (_this.data("layer") >= 3) {
-                return;
-            }
+            //if (_this.data("layer") >= 3) {
+            //    return;
+            //}
             Global.post("/Products/GetChildCategorysByID", {
                 categoryid: _this.data("id")
             }, function (data) {
@@ -71,9 +71,9 @@ define(function (require, exports, module) {
                     html.find(".category-header span").html(_this.find(".category-name").html());
                     
                     //只有第三层可以添加产品
-                    if (_this.data("layer") < 2) {
-                        html.find(".add-product").removeClass("add-product");
-                    }
+                    //if (_this.data("layer") < 2) {
+                    //    html.find(".add-product").removeClass("add-product");
+                    //}
 
                     _self.bindElementEvent(html.find("li"));
 
