@@ -88,14 +88,8 @@ define(function (require, exports, module) {
     ObjectJS.showCategory = function (callback, Layers) {
         var _self = this;
         doT.exec("template/products/category_add.html", function (templateFun) {
-            var html;
-            //if (Layers == 3) {
-            //    html = templateFun(CacheAttrs);
-            //} else {
-            //    html = templateFun([]);
-            //}
 
-            html = templateFun([]);
+            var html= templateFun([]);
             
             Easydialog.open({
                 container: {
@@ -117,18 +111,8 @@ define(function (require, exports, module) {
                             Description: $("#description").val()
                         };
 
-                        var attrs = "";
-                        //$("#attrList .attr-item").each(function () {
-                        //    if ($(this).prop("checked")) {
-                        //        attrs += $(this).data("id") + ",";
-                        //    }
-                        //});
-                        var saleattrs = "";
-                        //$("#saleAttr .attr-item").each(function () {
-                        //    if ($(this).prop("checked")) {
-                        //        saleattrs += $(this).data("id") + ",";
-                        //    }
-                        //});
+                        var attrs = "", saleattrs = "";
+
                         _self.saveCategory(model, attrs, saleattrs, callback);
                     },
                     callback: function () {
@@ -136,9 +120,7 @@ define(function (require, exports, module) {
                     }
                 }
             });
-            //if (Layers != 3) {
-            //    $(".category-attrs").hide();
-            //}
+
             $("#categoryName").focus();
 
             //编辑填充数据
@@ -146,16 +128,6 @@ define(function (require, exports, module) {
                 $("#categoryName").val(Category.CategoryName);
                 $("#categoryStatus").prop("checked", Category.Status == 1);
                 $("#description").val(Category.Description);
-                ////绑定属性
-                //$("#attrList .attr-item").each(function () {
-                //    var _this = $(this);
-                //    _this.prop("checked", Category.AttrList.indexOf(_this.data("id")) >= 0);
-                //});
-                ////绑定规格
-                //$("#saleAttr .attr-item").each(function () {
-                //    var _this = $(this);
-                //    _this.prop("checked", Category.SaleAttr.indexOf(_this.data("id")) >= 0);
-                //});
             }
 
             CategoryVerifyObject = Verify.createVerify({
