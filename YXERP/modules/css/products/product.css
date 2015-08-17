@@ -15,7 +15,7 @@
 
 
 /*添加子产品*/
-.product-details-add { width:500px; }
+.product-details-add { width:500px; min-height:200px; }
 .product-details-add li { height:auto; }
 .product-details-add .column-name{ width:85px; float:left; }
 

@@ -36,9 +36,13 @@ define(function (require, exports, module) {
     }
     //绑定元素定位和样式
     ObjectJS.bindStyle = function () {
-        var _height = document.documentElement.clientHeight - 250;
+
+        var _height = document.documentElement.clientHeight - 270;
+        $(".category-all").css("height", _height + 35);
+        $(".category-all").css("width", $(".category-layer").length * 200 + 500);
         $(".category-list").css("height", _height);
 
+        $("div.content-body").scrollLeft($("div.content-body").width());
     }
     //绑定事件
     ObjectJS.bindEvent = function () {
@@ -171,62 +175,76 @@ define(function (require, exports, module) {
             return false;
         })
 
-        //点击分类名称事件（展开下级或属性）
+        //点击分类名称事件（展开下级和属性）
         element.click(function () {
             var _this = $(this), layer = _this.data("layer");
             _this.siblings().removeClass("hover");
             _this.addClass("hover");
             _this.parents(".category-layer").nextAll(".category-layer,.category-attr-layer,.common-attr-layer").remove();
+            
+            //加载下级分类
+            Global.post("/Products/GetChildCategorysByID", {
+                categoryid: _this.data("id")
+            }, function (data) {
+                doT.exec("template/products/category_list.html", function (templateFun) {
+                    var html = templateFun(data.Items);
+                    html = $(html);
+                    //绑定添加事件
+                    html.find(".category-header span").html(_this.find(".category-name").html()+" >>");
+
+                    _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")).data("layer", _this.data("layer") * 1 + 1));
+
+                    _self.bindElementEvent(html.find("li"));
+
+                    _this.parents(".category-layer").after(html);
+                    _self.bindStyle();
+
+                    _self.showAttrs(_this);
+                });
+            });
+
             //小于3层添加分类，否则设置属性 
-            if (layer < 3) {
-                Global.post("/Products/GetChildCategorysByID", {
-                    categoryid: _this.data("id")
-                }, function (data) {
-                    doT.exec("template/products/category_list.html", function (templateFun) {
-                        var html = templateFun(data.Items);
-                        html = $(html);
-                        //绑定添加事件
-                        html.find(".category-header span").html(_this.find(".category-name").html());
+            //if (layer < 3) {
+                
+            //} else { //属性列表
 
-                        _self.addBindEvent(html.find(".ico-add").data("id", _this.data("id")).data("layer", _this.data("layer") * 1 + 1));
-
-                        _self.bindElementEvent(html.find("li"));
-
-                        _this.parents(".category-layer").after(html);
-                        _self.bindStyle();
-                    });
-                });
-            } else { //属性列表
-                Global.post("/Products/GetAttrsByCategoryID", {
-                    categoryid: _this.data("id")
-                }, function (data) {
-                    doT.exec("template/products/category_attr_list.html", function (templateFun) {
-                        var html = templateFun(data.Items);
-                        html = $(html);
-                        //绑定添加事件
-                        html.find(".category-attr-header span").html(_this.find(".category-name").html() + "-属性列表");
-
-                        html.find(".ico-add").click(function () {
-                            var _attrdiv = $(this);
-                            AttrPlug.init({
-                                attrid: "",
-                                categoryid: _this.data("id"),
-                                callback: function (Attr) {
-                                    _self.innerAttr(_attrdiv.parent().siblings("[data-type=" + Attr.Type + "]"), Attr);
-                                }
-                            });
-                        });
-
-                        _self.bindAttrElementEvent(html.find(".attritem"));
-
-                        _this.parents(".category-layer").after(html);
-
-                        _self.bindCommonAttr(_this.data("id"), html);
-                    });
-                });
-            }
+            //}
         });
     }
+    //显示分类属性
+    ObjectJS.showAttrs = function (obj) {
+
+        var _self = this;
+        //属性设置
+        Global.post("/Products/GetAttrsByCategoryID", {
+            categoryid: obj.data("id")
+        }, function (data) {
+            doT.exec("template/products/category_attr_list.html", function (templateFun) {
+                var html = templateFun(data.Items);
+                html = $(html);
+                //绑定添加事件
+                html.find(".category-attr-header span").html(obj.find(".category-name").html() + "-属性列表");
+
+                html.find(".ico-add").click(function () {
+                    var _attrdiv = $(this);
+                    AttrPlug.init({
+                        attrid: "",
+                        categoryid: obj.data("id"),
+                        callback: function (Attr) {
+                            _self.innerAttr(_attrdiv.parent().siblings("[data-type=" + Attr.Type + "]"), Attr);
+                        }
+                    });
+                });
+
+                _self.bindAttrElementEvent(html.find(".attritem"));
+
+                obj.parents(".category-layer").next().after(html);
+
+                _self.bindCommonAttr(obj.data("id"), html);
+            });
+        });
+    }
+
     //保存属性后添加到列表
     ObjectJS.innerAttr = function (parentele, Attr) {
         var _self = this;

@@ -100,7 +100,7 @@ define(function (require, exports, module) {
                 }
                 $("#price").val(detailsModel.Price);
                 $("#unitid").val(detailsModel.UnitID).prop("disabled", true);
-                $("#productCode").val(detailsModel.DetailsCode).prop("disabled", true);
+                $("#productCode").val(detailsModel.DetailsCode);
                 _self.ProductImage = detailsModel.ImgS;
                 $("#productImg").attr("src", detailsModel.ImgS);
                 

@@ -1,4 +1,7 @@
 ﻿
+
+.category-all { overflow-x:auto; overflow-y:hidden; }
+
 /*分类*/
 .category-layer { width:200px; float:left; }
 

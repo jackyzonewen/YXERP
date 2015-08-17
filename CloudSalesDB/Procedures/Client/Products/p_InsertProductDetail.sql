@@ -40,26 +40,18 @@ set @Result=0
 set @DetailID=NEWID()
 
 
-IF(NOT EXISTS(SELECT 1 FROM C_ProductDetail WHERE DetailsCode=@ProductCode and ClientID=@ClientID) and not EXISTS (SELECT 1 FROM C_Products WHERE ProductCode=@ProductCode and ClientID=@ClientID))--产品编号唯一，编号不存在时才能执行插入
-BEGIN
+if exists(select AutoID from C_ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList)
+begin
+	set @DetailID=''
+	rollback tran
+	return
+end
 
-	if exists(select AutoID from C_ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList)
-	begin
-		set @DetailID=''
-		rollback tran
-		return
-	end
-
-	INSERT INTO C_ProductDetail(ProductDetailID,[ProductID],DetailsCode,[UnitID] ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
-						Weight,ImgS,[ShapeCode] ,[Description],[CreateUserID],[CreateTime] ,[UpdateTime],[OperateIP] ,[ClientID])
-				 VALUES(@DetailID,@ProductID,@ProductCode,@UnitID,@AttrList,@ValueList,@AttrValueList,@Price,1,
-						@Weight,@ProductImg,@ShapeCode,@Description,@CreateUserID,getdate(),getdate(),'',@ClientID);
-	set @Result=1;
-END
-ELSE
-BEGIN
-	set @DetailID='';
-END
+INSERT INTO C_ProductDetail(ProductDetailID,[ProductID],DetailsCode,[UnitID] ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
+					Weight,ImgS,[ShapeCode] ,[Description],[CreateUserID],[CreateTime] ,[UpdateTime],[OperateIP] ,[ClientID])
+				VALUES(@DetailID,@ProductID,@ProductCode,@UnitID,@AttrList,@ValueList,@AttrValueList,@Price,1,
+					@Weight,@ProductImg,@ShapeCode,@Description,@CreateUserID,getdate(),getdate(),'',@ClientID);
+set @Result=1;
 
 set @Err+=@@Error
 
