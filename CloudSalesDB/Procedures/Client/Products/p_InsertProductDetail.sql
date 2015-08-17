@@ -40,7 +40,7 @@ set @Result=0
 set @DetailID=NEWID()
 
 
-IF(NOT EXISTS(SELECT 1 FROM C_ProductDetail WHERE DetailsCode=@ProductCode and ClientID=@ClientID))--产品编号唯一，编号不存在时才能执行插入
+IF(NOT EXISTS(SELECT 1 FROM C_ProductDetail WHERE DetailsCode=@ProductCode and ClientID=@ClientID) and not EXISTS (SELECT 1 FROM C_Products WHERE ProductCode=@ProductCode and ClientID=@ClientID))--产品编号唯一，编号不存在时才能执行插入
 BEGIN
 
 	if exists(select AutoID from C_ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList)
