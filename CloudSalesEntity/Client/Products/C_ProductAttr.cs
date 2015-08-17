@@ -47,9 +47,10 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string AttrID
 		{
 			set{ _attrid=value;}
@@ -79,9 +80,10 @@ namespace CloudSalesEntity
 			set{ _description=value;}
 			get{return _description;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string CreateUserID
 		{
 			set{ _createuserid=value;}
@@ -111,9 +113,10 @@ namespace CloudSalesEntity
 			set{ _operateip=value;}
 			get{return _operateip;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ClientID
 		{
 			set{ _clientid=value;}
@@ -127,8 +130,9 @@ namespace CloudSalesEntity
         public List<C_AttrValue> AttrValues { get; set; }
 
         /// <summary>
-        /// 产品分类ID
+        /// 
         /// </summary>
+        [Property("Lower")] 
         public string CategoryID { get; set; }
 
         public int Type { get; set; }

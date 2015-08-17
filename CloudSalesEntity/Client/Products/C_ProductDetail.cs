@@ -55,38 +55,43 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string ProductDetailID { set; get; }
 
 
         public string DetailsCode { get; set; }
 
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ProductID
 		{
 			set{ _productid=value;}
 			get{return _productid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string SaleAttr
 		{
 			set{ _saleattr=value;}
 			get{return _saleattr;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string AttrValue
 		{
 			set{ _attrvalue=value;}
 			get{return _attrvalue;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string SaleAttrValue
 		{
 			set{ _saleattrvalue=value;}
@@ -94,7 +99,10 @@ namespace CloudSalesEntity
 		}
 
         public string SaleAttrValueString { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string UnitID { get; set; }
 
         public C_ProductUnit Unit { get; set; }
@@ -163,9 +171,10 @@ namespace CloudSalesEntity
 			set{ _description=value;}
 			get{return _description;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string CreateUserID
 		{
 			set{ _createuserid=value;}
@@ -195,9 +204,10 @@ namespace CloudSalesEntity
 			set{ _operateip=value;}
 			get{return _operateip;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ClientID
 		{
 			set{ _clientid=value;}

@@ -82,7 +82,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string View
+        public string View
 		{
 			set{ _view=value;}
 			get{return _view;}

@@ -41,9 +41,10 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ModulesID
 		{
 			set{ _modulesid=value;}
@@ -65,9 +66,10 @@ namespace CloudSalesEntity
 			set{ _description=value;}
 			get{return _description;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ParentID
 		{
 			set{ _parentid=value;}

@@ -7,6 +7,15 @@ using System.Text;
 
 namespace CloudSalesEntity
 {
+    public class Property : System.Attribute
+    {
+        public string Value { get; set; }
+
+        public Property(string Value)
+        {
+            this.Value = Value;
+        }
+    }
     public static class ExpandFillData
     {
         /// <summary>
@@ -33,11 +42,35 @@ namespace CloudSalesEntity
                                 null);
                             break;
                         case "String":
-                            property.SetValue(entity,
-                                dr[property.Name] != null && dr[property.Name] != DBNull.Value
-                                ? dr[property.Name].ToString().ToUpper()
-                                : "",
-                                null);
+                            object[] objArray = property.GetCustomAttributes(false);
+                            if (objArray.Length > 0)
+                            {
+                                if ((objArray[0] as Property).Value.ToLower() == "lower")
+                                {
+                                    property.SetValue(entity,
+                                        dr[property.Name] != null && dr[property.Name] != DBNull.Value
+                                        ? dr[property.Name].ToString().ToLower()
+                                        : "",
+                                        null);
+                                }
+                                else if ((objArray[0] as Property).Value.ToLower() == "upper")
+                                {
+                                    property.SetValue(entity,
+                                        dr[property.Name] != null && dr[property.Name] != DBNull.Value
+                                        ? dr[property.Name].ToString().ToUpper()
+                                        : "",
+                                        null);
+                                }
+
+                            }
+                            else
+                            {
+                                property.SetValue(entity,
+                                    dr[property.Name] != null && dr[property.Name] != DBNull.Value
+                                    ? dr[property.Name].ToString()
+                                    : "",
+                                    null);
+                            }
                             break;
                         case "DateTime": 
                             property.SetValue(entity,

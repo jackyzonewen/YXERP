@@ -40,9 +40,10 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string PermissionID
 		{
 			set{ _permissionid=value;}

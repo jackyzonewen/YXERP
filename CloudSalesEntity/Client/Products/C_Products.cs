@@ -74,6 +74,10 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string ProductID { get; set; }
 
 		/// <summary>
@@ -116,17 +120,19 @@ namespace CloudSalesEntity
 			set{ _iscombineproduct=value;}
 			get{return _iscombineproduct;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string BrandID
 		{
 			set{ _brandid=value;}
 			get{return _brandid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string BigUnitID
 		{
 			set{ _bigunitid=value;}
@@ -134,9 +140,10 @@ namespace CloudSalesEntity
 		}
         public C_ProductUnit BigUnit { get; set; }
 
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string SmallUnitID
 		{
 			set{ _smallunitid=value;}
@@ -153,49 +160,55 @@ namespace CloudSalesEntity
 			set{ _bigsmallmultiple=value;}
 			get{return _bigsmallmultiple;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string CategoryID
 		{
 			set{ _categorycode=value;}
 			get{return _categorycode;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string CategoryIDList
 		{
 			set{ _categorycodelist=value;}
 			get{return _categorycodelist;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string SaleAttr
 		{
 			set{ _saleattr=value;}
 			get{return _saleattr;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string AttrList
 		{
 			set{ _attrlist=value;}
 			get{return _attrlist;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ValueList
 		{
 			set{ _valuelist=value;}
 			get{return _valuelist;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string AttrValueList
 		{
 			set{ _attrvaluelist=value;}
@@ -329,9 +342,10 @@ namespace CloudSalesEntity
 			set{ _shapecode=value;}
 			get{return _shapecode;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ProdiverID
 		{
 			set{ _prodiverid=value;}
@@ -345,9 +359,10 @@ namespace CloudSalesEntity
 			set{ _description=value;}
 			get{return _description;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string CreateUserID
 		{
 			set{ _createuserid=value;}
@@ -377,9 +392,10 @@ namespace CloudSalesEntity
 			set{ _operateip=value;}
 			get{return _operateip;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ClientID
 		{
 			set{ _clientid=value;}

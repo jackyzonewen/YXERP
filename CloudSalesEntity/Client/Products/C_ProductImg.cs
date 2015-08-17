@@ -45,9 +45,10 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string ProductID
 		{
 			set{ _productid=value;}
@@ -117,9 +118,10 @@ namespace CloudSalesEntity
 			set{ _operateip=value;}
 			get{return _operateip;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ClientID
 		{
 			set{ _clientid=value;}

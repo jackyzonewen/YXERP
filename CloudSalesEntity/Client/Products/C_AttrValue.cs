@@ -47,6 +47,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
+        [Property("Lower")] 
         public string ValueID
 		{
 			set{ _valueid=value;}
@@ -60,9 +61,10 @@ namespace CloudSalesEntity
 			set{ _valuename=value;}
 			get{return _valuename;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string AttrID
 		{
 			set{ _attrid=value;}
@@ -76,9 +78,10 @@ namespace CloudSalesEntity
 			set{ _status=value;}
 			get{return _status;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string CreateUserID
 		{
 			set{ _createuserid=value;}
@@ -108,9 +111,10 @@ namespace CloudSalesEntity
 			set{ _operateip=value;}
 			get{return _operateip;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ClientID
 		{
 			set{ _clientid=value;}

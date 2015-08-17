@@ -49,9 +49,10 @@ namespace CloudSalesEntity
 			set{ _autoid=value;}
 			get{return _autoid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string UserID
 		{
 			set{ _userid=value;}
@@ -153,9 +154,10 @@ namespace CloudSalesEntity
 			set{ _createtime=value;}
 			get{return _createtime;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string CreateUserID
 		{
 			set{ _createuserid=value;}

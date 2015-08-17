@@ -51,6 +51,10 @@ namespace CloudSalesEntity
             set { _autoid = value; }
             get { return _autoid; }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
         public string CategoryID { get; set; }
 
         /// <summary>
@@ -72,6 +76,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string PID
         {
             set { _pcode = value; }
@@ -80,6 +85,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string PIDList
         {
             set { _pcodelist = value; }
@@ -96,6 +102,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string SaleAttr
         {
             set { _saleattr = value; }
@@ -107,6 +114,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string AttrList
         {
             set { _attrlist = value; }
@@ -118,6 +126,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string BrandList
         {
             set { _brandlist = value; }
@@ -142,6 +151,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string CreateUserID
         {
             set { _createuserid = value; }
@@ -174,6 +184,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
+        [Property("Lower")] 
         public string ClientID
         {
             set { _clientid = value; }

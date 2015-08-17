@@ -67,6 +67,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
+        [Property("Lower")]
 		public string UserID
 		{
 			set{ _userid=value;}
@@ -184,9 +185,10 @@ namespace CloudSalesEntity
 			set{ _avatar=value;}
 			get{return _avatar;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ParentID
 		{
 			set{ _parentid=value;}
@@ -240,17 +242,19 @@ namespace CloudSalesEntity
 			set{ _createtime=value;}
 			get{return _createtime;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string CreateUserID
 		{
 			set{ _createuserid=value;}
 			get{return _createuserid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        [Property("Lower")] 
 		public string ClientID
 		{
 			set{ _clientid=value;}
