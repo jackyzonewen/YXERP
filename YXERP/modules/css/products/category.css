@@ -22,7 +22,7 @@
 /*分类属性*/
 .category-attr-layer { width:230px; float:left; margin-left:10px; }
 
-.category-attr-header { background-color:#e7f5fd; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
+.category-attr-header { background-color:#5b84ab; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
 .category-attr-header span { width:100px; }
 
 .category-attr-list { width:230px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; margin-bottom:5px; }
@@ -40,7 +40,7 @@
 /*通用属性*/
 .common-attr-layer { width:230px; float:left;}
 
-.common-attr-header { background-color:#e7f5fd; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
+.common-attr-header { background-color:#5b84ab; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
 .common-attr-header span { width:100px; }
 
 .common-attr-list { width:230px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; margin-bottom:5px; }
