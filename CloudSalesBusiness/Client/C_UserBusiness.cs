@@ -48,11 +48,13 @@ namespace CloudSalesBusiness
                 {
                     List<Menu> list = new List<Menu>();
                     var modules = CommonCache.Modules;
-                    foreach (DataRow module in ds.Tables["Modules"].Rows)
+                    foreach (DataRow dr in ds.Tables["Modules"].Rows)
                     {
-                        if (modules.ContainsKey(module["ModulesID"].ToString()))
+                        M_Modules module = new M_Modules();
+                        module.FillData(dr);
+                        if (modules.ContainsKey(module.ModulesID))
                         {
-                            foreach (var item in modules[module["ModulesID"].ToString()])
+                            foreach (var item in modules[module.ModulesID])
                             {
                                 if (list.Where(m => m.MenuCode == item.MenuCode).Count() == 0)
                                 {

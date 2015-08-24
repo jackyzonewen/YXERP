@@ -244,7 +244,6 @@ define(function (require, exports, module) {
             });
         });
     }
-
     //保存属性后添加到列表
     ObjectJS.innerAttr = function (parentele, Attr) {
         var _self = this;
