@@ -23,7 +23,7 @@
 .category-attr-layer { width:230px; float:left; margin-left:10px; }
 
 .category-attr-header { background-color:#5b84ab; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
-.category-attr-header span { width:100px; }
+.category-attr-header span { width:100px;  color:#fff;}
 
 .category-attr-list { width:230px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; margin-bottom:5px; }
 .category-attr-list li { height:30px; width:210px; line-height:30px; padding:0 10px; cursor:pointer; }
@@ -38,10 +38,10 @@
 .category-attr-list li  .category-name{ width:155px;}
 
 /*通用属性*/
-.common-attr-layer { width:230px; float:left;}
+.common-attr-layer { width:230px; float:left; }
 
-.common-attr-header { background-color:#5b84ab; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb; }
-.common-attr-header span { width:100px; }
+.common-attr-header { background-color:#5b84ab; height:30px; width:210px; line-height:30px;padding:0 10px; border:solid 1px #c5dceb;  }
+.common-attr-header span { width:100px; color:#fff; }
 
 .common-attr-list { width:230px; overflow-x:hidden; overflow-y:auto; border:solid 1px #c5dceb; position:relative; margin-bottom:5px; }
 .common-attr-list li { height:30px; width:210px; line-height:30px; padding:0 10px; cursor:pointer; }
@@ -58,6 +58,7 @@
 .common-attr-list a:hover {color:red; }
 
 .ico-edit, .ico-add, .ico-del{ margin-top:3px; }
+.category-attr-header .ico-add { color:#fff; }
 
 .category-add { }
 .category-add li { height:auto; }
