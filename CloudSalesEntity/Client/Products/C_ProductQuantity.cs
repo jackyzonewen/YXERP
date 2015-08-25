@@ -27,19 +27,10 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private string _productcode;
 		private string _productid;
 		private string _produceddate;
 		private long? _stockin=0;
 		private long? _stockout=0;
-		private long? _logicout=0;
-		private decimal? _lowestprice=0M;
-		private decimal? _highestprice=0M;
-		private decimal? _limitprice=0M;
-		private decimal? _commonprice=0M;
-		private string _approvalnumber="";
-		private string _factoryaddress="";
-		private string _factory="";
 		private string _batchcode="";
 		private string _warecode="";
 		private string _depotcode="";
@@ -55,14 +46,12 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ProductCode
-		{
-			set{ _productcode=value;}
-			get{return _productcode;}
-		}
+        [Property("Lower")] 
+        public string ProductDetailID { set; get; }
 		/// <summary>
 		/// 
 		/// </summary>
+        [Property("Lower")] 
 		public string ProductID
 		{
 			set{ _productid=value;}
@@ -92,70 +81,7 @@ namespace CloudSalesEntity
 			set{ _stockout=value;}
 			get{return _stockout;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public long? LogicOut
-		{
-			set{ _logicout=value;}
-			get{return _logicout;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? LowestPrice
-		{
-			set{ _lowestprice=value;}
-			get{return _lowestprice;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? HighestPrice
-		{
-			set{ _highestprice=value;}
-			get{return _highestprice;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? LimitPrice
-		{
-			set{ _limitprice=value;}
-			get{return _limitprice;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? CommonPrice
-		{
-			set{ _commonprice=value;}
-			get{return _commonprice;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string ApprovalNumber
-		{
-			set{ _approvalnumber=value;}
-			get{return _approvalnumber;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string FactoryAddress
-		{
-			set{ _factoryaddress=value;}
-			get{return _factoryaddress;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string Factory
-		{
-			set{ _factory=value;}
-			get{return _factory;}
-		}
+
 		/// <summary>
 		/// 
 		/// </summary>

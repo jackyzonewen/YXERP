@@ -410,6 +410,8 @@ namespace CloudSalesEntity
 
         public string CategoryName { get; set; }
 
+        public string ApprovalNumber { get; set; }
+
         /// <summary>
         /// 子产品列表
         /// </summary>

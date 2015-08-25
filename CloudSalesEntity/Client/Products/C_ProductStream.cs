@@ -52,11 +52,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ProductCode
-		{
-			set{ _productcode=value;}
-			get{return _productcode;}
-		}
+        public string ProductDetailID { set; get; }
 		/// <summary>
 		/// 
 		/// </summary>

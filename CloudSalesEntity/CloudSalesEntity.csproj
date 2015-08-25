@@ -58,10 +58,8 @@
     <Compile Include="Client\Products\C_Products.cs" />
     <Compile Include="Client\Products\C_ProductStream.cs" />
     <Compile Include="Client\Products\C_ProductUnit.cs" />
-    <Compile Include="Client\Products\C_StorageInDetail.cs" />
-    <Compile Include="Client\Products\C_StorageInDoc.cs" />
-    <Compile Include="Client\Products\C_StorageOutDetail.cs" />
-    <Compile Include="Client\Products\C_StorageOutDoc.cs" />
+    <Compile Include="Client\Products\C_StorageDetail.cs" />
+    <Compile Include="Client\Products\C_StorageDoc.cs" />
     <Compile Include="Client\Warehouse\C_WareAreaRel.cs" />
     <Compile Include="Client\Warehouse\C_WareHouse.cs" />
     <Compile Include="Client\Warehouse\C_WareHouseType.cs" />

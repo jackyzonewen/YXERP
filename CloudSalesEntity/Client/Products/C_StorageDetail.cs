@@ -28,21 +28,16 @@ namespace CloudSalesEntity
 		#region Model
 		private int _autoid;
 		private string _docid;
-		private string _productcode;
 		private string _productid;
 		private string _docdate;
-		private string _produceddate;
 		private int? _quantity=0;
-		private decimal? _commonprice=0M;
 		private decimal? _price=0M;
 		private decimal? _totalmoney=0M;
-		private decimal? _profit=0M;
 		private decimal? _taxmoney=0M;
 		private decimal? _taxrate=1M;
 		private decimal? _returnprice=0M;
 		private decimal? _returnmoney=0M;
 		private string _batchcode="";
-		private DateTime? _effectivedate;
 		private string _clientid;
 		/// <summary>
 		/// 
@@ -60,14 +55,9 @@ namespace CloudSalesEntity
 			set{ _docid=value;}
 			get{return _docid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string ProductCode
-		{
-			set{ _productcode=value;}
-			get{return _productcode;}
-		}
+
+        [Property("Lower")]
+        public string ProductDetailID { set; get; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -87,26 +77,10 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ProducedDate
-		{
-			set{ _produceddate=value;}
-			get{return _produceddate;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
 		public int? Quantity
 		{
 			set{ _quantity=value;}
 			get{return _quantity;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? CommonPrice
-		{
-			set{ _commonprice=value;}
-			get{return _commonprice;}
 		}
 		/// <summary>
 		/// 
@@ -123,14 +97,6 @@ namespace CloudSalesEntity
 		{
 			set{ _totalmoney=value;}
 			get{return _totalmoney;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? Profit
-		{
-			set{ _profit=value;}
-			get{return _profit;}
 		}
 		/// <summary>
 		/// 
@@ -164,6 +130,11 @@ namespace CloudSalesEntity
 			set{ _returnmoney=value;}
 			get{return _returnmoney;}
 		}
+
+        public string WareID { get; set; }
+
+        public string DepotID { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -171,14 +142,6 @@ namespace CloudSalesEntity
 		{
 			set{ _batchcode=value;}
 			get{return _batchcode;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public DateTime? EffectiveDate
-		{
-			set{ _effectivedate=value;}
-			get{return _effectivedate;}
 		}
 		/// <summary>
 		/// 

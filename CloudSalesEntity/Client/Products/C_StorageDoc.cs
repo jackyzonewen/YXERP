@@ -1,12 +1,12 @@
 ﻿/**  版本信息模板在安装目录下，可自行修改。
-* C_StorageOutDoc.cs
+* C_StorageInDoc.cs
 *
 * 功 能： N/A
-* 类 名： C_StorageOutDoc
+* 类 名： C_StorageInDoc
 *
 * Ver    变更日期             负责人  变更内容
 * ───────────────────────────────────
-* V0.01  2015/5/3 13:38:23   N/A    初版
+* V0.01  2015/5/3 13:38:22   N/A    初版
 *
 * Copyright (c) 2012 Maticsoft Corporation. All rights reserved.
 *┌──────────────────────────────────┐
@@ -18,36 +18,26 @@ using System;
 namespace CloudSalesEntity
 {
 	/// <summary>
-	/// C_StorageOutDoc:实体类(属性说明自动提取数据库字段的描述信息)
+	/// C_StorageInDoc:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
 	[Serializable]
-	public partial class C_StorageOutDoc
+	public partial class C_StorageInDoc
 	{
-		public C_StorageOutDoc()
+		public C_StorageInDoc()
 		{}
 		#region Model
 		private int _autoid;
 		private string _docid;
 		private string _doctype;
-		private string _docmaker="";
-		private DateTime? _docmakedate= DateTime.Now;
-		private string _docauditer="";
-		private DateTime? _docauditdate= Convert.ToDateTime("1900-01-01");
-		private string _docauditopinion="";
 		private int? _status=0;
 		private int? _returnstatus=0;
 		private int? _flag=0;
-		private DateTime? _closedate= Convert.ToDateTime("1900-01-01");
 		private string _prodiverid;
-		private decimal? _commonprice=0M;
 		private decimal? _totalmoney=0M;
 		private decimal? _taxmoney=0M;
-		private decimal? _profit=0M;
 		private decimal? _taxrate=1M;
 		private decimal? _returnmoney=0M;
 		private string _originalcode="";
-		private string _warecode="";
-		private string _depotcode="";
 		private string _countrycode="";
 		private string _citycode="";
 		private string _address="";
@@ -90,46 +80,7 @@ namespace CloudSalesEntity
 			set{ _doctype=value;}
 			get{return _doctype;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string DocMaker
-		{
-			set{ _docmaker=value;}
-			get{return _docmaker;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public DateTime? DocMakeDate
-		{
-			set{ _docmakedate=value;}
-			get{return _docmakedate;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string DocAuditer
-		{
-			set{ _docauditer=value;}
-			get{return _docauditer;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public DateTime? DocAuditDate
-		{
-			set{ _docauditdate=value;}
-			get{return _docauditdate;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string DocAuditOpinion
-		{
-			set{ _docauditopinion=value;}
-			get{return _docauditopinion;}
-		}
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -154,14 +105,7 @@ namespace CloudSalesEntity
 			set{ _flag=value;}
 			get{return _flag;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public DateTime? CloseDate
-		{
-			set{ _closedate=value;}
-			get{return _closedate;}
-		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -170,14 +114,7 @@ namespace CloudSalesEntity
 			set{ _prodiverid=value;}
 			get{return _prodiverid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? CommonPrice
-		{
-			set{ _commonprice=value;}
-			get{return _commonprice;}
-		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -194,14 +131,7 @@ namespace CloudSalesEntity
 			set{ _taxmoney=value;}
 			get{return _taxmoney;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public decimal? Profit
-		{
-			set{ _profit=value;}
-			get{return _profit;}
-		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -226,22 +156,7 @@ namespace CloudSalesEntity
 			set{ _originalcode=value;}
 			get{return _originalcode;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string WareCode
-		{
-			set{ _warecode=value;}
-			get{return _warecode;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string DepotCode
-		{
-			set{ _depotcode=value;}
-			get{return _depotcode;}
-		}
+
 		/// <summary>
 		/// 
 		/// </summary>
