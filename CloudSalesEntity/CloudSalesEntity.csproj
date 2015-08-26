@@ -39,34 +39,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\C_Department.cs" />
-    <Compile Include="Client\C_Industry.cs" />
-    <Compile Include="Client\C_Role.cs" />
-    <Compile Include="Client\C_RolePermission.cs" />
-    <Compile Include="Client\C_UserDepart.cs" />
-    <Compile Include="Client\C_UserRole.cs" />
-    <Compile Include="Client\C_Users.cs" />
-    <Compile Include="Client\C_Agents.cs" />
-    <Compile Include="Client\Products\C_AttrValue.cs" />
-    <Compile Include="Client\Products\C_Brand.cs" />
-    <Compile Include="Client\Products\C_Category.cs" />
-    <Compile Include="Client\Warehouse\C_DepotSeat.cs" />
-    <Compile Include="Client\Products\C_ProductAttr.cs" />
-    <Compile Include="Client\Products\C_ProductDetail.cs" />
-    <Compile Include="Client\Products\C_ProductImg.cs" />
-    <Compile Include="Client\Products\C_ProductQuantity.cs" />
-    <Compile Include="Client\Products\C_Products.cs" />
-    <Compile Include="Client\Products\C_ProductStream.cs" />
-    <Compile Include="Client\Products\C_ProductUnit.cs" />
-    <Compile Include="Client\Products\C_StorageDetail.cs" />
-    <Compile Include="Client\Products\C_StorageDoc.cs" />
-    <Compile Include="Client\Warehouse\C_WareAreaRel.cs" />
-    <Compile Include="Client\Warehouse\C_WareHouse.cs" />
-    <Compile Include="Client\Warehouse\C_WareHouseType.cs" />
+    <Compile Include="System\C_Department.cs" />
+    <Compile Include="System\C_Industry.cs" />
+    <Compile Include="System\C_Role.cs" />
+    <Compile Include="System\C_RolePermission.cs" />
+    <Compile Include="System\C_UserDepart.cs" />
+    <Compile Include="System\C_UserRole.cs" />
+    <Compile Include="System\C_Users.cs" />
+    <Compile Include="C_Agents.cs" />
+    <Compile Include="Stock\C_AttrValue.cs" />
+    <Compile Include="Stock\C_Brand.cs" />
+    <Compile Include="Stock\C_Category.cs" />
+    <Compile Include="Stock\C_DepotSeat.cs" />
+    <Compile Include="Stock\C_ProductAttr.cs" />
+    <Compile Include="Stock\C_ProductDetail.cs" />
+    <Compile Include="Stock\C_ProductImg.cs" />
+    <Compile Include="Stock\C_ProductQuantity.cs" />
+    <Compile Include="Stock\C_Products.cs" />
+    <Compile Include="Stock\C_ProductStream.cs" />
+    <Compile Include="Stock\C_ProductUnit.cs" />
+    <Compile Include="Stock\C_StorageDetail.cs" />
+    <Compile Include="Stock\C_StorageDoc.cs" />
+    <Compile Include="Stock\C_WareAreaRel.cs" />
+    <Compile Include="Stock\C_WareHouse.cs" />
+    <Compile Include="Stock\C_WareHouseType.cs" />
     <Compile Include="Common\City.cs" />
     <Compile Include="Common\Country.cs" />
     <Compile Include="Common\Menu.cs" />
     <Compile Include="ExpandFillData.cs" />
+    <Compile Include="Common\Log_Login.cs" />
+    <Compile Include="Common\Log_Error.cs" />
+    <Compile Include="Common\Log_Operate.cs" />
     <Compile Include="Manage\M_Clients.cs" />
     <Compile Include="Manage\M_Dictionary.cs" />
     <Compile Include="Manage\M_Modules.cs" />
@@ -75,7 +78,9 @@
     <Compile Include="Common\Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Log\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

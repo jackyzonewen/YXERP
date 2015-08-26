@@ -173,7 +173,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult UpdateWareHouseStatus(string id, int status)
         {
-            bool bl = new WarehouseBusiness().UpdateWareHouseStatus(id, (CloudSalesEnum.StatusEnum)status, CurrentUser.UserID, CurrentUser.ClientID);
+            bool bl = new WarehouseBusiness().UpdateWareHouseStatus(id, (CloudSalesEnum.EnumStatus)status, CurrentUser.UserID, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -188,7 +188,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeleteWareHouse(string id)
         {
-            bool bl = new WarehouseBusiness().UpdateWareHouseStatus(id, CloudSalesEnum.StatusEnum.Delete, CurrentUser.UserID, CurrentUser.ClientID);
+            bool bl = new WarehouseBusiness().UpdateWareHouseStatus(id, CloudSalesEnum.EnumStatus.Delete, CurrentUser.UserID, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -268,7 +268,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeleteDepotSeat(string id)
         {
-            bool bl = new WarehouseBusiness().UpdateDepotSeatStatus(id, CloudSalesEnum.StatusEnum.Delete, CurrentUser.UserID, CurrentUser.ClientID);
+            bool bl = new WarehouseBusiness().UpdateDepotSeatStatus(id, CloudSalesEnum.EnumStatus.Delete, CurrentUser.UserID, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -285,7 +285,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult UpdateDepotSeatStatus(string id, int status)
         {
-            bool bl = new WarehouseBusiness().UpdateDepotSeatStatus(id, (CloudSalesEnum.StatusEnum)status, CurrentUser.UserID, CurrentUser.ClientID);
+            bool bl = new WarehouseBusiness().UpdateDepotSeatStatus(id, (CloudSalesEnum.EnumStatus)status, CurrentUser.UserID, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {

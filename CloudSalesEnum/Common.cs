@@ -8,7 +8,7 @@ namespace CloudSalesEnum
     /// <summary>
     /// 菜单类型
     /// </summary>
-    public enum MenuType
+    public enum EnumMenuType
     {
         /// <summary>
         /// 管理系统
@@ -27,7 +27,7 @@ namespace CloudSalesEnum
     /// <summary>
     /// 状态枚举
     /// </summary>
-    public enum StatusEnum
+    public enum EnumStatus
     {
         //所有（搜索）
         All = -1,

@@ -630,7 +630,7 @@ namespace CloudSalesBusiness
         /// <param name="operateIP">操作IP</param>
         /// <param name="operateID">操作人</param>
         /// <returns></returns>
-        public bool UpdateBrandStatus(string brandID, StatusEnum status, string operateIP, string operateID)
+        public bool UpdateBrandStatus(string brandID, EnumStatus status, string operateIP, string operateID)
         {
             return CommonBusiness.Update("C_Brand", "Status", ((int)status).ToString(), " BrandID='" + brandID + "'");
         }
@@ -677,7 +677,7 @@ namespace CloudSalesBusiness
         /// <param name="operateIP">操作IP</param>
         /// <param name="operateID">操作人</param>
         /// <returns></returns>
-        public bool UpdateUnitStatus(string unitID, StatusEnum status, string operateIP, string operateID)
+        public bool UpdateUnitStatus(string unitID, EnumStatus status, string operateIP, string operateID)
         {
             var dal = new ProductsDAL();
             return dal.UpdateUnitStatus(unitID, (int)status);
@@ -718,7 +718,7 @@ namespace CloudSalesBusiness
         /// <param name="operateIP">操作IP</param>
         /// <param name="operateID">操作人</param>
         /// <returns></returns>
-        public bool UpdateProductAttrStatus(string attrid, StatusEnum status, string operateIP, string operateID)
+        public bool UpdateProductAttrStatus(string attrid, EnumStatus status, string operateIP, string operateID)
         {
             var dal = new ProductsDAL();
             return dal.UpdateProductAttrStatus(attrid, (int)status);
@@ -732,7 +732,7 @@ namespace CloudSalesBusiness
         /// <param name="operateIP"></param>
         /// <param name="operateID"></param>
         /// <returns></returns>
-        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, StatusEnum status, int type,string operateIP, string operateID)
+        public bool UpdateCategoryAttrStatus(string categoryid, string attrid, EnumStatus status, int type, string operateIP, string operateID)
         {
             var dal = new ProductsDAL();
             return dal.UpdateCategoryAttrStatus(categoryid, attrid, (int)status, type);
@@ -746,7 +746,7 @@ namespace CloudSalesBusiness
         /// <param name="operateIP">操作IP</param>
         /// <param name="operateID">操作人</param>
         /// <returns></returns>
-        public bool UpdateAttrValueStatus(string valueid, StatusEnum status, string operateIP, string operateID)
+        public bool UpdateAttrValueStatus(string valueid, EnumStatus status, string operateIP, string operateID)
         {
             var dal = new ProductsDAL();
             return dal.UpdateAttrValueStatus(valueid, (int)status);
@@ -775,7 +775,7 @@ namespace CloudSalesBusiness
         /// <param name="operateIP">操作IP</param>
         /// <param name="operateID">操作人</param>
         /// <returns></returns>
-        public bool UpdateProductStatus(string productid, StatusEnum status, string operateIP, string operateID)
+        public bool UpdateProductStatus(string productid, EnumStatus status, string operateIP, string operateID)
         {
             return CommonBusiness.Update("C_Products", "Status", ((int)status).ToString(), " ProductID='" + productid + "'");
         }
@@ -849,7 +849,7 @@ namespace CloudSalesBusiness
         /// <param name="operateIP"></param>
         /// <param name="operateID"></param>
         /// <returns></returns>
-        public bool UpdateProductDetailsStatus(string productdetailid, StatusEnum status, string operateIP, string operateID)
+        public bool UpdateProductDetailsStatus(string productdetailid, EnumStatus status, string operateIP, string operateID)
         {
             return CommonBusiness.Update("C_ProductDetail", "Status", (int)status, " ProductDetailID='" + productdetailid + "'");
         }

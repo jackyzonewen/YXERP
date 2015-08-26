@@ -82,7 +82,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool DeleteWarehouseType(string id, string operateid, string clientid)
         {
-            return CommonBusiness.Update("C_WareHouseType", "Status", (int)CloudSalesEnum.StatusEnum.Delete, " TypeID='" + id + "'");
+            return CommonBusiness.Update("C_WareHouseType", "Status", (int)CloudSalesEnum.EnumStatus.Delete, " TypeID='" + id + "'");
         }
         #endregion
 
@@ -272,7 +272,7 @@ namespace CloudSalesBusiness
         /// <param name="operateid"></param>
         /// <param name="clientid"></param>
         /// <returns></returns>
-        public bool UpdateWareHouseStatus(string id, StatusEnum status, string operateid, string clientid)
+        public bool UpdateWareHouseStatus(string id, EnumStatus status, string operateid, string clientid)
         {
             return CommonBusiness.Update("C_WareHouse", "Status", (int)status, " WareID='" + id + "'");
         }
@@ -301,7 +301,7 @@ namespace CloudSalesBusiness
         /// <param name="operateid"></param>
         /// <param name="clientid"></param>
         /// <returns></returns>
-        public bool UpdateDepotSeatStatus(string id, StatusEnum status, string operateid, string clientid)
+        public bool UpdateDepotSeatStatus(string id, EnumStatus status, string operateid, string clientid)
         {
             return CommonBusiness.Update("C_DepotSeat", "Status", (int)status, " DepotID='" + id + "'");
         }

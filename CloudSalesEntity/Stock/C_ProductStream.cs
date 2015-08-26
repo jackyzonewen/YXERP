@@ -27,7 +27,6 @@ namespace CloudSalesEntity
 		{}
 		#region Model
 		private int _autoid;
-		private string _productcode;
 		private string _productid;
 		private string _ordercode;
 		private string _batchcode="";

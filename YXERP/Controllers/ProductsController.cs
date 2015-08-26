@@ -195,7 +195,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult UpdateBrandStatus(string brandID, int status)
         {
-            bool bl = new ProductsBusiness().UpdateBrandStatus(brandID, (StatusEnum)status, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateBrandStatus(brandID, (EnumStatus)status, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -209,7 +209,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeleteBrand(string brandID)
         {
-            bool bl = new ProductsBusiness().UpdateBrandStatus(brandID, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateBrandStatus(brandID, EnumStatus.Delete, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -273,7 +273,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeleteUnit(string unitID)
         {
-            bool bl = new ProductsBusiness().UpdateUnitStatus(unitID, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateUnitStatus(unitID, EnumStatus.Delete, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -415,7 +415,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeleteCategoryAttr(string categoryid, string attrid, int type)
         {
-            bool bl = new ProductsBusiness().UpdateCategoryAttrStatus(categoryid, attrid, StatusEnum.Delete, type, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateCategoryAttrStatus(categoryid, attrid, EnumStatus.Delete, type, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -449,7 +449,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeleteProductAttr(string attrid)
         {
-            bool bl = new ProductsBusiness().UpdateProductAttrStatus(attrid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateProductAttrStatus(attrid, EnumStatus.Delete, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -465,7 +465,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeleteAttrValue(string valueid)
         {
-            bool bl = new ProductsBusiness().UpdateAttrValueStatus(valueid, StatusEnum.Delete, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateAttrValueStatus(valueid, EnumStatus.Delete, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -629,7 +629,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult UpdateProductStatus(string productid, int status)
         {
-            bool bl = new ProductsBusiness().UpdateProductStatus(productid, (StatusEnum)status, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateProductStatus(productid, (EnumStatus)status, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
@@ -740,7 +740,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult UpdateProductDetailsStatus(string productdetailid, int status)
         {
-            bool bl = new ProductsBusiness().UpdateProductDetailsStatus(productdetailid, (StatusEnum)status, OperateIP, CurrentUser.UserID);
+            bool bl = new ProductsBusiness().UpdateProductDetailsStatus(productdetailid, (EnumStatus)status, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
             return new JsonResult
             {

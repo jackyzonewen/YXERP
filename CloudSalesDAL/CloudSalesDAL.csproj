@@ -41,11 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
-    <Compile Include="Client\C_IndustryDAL.cs" />
-    <Compile Include="Client\C_RoleDAL.cs" />
-    <Compile Include="Client\C_UsersDAL.cs" />
-    <Compile Include="Client\Stock\ProductsDAL.cs" />
-    <Compile Include="Client\Stock\WarehouseDAL.cs" />
+    <Compile Include="System\C_IndustryDAL.cs" />
+    <Compile Include="System\C_RoleDAL.cs" />
+    <Compile Include="System\C_UsersDAL.cs" />
+    <Compile Include="Stock\ProductsDAL.cs" />
+    <Compile Include="Stock\WarehouseDAL.cs" />
     <Compile Include="CommonDAL.cs" />
     <Compile Include="Manage\M_ClientDAL.cs" />
     <Compile Include="Manage\M_ModulesDAL.cs" />

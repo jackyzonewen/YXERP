@@ -58,16 +58,6 @@
             </li>
         }
         <li>
-            <span class="column-name">大单位：</span>
-           
-            <select id="bigUnit">
-            @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
-            {
-                <option value="@unit.UnitID">@unit.UnitName</option> 
-            }
-            </select>
-        </li>
-        <li>
             <span class="column-name">小单位：</span>
 
             <select id="smallUnit">
@@ -77,6 +67,17 @@
             }
             </select>
         </li>
+        <li>
+            <span class="column-name">大单位：</span>
+           
+            <select id="bigUnit">
+            @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
+            {
+                <option value="@unit.UnitID">@unit.UnitName</option> 
+            }
+            </select>
+        </li>
+
         <li>
              <span class="column-name">大小单位比：</span>
             <input type="text" maxlength="3" id="bigSmallMultiple" value="1" data-empty="*" data-type="int"  class="input verify width30" />

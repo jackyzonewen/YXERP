@@ -40,11 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\C_IndustryBusiness.cs" />
-    <Compile Include="Client\C_RoleBusiness.cs" />
-    <Compile Include="Client\C_UserBusiness.cs" />
-    <Compile Include="Client\Stock\ProductsBusiness.cs" />
-    <Compile Include="Client\Stock\WarehouseBusiness.cs" />
+    <Compile Include="System\C_IndustryBusiness.cs" />
+    <Compile Include="System\C_RoleBusiness.cs" />
+    <Compile Include="System\C_UserBusiness.cs" />
+    <Compile Include="Stock\ProductsBusiness.cs" />
+    <Compile Include="Stock\WarehouseBusiness.cs" />
     <Compile Include="CommonBusiness.cs" />
     <Compile Include="CommonCache.cs" />
     <Compile Include="Manage\M_ClientBusiness.cs" />
