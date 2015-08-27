@@ -16,6 +16,8 @@ namespace CloudSalesEntity.Log
 
         public string Message { get; set; }
 
+        public int SystemType { get; set; }
+
         public DateTime CreateTime { get; set; }
 
         public string OpreateIP { get; set; }

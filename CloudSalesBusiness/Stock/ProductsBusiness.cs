@@ -632,7 +632,15 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateBrandStatus(string brandID, EnumStatus status, string operateIP, string operateID)
         {
-            return CommonBusiness.Update("C_Brand", "Status", ((int)status).ToString(), " BrandID='" + brandID + "'");
+            bool bl = CommonBusiness.Update("C_Brand", "Status", ((int)status).ToString(), " BrandID='" + brandID + "'");
+
+            if (bl)
+            {
+                string message = "编辑品牌状态为：" + CommonBusiness.GetEnumDesc(status);
+                LogBusiness.AddOperateLog(operateID, "ProductsBusiness.UpdateBrandStatus", EnumLogType.Update, EnumLogModules.Stock, EnumLogEntity.Brand, brandID, message, operateIP);
+            }
+
+            return bl;
         }
 
         /// <summary>
@@ -682,6 +690,7 @@ namespace CloudSalesBusiness
             var dal = new ProductsDAL();
             return dal.UpdateUnitStatus(unitID, (int)status);
         }
+
         /// <summary>
         /// 编辑属性信息
         /// </summary>

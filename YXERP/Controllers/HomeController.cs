@@ -28,6 +28,7 @@ namespace YXERP.Controllers
             }
             return View();
         }
+
         public ActionResult Logout()
         {
             Session["ClientManager"] = null;
@@ -45,7 +46,10 @@ namespace YXERP.Controllers
         public JsonResult UserLogin(string userName, string pwd)
         {
             bool bl = false;
-            CloudSalesEntity.C_Users model = CloudSalesBusiness.C_UserBusiness.GetC_UserByUserName(userName, pwd);
+
+            string operateip = string.IsNullOrEmpty(Request.Headers.Get("X-Real-IP")) ? Request.UserHostAddress : Request.Headers["X-Real-IP"];
+
+            CloudSalesEntity.C_Users model = CloudSalesBusiness.C_UserBusiness.GetC_UserByUserName(userName, pwd, operateip);
             if (model != null)
             {
                 Session["ClientManager"] = model;

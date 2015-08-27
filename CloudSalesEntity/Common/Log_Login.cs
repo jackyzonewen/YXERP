@@ -14,7 +14,7 @@ namespace CloudSalesEntity.Log
 
         public string LoginName { get; set; }
 
-        public int LoginType { get; set; }
+        public int SystemType { get; set; }
 
         public int Status { get; set; }
 

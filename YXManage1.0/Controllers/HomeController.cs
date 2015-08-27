@@ -28,6 +28,7 @@ namespace YXManage.Controllers
             }
             return View();
         }
+
         public ActionResult Logout()
         {
             CurrentUser = null;
@@ -43,7 +44,10 @@ namespace YXManage.Controllers
         public JsonResult UserLogin(string userName, string pwd)
         {
             bool bl = false;
-            CloudSalesEntity.M_Users model = CloudSalesBusiness.M_UsersBusiness.GetM_UserByUserName(userName, pwd);
+
+            string operateip = string.IsNullOrEmpty(Request.Headers.Get("X-Real-IP")) ? Request.UserHostAddress : Request.Headers["X-Real-IP"];
+
+            CloudSalesEntity.M_Users model = CloudSalesBusiness.M_UsersBusiness.GetM_UserByUserName(userName, pwd, operateip);
             if (model != null)
             {
                 CurrentUser = model;

@@ -7,15 +7,27 @@ using System.Text;
 namespace CloudSalesEnum
 {
     /// <summary>
-    /// 登录类型
+    /// 日志类型
     /// </summary>
-    public enum EnumLoginType
+    public enum EnumLogType
     {
-        [DescriptionAttribute("管理后台")]
-        Manage = 1,
-        [DescriptionAttribute("平台系统")]
-        Client = 2,
-        [DescriptionAttribute("代理商系统")]
-        Agents = 3
+        Create = 1,
+        Update = 2,
+        Delete = 3
+    }
+    /// <summary>
+    /// 日志模块
+    /// </summary>
+    public enum EnumLogModules
+    {
+        [DescriptionAttribute("库存")]
+        Stock = 1
+    }
+    /// <summary>
+    /// 日志对象
+    /// </summary>
+    public enum EnumLogEntity
+    {
+        Brand = 1
     }
 }

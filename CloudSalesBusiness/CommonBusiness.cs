@@ -3,6 +3,7 @@ using CloudSalesEntity;
 using CloudSalesEnum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -132,5 +133,17 @@ namespace CloudSalesBusiness
             return CommonDAL.GetPagerData(tableName, columns, condition, key, "", pageSize, pageIndex, out totalNum, out pageCount, asc);
         }
 
+        /// <summary>
+        /// 获取枚举描述
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="Enumtype"></param>
+        /// <returns></returns>
+        public static string GetEnumDesc<T>(T Enumtype)
+        {
+            if (Enumtype == null) throw new ArgumentNullException("Enumtype");
+            if (!Enumtype.GetType().IsEnum) throw new Exception("参数类型不正确");
+            return ((DescriptionAttribute)Enumtype.GetType().GetField(Enumtype.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false)[0]).Description;
+        }
     }
 }

@@ -27,13 +27,13 @@ namespace CloudSalesBusiness
         /// <summary>
         /// 根据用户名密码获取会员信息（登录）
         /// </summary>
-        /// <param name="userName">用户名</param>
+        /// <param name="loginname">用户名</param>
         /// <param name="pwd">密码</param>
         /// <returns></returns>
-        public static C_Users GetC_UserByUserName(string userName, string pwd)
+        public static C_Users GetC_UserByUserName(string loginname, string pwd, string operateip)
         {
-            pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, userName);
-            DataSet ds = new C_UsersDAL().GetC_UserByUserName(userName, pwd);
+            pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, loginname);
+            DataSet ds = new C_UsersDAL().GetC_UserByUserName(loginname, pwd);
             C_Users model = null;
             if (ds.Tables.Contains("User") && ds.Tables["User"].Rows.Count > 0)
             {
@@ -68,6 +68,10 @@ namespace CloudSalesBusiness
                     model.Menus = list;
                 }
             }
+
+            //记录登录日志
+            LogBusiness.AddLoginLog(loginname, model != null, CloudSalesEnum.EnumSystemType.Client, operateip);
+
             return model;
         }
 

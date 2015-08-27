@@ -10,13 +10,24 @@ namespace YXERP.Controllers
     public class BaseController : Controller
     {
 
-
+        /// <summary>
+        /// 默认分页Size
+        /// </summary>
         protected int PageSize = 20;
 
-        protected string OperateIP = System.Web.HttpContext.Current.Request.UserHostAddress;
+        /// <summary>
+        /// 登录IP
+        /// </summary>
+        protected string OperateIP
+        {
+            get 
+            {
+                return string.IsNullOrEmpty(Request.Headers.Get("X-Real-IP")) ? Request.UserHostAddress : Request.Headers["X-Real-IP"];
+            }
+        }
 
         /// <summary>
-        /// 当前用户
+        /// 当前登录用户
         /// </summary>
         protected CloudSalesEntity.C_Users CurrentUser
         {
@@ -34,7 +45,9 @@ namespace YXERP.Controllers
             set { Session["ClientManager"] = value; }
         }
 
-
+        /// <summary>
+        /// 返回数据集合
+        /// </summary>
         protected Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
 
         /// <summary>

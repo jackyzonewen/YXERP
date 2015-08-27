@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace CloudSalesEnum
 {
     /// <summary>
-    /// 菜单类型
+    /// 系统类型
     /// </summary>
-    public enum EnumMenuType
+    public enum EnumSystemType
     {
-        /// <summary>
-        /// 管理系统
-        /// </summary>
+        [DescriptionAttribute("管理系统")]
         Manage = 1,
-        /// <summary>
-        /// 客户端（公司）
-        /// </summary>
+        [DescriptionAttribute("客户端（公司）")]
         Client = 2,
-        /// <summary>
-        /// 代理商
-        /// </summary>
+        [DescriptionAttribute("代理商")]
         Agent = 3
     }
 
@@ -29,13 +24,13 @@ namespace CloudSalesEnum
     /// </summary>
     public enum EnumStatus
     {
-        //所有（搜索）
+        [DescriptionAttribute("全部")]
         All = -1,
-        //无效（未审核）
+        [DescriptionAttribute("禁用")]
         Invalid = 0,
-        //有效(上架、已审核)
+        [DescriptionAttribute("启用")]
         Valid = 1,
-        //删除
+        [DescriptionAttribute("删除")]
         Delete = 9
     }
 

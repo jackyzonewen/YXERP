@@ -11,11 +11,11 @@ namespace CloudSalesDAL
     {
         #region 查询
 
-        public DataSet GetC_UserByUserName(string userName, string pwd)
+        public DataSet GetC_UserByUserName(string loginname, string pwd)
         {
 
             SqlParameter[] paras = { 
-                                    new SqlParameter("@LoginName",userName),
+                                    new SqlParameter("@LoginName",loginname),
                                     new SqlParameter("@LoginPwd",pwd)
                                    };
             return GetDataSet("P_GetC_UserToLogin", paras, CommandType.StoredProcedure, "User|Department|Role|Permission|Modules");

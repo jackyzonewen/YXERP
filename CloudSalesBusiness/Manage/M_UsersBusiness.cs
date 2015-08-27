@@ -15,21 +15,25 @@ namespace CloudSalesBusiness
     public class M_UsersBusiness
     {
         /// <summary>
-        /// 根据用户名密码获取会员信息（登录）
+        /// 根据账号密码获取信息（登录）
         /// </summary>
-        /// <param name="userName">用户名</param>
+        /// <param name="loginname">账号</param>
         /// <param name="pwd">密码</param>
         /// <returns></returns>
-        public static M_Users GetM_UserByUserName(string userName, string pwd)
+        public static M_Users GetM_UserByUserName(string loginname, string pwd, string operateip)
         {
-            pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, userName);
-            DataTable dt = new M_UsersDAL().GetM_UserByUserName(userName, pwd);
+            pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, loginname);
+            DataTable dt = new M_UsersDAL().GetM_UserByUserName(loginname, pwd);
             M_Users model = null;
             if (dt.Rows.Count > 0)
             {
                 model = new M_Users();
                 model.FillData(dt.Rows[0]);
             }
+
+            //记录登录日志
+            LogBusiness.AddLoginLog(loginname, model != null, CloudSalesEnum.EnumSystemType.Manage, operateip);
+
             return model;
         }
     }
