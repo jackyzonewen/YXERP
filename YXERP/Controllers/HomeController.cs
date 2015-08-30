@@ -49,7 +49,7 @@ namespace YXERP.Controllers
 
             string operateip = string.IsNullOrEmpty(Request.Headers.Get("X-Real-IP")) ? Request.UserHostAddress : Request.Headers["X-Real-IP"];
 
-            CloudSalesEntity.C_Users model = CloudSalesBusiness.C_UserBusiness.GetC_UserByUserName(userName, pwd, operateip);
+            CloudSalesEntity.C_Users model = CloudSalesBusiness.OrganizationBusiness.GetC_UserByUserName(userName, pwd, operateip);
             if (model != null)
             {
                 Session["ClientManager"] = model;

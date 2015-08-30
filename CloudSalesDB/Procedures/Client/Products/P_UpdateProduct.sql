@@ -44,10 +44,12 @@ AS
 
 begin tran
 
-declare @Err int,@PIDList nvarchar(max),@SaleAttr  nvarchar(max)
+declare @Err int,@PIDList nvarchar(max),@SaleAttr  nvarchar(max),@BUnitID nvarchar(64),@MUnitID nvarchar(64)
 set @Err=0
 
 select @PIDList=PIDList,@SaleAttr=SaleAttr from C_Category where CategoryID=@CategoryID
+
+select @BUnitID=[BigUnitID],@MUnitID=[SmallUnitID] from [C_Products] where ProductID=@ProductID
 
 Update [C_Products] set [ProductName]=@ProductName,[GeneralName]=@GeneralName,[IsCombineProduct]=@IsCombineProduct,[BrandID]=@BrandID,
 						[BigUnitID]=@BigUnitID,[SmallUnitID]=@SmallUnitID,[BigSmallMultiple]=@BigSmallMultiple ,
@@ -56,6 +58,19 @@ Update [C_Products] set [ProductName]=@ProductName,[GeneralName]=@GeneralName,[I
 						[IsNew]=@Isnew,[IsRecommend]=@IsRecommend ,[DiscountValue]=@DiscountValue,[Weight]=@Weight ,[EffectiveDays]=@EffectiveDays,
 						[ShapeCode]=@ShapeCode ,[Description]=@Description ,[UpdateTime]=getdate()
 where ProductID=@ProductID
+
+
+if(@BUnitID<>@BigUnitID)
+begin
+	update C_ProductDetail set UnitID=@BigUnitID where ProductID=@ProductID and UnitID=@BUnitID
+	set @Err+=@@Error
+end
+if(@MUnitID<>@SmallUnitID)
+begin
+	update C_ProductDetail set UnitID=@SmallUnitID where ProductID=@ProductID and UnitID=@MUnitID
+	set @Err+=@@Error
+end
+
 
 set @Err+=@@Error
 

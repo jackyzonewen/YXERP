@@ -95,7 +95,7 @@ namespace YXManage.Controllers
         /// <returns></returns>
         public JsonResult IsExistLoginName(string loginName)
         {
-            bool bl = C_UserBusiness.IsExistLoginName(loginName);
+            bool bl = OrganizationBusiness.IsExistLoginName(loginName);
             JsonDictionary.Add("Result", bl);
             return new JsonResult()
             {
