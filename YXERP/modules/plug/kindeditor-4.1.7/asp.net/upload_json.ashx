@@ -15,6 +15,7 @@ using System.IO;
 using System.Globalization;
 using LitJson;
 
+
 public class Upload : IHttpHandler
 {
 	private HttpContext context;
@@ -97,7 +98,7 @@ public class Upload : IHttpHandler
 		hash["error"] = 0;
 		hash["url"] = fileUrl;
 		context.Response.AddHeader("Content-Type", "text/html; charset=UTF-8");
-		context.Response.Write(JsonMapper.ToJson(hash));
+		context.Response.Write(JsonMapper.ToJson(hash)); 
 		context.Response.End();
 	}
 

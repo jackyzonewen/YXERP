@@ -46,8 +46,6 @@
     <Compile Include="BaseDAL.cs" />
     <Compile Include="Common\LogDAL.cs" />
     <Compile Include="System\C_IndustryDAL.cs" />
-    <Compile Include="System\C_RoleDAL.cs" />
-    <Compile Include="System\C_UsersDAL.cs" />
     <Compile Include="Stock\ProductsDAL.cs" />
     <Compile Include="Stock\WarehouseDAL.cs" />
     <Compile Include="CommonDAL.cs" />
@@ -55,6 +53,7 @@
     <Compile Include="Manage\M_ModulesDAL.cs" />
     <Compile Include="Manage\M_UsersDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\OrganizationDAL.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

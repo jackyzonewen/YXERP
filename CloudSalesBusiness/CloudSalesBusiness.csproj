@@ -45,8 +45,6 @@
   <ItemGroup>
     <Compile Include="Common\LogBusiness.cs" />
     <Compile Include="System\C_IndustryBusiness.cs" />
-    <Compile Include="System\C_RoleBusiness.cs" />
-    <Compile Include="System\C_UserBusiness.cs" />
     <Compile Include="Stock\ProductsBusiness.cs" />
     <Compile Include="Stock\WarehouseBusiness.cs" />
     <Compile Include="CommonBusiness.cs" />
@@ -55,6 +53,7 @@
     <Compile Include="Manage\M_ModulesBusiness.cs" />
     <Compile Include="Manage\M_UsersBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\OrganizationBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CloudSalesDAL\CloudSalesDAL.csproj">

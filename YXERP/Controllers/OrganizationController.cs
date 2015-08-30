@@ -16,5 +16,20 @@ namespace YXERP.Controllers
             return View();
         }
 
+        public ActionResult Department()
+        {
+            return View();
+        }
+
+        public ActionResult Roles()
+        {
+            return View();
+        }
+
+        public ActionResult Users()
+        {
+            return View();
+        }
+
     }
 }

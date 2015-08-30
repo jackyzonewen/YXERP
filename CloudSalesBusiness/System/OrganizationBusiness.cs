@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Data;
 
 using CloudSalesEntity;
 using CloudSalesDAL;
 
+
 namespace CloudSalesBusiness
 {
-    public class C_UserBusiness
+    public class OrganizationBusiness
     {
         #region 查询
 
@@ -33,7 +35,7 @@ namespace CloudSalesBusiness
         public static C_Users GetC_UserByUserName(string loginname, string pwd, string operateip)
         {
             pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, loginname);
-            DataSet ds = new C_UsersDAL().GetC_UserByUserName(loginname, pwd);
+            DataSet ds = new OrganizationDAL().GetC_UserByUserName(loginname, pwd);
             C_Users model = null;
             if (ds.Tables.Contains("User") && ds.Tables["User"].Rows.Count > 0)
             {
@@ -75,6 +77,15 @@ namespace CloudSalesBusiness
             return model;
         }
 
+        #endregion
+
+        #region 添加
+        #endregion
+
+        #region 编辑
+        #endregion
+
+        #region 删除
         #endregion
     }
 }

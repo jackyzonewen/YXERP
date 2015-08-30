@@ -115,9 +115,56 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\uploadFiles\2015071122152715275334.png" />
+    <Content Include="Content\uploadFiles\2015071923242824288381.png" />
+    <Content Include="Content\uploadFiles\2015071923371437142207.jpg" />
+    <Content Include="Content\uploadFiles\2015071923382038209862.jpg" />
+    <Content Include="Content\uploadFiles\2015071923404540458048.png" />
+    <Content Include="Content\uploadFiles\2015072315434943496164.jpg" />
+    <Content Include="Content\uploadFiles\201508011400150153025.jpg" />
+    <Content Include="Content\uploadFiles\201508011401101107295.jpg" />
+    <Content Include="Content\uploadFiles\201508011403113114451.jpg" />
+    <Content Include="Content\uploadFiles\201508011404484481137.jpg" />
+    <Content Include="Content\uploadFiles\201508011405395392251.jpg" />
+    <Content Include="Content\uploadFiles\20150801140804848434.jpg" />
+    <Content Include="Content\uploadFiles\20150801140906968478.jpg" />
+    <Content Include="Content\uploadFiles\2015080114101410141216.jpg" />
+    <Content Include="Content\uploadFiles\2015080114215221528575.jpg" />
+    <Content Include="Content\uploadFiles\2015080114232423242978.jpg" />
+    <Content Include="Content\uploadFiles\2015080114245424542134.jpg" />
+    <Content Include="Content\uploadFiles\2015080114265426549469.jpg" />
+    <Content Include="Content\uploadFiles\2015081615432243226562.PNG" />
+    <Content Include="Content\uploadFiles\2015081719361636168547.jpg" />
+    <Content Include="Content\uploadFiles\2015081719402240223758.jpg" />
+    <Content Include="Content\uploadFiles\2015081719441444142152.jpg" />
+    <Content Include="Content\uploadFiles\2015081719574457444457.jpg" />
+    <Content Include="Content\uploadFiles\2015083013565256521828.jpg" />
+    <Content Include="Content\uploadFiles\2015083014331333136625.jpg" />
+    <Content Include="Content\uploadFiles\2015083014353235326161.jpg" />
+    <Content Include="Content\uploadFiles\2015083014363836383090.jpg" />
+    <Content Include="Content\uploadFiles\2015083014365536552928.jpg" />
+    <Content Include="Content\uploadFiles\201508301437083788392.jpg" />
+    <Content Include="Content\uploadFiles\2015083014371737175362.jpg" />
+    <Content Include="Content\uploadFiles\2015083014372937296872.jpg" />
+    <Content Include="Content\uploadFiles\2015083014373637369290.jpg" />
+    <Content Include="Content\uploadFiles\2015083018444244427023.jpg" />
+    <Content Include="Content\uploadFiles\2015083018454445447380.jpg" />
+    <Content Include="Content\uploadFiles\2015083018462846283691.jpg" />
+    <Content Include="Content\uploadFiles\201508301847094797954.jpg" />
+    <Content Include="Content\uploadFiles\2015083018483448343571.jpg" />
+    <Content Include="Content\uploadFiles\2015083018484748475051.jpg" />
+    <Content Include="Content\uploadFiles\2015083018491349135657.jpg" />
+    <Content Include="Content\uploadFiles\2015083018493149318605.jpg" />
+    <Content Include="Content\uploadFiles\2015083018495649566228.jpg" />
+    <Content Include="Content\uploadFiles\2015083018501250129757.jpg" />
+    <Content Include="Content\uploadFiles\2015083018503350334448.jpg" />
+    <Content Include="Content\uploadFiles\2015083018504950499203.jpg" />
+    <Content Include="Content\uploadFiles\2015083018523652361956.jpg" />
+    <Content Include="Content\uploadFiles\2015083018525152516016.jpg" />
     <Content Include="Global.asax" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\login.css" />
+    <Content Include="modules\css\organization\department.css" />
     <Content Include="modules\css\products\attr.css" />
     <Content Include="modules\css\products\brand.css" />
     <Content Include="modules\css\products\unit.css" />
@@ -438,6 +485,7 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home.js" />
     <Content Include="modules\scripts\layout.js" />
+    <Content Include="modules\scripts\organization\department.js" />
     <Content Include="modules\scripts\products\attr.js" />
     <Content Include="modules\scripts\products\brand.js" />
     <Content Include="modules\scripts\products\category.js" />
@@ -482,9 +530,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\tempfile\" />
-    <Folder Include="Content\uploadFiles\" />
     <Folder Include="Models\" />
     <Folder Include="modules\plug\kindeditor-4.1.7\attached\" />
+    <Folder Include="modules\template\organization\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -591,6 +639,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Organization\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Organization\Department.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Organization\Roles.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Organization\Users.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

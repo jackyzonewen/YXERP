@@ -67,7 +67,7 @@ namespace CloudSalesEntity
                             {
                                 property.SetValue(entity,
                                     dr[property.Name] != null && dr[property.Name] != DBNull.Value
-                                    ? dr[property.Name].ToString()
+                                    ? dr[property.Name].ToString().Replace("\"", "“")
                                     : "",
                                     null);
                             }
