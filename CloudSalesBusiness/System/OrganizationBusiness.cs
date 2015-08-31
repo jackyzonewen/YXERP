@@ -77,12 +77,62 @@ namespace CloudSalesBusiness
             return model;
         }
 
+        /// <summary>
+        /// 获取部门列表
+        /// </summary>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public static List<C_Department> GetDepartments(string clientid)
+        {
+            DataTable dt = new OrganizationDAL().GetDepartments(clientid);
+            List<C_Department> list = new List<C_Department>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                C_Department model = new C_Department();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
         #endregion
 
         #region 添加
+
+        /// <summary>
+        /// 添加部门
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <param name="parentid">上级ID</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public string AddDepartment(string name, string parentid, string description, string operateid, string clientid)
+        {
+            var dal = new OrganizationDAL();
+            return dal.AddDepartment(name, parentid, description, operateid, clientid);
+        }
+
         #endregion
 
         #region 编辑
+
+        /// <summary>
+        /// 编辑部门
+        /// </summary>
+        /// <param name="departid">部门ID</param>
+        /// <param name="name">名称</param>
+        /// <param name="description">描述</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="operateip">操作IP</param>
+        /// <returns></returns>
+        public bool UpdateDepartment(string departid, string name, string description, string operateid, string operateip)
+        {
+            var dal = new OrganizationDAL();
+            return dal.UpdateDepartment(departid, name, description);
+        }
+
         #endregion
 
         #region 删除

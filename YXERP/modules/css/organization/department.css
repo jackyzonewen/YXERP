@@ -1,9 +1,9 @@
 ﻿
-.unit-list { width:100%; }
+.entity-list { width:100%; }
 
-.unit-list li{ height:30px; line-height:30px; width:60px; padding:0 15px; float:left; margin: 10px 10px;  text-align:center; position:relative;  }
-.unit-list li input{ height:28px; line-height:30px; width:50px; text-align:center; border:none !important; cursor:pointer; }
-.unit-list li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
-.unit-list li:hover span{ display:inline-block; }
-.unit-list .unit-item { border:solid 1px #ccc; border-radius:5px; }
-.unit-list .unit-item:hover{ border:solid 1px #7faaca; }
+.entity-list li{ height:30px; line-height:30px; width:120px; padding:0 15px; float:left; margin: 10px 10px;  text-align:center; position:relative;  }
+.entity-list li input{ height:28px; line-height:30px; width:120px; text-align:center;  border:solid 1px #ccc; cursor:pointer;  border-radius:5px; }
+.entity-list li input:hover{ border:solid 1px #7faaca; }
+.entity-list li span{ position:absolute; right:-9px; top:-9px; display:none; background-color:white; }
+.entity-list li:hover span{ display:inline-block; }
+

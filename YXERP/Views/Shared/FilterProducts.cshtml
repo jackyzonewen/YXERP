@@ -1,0 +1,24 @@
+﻿@{
+    
+}
+@section css{
+    <link rel="stylesheet" href="/modules/css/products/filterproducts.css" />
+}
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/products/filterproducts"], function (obj) {
+            obj.init('@ViewBag.Type');
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">@ViewBag.Title</span>
+    <div class="right searth-module"> </div>
+    
+</div>
+<div class="content-body">
+    <ul class="entity-list">
+
+    </ul>
+    
+</div>

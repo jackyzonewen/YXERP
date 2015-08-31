@@ -1,12 +1,15 @@
-﻿using System;
+﻿using CloudSalesBusiness;
+using CloudSalesEntity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace YXERP.Controllers
 {
-    public class OrganizationController : Controller
+    public class OrganizationController : BaseController
     {
         //
         // GET: /Organization/
@@ -18,6 +21,7 @@ namespace YXERP.Controllers
 
         public ActionResult Department()
         {
+            ViewBag.Items = OrganizationBusiness.GetDepartments(CurrentUser.ClientID);
             return View();
         }
 
@@ -30,6 +34,41 @@ namespace YXERP.Controllers
         {
             return View();
         }
+
+        #region 部门
+
+        /// <summary>
+        /// 保存部门
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public JsonResult SaveDepartment(string entity)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            C_Department model = serializer.Deserialize<C_Department>(entity);
+
+            string ID = "";
+            if (string.IsNullOrEmpty(model.DepartID))
+            {
+                ID = new OrganizationBusiness().AddDepartment(model.Name, model.ParentID, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+            }
+            else
+            {
+                bool bl = new OrganizationBusiness().UpdateDepartment(model.DepartID, model.Name, model.Description, CurrentUser.UserID, OperateIP);
+                if (bl)
+                {
+                    ID = model.DepartID;
+                }
+            }
+            JsonDictionary.Add("ID", ID);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        #endregion
 
     }
 }

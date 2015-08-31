@@ -5,7 +5,7 @@
     ObjectJS.init = function () {
         var _self = this;
         _self.bindEvent();
-        _self.bindElementEvent($(".unit-item"));
+        _self.bindElementEvent($(".entity-item"));
     }
     //删除
     ObjectJS.deleteUnit = function (unitid, callback) {
@@ -16,26 +16,12 @@
     //绑定事件
     ObjectJS.bindEvent = function () {
         var _self = this;
-        $("#addUnit").click(function () {
+        $("#addEntity").click(function () {
             var _this = $(this);
-            var _ele = $('<li class="unit-item"><input type="text" maxlength="4" data-id="" data-value="" value="" /><span data-id="" class="ico-delete"></span></li>');
+            var _ele = $('<li class="entity-item"><input type="text" maxlength="20" data-id="" data-value="" value="" /><span data-id="" class="ico-delete"></span></li>');
             _self.bindElementEvent(_ele);
             _this.before(_ele);
             _ele.find("input").focus();
-        });
-        //搜索
-        require.async("search", function () {
-            $(".searth-module").searchKeys(function (keyWords) {
-                if (!!keyWords) {
-                    var _obj = $(".unit-list").find("input[data-value='" + keyWords + "']");
-                    _obj.focus();
-                    _obj.select();
-                    $(".unit-list li").hide();
-                    _obj.parent().show();
-                } else {
-                    $(".unit-list li").show();
-                }
-            });
         });
     }
     //附加元素事件
@@ -55,15 +41,17 @@
                     _this.val(_this.data("value"));
                 }
             } else if (_this.val() != _this.data("value")) {
-                var unit = {
-                    UnitID: _this.data("id"),
-                    UnitName: _this.val(),
+                var model = {
+                    DepartID: _this.data("id"),
+                    Name: _this.val(),
+                    ParentID: "",
                     Description: ""
                 };
-                Global.post("/Products/SaveUnit", { unit: JSON.stringify(unit) }, function (data) {
+                Global.post("/Organization/SaveDepartment", { entity: JSON.stringify(model) }, function (data) {
+
                     if (data.ID.length > 0) {
                         _this.data("id", data.ID);
-                        _this.data("value", unit.UnitName);
+                        _this.data("value", model.Name);
                         _this.next().data("id", data.ID);
                     }
                 })
@@ -72,7 +60,7 @@
         elments.find(".ico-delete").click(function () {
             var _this = $(this);
             if (_this.data("id") != "") {
-                if (confirm("单位删除后不可恢复,确认删除吗？")) {
+                if (confirm("部门删除后不可恢复,确认删除吗？")) {
                     _self.deleteUnit(_this.data("id"), function (status) {
                         status && _this.parent().remove();
                     });

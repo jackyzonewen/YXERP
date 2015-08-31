@@ -109,6 +109,11 @@ namespace CloudSalesEntity
 		}
 		#endregion Model
 
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
+
 	}
 }
 

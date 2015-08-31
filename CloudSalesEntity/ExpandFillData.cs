@@ -49,7 +49,7 @@ namespace CloudSalesEntity
                                 {
                                     property.SetValue(entity,
                                         dr[property.Name] != null && dr[property.Name] != DBNull.Value
-                                        ? dr[property.Name].ToString().ToLower()
+                                        ? dr[property.Name].ToString().ToLower().Replace("\"", "“")
                                         : "",
                                         null);
                                 }
@@ -57,7 +57,7 @@ namespace CloudSalesEntity
                                 {
                                     property.SetValue(entity,
                                         dr[property.Name] != null && dr[property.Name] != DBNull.Value
-                                        ? dr[property.Name].ToString().ToUpper()
+                                        ? dr[property.Name].ToString().ToUpper().Replace("\"", "“")
                                         : "",
                                         null);
                                 }
