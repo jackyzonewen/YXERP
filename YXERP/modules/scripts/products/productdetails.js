@@ -30,7 +30,7 @@ define(function (require, exports, module) {
     }
     //添加/编辑子产品
     ObjectJS.showTemplate = function (model, id) {
-        var _self = this;
+        var _self = this, count = 1;
         doT.exec("template/products/productdetails_add.html", function (templateFun) {
 
             var html = templateFun(model.Category.SaleAttrs);
@@ -120,7 +120,7 @@ define(function (require, exports, module) {
                 success: function (data, status) {
                     if (data.Items.length > 0) {
                         _self.ProductImage = data.Items[0];
-                        $("#productImg").attr("src", data.Items[0]);
+                        $("#productImg").attr("src", data.Items[0] + "?" + count++);
                     }
                 }
             });
