@@ -59,9 +59,8 @@
     <Folder Include="Properties" />
     <Folder Include="Procedures" />
     <Folder Include="Procedures\Manage" />
-    <Folder Include="Procedures\Client" />
-    <Folder Include="Procedures\Client\Products" />
-    <Folder Include="Procedures\Client\Warehouse" />
+    <Folder Include="Procedures\System" />
+    <Folder Include="Procedures\Stock" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Procedures\InitDatabase.sql" />
@@ -71,60 +70,60 @@
     <None Include="Procedures\Manage\P_InsertClient.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\P_GetC_UserToLogin.sql" />
+    <None Include="Procedures\System\P_GetC_UserToLogin.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Procedures\P_GetModulesMenu.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_GetBrandList.sql" />
+    <None Include="Procedures\Stock\P_AddCategoryAttr.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_GetProductAttrList.sql" />
+    <None Include="Procedures\Stock\P_GetAttrsByCategoryID.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_GetProductAttrByID.sql" />
+    <None Include="Procedures\Stock\P_GetBrandList.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_InsertCategory.sql" />
+    <None Include="Procedures\Stock\P_GetCategoryDetailByID.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_GetCategoryDetailByID.sql" />
+    <None Include="Procedures\Stock\P_GetDepotSeats.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_InsertProduct.sql" />
+    <None Include="Procedures\Stock\P_GetProductAttrByID.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_GetProductList.sql" />
+    <None Include="Procedures\Stock\P_GetProductAttrList.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_GetProductByID.sql" />
+    <None Include="Procedures\Stock\P_GetProductByID.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_UpdateProduct.sql" />
+    <None Include="Procedures\Stock\P_GetProductList.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_InsertAttr.sql" />
+    <None Include="Procedures\Stock\P_GetWareHouses.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_GetAttrsByCategoryID.sql" />
+    <None Include="Procedures\Stock\P_InsertAttr.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_UpdateCategory.sql" />
+    <None Include="Procedures\Stock\P_InsertCategory.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Warehouse\P_GetWareHouses.sql" />
+    <None Include="Procedures\Stock\P_InsertProduct.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Warehouse\P_GetDepotSeats.sql" />
+    <None Include="Procedures\Stock\P_InsertProductDetail.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_AddCategoryAttr.sql" />
+    <None Include="Procedures\Stock\P_UpdateCategory.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_InsertProductDetail.sql" />
+    <None Include="Procedures\Stock\P_UpdateProduct.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Procedures\Client\Products\P_UpdateProductDetail.sql" />
+    <None Include="Procedures\Stock\P_UpdateProductDetail.sql" />
   </ItemGroup>
 </Project>

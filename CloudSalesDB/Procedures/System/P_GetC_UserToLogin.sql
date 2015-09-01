@@ -25,16 +25,16 @@ select @C_UserID = UserID,@ClientID=ClientID from C_Users where LoginName=@Login
 
 if(@C_UserID is not null)
 begin
-    select RoleID into #Roles from C_UserRole where UserID=@C_UserID
+    select RoleID into #Roles from C_UserRole where UserID=@C_UserID and Status=1
 
 	--会员信息
 	select * from C_Users where UserID=@C_UserID
 
 	--部门信息
-	select d.* from C_UserDepart u join C_Department d on u.DepartID=d.DepartID  where u.UserID=@C_UserID 
+	select d.* from C_UserDepart u join C_Department d on u.DepartID=d.DepartID  where u.UserID=@C_UserID and u.Status=1 and d.Status=1
 
 	--角色信息
-	select d.* from C_UserRole u join C_Role d on u.RoleID=d.RoleID  where u.UserID=@C_UserID
+	select d.* from C_UserRole u join C_Role d on u.RoleID=d.RoleID  where u.UserID=@C_UserID and u.Status=1 and d.Status=1
 
 	--权限信息
 	select p.PermissionID,p.Name,p.MenuCode,p.Action from C_RolePermission r 

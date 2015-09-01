@@ -64,22 +64,29 @@
             </li>
         }
         <li>
-            <span class="column-name">单位：</span>
+            <span class="column-name">小单位：</span>
+
             <select id="smallUnit">
             @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
             {
                 <option value="@unit.UnitID">@unit.UnitName</option> 
             }
             </select>
-            （大 =
-            <input type="text" maxlength="3" id="bigSmallMultiple" value="1" data-empty="*" data-type="int"  class="input verify width30" /> *
-            小）
+        </li>
+        <li>
+            <span class="column-name">大单位：</span>
+           
             <select id="bigUnit">
             @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
             {
                 <option value="@unit.UnitID">@unit.UnitName</option> 
             }
             </select>
+        </li>
+
+        <li>
+             <span class="column-name">大小单位比：</span>
+            <input type="text" maxlength="3" id="bigSmallMultiple" value="1" data-empty="*" data-type="int"  class="input verify width30" />
         </li>
         <li>
             <span class="column-name">正常价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="commonprice" class="input verify width80" />
