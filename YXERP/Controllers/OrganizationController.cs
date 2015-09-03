@@ -67,6 +67,21 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        /// <summary>
+        /// 删除部门
+        /// </summary>
+        /// <param name="departid"></param>
+        /// <returns></returns>
+        public JsonResult DeleteDepartment(string departid)
+        {
+            var status = new OrganizationBusiness().UpdateDepartmentStatus(departid, CloudSalesEnum.EnumStatus.Delete, CurrentUser.UserID, OperateIP);
+            JsonDictionary.Add("Status", (int)status);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
         #endregion
 

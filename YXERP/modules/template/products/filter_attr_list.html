@@ -1,0 +1,18 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+<ul class="attr-item" data-id="{%=item.AttrID%}">
+    <li class="attrkey" title="{%=item.Description%}">{%=item.AttrName%}：</li>
+    <li class="attrValues">
+        <ul>
+            {%
+	            for(var ii=0, jj=item.AttrValues.length; ii < jj; ii++){
+	            var value = item.AttrValues[ii];
+            %}
+                <li data-id="{%=value.ValueID%}">{%=value.ValueName%}</li>
+            {% } %}
+        </ul>
+    </li>
+</ul>
+{% } %}

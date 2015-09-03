@@ -113,6 +113,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilterProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -321,6 +322,7 @@
     <Content Include="modules\css\products\category.css" />
     <Content Include="modules\css\products\product.css" />
     <Content Include="modules\css\products\attrplug.css" />
+    <Content Include="modules\css\products\filterproducts.css" />
     <Content Include="modules\css\warehouse\warehouse.css" />
     <Content Include="modules\css\warehouse\warehousetype.css" />
     <Content Include="modules\images\default.png" />
@@ -343,6 +345,12 @@
     <Content Include="modules\images\ico-logout.png" />
     <Content Include="modules\images\ico-name.png" />
     <Content Include="modules\images\ico-open.png" />
+    <Content Include="modules\images\ico-orderby-down-hover.png" />
+    <Content Include="modules\images\ico-orderby-down.png" />
+    <Content Include="modules\images\ico-orderby-shang-hover.png" />
+    <Content Include="modules\images\ico-orderby-shang.png" />
+    <Content Include="modules\images\ico-orderby-xia-hover.png" />
+    <Content Include="modules\images\ico-orderby-xia.png" />
     <Content Include="modules\images\ico-pull.png" />
     <Content Include="modules\images\ico-pwd.png" />
     <Content Include="modules\images\ico-tree-full.png" />
@@ -359,7 +367,6 @@
     <Content Include="modules\images\logo.png" />
     <Content Include="modules\images\sidebar.gif" />
     <Content Include="modules\images\submenu.gif" />
-    <Content Include="modules\images\topLine.gif" />
     <Content Include="modules\images\topmenu.gif" />
     <Content Include="modules\images\logo-1.png" />
     <Content Include="modules\plug\city.js" />
@@ -639,6 +646,7 @@
     <Content Include="modules\scripts\products\attr.js" />
     <Content Include="modules\scripts\products\brand.js" />
     <Content Include="modules\scripts\products\category.js" />
+    <Content Include="modules\scripts\products\filterproducts.js" />
     <Content Include="modules\scripts\products\unit.js" />
     <Content Include="modules\scripts\products\choosecategory.js" />
     <Content Include="modules\scripts\products\product.js" />
@@ -657,6 +665,7 @@
     <Content Include="modules\template\products\common_attr_list.html" />
     <Content Include="modules\template\products\productdetails_add.html" />
     <Content Include="modules\template\products\productdetails_list.html" />
+    <Content Include="modules\template\products\filter_attr_list.html" />
     <Content Include="modules\template\warehouse\depotseat_add.html" />
     <Content Include="modules\template\warehouse\warehouse_list.html" />
     <Content Include="modules\template\warehouse\depotseat_list.html" />
@@ -680,7 +689,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\tempfile\" />
-    <Folder Include="Models\" />
     <Folder Include="modules\plug\kindeditor-4.1.7\attached\" />
     <Folder Include="modules\template\organization\" />
     <Folder Include="Views\Purchase\" />

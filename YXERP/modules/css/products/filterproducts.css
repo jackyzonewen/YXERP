@@ -1,0 +1,30 @@
+﻿
+/*分类层级*/
+.category-map { height:30px; border-bottom:solid 1px #ccc; padding-bottom:5px; }
+.category-map li{ height:30px; line-height:30px; color:#333; cursor:pointer; float:left; padding-right:20px; }
+.category-map li span { font-family: simsun; font-style: normal; padding-left:5px; }
+.category-map li:hover{  color:#B10000; }
+
+/*属性筛选*/
+.attr-item { border-bottom:solid 1px #ccc; overflow:auto; background-color:#eee; }
+.attrkey{ width:10%; float:left; line-height:35px; text-indent:20px; }
+.attrValues{ width:90%; float:left;line-height:35px; height:35px; height:auto; background-color:#fff;}
+.attrValues li { height:35px; line-height:35px; float:left; padding:0 20px; cursor:pointer; display:inline-block; }
+.attrValues li:hover { color:#B10000; }
+
+
+#beginprice, #endprice { width:60px; }
+
+/*排序*/
+.filter-orderby { height:50px; width:100%; background-color:#FAF9F9; color:#806F66; margin-top:30px; }
+.filter-orderby .orderby{ border-left:solid 1px #ccc; border-top:solid 1px #ccc;border-bottom:solid 1px #ccc; height:25px; width:183px;}
+.filter-orderby .orderby li{ border-right:solid 1px #ccc; float:left;  line-height:25px; padding:0 10px; width:40px; cursor:pointer;}
+
+.filter-orderby .orderby li:hover,.filter-orderby .orderby .hover{ background-color:#eee; color:#B10000;}
+
+.orderby-new .ico,.orderby-sales .ico{ background:url(/modules/images/ico-orderby-down.png) no-repeat 2px 3px; height:12px; width:12px; display:inline-block; }
+.orderby-new:hover .ico,.orderby-sales:hover .ico,.orderby-new.hover .ico,.orderby-sales.hover .ico{ background:url(/modules/images/ico-orderby-down-hover.png) no-repeat 2px 3px; }
+
+.orderby-price { position:relative; }
+.orderby-price .shang { position:absolute; top:5px; right:15px; background:url(/modules/images/ico-orderby-shang.png) no-repeat; height:8px; width:8px; display:inline-block;}
+.orderby-price .xia { position:absolute; top:12px; right:15px; background:url(/modules/images/ico-orderby-xia.png) no-repeat; height:8px; width:8px; display:inline-block;}

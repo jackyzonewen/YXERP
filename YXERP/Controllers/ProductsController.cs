@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using YXERP.Models;
 
 namespace YXERP.Controllers
 {
@@ -550,6 +551,21 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        /// <summary>
+        /// 获取分类详情(带属性)
+        /// </summary>
+        /// <param name="categoryid"></param>
+        /// <returns></returns>
+        public JsonResult GetCategoryDetailsByID(string categoryid)
+        {
+            var model = new ProductsBusiness().GetCategoryDetailByID(categoryid);
+            JsonDictionary.Add("Model", model);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
 
         #region 产品
@@ -743,6 +759,28 @@ namespace YXERP.Controllers
         {
             bool bl = new ProductsBusiness().UpdateProductDetailsStatus(productdetailid, (EnumStatus)status, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// 过滤产品
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public JsonResult GetProductListForShopping(string filter)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            FilterProduct model = serializer.Deserialize<FilterProduct>(filter);
+
+            int pageCount = 0;
+            List<C_Products> list = new List<C_Products>();
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", 0);
+            JsonDictionary.Add("PageCount", pageCount);
             return new JsonResult
             {
                 Data = JsonDictionary,

@@ -33,5 +33,19 @@ namespace CloudSalesEnum
         [DescriptionAttribute("删除")]
         Delete = 9
     }
+    /// <summary>
+    /// 执行状态码
+    /// </summary>
+    public enum EnumResultStatus
+    {
+        [DescriptionAttribute("失败")]
+        Failed = 0,
+        [DescriptionAttribute("成功")]
+        Success = 1,
+        [DescriptionAttribute("错误")]
+        Error = 10001,
+        [DescriptionAttribute("已存在")]
+        Exists = 10002
+    }
 
 }

@@ -7,6 +7,7 @@ using System.Data;
 
 using CloudSalesEntity;
 using CloudSalesDAL;
+using CloudSalesEnum;
 
 
 namespace CloudSalesBusiness
@@ -131,6 +132,34 @@ namespace CloudSalesBusiness
         {
             var dal = new OrganizationDAL();
             return dal.UpdateDepartment(departid, name, description);
+        }
+
+        /// <summary>
+        /// 编辑部门状态
+        /// </summary>
+        /// <param name="departid">部门ID</param>
+        /// <param name="status">状态</param>
+        /// <param name="operateid">操作人</param>
+        /// <param name="operateip">操作IP</param>
+        /// <returns></returns>
+        public EnumResultStatus UpdateDepartmentStatus(string departid, EnumStatus status, string operateid, string operateip)
+        {
+            if (status == EnumStatus.Delete)
+            {
+                object count = CommonBusiness.Select(" C_UserDepart ", " count(0) ", " DepartID='" + departid + "' and Status=1 ");
+                if (Convert.ToInt32(count) > 0)
+                {
+                    return EnumResultStatus.Exists;
+                }
+            }
+            if (CommonBusiness.Update(" C_Department ", " Status ", (int)status, " DepartID='" + departid + "'"))
+            {
+                return EnumResultStatus.Success;
+            }
+            else
+            {
+                return EnumResultStatus.Failed;
+            }
         }
 
         #endregion

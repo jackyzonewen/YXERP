@@ -33,6 +33,9 @@ select option{ padding:2px; }
 .btn { height:25px; padding:0px 10px; line-height:25px; background-color:#BFD9EA ; color:#033d91; 
        border:none; font-weight:bold; cursor:pointer; display:inline-block; border-radius:0;}
 
+.btnccc { height:25px; padding:0px 8px; line-height:22px; background-color:#eee ; color:#333; 
+       border:solid 1px #ccc; cursor:pointer; display:inline-block;}
+
 .ico-add{ background:url(../images/ico-add.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
           display:inline-block; cursor:pointer; padding-left:25px; color:#7faaca; font-weight:bold; }
 
@@ -58,6 +61,13 @@ select option{ padding:2px; }
 
 .ico-help{ background:url(../images/ico-help.png) no-repeat; height:20px; min-width:20px; line-height:20px; 
           display:inline-block; cursor:pointer;}
+
+.ico-orderby-down{ background:url(../images/ico-orderby-down.png) no-repeat; height:10px; min-width:10px; line-height:10px; 
+          display:inline-block; cursor:pointer;}
+
+.ico-orderby-down-hover{ background:url(../images/ico-orderby-down-hover.png) no-repeat; height:10px; min-width:10px; line-height:10px; 
+          display:inline-block; cursor:pointer;}
+
 /*字体*/
 .font14 {font-size:14px; }
 .font16 {font-size:16px; }
@@ -142,33 +152,30 @@ select option{ padding:2px; }
 .width200 { width:200px !important; }
 
 /*header样式*/
-header { height:55px; width:100%; padding-top:25px; background:url(../images/header.jpg) no-repeat left top; position:relative; }
+header { height:55px; width:100%; padding-top:25px; background:url(../images/header.jpg) no-repeat left top; 
+         position:fixed; top:0; border-bottom:solid 4px #7faaca;}
 
 header .logo { width:150px; height:50px; padding-left:50px; }
 header .logo img{ width:100px; height:45px; }
-header .menu { position:absolute; height:28px; left:240px; bottom:0; overflow:hidden;}
-header .menu a{ background:url(../images/topmenu.gif) no-repeat left top;color:#033d91;height:28px; line-height:28px;text-align:center;width:79px; display:inline-block;}
+header .menu { position:absolute; height:28px; left:240px; bottom:0; }
+header .menu a{ background:url(../images/topmenu.gif) no-repeat left top;color:#033d91;height:28px; line-height:28px;text-align:center;
+                width:79px; display:inline-block;}
 header .menu a:hover,header .menu .select{ background:url(../images/topmenu.gif) no-repeat -234px top;color:#fff; width:78px;font-weight:bold;}
 
 header .help { position:absolute; height:28px; right:50px; bottom:0; overflow:hidden;}
 
-
-.topLine {width:100%;height:4px;background:url(../images/topLine.gif) repeat-x left top;}
-
-/*main页面*/
-.main-body { width:100%; position:fixed; top:84px; }
-
 /*左侧菜单栏*/
-nav { width:186px; position:absolute; left:0;}
+nav { width:186px; position:fixed; left:0; top:84px; height:100%; border-right:solid 4px #7faaca;}
 nav .admin-name { background:url(../images/sidebar.gif) repeat-x left top; padding:10px 0 0 20px; height:22px; width:166px; color:#2a3441;}
-nav .admin-name span { width:60px; float:left; }
+nav .admin-name span { float:left; padding:0 10px; }
 
 nav .top-nav { width:186px; height:32px; border-bottom:1px solid #aae3fd; background-color:#97bed8; color:#2a3441; }
 nav .top-nav img{ margin:10px 0 0 19px;display:inline; float:left; height:16px; width:16px;}
 nav .top-nav span{margin-top:10px;float:left; padding-left:5px;}
 nav .top-nav a{color:#2a3441;}
 
-nav .controller .ico-img { background:url(../images/ico-open.png) no-repeat; float:left; width:16px; height:16px; border-radius:8px; margin:6px 0 0 19px; display:inline-block;}
+nav .controller .ico-img { background:url(../images/ico-open.png) no-repeat; float:left; width:16px; height:16px; border-radius:8px; 
+                           margin:6px 0 0 19px; display:inline-block;}
 nav .controller ul { display:none; }
 nav .controller { width:186px; overflow:hidden; background-color:#bfd9ea; border-bottom:1px solid #e7f5fd;cursor:pointer;}
 nav .select .ico-img{ background:url(../images/ico-pull.png) no-repeat; }
@@ -176,20 +183,19 @@ nav .select ul { display:block; background-color:#eafafe; margin-top:29px;}
 nav .controller .menu-name{float:left; font-size:10pt; color:#2a3441; padding-left:5px; height:28px; line-height:28px;}
 
 nav .action {width:186px; border-bottom:1px solid #fff; float:left; }
-nav .action a{ width:141px; height:25px;line-height:25px;padding-left:45px; display:block; color:#2a3441; background:url(../images/submenu.gif) repeat-x -5px -26px;}
+nav .action a{ width:141px; height:25px;line-height:25px;padding-left:45px; display:block; color:#2a3441; 
+               background:url(../images/submenu.gif) repeat-x -5px -26px;}
 nav .action a:hover{background:url(../images/submenu.gif) no-repeat left top; font-weight:bold;}
 nav .action .select{background:url(../images/submenu.gif) no-repeat left top;font-weight:bold;}
 
 /*隐藏左侧菜单*/
-.controlbar { width:4px; background-color:#7faaca; position:absolute; left:186px;}
-
-.ico-left-pull{ background:url(../images/ico-left-pull.png) no-repeat; position:absolute; left:188px; width:22px; height:32px; cursor:pointer; }
+.ico-left-pull{ background:url(../images/ico-left-pull.png) no-repeat; position:absolute; left:188px; width:22px; height:32px; cursor:pointer; top:45%; }
 .ico-left-pull:hover{ background:url(../images/ico-left-pullL.png) no-repeat;left:186px;  height:64px; cursor:pointer; }
-.ico-left-open{ background:url(../images/ico-left-open.png) no-repeat; position:absolute; left:2px; width:22px; height:32px; cursor:pointer;}
+.ico-left-open{ background:url(../images/ico-left-open.png) no-repeat; position:absolute; left:2px; width:22px; height:32px; cursor:pointer; top:45%;}
 .ico-left-open:hover{ background:url(../images/ico-left-openL.png) no-repeat;left:0px;  height:64px; cursor:pointer; }
 
 /*内容页样式*/
-.main-content { overflow-x:hidden; position:absolute; right:0; }
+.main-content { overflow-x:hidden; position:fixed; right:0; top:84px;}
 
 .header-box { border-bottom:solid 1px #7faaca; margin:20px; height:35px; }
 .ico-goback { background:url(../images/ico-goback.png) no-repeat; width:32px; height:32px; cursor:pointer; display:inline-block; }
@@ -203,7 +209,6 @@ nav .action .select{background:url(../images/submenu.gif) no-repeat left top;fon
 
 /*数据验证错误*/
 .verify-fail-err { height:20px; line-height:20px; padding-left:10px; padding-top:2px;}
-
 
 /*表格样式*/
 .table-list { width:100%; border-top:solid 1px #c5dceb;border-left:solid 1px #c5dceb; border-collapse:collapse;border-spacing:0;}
@@ -222,7 +227,7 @@ nav .action .select{background:url(../images/submenu.gif) no-repeat left top;fon
 .table-add li textarea { height:80px; line-height:20px; padding:1px 5px; border:solid 1px #ccc; width:350px; border-radius:5px;}
 .table-add span {  display:inline-block; color:#333; vertical-align:top;}
 
-
+/*信息层样式*/
 .alert { border: 1px solid #5996CE;  background-color: #fff; font-size: 13px; margin: auto; position: fixed; top: 30%; z-index: 9999; 
          padding: 15px; display: inline-block; min-width: 330px; text-align: center; -moz-box-shadow: 0 0 30px #ccc;
          box-shadow: 0 0 30px #ccc; -webkit-box-shadow: 0 0 30px #ccc; }
