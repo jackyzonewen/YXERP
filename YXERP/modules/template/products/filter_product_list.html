@@ -1,0 +1,21 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+<li>
+    <a class="product-item" href="ProductDetails/{%=item.ProductID%}">
+        <div class="productimg">
+            <img src="{%=item.ProductImage%}" alt="" />
+        </div>
+        <h2>
+            {%=item.Price.toFixed(2)%}
+        </h2>
+         <h3>
+            {%=item.ProductName%}
+        </h3>
+        <div>
+            成交：{%=item.SaleCount%}
+        </div>
+    </a>
+</li>
+{% } %}

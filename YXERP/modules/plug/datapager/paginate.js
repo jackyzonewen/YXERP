@@ -32,6 +32,7 @@ define(function (require, exports, module) {
             rotate: true,
             images: true,
             mouse: 'slide',
+            float: "right",
             onChange: function () { return false; }
         };
         $.fn.draw = function (o, obj, selectedpage) {
@@ -97,6 +98,10 @@ define(function (require, exports, module) {
 
             //append all:
             $this.addClass('jPaginate').append(_divwrapleft).append(_ulwrapdiv).append(_divwrapright).append(_total_count);
+
+            if (o.float != "normal") {
+                $this.css("float", o.float);
+            }
 
             if (!o.border) {
                 if (o.background_color == 'none') var a_css = { 'color': o.text_color };

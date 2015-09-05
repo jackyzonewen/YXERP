@@ -126,4 +126,7 @@
   <ItemGroup>
     <None Include="Procedures\Stock\P_UpdateProductDetail.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Stock\P_GetFilterProducts.sql" />
+  </ItemGroup>
 </Project>

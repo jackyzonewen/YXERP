@@ -2,13 +2,17 @@
     var Global = require("global"),
     doT = require("dot");
 
+    require("pager");
+
     var CacheCategorys = [];
     var CacheChildCategorys = [];
 
     var Params = {
         CategoryID: "",
         BeginPrice: "",
-        EndPrice: ""
+        EndPrice: "",
+        PageIndex: 1,
+        keyWords: ""
     }
 
     var ObjectJS = {};
@@ -18,9 +22,10 @@
         _self.type = type;
         _self.getChildCategory("");
         _self.bindEvent();
+        _self.getProducts();
     }
 
-    //绑定下级分类
+    //获取分类信息和下级分类
     ObjectJS.getChildCategory = function (pid) {
         var _self = this;
         $("#category-child").empty();
@@ -47,7 +52,7 @@
             }
         }
     }
-
+    //绑定分类属性
     ObjectJS.bindCagegoryAttr = function (pid) {
         var _self = this;
         $("#attr-price").nextAll(".attr-item").remove();
@@ -66,7 +71,6 @@
             $("#attr-price").after(html);
         });
     }
-
     //绑定下级分类
     ObjectJS.bindChildCagegory = function (pid) {
         var _self = this;
@@ -104,10 +108,50 @@
         //搜索
         require.async("search", function () {
             $(".searth-module").searchKeys(function (keyWords) {
-                
+                Params.keyWords = keyWords;
             });
         });
 
+    }
+
+    //绑定产品列表
+    ObjectJS.getProducts = function (params) {
+        var opt = $.extend({
+            CategoryID: Params.CategoryID,
+            PageIndex: Params.PageIndex,
+            Keywords: Params.keyWords
+        }, params);
+        Global.post("/Products/GetProductListForShopping", { filter: JSON.stringify(opt) }, function (data) {
+            $("#productlist").empty();
+            doT.exec("template/products/filter_product_list.html", function (templateFun) {
+                var html = templateFun(data.Items);
+                html = $(html);
+
+                $("#productlist").append(html);
+            });
+
+            $("#pager").paginate({
+                total_count: data.TotalCount,
+                count: data.PageCount,
+                start: Params.PageIndex,
+                display: 5,
+                border: true,
+                border_color: '#fff',
+                text_color: '#333',
+                background_color: '#fff',
+                border_hover_color: '#ccc',
+                text_hover_color: '#000',
+                background_hover_color: '#efefef',
+                rotate: true,
+                images: false,
+                mouse: 'slide',
+                float: "normal",
+                onChange: function (page) {
+                    Params.PageIndex = page;
+                    ObjectJS.getProducts();
+                }
+            });
+        });
     }
 
     module.exports = ObjectJS;

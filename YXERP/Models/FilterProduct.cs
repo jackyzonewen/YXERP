@@ -5,6 +5,7 @@ using System.Web;
 
 namespace YXERP.Models
 {
+    [Serializable]
     public class FilterProduct
     {
         public string CategoryID { get; set; }
@@ -24,7 +25,7 @@ namespace YXERP.Models
         public List<FilterAttr> Attrs { get; set; }
 
     }
-
+    [Serializable]
     public class FilterAttr
     {
         public string AttrID { get; set; }

@@ -775,11 +775,11 @@ namespace YXERP.Controllers
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             FilterProduct model = serializer.Deserialize<FilterProduct>(filter);
-
+            int totalCount = 0;
             int pageCount = 0;
-            List<C_Products> list = new List<C_Products>();
+            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.Keywords, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
-            JsonDictionary.Add("TotalCount", 0);
+            JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);
             return new JsonResult
             {

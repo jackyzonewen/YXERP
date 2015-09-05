@@ -28,3 +28,16 @@
 .orderby-price { position:relative; }
 .orderby-price .shang { position:absolute; top:5px; right:15px; background:url(/modules/images/ico-orderby-shang.png) no-repeat; height:8px; width:8px; display:inline-block;}
 .orderby-price .xia { position:absolute; top:12px; right:15px; background:url(/modules/images/ico-orderby-xia.png) no-repeat; height:8px; width:8px; display:inline-block;}
+
+
+/**/
+.productlist { width:100%; overflow:auto;}
+.productlist li{ width:250px; height:350px; float:left; margin-top:20px; }
+
+.productlist .product-item{  width:230px; height:330px; padding:5px; border:solid 5px #eee; display:inline-block; }
+.productlist li:hover .product-item{ border:solid 5px #B10000; }
+
+.product-item .productimg { width:230px; height:230px; overflow:hidden; }
+.product-item .productimg img{ width:230px;}
+
+#pager { margin:50px auto; }
