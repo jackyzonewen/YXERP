@@ -3,19 +3,19 @@
 	var item = $data[i];
 %}
 <li>
-    <a class="product-item" href="ProductDetails/{%=item.ProductID%}">
-        <div class="productimg">
+    <div class="product-item" >
+        <a href="/Products/ChooseDetail?pid={%=item.ProductID%}&did={%=item.ProductDetailID%}" class="productimg">
             <img src="{%=item.ProductImage%}" alt="" />
-        </div>
-        <h2>
-            {%=item.Price.toFixed(2)%}
+        </a>
+        <h2 class="price">
+            ￥{%=item.Price.toFixed(2)%}
         </h2>
-         <h3>
+        <a href="/Products/ChooseDetail?pid={%=item.ProductID%}&did={%=item.ProductDetailID%}" class="name">
             {%=item.ProductName%}
-        </h3>
-        <div>
+        </a>
+        <div class="sales">
             成交：{%=item.SaleCount%}
         </div>
-    </a>
+    </div>
 </li>
 {% } %}

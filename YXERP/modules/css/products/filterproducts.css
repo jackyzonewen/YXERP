@@ -30,7 +30,7 @@
 .orderby-price .xia { position:absolute; top:12px; right:15px; background:url(/modules/images/ico-orderby-xia.png) no-repeat; height:8px; width:8px; display:inline-block;}
 
 
-/**/
+/*产品列表样式*/
 .productlist { width:100%; overflow:auto;}
 .productlist li{ width:250px; height:350px; float:left; margin-top:20px; }
 
@@ -38,6 +38,13 @@
 .productlist li:hover .product-item{ border:solid 5px #B10000; }
 
 .product-item .productimg { width:230px; height:230px; overflow:hidden; }
-.product-item .productimg img{ width:230px;}
+.product-item .productimg img{ width:230px; height:230px;}
+
+.product-item .price { color:#B10000; height:30px; line-height:30px; font-size:16px; }
+
+.product-item .name { height:35px; overflow:hidden; color:#333; }
+.product-item .name:hover { text-decoration:underline; color:#B10000; }
+
+.product-item .sales { height:25px; line-height:25px; color:#666; }
 
 #pager { margin:50px auto; }

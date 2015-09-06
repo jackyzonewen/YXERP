@@ -138,6 +138,13 @@ namespace YXERP.Controllers
         }
 
 
+        public ActionResult ChooseDetail(string pid, string did)
+        {
+            var model = new ProductsBusiness().GetProductByID(pid);
+            ViewBag.Model = model;
+            return View();
+        } 
+
         #region Ajax
 
         #region 品牌
@@ -777,7 +784,7 @@ namespace YXERP.Controllers
             FilterProduct model = serializer.Deserialize<FilterProduct>(filter);
             int totalCount = 0;
             int pageCount = 0;
-            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.Keywords, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.CategoryID, model.Keywords, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);

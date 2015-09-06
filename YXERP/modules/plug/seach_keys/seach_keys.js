@@ -24,6 +24,8 @@ define(function (require, exports, module) {
             var _ico = $('<span class="search-ico hand"></span>');
             obj.append(_input).append(_ico);
 
+            _input.focus();
+
             //处理事件
             _ico.click(function () {
                 var _this = $(this);

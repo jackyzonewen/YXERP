@@ -22,13 +22,13 @@
         _self.type = type;
         _self.getChildCategory("");
         _self.bindEvent();
-        _self.getProducts();
     }
 
     //获取分类信息和下级分类
     ObjectJS.getChildCategory = function (pid) {
         var _self = this;
         $("#category-child").empty();
+        
         if (!CacheChildCategorys[pid]) {
             Global.post("/Products/GetChildCategorysByID", {
                 categoryid: pid
@@ -51,6 +51,9 @@
                 _self.bindCagegoryAttr(pid);
             }
         }
+
+        Params.CategoryID = pid;
+        _self.getProducts();
     }
     //绑定分类属性
     ObjectJS.bindCagegoryAttr = function (pid) {
@@ -109,6 +112,7 @@
         require.async("search", function () {
             $(".searth-module").searchKeys(function (keyWords) {
                 Params.keyWords = keyWords;
+                _self.getProducts();
             });
         });
 

@@ -13,9 +13,11 @@ GO
 编写日期： 2015/9/5
 程序作者： Allen
 调试记录：declare @totalCount int,@pageCount int 
-		  exec P_GetFilterProducts '','',1,20,1,@totalCount output,@pageCount output,'d583bf9e-1243-44fe-ac5c-6fbc118aae36'
+		  exec P_GetFilterProducts '019C0D0A-E829-4BEB-AB54-653674931295','','',1,20,1,@totalCount output,@pageCount output,
+		  'd583bf9e-1243-44fe-ac5c-6fbc118aae36'
 ************************************************************/
 CREATE PROCEDURE [dbo].[P_GetFilterProducts]
+	@CategoryID nvarchar(64),
 	@keyWords nvarchar(4000),
 	@orderColumn nvarchar(500)='',
 	@isAsc int=0,
@@ -31,12 +33,18 @@ AS
 	@key nvarchar(100)
 	
 
-	set @tableName='C_Products P join C_Brand B on P.BrandID=B.BrandID 
+	set @tableName='C_Products P join C_Brand B on P.BrandID=B.BrandID join C_Category c on p.CategoryID=c.CategoryID
 					left join C_ProductDetail pd on p.ProductID=pd.ProductID and pd.Status<>9 '
 	set @columns='P.ProductID,P.ProductName,p.CommonPrice,isnull(pd.price,p.price) price,B.Name BrandName,
 				  ISNULL(pd.ImgS,p.ProductImage) ProductImage,ISNULL(pd.SaleCount,p.SaleCount) SaleCount,pd.ProductDetailID,pd.AttrValue '
 	set @key='P.AutoID'
 	set @condition=' P.ClientID='''+@ClientID+''' and P.Status<>9 '
+
+	if(@CategoryID<>'' and @CategoryID<> '-1')
+	begin
+		set @condition +=' and C.PIDList like ''%'+@CategoryID+'%'''
+	end
+
 	if(@keyWords <> '')
 	begin
 		set @condition +=' and (ProductName like ''%'+@keyWords+'%'' or  ProductCode like ''%'+@keyWords+'%'' or  GeneralName like ''%'+@keyWords+'%'') '

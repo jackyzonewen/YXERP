@@ -393,10 +393,10 @@ namespace CloudSalesBusiness
         }
 
 
-        public List<C_Products> GetFilterProducts(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public List<C_Products> GetFilterProducts(string categoryid, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
-            DataSet ds = dal.GetFilterProducts(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
+            DataSet ds = dal.GetFilterProducts(categoryid, keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
             List<C_Products> list = new List<C_Products>();
             foreach (DataRow dr in ds.Tables[0].Rows)

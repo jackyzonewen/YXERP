@@ -412,6 +412,8 @@ namespace CloudSalesEntity
 
         public string ApprovalNumber { get; set; }
 
+        public string ProductDetailID { get; set; }
+
         /// <summary>
         /// 子产品列表
         /// </summary>
