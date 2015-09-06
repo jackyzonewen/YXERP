@@ -31,9 +31,9 @@ namespace CloudSalesEntity
 		private string _saleattr="";
 		private string _attrvalue="";
 		private string _saleattrvalue="";
-		private long? _salecount=0;
-		private long? _stockin=0;
-		private long? _logicout=0;
+		private int? _salecount=0;
+        private int? _stockin = 0;
+        private int? _logicout = 0;
 		private string _imgs="";
 		private string _imgm="";
 		private int? _warncount=0;
@@ -110,7 +110,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? SaleCount
+        public int? SaleCount
 		{
 			set{ _salecount=value;}
 			get{return _salecount;}
@@ -118,7 +118,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? StockIn
+        public int? StockIn
 		{
 			set{ _stockin=value;}
 			get{return _stockin;}
@@ -126,7 +126,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? LogicOut
+        public int? LogicOut
 		{
 			set{ _logicout=value;}
 			get{return _logicout;}
