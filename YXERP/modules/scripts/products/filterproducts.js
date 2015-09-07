@@ -64,6 +64,16 @@
             var html = templateFun(CacheCategorys[pid].AttrLists);
             html = $(html);
 
+            html.find(".value").data("type", 1);
+            html.find(".value").click(function () {
+                var _this = $(this);
+                if (!_this.hasClass("hover")) {
+                    _this.addClass("hover");
+                    _this.siblings().removeClass("hover");
+
+                    _self.getProducts();
+                }
+            });
             $("#attr-price").after(html);
         });
         //规格
@@ -71,6 +81,16 @@
             var html = templateFun(CacheCategorys[pid].SaleAttrs);
             html = $(html);
 
+            html.find(".value").data("type", 2);
+            html.find(".value").click(function () {
+                var _this = $(this);
+                if (!_this.hasClass("hover")) {
+                    _this.addClass("hover");
+                    _this.siblings().removeClass("hover");
+
+                    _self.getProducts();
+                }
+            });
             $("#attr-price").after(html);
         });
     }
@@ -115,16 +135,69 @@
                 _self.getProducts();
             });
         });
+        //价格筛选
+        $("#attr-price .attrValues .price").click(function () {
+            var _this = $(this);
+            if (!_this.hasClass("hover")) {
+                _this.addClass("hover");
+                _this.siblings().removeClass("hover");
+                Params.BeginPrice = _this.data("begin");
+                Params.EndPrice = _this.data("end");
+                _self.getProducts();
+                $("#beginprice").val("");
+                $("#endprice").val("");
+            }
+        });
+        //搜索价格区间
+        $("#searchprice").click(function () {
+            if (!!$("#beginprice").val() && !isNaN($("#beginprice").val())) {
+                Params.BeginPrice = $("#beginprice").val();
+                $("#attr-price .attrValues .price").removeClass("hover");
+            } else if (!$("#beginprice").val()) {
+                Params.BeginPrice = "";
+            } else {
+                $("#beginprice").val("");
+            }
+
+            if (!!$("#endprice").val() && !isNaN($("#endprice").val())) {
+                Params.EndPrice = $("#endprice").val();
+                $("#attr-price .attrValues .price").removeClass("hover");
+            } else if (!$("#endprice").val()) {
+                Params.EndPrice = "";
+            } else {
+                $("#endprice").val("");
+            }
+
+            _self.getProducts();
+        });
 
     }
 
     //绑定产品列表
     ObjectJS.getProducts = function (params) {
+
+        var attrs = [];
+        $(".filter-attr").each(function () {
+            var _this = $(this), _value = _this.find(".hover");
+            if (_value.data("id")) {
+                var FilterAttr = {
+                    AttrID: _this.data("id"),
+                    ValueID: _value.data("id"),
+                    Type: _value.data("type")
+                };
+                attrs.push(FilterAttr);
+            }
+        });
+
         var opt = $.extend({
             CategoryID: Params.CategoryID,
             PageIndex: Params.PageIndex,
-            Keywords: Params.keyWords
+            Keywords: Params.keyWords,
+            BeginPrice: Params.BeginPrice,
+            EndPrice: Params.EndPrice,
+            Attrs: attrs
         }, params);
+
         Global.post("/Products/GetProductListForShopping", { filter: JSON.stringify(opt) }, function (data) {
             $("#productlist").empty();
             doT.exec("template/products/filter_product_list.html", function (templateFun) {
@@ -150,6 +223,27 @@
                 images: false,
                 mouse: 'slide',
                 float: "normal",
+                onChange: function (page) {
+                    Params.PageIndex = page;
+                    ObjectJS.getProducts();
+                }
+            });
+            $("#toppager").paginate({
+                total_count: data.TotalCount,
+                count: data.PageCount,
+                start: Params.PageIndex,
+                display: 5,
+                border: true,
+                border_color: '#fff',
+                text_color: '#333',
+                background_color: '#fff',
+                border_hover_color: '#ccc',
+                text_hover_color: '#000',
+                background_hover_color: '#efefef',
+                rotate: true,
+                images: false,
+                mouse: 'slide',
+                float: "left",
                 onChange: function (page) {
                     Params.PageIndex = page;
                     ObjectJS.getProducts();

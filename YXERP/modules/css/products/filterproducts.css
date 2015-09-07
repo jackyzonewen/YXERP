@@ -9,8 +9,10 @@
 .attr-item { border-bottom:solid 1px #ccc; overflow:auto; background-color:#eee; }
 .attrkey{ width:10%; float:left; line-height:35px; text-indent:20px; }
 .attrValues{ width:90%; float:left;line-height:35px; height:35px; height:auto; background-color:#fff;}
-.attrValues li { height:35px; line-height:35px; float:left; padding:0 20px; cursor:pointer; display:inline-block; }
+.attrValues li { height:25px; line-height:25px; float:left; padding:0 20px; margin:5px 0; cursor:pointer; display:inline-block; }
 .attrValues li:hover { color:#B10000; }
+
+.attrValues li.hover { border:solid 1px #B10000; color:#B10000; }
 
 
 #beginprice, #endprice { width:60px; }
@@ -34,7 +36,7 @@
 .productlist { width:100%; overflow:auto;}
 .productlist li{ width:250px; height:350px; float:left; margin-top:20px; }
 
-.productlist .product-item{  width:230px; height:330px; padding:5px; border:solid 5px #eee; display:inline-block; }
+.productlist .product-item{  width:230px; height:330px; padding:5px; border:solid 5px #eee; display:inline-block; position:relative; }
 .productlist li:hover .product-item{ border:solid 5px #B10000; }
 
 .product-item .productimg { width:230px; height:230px; overflow:hidden; }
@@ -45,6 +47,6 @@
 .product-item .name { height:35px; overflow:hidden; color:#333; }
 .product-item .name:hover { text-decoration:underline; color:#B10000; }
 
-.product-item .sales { height:25px; line-height:25px; color:#666; }
+.product-item .sales { height:25px; line-height:25px; color:#666; position:absolute; bottom:5px; }
 
 #pager { margin:50px auto; }

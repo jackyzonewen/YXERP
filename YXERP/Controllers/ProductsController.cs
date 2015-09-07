@@ -784,7 +784,7 @@ namespace YXERP.Controllers
             FilterProduct model = serializer.Deserialize<FilterProduct>(filter);
             int totalCount = 0;
             int pageCount = 0;
-            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.CategoryID, model.Keywords, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.CategoryID, model.BeginPrice, model.EndPrice, model.Keywords, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);

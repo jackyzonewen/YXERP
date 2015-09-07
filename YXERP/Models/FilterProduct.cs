@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using CloudSalesEnum;
+
 namespace YXERP.Models
 {
     [Serializable]
@@ -30,6 +32,6 @@ namespace YXERP.Models
     {
         public string AttrID { get; set; }
         public string ValueID { get; set; }
-        public int type { get; set; }
+        public EnumAttrType Type { get; set; }
     }
 }

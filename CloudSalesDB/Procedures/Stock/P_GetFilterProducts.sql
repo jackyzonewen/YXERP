@@ -12,12 +12,22 @@ GO
 参数说明：	 
 编写日期： 2015/9/5
 程序作者： Allen
-调试记录：declare @totalCount int,@pageCount int 
-		  exec P_GetFilterProducts '019C0D0A-E829-4BEB-AB54-653674931295','','',1,20,1,@totalCount output,@pageCount output,
-		  'd583bf9e-1243-44fe-ac5c-6fbc118aae36'
+调试记录：declare @totalCount int ,@pageCount int 
+		  exec P_GetFilterProducts 
+		  @CategoryID='e60b739b-df7a-4c66-b75a-4b29fabea3a9',
+		  @keyWords='',
+		  @orderColumn='',
+		  @isAsc=1,
+		  @pageSize=20,
+		  @pageIndex=1,
+		  @totalCount =@totalCount,
+		  @pageCount =@pageCount,
+		  @ClientID='d583bf9e-1243-44fe-ac5c-6fbc118aae36'
 ************************************************************/
 CREATE PROCEDURE [dbo].[P_GetFilterProducts]
 	@CategoryID nvarchar(64),
+	@BeginPrice nvarchar(20)='',
+	@EndPrice nvarchar(20)='',
 	@keyWords nvarchar(4000),
 	@orderColumn nvarchar(500)='',
 	@isAsc int=0,
@@ -43,6 +53,16 @@ AS
 	if(@CategoryID<>'' and @CategoryID<> '-1')
 	begin
 		set @condition +=' and C.PIDList like ''%'+@CategoryID+'%'''
+	end
+
+	if(@BeginPrice<>'')
+	begin
+		set @condition +=' and ((pd.Price is null and P.Price>='+@BeginPrice+') or (pd.Price is not null and pd.Price>='+@BeginPrice+'))'
+	end
+
+	if(@EndPrice<>'')
+	begin
+		set @condition +=' and ((pd.Price is null and P.Price<='+@EndPrice+') or (pd.Price is not null and pd.Price<='+@EndPrice+'))'
 	end
 
 	if(@keyWords <> '')

@@ -104,7 +104,7 @@ namespace CloudSalesBusiness
         }
 
         /// <summary>
-        /// 获取属性列表
+        /// 获取属性列表（包括属性值列表）
         /// </summary>
         /// <param name="keyWords"></param>
         /// <param name="pageSize"></param>
@@ -327,7 +327,7 @@ namespace CloudSalesBusiness
         }
 
         /// <summary>
-        /// 根据产品ID获取产品信息
+        /// 根据产品ID获取产品信息(包括子产品)
         /// </summary>
         /// <param name="productid"></param>
         /// <returns></returns>
@@ -348,6 +348,7 @@ namespace CloudSalesBusiness
                 var smallunit = new C_ProductUnit();
                 smallunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
                 model.SmallUnit = smallunit;
+
                 List<C_ProductDetail> list = new List<C_ProductDetail>();
                 foreach (DataRow item in ds.Tables["Details"].Rows)
                 {
@@ -393,10 +394,10 @@ namespace CloudSalesBusiness
         }
 
 
-        public List<C_Products> GetFilterProducts(string categoryid, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public List<C_Products> GetFilterProducts(string categoryid, string beginprice, string endprice, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
-            DataSet ds = dal.GetFilterProducts(categoryid, keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
+            DataSet ds = dal.GetFilterProducts(categoryid, beginprice, endprice, keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
             List<C_Products> list = new List<C_Products>();
             foreach (DataRow dr in ds.Tables[0].Rows)
