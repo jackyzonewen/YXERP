@@ -4,6 +4,7 @@ using CloudSalesEnum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -784,7 +785,8 @@ namespace YXERP.Controllers
             FilterProduct model = serializer.Deserialize<FilterProduct>(filter);
             int totalCount = 0;
             int pageCount = 0;
-            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.CategoryID, model.BeginPrice, model.EndPrice, model.Keywords, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+
+            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.CategoryID, model.Attrs, model.BeginPrice, model.EndPrice, model.Keywords, model.OrderBy, model.IsAsc, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);

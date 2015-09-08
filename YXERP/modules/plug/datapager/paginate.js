@@ -38,8 +38,10 @@ define(function (require, exports, module) {
         $.fn.draw = function (o, obj, selectedpage) {
             if (o.display > o.count)
                 o.display = o.count;
-            if (o.count < 1)
+            if (o.count < 1) {
                 $this.hide();
+                return;
+            }
             else
                 $this.show();
             $this.css("width", o.display * 26 + 100 + ((o.total_count).toString().length * 8) + "px");

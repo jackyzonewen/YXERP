@@ -12,7 +12,9 @@
         BeginPrice: "",
         EndPrice: "",
         PageIndex: 1,
-        keyWords: ""
+        keyWords: "",
+        OrderBy: "pd.CreateTime desc",
+        IsAsc:false
     }
 
     var ObjectJS = {};
@@ -171,6 +173,55 @@
             _self.getProducts();
         });
 
+        //按时间排序
+        $(".orderby-new").click(function () {
+            var _this = $(this);
+            if (!_this.hasClass("hover")) {
+                _this.addClass("hover");
+                _this.siblings().removeClass("hover");
+                Params.OrderBy = "pd.CreateTime desc";
+                Params.IsAsc = false;
+                Params.PageIndex = 1;
+                _self.getProducts();
+            }
+        });
+
+        //按销量排序
+        $(".orderby-sales").click(function () {
+            var _this = $(this);
+            if (!_this.hasClass("hover")) {
+                _this.addClass("hover");
+                _this.siblings().removeClass("hover");
+                Params.OrderBy = "pd.SaleCount desc";
+                Params.IsAsc = false;
+                Params.PageIndex = 1;
+                _self.getProducts();
+            }
+        });
+        //按价格排序
+        $(".orderby-price").click(function () {
+            var _this = $(this);
+            
+            if (!_this.hasClass("hover")) {
+                _this.addClass("hover");
+                _this.siblings().removeClass("hover");
+                Params.IsAsc = true;
+                Params.PageIndex = 1;
+            } else {
+                Params.IsAsc = !Params.IsAsc;
+            }
+            if (Params.IsAsc) {
+                _this.find(".shang").addClass("shang-hover");
+                _this.find(".xia").removeClass("xia-hover");
+                Params.OrderBy = "pd.Price";
+            } else {
+                _this.find(".shang").removeClass("shang-hover");
+                _this.find(".xia").addClass("xia-hover");
+                Params.OrderBy = "pd.Price desc";
+            }
+            _self.getProducts();
+        });
+
     }
 
     //绑定产品列表
@@ -195,6 +246,8 @@
             Keywords: Params.keyWords,
             BeginPrice: Params.BeginPrice,
             EndPrice: Params.EndPrice,
+            OrderBy: Params.OrderBy,
+            IsAsc: Params.IsAsc,
             Attrs: attrs
         }, params);
 

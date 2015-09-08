@@ -151,11 +151,14 @@ namespace CloudSalesDAL
             return ds;
         }
 
-        public DataSet GetFilterProducts(string categoryid, string beginprice, string endprice, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public DataSet GetFilterProducts(string categoryid, string where, string beginprice, string endprice, string keyWords, string orderby, int isasc, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             SqlParameter[] paras = { 
                                        new SqlParameter("@totalCount",SqlDbType.Int),
                                        new SqlParameter("@pageCount",SqlDbType.Int),
+                                       new SqlParameter("@orderColumn",orderby),
+                                       new SqlParameter("@isAsc",isasc),
+                                       new SqlParameter("@Where",where),
                                        new SqlParameter("@BeginPrice",beginprice),
                                        new SqlParameter("@EndPrice",endprice),
                                        new SqlParameter("@CategoryID",categoryid),

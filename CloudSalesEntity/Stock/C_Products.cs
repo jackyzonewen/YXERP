@@ -429,5 +429,13 @@ namespace CloudSalesEntity
         }
 
 	}
+
+    [Serializable]
+    public class FilterAttr
+    {
+        public string AttrID { get; set; }
+        public string ValueID { get; set; }
+        public CloudSalesEnum.EnumAttrType Type { get; set; }
+    }
 }
 

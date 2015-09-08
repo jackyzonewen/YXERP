@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using CloudSalesEnum;
+using CloudSalesEntity;
 
 namespace YXERP.Models
 {
@@ -26,12 +27,5 @@ namespace YXERP.Models
 
         public List<FilterAttr> Attrs { get; set; }
 
-    }
-    [Serializable]
-    public class FilterAttr
-    {
-        public string AttrID { get; set; }
-        public string ValueID { get; set; }
-        public EnumAttrType Type { get; set; }
     }
 }

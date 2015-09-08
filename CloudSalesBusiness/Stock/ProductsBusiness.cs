@@ -361,7 +361,10 @@ namespace CloudSalesBusiness
                     Dictionary<string, string> attrs = new Dictionary<string, string>();
                     foreach (string attr in detail.SaleAttrValue.Split(','))
                     {
-                        attrs.Add(attr.Split(':')[0], attr.Split(':')[1]);
+                        if (!string.IsNullOrEmpty(attr))
+                        {
+                            attrs.Add(attr.Split(':')[0], attr.Split(':')[1]);
+                        }
                     }
                     detail.SaleAttrValueString = "";
                     foreach (var attr in model.Category.SaleAttrs)
@@ -394,10 +397,23 @@ namespace CloudSalesBusiness
         }
 
 
-        public List<C_Products> GetFilterProducts(string categoryid, string beginprice, string endprice, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public List<C_Products> GetFilterProducts(string categoryid, List<FilterAttr> Attrs, string beginprice, string endprice, string keyWords, string orderby, bool isasc, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
-            DataSet ds = dal.GetFilterProducts(categoryid, beginprice, endprice, keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
+            StringBuilder build = new StringBuilder();
+            foreach (var attr in Attrs)
+            {
+                if (attr.Type == EnumAttrType.Parameter)
+                {
+                    build.Append(" and p.ValueList like '%" + attr.ValueID + "%'");
+                }
+                else if (attr.Type == EnumAttrType.Specification)
+                {
+                    build.Append(" and pd.AttrValue like '%" + attr.ValueID + "%'");
+                }
+            }
+
+            DataSet ds = dal.GetFilterProducts(categoryid, build.ToString(), beginprice, endprice, keyWords, orderby, isasc ? 1 : 0, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
             List<C_Products> list = new List<C_Products>();
             foreach (DataRow dr in ds.Tables[0].Rows)

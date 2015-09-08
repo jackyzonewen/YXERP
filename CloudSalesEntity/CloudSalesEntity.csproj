@@ -81,6 +81,12 @@
   <ItemGroup>
     <Folder Include="Log\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CloudSalesEnum\CloudSalesEnum.csproj">
+      <Project>{b86924c1-ec31-449f-97f3-258dfa43a44f}</Project>
+      <Name>CloudSalesEnum</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
