@@ -26,6 +26,7 @@ CREATE PROCEDURE [dbo].[P_UpdateProductDetail]
 @Weight decimal(18,2),
 @Description text,
 @ShapeCode nvarchar(50),
+@ImgS nvarchar(500),
 @Result int output--1：成功；0失败
 AS
 
@@ -42,7 +43,7 @@ begin
 end
 
 update C_ProductDetail set DetailsCode=@ProductCode ,[SaleAttr]=@AttrList,[AttrValue]=@ValueList,[SaleAttrValue]=@AttrValueList,[Price]=@Price,
-					[Weight]=@Weight,[ShapeCode]=@ShapeCode ,[Description]=@Description ,[UpdateTime]=getdate()
+					[Weight]=@Weight,[ShapeCode]=@ShapeCode ,ImgS=@ImgS,[Description]=@Description ,[UpdateTime]=getdate()
 where ProductDetailID=@DetailID
 
 set @Err+=@@Error

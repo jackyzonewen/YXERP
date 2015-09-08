@@ -515,7 +515,7 @@ namespace CloudSalesDAL
 
         }
 
-        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, string unitid, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description)
+        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, string unitid, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description, string image)
         {
             int result = 0;
             SqlParameter[] paras = { 
@@ -530,6 +530,7 @@ namespace CloudSalesDAL
                                        new SqlParameter("@Price",price),
                                        new SqlParameter("@Weight",weight),
                                        new SqlParameter("@ShapeCode",shapeCode),
+                                       new SqlParameter("@ImgS",image),
                                        new SqlParameter("@Description",description)
                                    };
             paras[0].Value = result;

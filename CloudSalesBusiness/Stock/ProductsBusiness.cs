@@ -396,7 +396,22 @@ namespace CloudSalesBusiness
             return Convert.ToInt32(obj) > 0;
         }
 
-
+        /// <summary>
+        /// 筛选产品
+        /// </summary>
+        /// <param name="categoryid">分类ID</param>
+        /// <param name="Attrs">属性</param>
+        /// <param name="beginprice"></param>
+        /// <param name="endprice"></param>
+        /// <param name="keyWords"></param>
+        /// <param name="orderby">排序字段</param>
+        /// <param name="isasc">是否升序</param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="totalCount"></param>
+        /// <param name="pageCount"></param>
+        /// <param name="clientID"></param>
+        /// <returns></returns>
         public List<C_Products> GetFilterProducts(string categoryid, List<FilterAttr> Attrs, string beginprice, string endprice, string keyWords, string orderby, bool isasc, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
@@ -898,7 +913,7 @@ namespace CloudSalesBusiness
 
 
         /// <summary>
-        /// 添加子产品
+        /// 编辑子产品
         /// </summary>
         /// <param name="detailid">子产品ID</param>
         /// <param name="productid">产品ID</param>
@@ -913,12 +928,32 @@ namespace CloudSalesBusiness
         /// <param name="operateid"></param>
         /// <param name="clientid"></param>
         /// <returns></returns>
-        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, string unitid, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description, string operateid, string clientid)
+        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, string unitid, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description, string productImg, string operateid, string clientid)
         {
             lock (SingleLock)
             {
+                if (!string.IsNullOrEmpty(productImg))
+                {
+                    if (productImg.IndexOf("tempfile") >= 0)
+                    {
+                        if (productImg.IndexOf("?") > 0)
+                        {
+                            productImg = productImg.Substring(0, productImg.IndexOf("?"));
+                        }
+                        FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath(productImg));
+                        productImg = FILEPATH + file.Name;
+                        if (file.Exists)
+                        {
+                            file.MoveTo(HttpContext.Current.Server.MapPath(productImg));
+                        }
+                    }
+                }
+                else
+                {
+                    productImg = FILEPATH + DateTime.Now.ToString("yyyyMMddHHmmssms") + new Random().Next(1000, 9999).ToString() + ".png";
+                }
                 var dal = new ProductsDAL();
-                return dal.UpdateProductDetails(detailid, productid, productCode, shapeCode, unitid, attrlist, valuelist, attrvaluelist, price, weight, description);
+                return dal.UpdateProductDetails(detailid, productid, productCode, shapeCode, unitid, attrlist, valuelist, attrvaluelist, price, weight, description, productImg);
             }
         }
 

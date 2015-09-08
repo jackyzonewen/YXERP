@@ -743,7 +743,7 @@ namespace YXERP.Controllers
             else
             {
                 bool bl = new ProductsBusiness().UpdateProductDetails(model.ProductDetailID, model.ProductID, model.DetailsCode, model.ShapeCode, model.UnitID, model.SaleAttr, model.AttrValue, model.SaleAttrValue,
-                                                              model.Price, model.Weight, model.Description, CurrentUser.UserID, CurrentUser.ClientID); 
+                                                              model.Price, model.Weight, model.Description, model.ImgS, CurrentUser.UserID, CurrentUser.ClientID); 
                 if (bl)
                 {
                     id = model.ProductDetailID;
