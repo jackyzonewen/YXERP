@@ -385,6 +385,55 @@ namespace CloudSalesBusiness
             return model;
         }
 
+        public C_Products GetProductByIDForDetails(string productid)
+        {
+            var dal = new ProductsDAL();
+            DataSet ds = dal.GetProductByID(productid);
+
+            C_Products model = new C_Products();
+            if (ds.Tables.Contains("Product") && ds.Tables["Product"].Rows.Count > 0)
+            {
+                model.FillData(ds.Tables["Product"].Rows[0]);
+                model.Category = GetCategoryDetailByID(model.CategoryID);
+                var bigunit = new C_ProductUnit();
+                bigunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
+                model.BigUnit = bigunit;
+
+                var smallunit = new C_ProductUnit();
+                smallunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
+                model.SmallUnit = smallunit;
+
+                List<C_ProductDetail> list = new List<C_ProductDetail>();
+                foreach (DataRow item in ds.Tables["Details"].Rows)
+                {
+                    //子产品
+                    C_ProductDetail detail = new C_ProductDetail();
+                    detail.FillData(item);
+                    var unit = new C_ProductUnit();
+                    unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
+                    detail.Unit = unit;
+                    Dictionary<string, string> attrs = new Dictionary<string, string>();
+                    foreach (string attr in detail.SaleAttrValue.Split(','))
+                    {
+                        if (!string.IsNullOrEmpty(attr))
+                        {
+                            attrs.Add(attr.Split(':')[0], attr.Split(':')[1]);
+                        }
+                    }
+
+                    foreach (var attr in model.Category.SaleAttrs)
+                    {
+                        detail.SaleAttrValueString += attr.AttrName + ":" + attr.AttrValues.Where(a => a.ValueID.ToLower() == attrs[attr.AttrID].ToLower()).FirstOrDefault().ValueName + ",";
+                    }
+
+                    list.Add(detail);
+                }
+                model.ProductDetails = list;
+            }
+
+            return model;
+        }
+
         /// <summary>
         /// 是否存在产品编码
         /// </summary>

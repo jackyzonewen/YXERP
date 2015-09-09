@@ -323,6 +323,7 @@
     <Content Include="modules\css\products\product.css" />
     <Content Include="modules\css\products\attrplug.css" />
     <Content Include="modules\css\products\filterproducts.css" />
+    <Content Include="modules\css\products\filterdetails.css" />
     <Content Include="modules\css\warehouse\warehouse.css" />
     <Content Include="modules\css\warehouse\warehousetype.css" />
     <Content Include="modules\images\default.png" />

@@ -1,6 +1,7 @@
 ﻿
 /*分类层级*/
-.category-map { height:30px; border-bottom:solid 1px #ccc; padding-bottom:5px; }
+.top-div { height:30px; border-bottom:solid 1px #ccc; padding-bottom:5px;}
+.category-map {  }
 .category-map li{ height:30px; line-height:30px; color:#333; cursor:pointer; float:left; padding-right:20px; }
 .category-map li span { font-family: simsun; font-style: normal; padding-left:5px; }
 .category-map li:hover{  color:#B10000; }

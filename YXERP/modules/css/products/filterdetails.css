@@ -1,0 +1,21 @@
+﻿
+/*图片产品规格*/
+.top-div { height:400px; padding-bottom:5px;}
+
+.top-div .image{ height:400px; width:400px; border:solid 1px #ccc; overflow:hidden;}
+.top-div .image img{ height:400px; width:400px;}
+
+.top-div .product-attr { margin-left:50px;}
+.top-div .product-attr h1{ font-size:16px;}
+
+.top-div .product-attr .price{ height:50px; margin:10px 0; padding:0 10px; background-color:#f3f3f3; }
+.product-attr .price li { height:50px; float:left; line-height:50px;}
+.product-attr .price .column { width:60px;color:#333;}
+.product-attr .price .salesprice { font-size:26px; color:#B10000; font-weight:bold; }
+.product-attr .price .commonprice { text-decoration:line-through; margin-left:10px; font-size:14px;}
+
+.attr-item { overflow:auto; }
+.attrkey{ width:15%; float:left; line-height:35px; text-indent:10px; max-width:150px; }
+.attrValues{ width:85%; float:left;line-height:35px; height:35px; height:auto;}
+.attrValues li { height:25px; line-height:25px; float:left; padding:0 20px; margin:5px 0; cursor:pointer; display:inline-block; }
+.attrValues li:hover { color:#B10000; }

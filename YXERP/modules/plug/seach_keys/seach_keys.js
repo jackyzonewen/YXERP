@@ -20,7 +20,8 @@ define(function (require, exports, module) {
             if (!obj.hasClass("searth-module")) {
                 obj.addClass("searth-module");
             }
-            var _input = $('<input class="search-ipt" type="text" placeholder="智能搜索...">');
+            var _input = $('<input class="search-ipt" type="text" placeholder="' + (obj.data("text") || '智能搜索...') + '">');
+            _input.css("width", (obj.data("width") || 180) + "px");
             var _ico = $('<span class="search-ico hand"></span>');
             obj.append(_input).append(_ico);
 

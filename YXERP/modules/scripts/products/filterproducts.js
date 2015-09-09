@@ -226,7 +226,7 @@
 
     //绑定产品列表
     ObjectJS.getProducts = function (params) {
-
+        var _self = this;
         var attrs = [];
         $(".filter-attr").each(function () {
             var _this = $(this), _value = _this.find(".hover");
@@ -257,7 +257,12 @@
                 var html = templateFun(data.Items);
                 html = $(html);
 
+                html.find(".productimg,.name").each(function () {
+                    $(this).attr("href", $(this).attr("href") + "&type=" + _self.type);
+                });
+
                 $("#productlist").append(html);
+
             });
 
             $("#pager").paginate({

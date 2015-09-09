@@ -4,13 +4,13 @@
 %}
 <li>
     <div class="product-item" >
-        <a href="/Products/ChooseDetail?pid={%=item.ProductID%}&did={%=item.ProductDetailID%}" class="productimg">
+        <a target="_blank" href="/Products/ChooseDetail?pid={%=item.ProductID%}&did={%=item.ProductDetailID%}" class="productimg">
             <img src="{%=item.ProductImage%}" alt="" />
         </a>
         <h2 class="price">
             ￥{%=item.Price.toFixed(2)%}
         </h2>
-        <a href="/Products/ChooseDetail?pid={%=item.ProductID%}&did={%=item.ProductDetailID%}" class="name">
+        <a target="_blank" href="/Products/ChooseDetail?pid={%=item.ProductID%}&did={%=item.ProductDetailID%}" class="name">
             {%=item.ProductName%}
         </a>
         <div class="sales">
