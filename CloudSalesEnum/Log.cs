@@ -28,6 +28,7 @@ namespace CloudSalesEnum
     /// </summary>
     public enum EnumLogEntity
     {
-        Brand = 1
+        Brand = 1,
+        ProductUnit
     }
 }
