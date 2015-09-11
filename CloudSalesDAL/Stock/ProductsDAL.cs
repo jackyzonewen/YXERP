@@ -49,6 +49,13 @@ namespace CloudSalesDAL
             return dt;
         }
 
+        public DataTable GetUnitByUnitID(string unitID) 
+        {
+            SqlParameter[] paras = { new SqlParameter("@unitID", unitID) };
+            DataTable dt = GetDataTable("select * from C_ProductUnit where UnitID=@unitID", paras, CommandType.Text);
+            return dt;
+        }
+
         public DataTable GetClientUnits(string clientid)
         {
             SqlParameter[] paras = { new SqlParameter("@ClientID", clientid) };

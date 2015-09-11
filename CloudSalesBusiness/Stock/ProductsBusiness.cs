@@ -768,9 +768,12 @@ namespace CloudSalesBusiness
         /// <param name="desciption">描述</param>
         /// <param name="operateid">操作人</param>
         /// <returns></returns>
-        public bool UpdateUnit(string unitID, string unitName, string desciption, string operateid)
+        public bool UpdateUnit(string unitID, string unitName, string desciption, string operateID)
         {
             var dal = new ProductsDAL();
+            DataTable dt = dal.GetUnitByUnitID(unitID);
+            string message = "单位名称“" + dt.Rows[0]["unitName"].ToString() + "”变更为“" + unitName + "”；描述“" + dt.Rows[0]["Description"].ToString() + "”变更为“" + desciption + "”";
+            LogBusiness.AddOperateLog(operateID, "ProductsBusiness.UpdateUnit", EnumLogType.Update, EnumLogModules.Stock, EnumLogEntity.ProductUnit, unitID, message,"");
             return dal.UpdateUnit(unitID, unitName, desciption);
         }
 
