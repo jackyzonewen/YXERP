@@ -3,12 +3,22 @@
     ViewBag.Title = model.ProductName;
 }
 @section css{
-    <link rel="stylesheet" href="/modules/css/products/filterdetails.css" />
+   
+    
 }
+<link rel="stylesheet" href="/modules/css/products/filterdetails.css" />
+<link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
 @section scripts{
+    <script src="/Scripts/jquery-1.11.1.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.config.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.min.js"></script>
     <script type="text/javascript">
-        seajs.use(["scripts/products/filterproducts"], function (obj) {
-            obj.init('@ViewBag.Type');
+        seajs.use(["scripts/products/filterdetails"], function (obj) {
+            var um = "";
+            //var um = UM.getEditor('description', {
+            //    autoHeightEnabled: true
+            //});
+            obj.init('@Html.ToJSONString(model)', um);
         });
     </script>
 }
@@ -20,7 +30,7 @@
         <div class="image left">
             <img src="@(model.ProductImage)" />
         </div>
-        <div class="product-attr left">
+        <div class="product-name left">
             <h1>@(model.ProductName)</h1>
 
             <ul class="price">
@@ -44,5 +54,11 @@
             }
 
         </div>
+    </div>
+    <div class="product-attr">
+
+    </div>
+    <div class="description" id="description">
+
     </div>
 </div>

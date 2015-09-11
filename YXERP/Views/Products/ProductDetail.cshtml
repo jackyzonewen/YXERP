@@ -2,16 +2,22 @@
     ViewBag.Title = "产品详情页";
     var model = (CloudSalesEntity.C_Products)ViewBag.Model;
 }
-<link href="/modules/css/products/product.css" rel="stylesheet" />
+@section css{
+   <link href="/modules/css/products/product.css" rel="stylesheet" />
+   <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+}
 
 @section scripts{
-    <script src="/modules/plug/kindeditor-4.1.7/kindeditor.js"></script>
+    <script src="/Scripts/jquery-1.11.1.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.config.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.min.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/products/product"], function (product) {
-            KindEditor.ready(function (K) {
-                var editor = K.create('#remark');
-                product.initEdit('@Html.ToJSONString(model)', editor);
+            var um = UM.getEditor('remark', {
+                autoHeightEnabled: true
             });
+            product.initEdit('@Html.ToJSONString(model)', um);
+            
         });
     </script>
 }
@@ -113,7 +119,7 @@
             <span class="column-name">是否推荐：</span><label><input type="checkbox" id="isRecommend" />是</label> 
         </li>
         <li>
-            <span class="column-name">产品说明：</span><textarea id="remark"></textarea>
+            <span class="column-name">产品说明：</span><div id="remark"></div>
         </li>
 
     </ul>

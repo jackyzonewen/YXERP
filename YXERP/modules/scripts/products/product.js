@@ -13,8 +13,8 @@ define(function (require, exports, module) {
     };
     var Product = {};
     //添加页初始化
-    Product.init = function (KindEditor) {
-        editor = KindEditor;
+    Product.init = function (Editor) {
+        editor = Editor;
         Product.bindEvent();
     }
     //绑定事件
@@ -99,8 +99,9 @@ define(function (require, exports, module) {
             DiscountValue:1,
             ProductImage: _self.ProductImage,
             ShapeCode: $("#shapeCode").val(),
-            Description: encodeURI(editor.html())
+            Description: encodeURI(editor.getContent())
         };
+
         Global.post("/Products/SavaProduct", {
             product: JSON.stringify(Product)
         }, function (data) {
@@ -216,9 +217,9 @@ define(function (require, exports, module) {
         });
     }
     //初始化编辑页数据
-    Product.initEdit = function (model, KindEditor) {
+    Product.initEdit = function (model, Editor) {
         var _self = this;
-        editor = KindEditor;
+        editor = Editor;
         model = JSON.parse(model.replace(/&quot;/g, '"'));
         _self.bindDetailEvent(model);
         _self.bindDetail(model);
@@ -256,7 +257,9 @@ define(function (require, exports, module) {
         
         _self.ProductImage = model.ProductImage;
         
-        editor.html(decodeURI(model.Description))
+        editor.ready(function () {
+            editor.setContent(decodeURI(model.Description));
+        });
     }
     //详情页事件
     Product.bindDetailEvent = function (model) {
