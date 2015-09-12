@@ -231,8 +231,6 @@ namespace CloudSalesBusiness
                 model.FillData(dr);
                 list.Add(model);
             }
-
-
             return list;
         }
 
@@ -385,55 +383,6 @@ namespace CloudSalesBusiness
             return model;
         }
 
-        public C_Products GetProductByIDForDetails(string productid)
-        {
-            var dal = new ProductsDAL();
-            DataSet ds = dal.GetProductByID(productid);
-
-            C_Products model = new C_Products();
-            if (ds.Tables.Contains("Product") && ds.Tables["Product"].Rows.Count > 0)
-            {
-                model.FillData(ds.Tables["Product"].Rows[0]);
-                model.Category = GetCategoryDetailByID(model.CategoryID);
-                var bigunit = new C_ProductUnit();
-                bigunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
-                model.BigUnit = bigunit;
-
-                var smallunit = new C_ProductUnit();
-                smallunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
-                model.SmallUnit = smallunit;
-
-                List<C_ProductDetail> list = new List<C_ProductDetail>();
-                foreach (DataRow item in ds.Tables["Details"].Rows)
-                {
-                    //子产品
-                    C_ProductDetail detail = new C_ProductDetail();
-                    detail.FillData(item);
-                    var unit = new C_ProductUnit();
-                    unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
-                    detail.Unit = unit;
-                    Dictionary<string, string> attrs = new Dictionary<string, string>();
-                    foreach (string attr in detail.SaleAttrValue.Split(','))
-                    {
-                        if (!string.IsNullOrEmpty(attr))
-                        {
-                            attrs.Add(attr.Split(':')[0], attr.Split(':')[1]);
-                        }
-                    }
-
-                    foreach (var attr in model.Category.SaleAttrs)
-                    {
-                        detail.SaleAttrValueString += attr.AttrName + ":" + attr.AttrValues.Where(a => a.ValueID.ToLower() == attrs[attr.AttrID].ToLower()).FirstOrDefault().ValueName + ",";
-                    }
-
-                    list.Add(detail);
-                }
-                model.ProductDetails = list;
-            }
-
-            return model;
-        }
-
         /// <summary>
         /// 是否存在产品编码
         /// </summary>
@@ -489,6 +438,92 @@ namespace CloudSalesBusiness
             return list;
         }
 
+        /// <summary>
+        /// 获取产品信息（加入购物车页面）
+        /// </summary>
+        /// <param name="productid"></param>
+        /// <returns></returns>
+        public C_Products GetProductByIDForDetails(string productid)
+        {
+            var dal = new ProductsDAL();
+            DataSet ds = dal.GetProductByIDForDetails(productid);
+
+            C_Products model = new C_Products();
+            if (ds.Tables.Contains("Product") && ds.Tables["Product"].Rows.Count > 0)
+            {
+                model.FillData(ds.Tables["Product"].Rows[0]);
+
+                //单位
+                model.BigUnit = new C_ProductUnit();
+                model.BigUnit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
+
+                model.SmallUnit = new C_ProductUnit();
+                model.SmallUnit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
+
+                model.AttrLists = new List<C_ProductAttr>();
+                model.SaleAttrs = new List<C_ProductAttr>();
+
+                foreach (DataRow attrtr in ds.Tables["Attrs"].Rows)
+                {
+                    C_ProductAttr attrModel = new C_ProductAttr();
+                    attrModel.FillData(attrtr);
+                    attrModel.AttrValues = new List<C_AttrValue>();
+
+                    //参数
+                    if (attrModel.Type == (int)EnumAttrType.Parameter)
+                    {
+                        foreach (DataRow valuetr in ds.Tables["Values"].Select("AttrID='" + attrModel.AttrID + "'"))
+                        {
+                            C_AttrValue valueModel = new C_AttrValue();
+                            valueModel.FillData(valuetr);
+                            if (model.AttrValueList.IndexOf(valueModel.ValueID) >= 0)
+                            {
+                                attrModel.AttrValues.Add(valueModel);
+                                model.AttrLists.Add(attrModel);
+                                break;
+                            }
+                        }
+                       
+                    }
+                    else
+                    {
+                        model.SaleAttrs.Add(attrModel);
+                    }
+                }
+
+                model.ProductDetails = new List<C_ProductDetail>();
+                foreach (DataRow item in ds.Tables["Details"].Rows)
+                {
+
+                    C_ProductDetail detail = new C_ProductDetail();
+                    detail.FillData(item);
+
+                    detail.Unit = new C_ProductUnit();
+                    detail.Unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
+
+                    //填充存在的规格
+                    foreach (var attrModel in model.SaleAttrs)
+                    {
+                        foreach (DataRow valuetr in ds.Tables["Values"].Select("AttrID='" + attrModel.AttrID + "'"))
+                        {
+                            C_AttrValue valueModel = new C_AttrValue();
+                            valueModel.FillData(valuetr);
+                            if (detail.AttrValue.IndexOf(valueModel.ValueID) >= 0)
+                            {
+                                if (attrModel.AttrValues.Where(v => v.ValueID == valueModel.ValueID).Count() == 0)
+                                {
+                                    attrModel.AttrValues.Add(valueModel);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    model.ProductDetails.Add(detail);
+                }
+            }
+
+            return model;
+        }
         #endregion
 
         #region 添加

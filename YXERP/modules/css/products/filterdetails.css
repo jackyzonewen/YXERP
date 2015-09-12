@@ -5,7 +5,7 @@
 .top-div .image{ height:400px; width:400px; border:solid 1px #ccc; overflow:hidden;}
 .top-div .image img{ height:400px; width:400px;}
 
-.top-div .product-name { margin-left:50px;}
+.top-div .product-name { margin-left:50px; min-width:500px; overflow:auto;}
 .top-div .product-name h1{ font-size:16px;}
 
 .top-div .product-name .price{ height:50px; margin:10px 0; padding:0 10px; background-color:#f3f3f3; }
@@ -22,4 +22,4 @@
 
 
 /*描述*/
-#description { width:90%; overflow:auto; }
+#description { overflow:auto; line-height:25px; }

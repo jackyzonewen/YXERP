@@ -26,6 +26,6 @@ select * from C_Products where ProductID=@ProductID
 
 select * from C_ProductDetail where ProductID=@ProductID
 
-select * from C_ProductUnit where UnitID=@BigUnit or UnitID=@Unit
+select UnitID,UnitName from C_ProductUnit where UnitID=@BigUnit or UnitID=@Unit
  
 

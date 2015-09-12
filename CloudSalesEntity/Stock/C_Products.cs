@@ -420,6 +420,11 @@ namespace CloudSalesEntity
         public List<C_ProductDetail> ProductDetails { get; set; }
 
         /// <summary>
+        /// 属性
+        /// </summary>
+        public List<C_ProductAttr> AttrLists { get; set; }
+
+        /// <summary>
         /// 规格
         /// </summary>
         public List<C_ProductAttr> SaleAttrs { get; set; }

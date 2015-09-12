@@ -141,7 +141,7 @@ namespace YXERP.Controllers
 
         public ActionResult ChooseDetail(string pid, string did, int type = 0)
         {
-            var model = new ProductsBusiness().GetProductByID(pid);
+            var model = new ProductsBusiness().GetProductByIDForDetails(pid);
             ViewBag.Model = model;
             return View();
         } 

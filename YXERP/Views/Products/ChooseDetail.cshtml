@@ -3,22 +3,14 @@
     ViewBag.Title = model.ProductName;
 }
 @section css{
-   
-    
+   <link rel="stylesheet" href="/modules/css/products/filterdetails.css" />
+    <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
 }
-<link rel="stylesheet" href="/modules/css/products/filterdetails.css" />
-<link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+
 @section scripts{
-    <script src="/Scripts/jquery-1.11.1.js"></script>
-    <script src="/modules/plug/umeditor/umeditor.config.js"></script>
-    <script src="/modules/plug/umeditor/umeditor.min.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/products/filterdetails"], function (obj) {
-            var um = "";
-            //var um = UM.getEditor('description', {
-            //    autoHeightEnabled: true
-            //});
-            obj.init('@Html.ToJSONString(model)', um);
+            obj.init('@Html.ToJSONString(model)');
         });
     </script>
 }
@@ -38,17 +30,17 @@
                 <li class="salesprice">￥@(model.Price.ToString("f2"))</li>
                 <li class="commonprice">￥@(model.CommonPrice.Value.ToString("f2"))</li>
             </ul>
-            @foreach (var attr in model.Category.SaleAttrs)
+            @foreach (var attr in model.SaleAttrs)
             { 
                 <ul class="attr-item" data-id="@attr.AttrID">
                     <li class="attrkey">@attr.AttrName：</li>
                     <li class="attrValues">
-                    @*    <ul>
+                        <ul>
                             @foreach (var value in attr.AttrValues)
                             { 
                                 <li class="value" data-id="@value.ValueID">@value.ValueName</li>
                             }
-                        </ul>*@
+                        </ul>
                     </li>
                 </ul>
             }
@@ -58,7 +50,12 @@
     <div class="product-attr">
 
     </div>
-    <div class="description" id="description">
+    <div class="edui-container">
+        <div class="edui-editor-body">
+            <div class="description  edui-body-container" id="description">
 
+             </div>
+        </div>
     </div>
+    
 </div>

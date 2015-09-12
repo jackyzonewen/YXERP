@@ -6,10 +6,9 @@ define(function (require, exports, module) {
 
     var ObjectJS = {};
     //添加页初始化
-    ObjectJS.init = function (model, Editor) {
+    ObjectJS.init = function (model) {
         var _self = this;
         model = JSON.parse(model.replace(/&quot;/g, '"'));
-        editor = Editor;
         
         _self.bindDetail(model);
         _self.bindEvent(model);
@@ -26,9 +25,6 @@ define(function (require, exports, module) {
         _self.ProductID = model.ProductID;
 
         $("#description").html(decodeURI(model.Description));
-        //editor.ready(function () {
-        //    editor.setContent(decodeURI(model.Description));
-        //});
     }
     module.exports = ObjectJS;
 })

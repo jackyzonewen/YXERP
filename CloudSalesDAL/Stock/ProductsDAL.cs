@@ -187,6 +187,13 @@ namespace CloudSalesDAL
 
         }
 
+        public DataSet GetProductByIDForDetails(string productid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@ProductID", productid) };
+            DataSet ds = GetDataSet("P_GetProductByIDForDetails", paras, CommandType.StoredProcedure, "Product|Details|Unit|Attrs|Values");
+            return ds;
+        }
+
         #endregion
 
         #region 添加

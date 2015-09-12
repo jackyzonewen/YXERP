@@ -129,4 +129,7 @@
   <ItemGroup>
     <None Include="Procedures\Stock\P_GetFilterProducts.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Stock\P_GetProductByIDForDetails.sql" />
+  </ItemGroup>
 </Project>
