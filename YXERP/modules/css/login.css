@@ -28,7 +28,7 @@ body{ background:url(../images/loginMainBackground.jpg) repeat-x left top;color:
 #container{margin:0 auto;width:1000px; height:500px;padding-top:130px;background:url(../images/loginBackground.jpg) no-repeat center top;}
 
 #container .main{margin:0 auto;width:608px;height:340px; background-color:#D9EFFA;}
-#container .main .title{width:100%;height:70px; color:#033d91; text-align:center; font-size:32px;line-height:70px; border-bottom:solid 1px #fff;}
+#container .main .title{width:100%;height:70px; color:#29abdf; text-align:center; font-size:32px; font-weight:bold; line-height:70px; border-bottom:solid 1px #fff;}
 #container .main .content{width:530px;float:left;margin-left:35px;display:inline;}
 
 /**/

@@ -367,10 +367,12 @@
     <Content Include="modules\images\loginMainBackground.jpg" />
     <Content Include="modules\images\logo.gif" />
     <Content Include="modules\images\logo.png" />
+    <Content Include="modules\images\logo_login.png" />
     <Content Include="modules\images\sidebar.gif" />
     <Content Include="modules\images\submenu.gif" />
     <Content Include="modules\images\topmenu.gif" />
     <Content Include="modules\images\logo-1.png" />
+    <Content Include="modules\images\yunx_Logo_zt.png" />
     <Content Include="modules\plug\city.js" />
     <Content Include="modules\plug\datapager\images\next.png" />
     <Content Include="modules\plug\datapager\images\previous.png" />
