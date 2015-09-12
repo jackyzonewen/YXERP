@@ -26,5 +26,6 @@ obj/
 _ReSharper*/
 tempFiles
 tempfile
+upload
 uploadFiles
 *.dbmdl

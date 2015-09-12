@@ -1,12 +1,12 @@
 ﻿
 .ico-back { margin-top:3px; }
 
-.product-add { }
+.product-add { overflow:auto; }
 .product-add li { height:auto; }
 .product-add .column-name{ width:85px; float:left; }
 .product-add input[type="checkbox"] { vertical-align:middle; margin:0 2px; }
 
-.edui-container { min-width:700px; width:80%; margin-left:85px !important; }
+.edui-container { min-width:700px; width:80%; float:left; }
 
 .product-img { position:absolute; top:80px; right:50px; width:150px; }
 .product-img img{ width:150px;}
