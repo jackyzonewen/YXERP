@@ -5,7 +5,7 @@
 .top-div .image{ height:400px; width:400px; border:solid 1px #ccc; overflow:hidden;}
 .top-div .image img{ height:400px; width:400px;}
 
-.top-div .product-name { margin-left:50px; min-width:500px; overflow:auto;}
+.top-div .product-name { margin-left:50px; min-width:500px; overflow:auto; min-height:400px;}
 .top-div .product-name h1{ font-size:16px;}
 
 .top-div .product-name .price{ height:50px; margin:10px 0; padding:0 10px; background-color:#f3f3f3; }
@@ -14,12 +14,36 @@
 .product-name .price .salesprice { font-size:26px; color:#B10000; font-weight:bold; }
 .product-name .price .commonprice { text-decoration:line-through; margin-left:10px; font-size:14px;}
 
+.attrs { height:150px; }
 .attr-item { overflow:auto; }
 .attrkey{ width:15%; float:left; line-height:35px; text-indent:10px; max-width:150px; }
 .attrValues{ width:85%; float:left;line-height:35px; height:35px; height:auto;}
-.attrValues li { height:25px; line-height:25px; float:left; padding:0 20px; margin:5px 0; cursor:pointer; display:inline-block; }
-.attrValues li:hover { color:#B10000; }
+.attrValues li { height:21px; line-height:21px; float:left; padding:0 20px; margin:5px 10px; border:solid 2px #ccc; cursor:pointer; display:inline-block; }
+.attrValues li:hover { border:solid 2px #B10000; color:#B10000; }
+.attrValues li.hover { border:solid 2px #B10000; color:#B10000; }
 
+/*编辑数量/加入购物车*/
+.choose-quantity { width: 49px; height: 34px; overflow: hidden; border: 1px solid #CCC; position: relative; margin: 8px 10px 0px 0px; }
+.choose-quantity input { display: block; width: 31px; height: 32px; line-height: 32px; position: absolute; top: 1px; left: 0px; border: 0px none; text-align: center; }
+.choose-quantity input:focus{ border:0px none; }
+
+.choose-quantity span{display: block; width: 15px; text-align: center; height: 17px; line-height: 17px; overflow: hidden; cursor:pointer;
+                                  background: #F1F1F1 none repeat scroll 0% 0%; color: #666; position: absolute; right: -1px; border: 1px solid #CCC; }
+.choose-quantity .quantity-add { top: -1px; }
+.choose-quantity .quantity-reduce { bottom: -1px;}
+
+.addcart { height:36px; background-color:#B10000; color:#fff; font-size:14px; font-weight:bold; padding:0 20px; border:none; cursor:pointer; margin-top:8px; }
+
+/*产品属性*/
+.show-nav { height: 30px; width: 90%; line-height: 30px; margin-top: 20px; border-width: 2px 1px 1px; border-style: solid; 
+            border-color: #999 #DEDFDE #DEDFDE; background-color: #F7F7F7; overflow: visible; }
+.show-nav-ul { float: left; height: 31px; margin-bottom: -1px; }
+.show-nav-ul li { height:30px; float:left; padding:0 20px; }
+.show-nav-ul .hover { position: relative; height: 35px; line-height: 35px; margin-top: -6px; margin-left: -1px; border-top: 2px solid #E4393C;
+          border-left: 1px solid #DEDFDE; border-right: 1px solid #DEDFDE; background-color: #FFF; }
+
+.product-attr { padding:30px 50px; width:90%; border-style:solid ; border-width:0 1px 1px; border-color:#DEDFDE; margin-bottom:20px; box-sizing:padding-box; }
+.product-attr li{ width:22%; padding:5px 1%;}
 
 /*描述*/
-#description { overflow:auto; line-height:25px; }
+.edui-container { overflow:auto; line-height:25px; width:90% !important; }

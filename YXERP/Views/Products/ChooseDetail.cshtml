@@ -30,26 +30,51 @@
                 <li class="salesprice">￥@(model.Price.ToString("f2"))</li>
                 <li class="commonprice">￥@(model.CommonPrice.Value.ToString("f2"))</li>
             </ul>
-            @foreach (var attr in model.SaleAttrs)
-            { 
-                <ul class="attr-item" data-id="@attr.AttrID">
-                    <li class="attrkey">@attr.AttrName：</li>
-                    <li class="attrValues">
-                        <ul>
-                            @foreach (var value in attr.AttrValues)
-                            { 
-                                <li class="value" data-id="@value.ValueID">@value.ValueName</li>
-                            }
-                        </ul>
-                    </li>
-                </ul>
-            }
-
+            <div class="attrs">
+                @foreach (var attr in model.SaleAttrs)
+                { 
+                    <ul class="attr-item" data-id="@attr.AttrID">
+                        <li class="attrkey">@attr.AttrName：</li>
+                        <li class="attrValues">
+                            <ul>
+                                @foreach (var value in attr.AttrValues)
+                                { 
+                                    <li class="value" data-id="@value.ValueID">@value.ValueName</li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                }
+           </div>
+            <div class="choose-div">
+                <div class="choose-quantity left">
+                    <input type="text" value="1" id="quantity" />
+                    <span class="quantity-add" id="quantity-add">+</span>
+                    <span class="quantity-reduce" id="quantity-reduce">-</span>
+                </div>
+                <div class="left mLeft10">
+                    <input type="button" class="addcart" id="addcart" value="加入购物车" />
+                </div>
+            </div>
         </div>
     </div>
-    <div class="product-attr">
-
+    <div class="show-nav">
+        <ul class="show-nav-ul">
+            <li class="hover">产品介绍</li>
+        </ul>
     </div>
+    
+    <ul class="product-attr">
+        <li class="long">产品名称：@(model.ProductName)</li>
+        <li class="long">产品编码：@(model.ProductCode)</li>
+        <li class="long">产品毛重：@(model.Weight.Value.ToString("f2"))g</li>
+        <li class="long">上架时间：@(model.OnlineTime.ToString("yyyy-MM-dd HH:mm:ss"))</li>
+        @foreach (var attr in model.AttrLists)
+        { 
+            <li class="long">@attr.AttrName：@attr.AttrValues[0].ValueName</li>
+         }
+        
+    </ul>
     <div class="edui-container">
         <div class="edui-editor-body">
             <div class="description  edui-body-container" id="description">

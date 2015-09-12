@@ -48,7 +48,7 @@ namespace CloudSalesEntity
 		private decimal _preferentialpv=0;
         private double? _taxrate = 0;
 		private int? _status=1;
-		private DateTime? _onlinetime= DateTime.Now;
+		private DateTime _onlinetime= DateTime.Now;
 		private int? _usetype=0;
 		private int? _isnew=0;
 		private int? _isrecommend=0;
@@ -62,8 +62,8 @@ namespace CloudSalesEntity
 		private string _prodiverid;
 		private string _description="";
 		private string _createuserid;
-		private DateTime? _createtime= DateTime.Now;
-		private DateTime? _updatetime= DateTime.Now;
+		private DateTime _createtime= DateTime.Now;
+		private DateTime _updatetime= DateTime.Now;
 		private string _operateip="";
 		private string _clientid;
 		/// <summary>
@@ -257,7 +257,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? OnlineTime
+		public DateTime OnlineTime
 		{
 			set{ _onlinetime=value;}
 			get{return _onlinetime;}
@@ -371,7 +371,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? CreateTime
+		public DateTime CreateTime
 		{
 			set{ _createtime=value;}
 			get{return _createtime;}
@@ -379,7 +379,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? UpdateTime
+		public DateTime UpdateTime
 		{
 			set{ _updatetime=value;}
 			get{return _updatetime;}
