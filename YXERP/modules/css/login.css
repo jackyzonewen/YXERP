@@ -44,7 +44,7 @@ body{ background:url(../images/loginMainBackground.jpg) repeat-x left top;color:
 #container #loginBtn{width:200px; float:right; padding-top:30px; height:50px;}
 
 
-#btnLogin { height:35px;line-height:35px; background-color:#BFD9EA ; color:#033d91; 
+#btnLogin { height:35px;line-height:35px; background-color:#BFD9EA ; color:#033d91; font-size:16px;
        border:none; font-weight:bold; cursor:pointer; display:inline-block; border-radius:0; width:200px;}
 
 .logo {  height:150px; width:150px; float:right; margin:40px 20px 0 0 ;}
