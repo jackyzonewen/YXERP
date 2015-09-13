@@ -412,6 +412,7 @@ namespace CloudSalesEntity
 
         public string ApprovalNumber { get; set; }
 
+        [Property("Lower")] 
         public string ProductDetailID { get; set; }
 
         /// <summary>

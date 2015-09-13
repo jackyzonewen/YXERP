@@ -198,6 +198,7 @@
                 _self.getProducts();
             }
         });
+
         //按价格排序
         $(".orderby-price").click(function () {
             var _this = $(this);

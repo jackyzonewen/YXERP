@@ -143,6 +143,8 @@ namespace YXERP.Controllers
         {
             var model = new ProductsBusiness().GetProductByIDForDetails(pid);
             ViewBag.Model = model;
+            ViewBag.DetailID = did;
+            ViewBag.OrderType = type;
             return View();
         } 
 

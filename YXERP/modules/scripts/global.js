@@ -18,7 +18,6 @@
             }
         });
     }
-
     //格式化日期
     Date.prototype.toString = function (format) {
         var o = {
@@ -48,13 +47,16 @@
         d.setTime(this.match(/\d+/)[0]);
         return (!!format) ? d.toString(format) : d;
     }
-
     //截取字符串
     String.prototype.subString = function (len) {
         if (this.length > len) {
             return this.substr(0, len-1) + "...";
         }
         return this;
+    }
+    //判断字符串是否整数
+    String.prototype.isInt = function () {
+        return this.match(/^(0|([1-9]\d*))$/);
     }
 
     /*重写alert*/

@@ -1,0 +1,6 @@
+﻿
+.shopping-cart { position:fixed; right:0; bottom:0; overflow:auto; background-color:#fff; }
+
+.shopping-cart .cart-header { background:url('/modules/images/ico-gouwuche.png') no-repeat 10px 5px; height:35px; width:150px; line-height:35px; 
+                              font-size:20px; text-indent:40px; border:solid 1px #B10000; padding:5px 10px; }
+.shopping-cart .cart-header .totalcount{ line-height:35px;  font-size:20px; color:#B10000; margin-left:10px; }

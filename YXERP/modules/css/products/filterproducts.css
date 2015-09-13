@@ -44,7 +44,7 @@
 .productlist .product-item{  width:230px; height:330px; padding:5px; border:solid 5px #eee; display:inline-block; position:relative; }
 .productlist li:hover .product-item{ border:solid 5px #B10000; }
 
-.product-item .productimg { width:230px; height:230px; overflow:hidden; }
+.product-item .productimg { width:230px; height:230px; overflow:hidden; display:inline-block; }
 .product-item .productimg img{ width:230px; height:230px;}
 
 .product-item .price { color:#B10000; height:30px; line-height:30px; font-size:16px; }

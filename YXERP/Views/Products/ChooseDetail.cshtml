@@ -10,7 +10,7 @@
 @section scripts{
     <script type="text/javascript">
         seajs.use(["scripts/products/filterdetails"], function (obj) {
-            obj.init('@Html.ToJSONString(model)');
+            obj.init('@Html.ToJSONString(model)', '@ViewBag.DetailID', '@ViewBag.OrderType');
         });
     </script>
 }
@@ -20,23 +20,23 @@
 <div class="content-body">
     <div class="top-div">
         <div class="image left">
-            <img src="@(model.ProductImage)" />
+            <img id="productimg" src="@(model.ProductImage)" />
         </div>
         <div class="product-name left">
             <h1>@(model.ProductName)</h1>
 
             <ul class="price">
                 <li class="column">促&nbsp;&nbsp;销&nbsp;&nbsp;价：</li>
-                <li class="salesprice">￥@(model.Price.ToString("f2"))</li>
+                <li id="price" class="salesprice">￥@(model.Price.ToString("f2"))</li>
                 <li class="commonprice">￥@(model.CommonPrice.Value.ToString("f2"))</li>
             </ul>
-            <div class="attrs">
+            <div class="attrs" id="saleattr">
                 @foreach (var attr in model.SaleAttrs)
                 { 
                     <ul class="attr-item" data-id="@attr.AttrID">
                         <li class="attrkey">@attr.AttrName：</li>
                         <li class="attrValues">
-                            <ul>
+                            <ul class="salesattr">
                                 @foreach (var value in attr.AttrValues)
                                 { 
                                     <li class="value" data-id="@value.ValueID">@value.ValueName</li>
@@ -45,12 +45,24 @@
                         </li>
                     </ul>
                 }
+                <ul class="attr-item">
+                    <li class="attrkey">单位：</li>
+                    <li class="attrValues">
+                        <ul id="unit">
+                            <li class="value" data-id="@(model.SmallUnit.UnitID)">@(model.SmallUnit.UnitName)</li>
+                            @if (model.SmallUnitID != model.BigUnitID)
+                            {
+                                <li class="value" data-id="@(model.BigUnit.UnitID)">@(model.BigUnit.UnitName)</li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
            </div>
             <div class="choose-div">
                 <div class="choose-quantity left">
                     <input type="text" value="1" id="quantity" />
-                    <span class="quantity-add" id="quantity-add">+</span>
-                    <span class="quantity-reduce" id="quantity-reduce">-</span>
+                    <span class="quantity-add" id="quantityadd">+</span>
+                    <span class="quantity-reduce" id="quantityreduce">-</span>
                 </div>
                 <div class="left mLeft10">
                     <input type="button" class="addcart" id="addcart" value="加入购物车" />

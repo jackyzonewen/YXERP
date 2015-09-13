@@ -60,7 +60,7 @@ Update [C_Products] set [ProductName]=@ProductName,[GeneralName]=@GeneralName,[I
 where ProductID=@ProductID
 
 
-if(@BUnitID<>@BigUnitID)
+if(@BUnitID<>@BigUnitID and @BUnitID<>@MUnitID)
 begin
 	update C_ProductDetail set UnitID=@BigUnitID where ProductID=@ProductID and UnitID=@BUnitID
 	set @Err+=@@Error

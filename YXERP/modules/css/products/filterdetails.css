@@ -33,6 +33,7 @@
 .choose-quantity .quantity-reduce { bottom: -1px;}
 
 .addcart { height:36px; background-color:#B10000; color:#fff; font-size:14px; font-weight:bold; padding:0 20px; border:none; cursor:pointer; margin-top:8px; }
+.addcartun { background-color:#ccc; color:#fff;  }
 
 /*产品属性*/
 .show-nav { height: 30px; width: 90%; line-height: 30px; margin-top: 20px; border-width: 2px 1px 1px; border-style: solid; 

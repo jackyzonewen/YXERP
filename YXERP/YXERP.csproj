@@ -338,6 +338,7 @@
     <Content Include="modules\images\ico-edit-light.png" />
     <Content Include="modules\images\ico-goback.png" />
     <Content Include="modules\images\ico-gonext.png" />
+    <Content Include="modules\images\ico-gouwuche.png" />
     <Content Include="modules\images\ico-home.png" />
     <Content Include="modules\images\ico-input-add.png" />
     <Content Include="modules\images\ico-left-open.png" />
@@ -365,14 +366,11 @@
     <Content Include="modules\images\loginBackground.jpg" />
     <Content Include="modules\images\loginbarBackground2.gif" />
     <Content Include="modules\images\loginMainBackground.jpg" />
-    <Content Include="modules\images\logo.gif" />
     <Content Include="modules\images\logo.png" />
     <Content Include="modules\images\logo_login.png" />
     <Content Include="modules\images\sidebar.gif" />
     <Content Include="modules\images\submenu.gif" />
     <Content Include="modules\images\topmenu.gif" />
-    <Content Include="modules\images\logo-1.png" />
-    <Content Include="modules\images\yunx_Logo_zt.png" />
     <Content Include="modules\plug\city.js" />
     <Content Include="modules\plug\datapager\images\next.png" />
     <Content Include="modules\plug\datapager\images\previous.png" />
@@ -386,6 +384,7 @@
     <Content Include="modules\plug\easydialog\ico-big-close.png" />
     <Content Include="modules\plug\seach_keys\seach_keys.js" />
     <Content Include="modules\plug\seach_keys\style.css" />
+    <Content Include="modules\plug\shoppingcart\shoppingcart.html" />
     <Content Include="modules\plug\switch\style.css" />
     <Content Include="modules\plug\switch\switch.js" />
     <Content Include="modules\plug\umeditor\dialogs\emotion\emotion.css" />
@@ -468,6 +467,8 @@
     <Content Include="modules\plug\upload\jquery.form.js" />
     <Content Include="modules\plug\upload\upload.js" />
     <Content Include="modules\plug\verify.js" />
+    <Content Include="modules\plug\shoppingcart\shoppingcart.js" />
+    <Content Include="modules\plug\shoppingcart\style.css" />
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home.js" />
     <Content Include="modules\scripts\layout.js" />
