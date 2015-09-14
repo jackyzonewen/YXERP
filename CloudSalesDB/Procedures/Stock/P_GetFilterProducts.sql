@@ -75,6 +75,7 @@ AS
 
 	declare @total int,@page int
 	exec P_GetPagerData @tableName,@columns,@condition,@key,@orderColumn,@pageSize,@pageIndex,@total out,@page out,@isAsc 
+
 	select @totalCount=@total,@pageCount =@page
  
 

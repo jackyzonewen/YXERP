@@ -7,7 +7,8 @@
 */
 
 define(function (require, exports, module) {
-    var doT = require("dot");
+    var Global = require("global"),
+        doT = require("dot");
     require("plug/shoppingcart/style.css");
     (function ($) {
         $.fn.createCart = function (ordertype) {
@@ -19,13 +20,14 @@ define(function (require, exports, module) {
 
         $.fn.drawCart = function (obj, ordertype) {
             
-            //Global.post("/Warehouse/GetWareHouses", Params, function (data) {
-            doT.exec("plug/shoppingcart/shoppingcart.html", function (templateFun) {
-                    var innerText = templateFun([]);
-                    innerText = $(innerText);
-                    obj.append(innerText);
+            Global.post("/Orders/GetShoppingCartCount", { ordertype: ordertype }, function (data) {
+                doT.exec("plug/shoppingcart/shoppingcart.html", function (templateFun) {
+                        var innerText = templateFun([]);
+                        innerText = $(innerText);
+                        innerText.find(".totalcount").html(data.Quantity);
+                        obj.append(innerText);
+                    });
                 });
-            //});
         }
     })(jQuery)
     module.exports = jQuery;

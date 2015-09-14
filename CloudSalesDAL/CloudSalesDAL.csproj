@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="Common\LogDAL.cs" />
+    <Compile Include="Stock\OrdersDAL.cs" />
     <Compile Include="System\C_IndustryDAL.cs" />
     <Compile Include="Stock\ProductsDAL.cs" />
     <Compile Include="Stock\WarehouseDAL.cs" />

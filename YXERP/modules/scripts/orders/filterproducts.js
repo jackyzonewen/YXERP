@@ -252,7 +252,7 @@
             Attrs: attrs
         }, params);
 
-        Global.post("/Products/GetProductListForShopping", { filter: JSON.stringify(opt) }, function (data) {
+        Global.post("/Orders/GetProductListForShopping", { filter: JSON.stringify(opt) }, function (data) {
             $("#productlist").empty();
             doT.exec("template/products/filter_product_list.html", function (templateFun) {
                 var html = templateFun(data.Items);

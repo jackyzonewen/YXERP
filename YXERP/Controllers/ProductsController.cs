@@ -138,7 +138,13 @@ namespace YXERP.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// 加入购物车详情页
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="did"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public ActionResult ChooseDetail(string pid, string did, int type = 0)
         {
             var model = new ProductsBusiness().GetProductByIDForDetails(pid);
@@ -769,29 +775,6 @@ namespace YXERP.Controllers
         {
             bool bl = new ProductsBusiness().UpdateProductDetailsStatus(productdetailid, (EnumStatus)status, OperateIP, CurrentUser.UserID);
             JsonDictionary.Add("Status", bl);
-            return new JsonResult
-            {
-                Data = JsonDictionary,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
-
-        /// <summary>
-        /// 过滤产品
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        public JsonResult GetProductListForShopping(string filter)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            FilterProduct model = serializer.Deserialize<FilterProduct>(filter);
-            int totalCount = 0;
-            int pageCount = 0;
-
-            List<C_Products> list = new ProductsBusiness().GetFilterProducts(model.CategoryID, model.Attrs, model.BeginPrice, model.EndPrice, model.Keywords, model.OrderBy, model.IsAsc, 20, model.PageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
-            JsonDictionary.Add("Items", list);
-            JsonDictionary.Add("TotalCount", totalCount);
-            JsonDictionary.Add("PageCount", pageCount);
             return new JsonResult
             {
                 Data = JsonDictionary,

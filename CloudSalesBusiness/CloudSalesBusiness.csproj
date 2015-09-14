@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\LogBusiness.cs" />
+    <Compile Include="Stock\OrdersBusiness.cs" />
     <Compile Include="System\C_IndustryBusiness.cs" />
     <Compile Include="Stock\ProductsBusiness.cs" />
     <Compile Include="Stock\WarehouseBusiness.cs" />

@@ -347,7 +347,7 @@ namespace CloudSalesBusiness
                 smallunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
                 model.SmallUnit = smallunit;
 
-                List<C_ProductDetail> list = new List<C_ProductDetail>();
+                model.ProductDetails = new List<C_ProductDetail>();
                 foreach (DataRow item in ds.Tables["Details"].Rows)
                 {
                     //子产品
@@ -375,9 +375,8 @@ namespace CloudSalesBusiness
                         detail.SaleAttrValueString = detail.SaleAttrValueString.Substring(0, detail.SaleAttrValueString.Length - 1);
                     }
 
-                    list.Add(detail);
+                    model.ProductDetails.Add(detail);
                 }
-                model.ProductDetails = list;
             }
 
             return model;

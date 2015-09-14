@@ -14,4 +14,10 @@ namespace CloudSalesEnum
         [DescriptionAttribute("入库单")]
         RK = 1
     }
+
+    public enum EnumOrderType
+    {
+        [DescriptionAttribute("入库单")]
+        RK = 1
+    }
 }

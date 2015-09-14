@@ -3,13 +3,13 @@
     ViewBag.Title = model.ProductName;
 }
 @section css{
-   <link rel="stylesheet" href="/modules/css/products/filterdetails.css" />
+   <link rel="stylesheet" href="/modules/css/orders/filterdetails.css" />
     <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
 }
 
 @section scripts{
     <script type="text/javascript">
-        seajs.use(["scripts/products/filterdetails"], function (obj) {
+        seajs.use(["scripts/orders/filterdetails"], function (obj) {
             obj.init('@Html.ToJSONString(model)', '@ViewBag.DetailID', '@ViewBag.OrderType');
         });
     </script>

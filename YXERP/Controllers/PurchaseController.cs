@@ -19,7 +19,7 @@ namespace YXERP.Controllers
 
         public ActionResult Purchase()
         {
-            ViewBag.Type = (int)EnumDocType.RK;
+            ViewBag.Type = (int)EnumOrderType.RK;
             ViewBag.Title = "采购入库";
             return View("FilterProducts");
         }

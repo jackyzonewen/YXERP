@@ -56,6 +56,7 @@ define(function (require, exports, module) {
             }
         });
 
+        //产品数量
         $("#quantity").blur(function () {
             if (!$(this).val().isInt()) {
                 $(this).val("1");
@@ -83,7 +84,23 @@ define(function (require, exports, module) {
             $("body").append(temp);
             temp.animate({ top: cart.top, left: cart.left }, 500, function () {
                 temp.remove();
-                $("#shopping-cart .totalcount").html($("#shopping-cart .totalcount").html() * 1 + 1);
+                var remark = "";
+                $("#saleattr ul.attr-item").each(function () {
+                    var _this = $(this);
+                    remark += "[" + _this.find(".attrkey").html() + _this.find("li.hover").html() + "]";
+                });
+                Global.post("/Orders/AddShoppingCart", {
+                    productid: _self.productid,
+                    detailsid: _self.detailid,
+                    quantity: $("#quantity").val(),
+                    ordertype: _self.ordertype,
+                    remark: remark
+                }, function (data) {
+                    if (data.Status) {
+                        $("#quantity").val("1");
+                        $("#shopping-cart .totalcount").html($("#shopping-cart .totalcount").html() * 1 + 1);
+                    }
+                });
             });
         });
 
@@ -108,5 +125,6 @@ define(function (require, exports, module) {
         }
         $("#description").html(decodeURI(model.Description));
     }
+
     module.exports = ObjectJS;
 })

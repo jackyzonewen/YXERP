@@ -46,13 +46,14 @@ define(function (require, exports, module) {
                             return false;
                         }
 
-                        var attrlist = "", valuelist = "", attrvaluelist = "";
+                        var attrlist = "", valuelist = "", attrvaluelist = "", desc = "";
 
                         $(".productattr").each(function () {
                             var _this = $(this);
                             attrlist += _this.data("id") + ",";
                             valuelist += _this.find("select").val() + ",";
                             attrvaluelist += _this.data("id") + ":" + _this.find("select").val() + ",";
+                            //desc += "[" + _this.find(".column-name").html() + _this.find("select option:selected").text() + "]";
                         });
 
                         var Model = {
@@ -67,7 +68,7 @@ define(function (require, exports, module) {
                             Price: $("#price").val(),
                             Weight: 0,
                             ImgS: _self.ProductImage,
-                            Description: ""
+                            Description: desc
                         };
                         Global.post("/Products/SavaProductDetail", {
                             product: JSON.stringify(Model)

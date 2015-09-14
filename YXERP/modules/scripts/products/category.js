@@ -283,7 +283,7 @@ define(function (require, exports, module) {
         var _self = this;
         var _attrlist = $(".category-attr-layer").find("ul[data-type=" + ele.data("type") + "]");
         if (_attrlist.find("li[data-id=" + ele.data("id") + "]").length === 0) {
-            if (confirm("确认添加此" + (ele.data("type") == 1 ? "参数" : "规格") + "吗?")) {
+            if (confirm("确认添加此" + (ele.data("type") == 1 ? "属性" : "规格") + "吗?")) {
                 Global.post("/Products/AddCategoryAttr", {
                     categoryid: categoryid,
                     attrid: ele.data("id"),
@@ -307,7 +307,7 @@ define(function (require, exports, module) {
             
         } else {
             ele.hide();
-            alert("此分类已存在该" + (ele.data("type") == 1 ? "参数" : "规格") + "，不能重复添加！");
+            alert("此分类已存在该" + (ele.data("type") == 1 ? "属性" : "规格") + "，不能重复添加！");
         }
     }
     //绑定属性事件

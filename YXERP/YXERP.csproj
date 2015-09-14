@@ -323,8 +323,8 @@
     <Content Include="modules\css\products\category.css" />
     <Content Include="modules\css\products\product.css" />
     <Content Include="modules\css\products\attrplug.css" />
-    <Content Include="modules\css\products\filterproducts.css" />
-    <Content Include="modules\css\products\filterdetails.css" />
+    <Content Include="modules\css\orders\filterproducts.css" />
+    <Content Include="modules\css\orders\filterdetails.css" />
     <Content Include="modules\css\warehouse\warehouse.css" />
     <Content Include="modules\css\warehouse\warehousetype.css" />
     <Content Include="modules\images\default.png" />
@@ -476,13 +476,13 @@
     <Content Include="modules\scripts\products\attr.js" />
     <Content Include="modules\scripts\products\brand.js" />
     <Content Include="modules\scripts\products\category.js" />
-    <Content Include="modules\scripts\products\filterproducts.js" />
+    <Content Include="modules\scripts\orders\filterproducts.js" />
     <Content Include="modules\scripts\products\unit.js" />
     <Content Include="modules\scripts\products\choosecategory.js" />
     <Content Include="modules\scripts\products\product.js" />
     <Content Include="modules\scripts\products\attrplug.js" />
     <Content Include="modules\scripts\products\productdetails.js" />
-    <Content Include="modules\scripts\products\filterdetails.js" />
+    <Content Include="modules\scripts\orders\filterdetails.js" />
     <Content Include="modules\scripts\warehouse\warehouse.js" />
     <Content Include="modules\scripts\warehouse\warehousetype.js" />
     <Content Include="modules\scripts\warehouse\depotseat.js" />
