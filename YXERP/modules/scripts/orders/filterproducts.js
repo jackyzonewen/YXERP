@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
     var Global = require("global"),
     doT = require("dot");
-
+    require("cart");
     require("pager");
 
     var CacheCategorys = [];
@@ -24,6 +24,7 @@
         _self.type = type;
         _self.getChildCategory("");
         _self.bindEvent();
+        $(".content-body").createCart(type);
     }
 
     //获取分类信息和下级分类
@@ -62,7 +63,7 @@
         var _self = this;
         $("#attr-price").nextAll(".attr-item").remove();
         //属性
-        doT.exec("template/products/filter_attr_list.html", function (templateFun) {
+        doT.exec("template/orders/filter_attr_list.html", function (templateFun) {
             var html = templateFun(CacheCategorys[pid].AttrLists);
             html = $(html);
 
@@ -254,7 +255,7 @@
 
         Global.post("/Orders/GetProductListForShopping", { filter: JSON.stringify(opt) }, function (data) {
             $("#productlist").empty();
-            doT.exec("template/products/filter_product_list.html", function (templateFun) {
+            doT.exec("template/orders/filter_product_list.html", function (templateFun) {
                 var html = templateFun(data.Items);
                 html = $(html);
 

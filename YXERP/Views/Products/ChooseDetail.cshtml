@@ -33,10 +33,10 @@
             <div class="attrs" id="saleattr">
                 @foreach (var attr in model.SaleAttrs)
                 { 
-                    <ul class="attr-item" data-id="@attr.AttrID">
+                    <ul class="attr-item salesattr" data-id="@attr.AttrID">
                         <li class="attrkey">@attr.AttrName：</li>
                         <li class="attrValues">
-                            <ul class="salesattr">
+                            <ul>
                                 @foreach (var value in attr.AttrValues)
                                 { 
                                     <li class="value" data-id="@value.ValueID">@value.ValueName</li>

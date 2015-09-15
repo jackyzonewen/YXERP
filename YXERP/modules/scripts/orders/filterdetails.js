@@ -85,7 +85,7 @@ define(function (require, exports, module) {
             temp.animate({ top: cart.top, left: cart.left }, 500, function () {
                 temp.remove();
                 var remark = "";
-                $("#saleattr ul.attr-item").each(function () {
+                $("#saleattr ul.salesattr").each(function () {
                     var _this = $(this);
                     remark += "[" + _this.find(".attrkey").html() + _this.find("li.hover").html() + "]";
                 });

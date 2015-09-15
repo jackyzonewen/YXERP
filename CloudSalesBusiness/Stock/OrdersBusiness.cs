@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using CloudSalesEnum;
 using CloudSalesDAL;
+using CloudSalesEntity;
+using System.Data;
 
 namespace CloudSalesBusiness
 {
@@ -25,6 +27,25 @@ namespace CloudSalesBusiness
             object obj = CommonBusiness.Select("ShoppingCart", "count(0)", "ordertype=" + (int)ordertype + " and UserID='" + userid + "'");
             return Convert.ToInt32(obj);
         }
+        /// <summary>
+        /// 获取购物车列表
+        /// </summary>
+        /// <param name="ordertype"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public static List<C_ProductDetail> GetShoppingCart(EnumOrderType ordertype, string userid)
+        {
+            DataTable dt = OrdersDAL.GetShoppingCart((int)ordertype, userid);
+            List<C_ProductDetail> list = new List<C_ProductDetail>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                C_ProductDetail model = new C_ProductDetail();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
         #endregion
 
         #region 添加

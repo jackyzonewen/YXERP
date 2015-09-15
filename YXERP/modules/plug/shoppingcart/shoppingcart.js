@@ -19,15 +19,18 @@ define(function (require, exports, module) {
         }
 
         $.fn.drawCart = function (obj, ordertype) {
-            
             Global.post("/Orders/GetShoppingCartCount", { ordertype: ordertype }, function (data) {
                 doT.exec("plug/shoppingcart/shoppingcart.html", function (templateFun) {
-                        var innerText = templateFun([]);
-                        innerText = $(innerText);
-                        innerText.find(".totalcount").html(data.Quantity);
-                        obj.append(innerText);
-                    });
+                    var innerText = templateFun([]);
+                    innerText = $(innerText);
+                    innerText.find(".totalcount").html(data.Quantity);
+                    //入库单
+                    if (ordertype == 1) {
+                        innerText.find(".totalcount").attr("href", "/Purchase/ConfirmPurchase");
+                    }
+                    obj.append(innerText);
                 });
+            });
         }
     })(jQuery)
     module.exports = jQuery;

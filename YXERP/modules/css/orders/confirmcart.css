@@ -1,0 +1,23 @@
+﻿
+/*表格样式*/
+.confirm-list { width:95%; border-collapse:collapse;border-spacing:0;}
+.confirm-list .tr-header{ font-weight:bold; height:35px; }
+.confirm-list .tr-header td{ color:#2a3441;}
+.confirm-list .line td{ border-right:solid 2px #fff; background-color:#c5dceb; height:3px; }
+
+.confirm-list a{ color:#333;  vertical-align:middle;}
+.confirm-list a:hover{ color:red; text-decoration:underline; }
+
+.item { height:50px; vertical-align:middle; background-color:#FBFCFF; }
+.item img { width:30px; height:30px; display:inline-block;vertical-align:middle; }
+.item .price { width:120px;}
+.item .quantity { width:60px;}
+
+.bottom-div { width:95%; margin-top:30px; }
+
+#remark { width:300px; }
+
+.goback { display:inline-block; height:35px; line-height:35px; margin-right:50px; color:#C97; }
+.goback:hover { text-decoration:underline; color:#B10000; }
+.btnconfirm { height:36px; background-color:#B10000; color:#fff; font-size:14px; font-weight:bold; padding:0 20px; border:none; cursor:pointer; }
+

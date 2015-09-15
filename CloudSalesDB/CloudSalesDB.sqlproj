@@ -135,4 +135,7 @@
   <ItemGroup>
     <None Include="Procedures\Stock\P_AddShoppingCart.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Stock\P_GetShoppingCart.sql" />
+  </ItemGroup>
 </Project>

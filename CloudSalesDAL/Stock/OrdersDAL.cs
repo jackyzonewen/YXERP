@@ -26,6 +26,15 @@ namespace CloudSalesDAL
             return ExecuteNonQuery("P_AddShoppingCart", paras, CommandType.StoredProcedure) > 0;
         }
 
+        public static DataTable GetShoppingCart(int ordertype, string userid)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@OrderType",ordertype),
+                                     new SqlParameter("@UserID" , userid),
+                                   };
+            return GetDataTable("P_GetShoppingCart", paras, CommandType.StoredProcedure);
+        }
+
         #endregion
     }
 }

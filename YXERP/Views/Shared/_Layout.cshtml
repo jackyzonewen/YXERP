@@ -36,7 +36,7 @@
     <div class="main-body">
         <nav>
             <div class="admin-name">
-                <span class="bolder long">@CurrentUser.LoginName</span> 欢迎您！
+                <span class="bolder long">@(string.IsNullOrEmpty(CurrentUser.Name)? CurrentUser.LoginName : CurrentUser.Name)</span> 欢迎您！
             </div>
             <div class="top-nav">
                 <img alt="首页" src="/modules/images/ico-home.png"/>
