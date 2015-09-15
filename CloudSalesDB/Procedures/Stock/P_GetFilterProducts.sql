@@ -28,7 +28,8 @@ CREATE PROCEDURE [dbo].[P_GetFilterProducts]
 	@CategoryID nvarchar(64),
 	@BeginPrice nvarchar(20)='',
 	@EndPrice nvarchar(20)='',
-	@Where nvarchar(4000)='',
+	@AttrWhere nvarchar(4000)='',
+	@SaleWhere nvarchar(4000)='',
 	@keyWords nvarchar(4000),
 	@orderColumn nvarchar(500)='',
 	@isAsc int=0,
@@ -47,7 +48,7 @@ AS
 	set @tableName='C_Products P join C_Brand B on P.BrandID=B.BrandID 
 					join C_ProductDetail pd on p.ProductID=pd.ProductID and pd.Status<>9 '
 	set @columns='P.ProductID,P.ProductName,p.CommonPrice,isnull(pd.price,p.price) price,B.Name BrandName,
-				  ISNULL(pd.ImgS,p.ProductImage) ProductImage,ISNULL(pd.SaleCount,p.SaleCount) SaleCount,pd.ProductDetailID,pd.AttrValue '
+				  ISNULL(pd.ImgS,p.ProductImage) ProductImage,p.SaleCount,pd.ProductDetailID '
 	set @key='pd.AutoID'
 	set @condition=' P.ClientID='''+@ClientID+''' and P.Status<>9 '
 
@@ -71,7 +72,9 @@ AS
 		set @condition +=' and (ProductName like ''%'+@keyWords+'%'' or  ProductCode like ''%'+@keyWords+'%'' or  GeneralName like ''%'+@keyWords+'%'') '
 	end
 
-	set @condition += @Where
+	set @condition += @AttrWhere
+
+	set @condition += ' and pd.AutoID in (select MAX(AutoID) from C_ProductDetail where ClientID='''+@ClientID+''' and Status=1'+@SaleWhere+'  group by ProductID )'
 
 	declare @total int,@page int
 	exec P_GetPagerData @tableName,@columns,@condition,@key,@orderColumn,@pageSize,@pageIndex,@total out,@page out,@isAsc 

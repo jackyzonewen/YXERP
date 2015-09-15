@@ -12,9 +12,9 @@ namespace CloudSalesEnum
     public enum EnumAttrType
     {
         /// <summary>
-        /// 产品参数
+        /// 产品属性
         /// </summary>
-        [DescriptionAttribute("产品参数")]
+        [DescriptionAttribute("产品属性")]
         Parameter = 1,
         /// <summary>
         /// 产品规格

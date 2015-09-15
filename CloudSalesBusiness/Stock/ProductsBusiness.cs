@@ -412,20 +412,21 @@ namespace CloudSalesBusiness
         public List<C_Products> GetFilterProducts(string categoryid, List<FilterAttr> Attrs, string beginprice, string endprice, string keyWords, string orderby, bool isasc, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
-            StringBuilder build = new StringBuilder();
+            StringBuilder attrbuild = new StringBuilder();
+            StringBuilder salebuild = new StringBuilder();
             foreach (var attr in Attrs)
             {
                 if (attr.Type == EnumAttrType.Parameter)
                 {
-                    build.Append(" and p.ValueList like '%" + attr.ValueID + "%'");
+                    attrbuild.Append(" and p.ValueList like '%" + attr.ValueID + "%'");
                 }
                 else if (attr.Type == EnumAttrType.Specification)
                 {
-                    build.Append(" and pd.AttrValue like '%" + attr.ValueID + "%'");
+                    salebuild.Append(" and AttrValue like '%" + attr.ValueID + "%'");
                 }
             }
 
-            DataSet ds = dal.GetFilterProducts(categoryid, build.ToString(), beginprice, endprice, keyWords, orderby, isasc ? 1 : 0, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
+            DataSet ds = dal.GetFilterProducts(categoryid, attrbuild.ToString(), salebuild.ToString(), beginprice, endprice, keyWords, orderby, isasc ? 1 : 0, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
             List<C_Products> list = new List<C_Products>();
             foreach (DataRow dr in ds.Tables[0].Rows)
