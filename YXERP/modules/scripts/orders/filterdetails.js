@@ -39,14 +39,14 @@ define(function (require, exports, module) {
                         }
                     });
 
-                    if ($("#unit li.hover").data("id") != unitid) {
-                        bl = false;
-                    }
-
                     if (bl) {
                         $("#addcart").prop("disabled", false).removeClass("addcartun");
                         _self.detailid = model.ProductDetails[i].ProductDetailID;
-                        $("#price").html("￥" + model.ProductDetails[i].Price.toFixed(2));
+                        if ($("#small").hasClass("hover")) {
+                            $("#price").html("￥" + model.ProductDetails[i].Price.toFixed(2));
+                        } else {
+                            $("#price").html("￥" + model.ProductDetails[i].BigPrice.toFixed(2));
+                        }
                         $("#productimg").attr("src", model.ProductDetails[i].ImgS);
                         return;
                     } else {
@@ -93,6 +93,8 @@ define(function (require, exports, module) {
                     productid: _self.productid,
                     detailsid: _self.detailid,
                     quantity: $("#quantity").val(),
+                    unitid: $("#unit li.hover").data("id"),
+                    isBigUnit: $("#unit li.hover").data("value"),
                     ordertype: _self.ordertype,
                     remark: remark
                 }, function (data) {
@@ -117,7 +119,6 @@ define(function (require, exports, module) {
                     var item = list[ii].split(":");
                     $(".attr-item[data-id='" + item[0] + "']").find("li[data-id='" + item[1] + "']").addClass("hover");
                 }
-                $("#unit li[data-id='" + model.ProductDetails[i].UnitID + "']").addClass("hover");
                 $("#price").html("￥" + model.ProductDetails[i].Price.toFixed(2));
                 $("#productimg").attr("src", model.ProductDetails[i].ImgS);
                 break;

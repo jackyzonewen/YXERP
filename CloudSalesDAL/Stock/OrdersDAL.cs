@@ -12,13 +12,15 @@ namespace CloudSalesDAL
     {
         #region 添加
 
-        public static bool AddShoppingCart(string productid, string detailsid, int quantity, int ordertype, string remark, string userid, string operateip)
+        public static bool AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, int ordertype, string remark, string userid, string operateip)
         {
             SqlParameter[] paras = { 
                                      new SqlParameter("@OrderType",ordertype),
                                      new SqlParameter("@ProductDetailID",detailsid),
                                      new SqlParameter("@ProductID" , productid),
                                      new SqlParameter("@Quantity" , quantity),
+                                     new SqlParameter("@UnitID" , unitid),
+                                     new SqlParameter("@IsBigUnit" , isBigUnit),
                                      new SqlParameter("@Remark" , remark),
                                      new SqlParameter("@UserID" , userid),
                                      new SqlParameter("@OperateIP" , operateip)

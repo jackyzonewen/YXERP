@@ -496,9 +496,6 @@ namespace CloudSalesBusiness
                     ProductDetail detail = new ProductDetail();
                     detail.FillData(item);
 
-                    detail.Unit = new ProductUnit();
-                    detail.Unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
-
                     //填充存在的规格
                     foreach (var attrModel in model.SaleAttrs)
                     {

@@ -56,14 +56,16 @@ namespace CloudSalesBusiness
         /// <param name="productid">产品ID</param>
         /// <param name="detailsid">产品详情ID</param>
         /// <param name="quantity">数量</param>
+        /// <param name="unitid">单位</param>
+        /// <param name="isBigUnit">是否大单位</param>
         /// <param name="ordertype">订单类型</param>
-        /// <param name="ordertype">备注</param>
+        /// <param name="remark">备注</param>
         /// <param name="userid">操作员</param>
         /// <param name="operateip">操作IP</param>
         /// <returns></returns>
-        public static bool AddShoppingCart(string productid, string detailsid, int quantity, EnumOrderType ordertype, string remark, string userid, string operateip)
+        public static bool AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, EnumOrderType ordertype, string remark, string userid, string operateip)
         {
-            return OrdersDAL.AddShoppingCart(productid, detailsid, quantity, (int)ordertype, remark, userid, operateip);
+            return OrdersDAL.AddShoppingCart(productid, detailsid, quantity, unitid, isBigUnit, (int)ordertype, remark, userid, operateip);
         }
 
         #endregion

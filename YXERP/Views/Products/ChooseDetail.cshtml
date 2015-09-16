@@ -49,10 +49,10 @@
                     <li class="attrkey">单位：</li>
                     <li class="attrValues">
                         <ul id="unit">
-                            <li class="value" data-id="@(model.SmallUnit.UnitID)">@(model.SmallUnit.UnitName)</li>
+                            <li class="value hover" id="small" data-value="0" data-id="@(model.SmallUnit.UnitID)">@(model.SmallUnit.UnitName)</li>
                             @if (model.SmallUnitID != model.BigUnitID)
                             {
-                                <li class="value" data-id="@(model.BigUnit.UnitID)">@(model.BigUnit.UnitName)</li>
+                                <li class="value" id="big"  data-value="1" data-id="@(model.BigUnit.UnitID)">@(model.BigUnit.UnitName)</li>
                             }
                         </ul>
                     </li>
