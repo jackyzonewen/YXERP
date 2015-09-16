@@ -655,6 +655,22 @@ namespace YXERP.Controllers
         }
 
         /// <summary>
+        /// 获取产品信息
+        /// </summary>
+        /// <param name="productid"></param>
+        /// <returns></returns>
+        public JsonResult GetProductByID(string productid) 
+        {
+            var model = new ProductsBusiness().GetProductByID(productid);
+            JsonDictionary.Add("Item", model);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
         /// 编辑产品状态
         /// </summary>
         /// <param name="productid"></param>
@@ -746,11 +762,11 @@ namespace YXERP.Controllers
             if (string.IsNullOrEmpty(model.ProductDetailID))
             {
                 id = new ProductsBusiness().AddProductDetails(model.ProductID, model.DetailsCode, model.ShapeCode, model.SaleAttr, model.AttrValue, model.SaleAttrValue,
-                                                              model.Price, model.Weight, model.UnitID, model.ImgS, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
+                                                              model.Price, model.Weight, model.BigPrice, model.ImgS, model.Description, CurrentUser.UserID, CurrentUser.ClientID);
             }
             else
             {
-                bool bl = new ProductsBusiness().UpdateProductDetails(model.ProductDetailID, model.ProductID, model.DetailsCode, model.ShapeCode, model.UnitID, model.SaleAttr, model.AttrValue, model.SaleAttrValue,
+                bool bl = new ProductsBusiness().UpdateProductDetails(model.ProductDetailID, model.ProductID, model.DetailsCode, model.ShapeCode, model.BigPrice, model.SaleAttr, model.AttrValue, model.SaleAttrValue,
                                                               model.Price, model.Weight, model.Description, model.ImgS, CurrentUser.UserID, CurrentUser.ClientID); 
                 if (bl)
                 {

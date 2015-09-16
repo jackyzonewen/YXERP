@@ -17,7 +17,7 @@ GO
 CREATE PROCEDURE [dbo].[P_InsertProductDetail]
 @ProductID nvarchar(64),
 @ProductCode nvarchar(200),
-@UnitID nvarchar(64),
+@BigPrice decimal(18,2),
 @AttrList nvarchar(max),
 @ValueList nvarchar(max),
 @AttrValueList nvarchar(max),
@@ -40,16 +40,16 @@ set @Result=0
 set @DetailID=NEWID()
 
 
-if exists(select AutoID from ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList)
+if exists(select AutoID from ProductDetail where ProductID=@ProductID  and [AttrValue]=@ValueList)
 begin
 	set @DetailID=''
 	rollback tran
 	return
 end
 
-INSERT INTO ProductDetail(ProductDetailID,[ProductID],DetailsCode,[UnitID] ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
+INSERT INTO ProductDetail(ProductDetailID,[ProductID],DetailsCode,BigPrice ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
 					Weight,ImgS,[ShapeCode] ,[Description],[CreateUserID],[CreateTime] ,[UpdateTime],[OperateIP] ,[ClientID])
-				VALUES(@DetailID,@ProductID,@ProductCode,@UnitID,@AttrList,@ValueList,@AttrValueList,@Price,1,
+				VALUES(@DetailID,@ProductID,@ProductCode,@BigPrice,@AttrList,@ValueList,@AttrValueList,@Price,1,
 					@Weight,@ProductImg,@ShapeCode,@Description,@CreateUserID,getdate(),getdate(),'',@ClientID);
 set @Result=1;
 

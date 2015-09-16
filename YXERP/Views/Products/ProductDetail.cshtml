@@ -23,108 +23,128 @@
 }
 
 <div class="header-box">
-    <span class="header-title left">产品详情页 
-    </span>
+    <span class="header-title left">产品详情页</span>
+    <a href="javascript:void(0)" id="addDetails" class="ico-add left mTop4 mLeft20">添加子产品</a>
     <span class="ico-gonext right" onclick="history.go(1)" title="前进"></span>
     <span class="ico-goback right" onclick="history.go(-1)" title="后退"></span>
 </div>
 <div class="content-body">
-    <ul class="table-add product-add">
-        <li>
-            <span class="column-name">分类名称：</span><label>@(model.Category.CategoryName)</label>
-            <input type="hidden" id="categoryID" value="@(model.CategoryID)" />
-        </li>
-        <li>
-            <span class="column-name">产品编码：</span><label id="productCode"></label>
-        </li>
-        <li>
-            <span class="column-name">产品名称：</span><input type="text" maxlength="50" id="productName" data-empty="* 必填" class="input verify" />
-        </li>
+    <div class="show-nav">
+        <ul class="show-nav-ul">
+            <li class="hover" data-id="productinfo">产品信息</li>
+            <li class="" data-id="childproduct">子产品管理</li>
+        </ul>
+    </div>
+    <div id="productinfo">
+        <ul class="table-add product-add">
+            <li>
+                <span class="column-name">分类名称：</span><label>@(model.Category.CategoryName)</label>
+                <input type="hidden" id="categoryID" value="@(model.CategoryID)" />
+            </li>
+            <li>
+                <span class="column-name">产品编码：</span><label id="productCode"></label>
+            </li>
+            <li>
+                <span class="column-name">产品名称：</span><input type="text" style="width:300px;"  maxlength="50" id="productName" data-empty="* 必填" class="input verify" />
+            </li>
         
-         <li>
-            <span class="column-name">常用名：</span><input type="text" maxlength="50" id="generalName" class="input" />
-        </li>
-        <li>
-            <span class="column-name">条形码：</span><input type="text" maxlength="50" id="shapeCode" class="input" />
-        </li>
-        <li>
-            <span class="column-name">品牌：</span>
-            <select id="brand">
-            @foreach (CloudSalesEntity.Brand brand in (List<CloudSalesEntity.Brand>)ViewBag.BrandList)
-            {
-                <option value="@brand.BrandID">@brand.Name</option> 
-            }
-            </select>
-        </li>
-        
-        @foreach (CloudSalesEntity.ProductAttr attr in model.Category.AttrLists)
-        {
-            <li data-id="@attr.AttrID" class="productattr">
-                <span class="column-name">@attr.AttrName：</span>
-                <select id="@attr.AttrID">
-                    @foreach (CloudSalesEntity.AttrValue value in attr.AttrValues)
-                    {
-                        <option value="@value.ValueID">@value.ValueName</option> 
-                    }
+             <li>
+                <span class="column-name">常用名：</span><input type="text" maxlength="50" id="generalName" class="input" />
+            </li>
+            <li>
+                <span class="column-name">条形码：</span><input type="text" maxlength="50" id="shapeCode" class="input" />
+            </li>
+            <li>
+                <span class="column-name">品牌：</span>
+                <select id="brand">
+                @foreach (CloudSalesEntity.Brand brand in (List<CloudSalesEntity.Brand>)ViewBag.BrandList)
+                {
+                    <option value="@brand.BrandID">@brand.Name</option> 
+                }
                 </select>
             </li>
-        }
-        <li>
-            <span class="column-name">小单位：</span>
-
-            <select id="smallUnit">
-            @foreach (CloudSalesEntity.ProductUnit unit in (List<CloudSalesEntity.ProductUnit>)ViewBag.UnitList)
+        
+            @foreach (CloudSalesEntity.ProductAttr attr in model.Category.AttrLists)
             {
-                <option value="@unit.UnitID">@unit.UnitName</option> 
+                <li data-id="@attr.AttrID" class="productattr">
+                    <span class="column-name">@attr.AttrName：</span>
+                    <select id="@attr.AttrID">
+                        @foreach (CloudSalesEntity.AttrValue value in attr.AttrValues)
+                        {
+                            <option value="@value.ValueID">@value.ValueName</option> 
+                        }
+                    </select>
+                </li>
             }
-            </select>
-        </li>
-        <li>
-            <span class="column-name">大单位：</span>
+            <li>
+                <span class="column-name">单位：</span>
+
+                <select id="smallUnit">
+                @foreach (CloudSalesEntity.ProductUnit unit in (List<CloudSalesEntity.ProductUnit>)ViewBag.UnitList)
+                {
+                    <option value="@unit.UnitID">@unit.UnitName</option> 
+                }
+                </select>
+            </li>
+            <li>
+                <span class="column-name">大单位：</span>
            
-            <select id="bigUnit">
-            @foreach (CloudSalesEntity.ProductUnit unit in (List<CloudSalesEntity.ProductUnit>)ViewBag.UnitList)
-            {
-                <option value="@unit.UnitID">@unit.UnitName</option> 
-            }
-            </select>
-        </li>
+                <select id="bigUnit">
+                @foreach (CloudSalesEntity.ProductUnit unit in (List<CloudSalesEntity.ProductUnit>)ViewBag.UnitList)
+                {
+                    <option value="@unit.UnitID">@unit.UnitName</option> 
+                }
+                </select>
+            </li>
 
-        <li>
-             <span class="column-name">大小单位比：</span>
-            <input type="text" maxlength="3" id="bigSmallMultiple" value="1" data-empty="*" data-type="int"  class="input verify width30" />
-        </li>
-        <li>
-            <span class="column-name">正常价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="commonprice" class="input verify width80" />
-        </li>
-        <li>
-            <span class="column-name">优惠价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="price" class="input verify width80" />
-        </li>
-        <li>
-            <span class="column-name">缩略图：</span><span id="productIco"></span>
-        </li>
-        <li>
-            <span class="column-name">重量(kg)：</span><input type="text" maxlength="10" value="0" data-empty="*" data-type="double" data-text="请输入数字!" id="weight" class="input verify width50" />
-        </li>
-        <li>
-            <span class="column-name">有效期（天）：</span><input type="text" maxlength="10" value="0" data-empty="*" data-type="int" data-text="请输入数字!" id="effectiveDays" class="input verify width50" />
-        </li>
-        <li>
-            <span class="column-name">是否上架：</span><label><input type="checkbox" checked="checked" id="status" />是</label> 
-        </li>
-        <li>
-            <span class="column-name">是否新品：</span><label><input type="checkbox" id="isNew" />是</label> 
-        </li>
-        <li>
-            <span class="column-name">是否推荐：</span><label><input type="checkbox" id="isRecommend" />是</label> 
-        </li>
-        <li>
-            <span class="column-name">产品说明：</span><div id="remark"></div>
-        </li>
+            <li>
+                 <span class="column-name">大小单位比：</span>
+                <input type="text" maxlength="3" id="bigSmallMultiple" value="1" data-empty="*" data-type="int"  class="input verify width30" />
+            </li>
+            <li>
+                <span class="column-name">正常价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="commonprice" class="input verify width80" />
+            </li>
+            <li>
+                <span class="column-name">优惠价：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="price" class="input verify width80" />
+            </li>
+            <li>
+                <span class="column-name">缩略图：</span><span id="productIco"></span>
+            </li>
+            <li>
+                <span class="column-name">重量(kg)：</span><input type="text" maxlength="10" value="0" data-empty="*" data-type="double" data-text="请输入数字!" id="weight" class="input verify width50" />
+            </li>
+            <li>
+                <span class="column-name">有效期（天）：</span><input type="text" maxlength="10" value="0" data-empty="*" data-type="int" data-text="请输入数字!" id="effectiveDays" class="input verify width50" />
+            </li>
+            <li>
+                <span class="column-name">是否上架：</span><label><input type="checkbox" checked="checked" id="status" />是</label> 
+            </li>
+            <li>
+                <span class="column-name">是否新品：</span><label><input type="checkbox" id="isNew" />是</label> 
+            </li>
+            <li>
+                <span class="column-name">是否推荐：</span><label><input type="checkbox" id="isRecommend" />是</label> 
+            </li>
+            <li>
+                <span class="column-name">产品说明：</span><div id="remark"></div>
+            </li>
 
-    </ul>
-    <img class="product-img" id="productImg" alt="" src="/modules/images/default.png" />
-    <div class="mTop20">
-        <input type="button" class="btn" id="btnSaveProduct" value="保存" />
+        </ul>
+        <img class="product-img" id="productImg" alt="" src="/modules/images/default.png" />
+        <div class="mTop20">
+            <input type="button" class="btn" id="btnSaveProduct" value="保存" />
+        </div>
+    </div>
+    <div id="childproduct" class="hide">
+        <table class="table-list clear">
+            <tr class="tr-header" id="header-items">
+                <td>编码</td>
+                <td class="">规格</td>
+                <td class="m-len">价格/@(model.SmallUnit.UnitName)</td>
+                <td class="s-len">价格/@(model.BigUnit.UnitName)</td>
+                <td class="m-len">启用/禁用</td>
+                <td class="s-len">编辑</td>
+            </tr>
+        </table>
     </div>
 </div>

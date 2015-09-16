@@ -220,6 +220,8 @@ namespace CloudSalesEntity
 
         public decimal Price { get; set; }
 
+        public decimal BigPrice { get; set; }
+
         public decimal Weight { get; set; }
 
         public string ProductName { get; set; }

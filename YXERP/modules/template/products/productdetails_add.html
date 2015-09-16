@@ -1,7 +1,7 @@
 ﻿
 <ul class="table-add product-details-add">
     <li>
-        <span class="column-name">编码：</span><input type="text" maxlength="50" id="productCode" data-empty="* 必填" class="input" />
+        <span class="column-name">编码：</span><input type="text" maxlength="50" id="detailsCode" data-empty="* 必填" class="input" />
     </li>
 <!--    <li>
         <span class="column-name">条形码：</span><input type="text" maxlength="50" id="shapeCode" class="input" />
@@ -23,14 +23,15 @@
         </li>
     {% } %}
     <li>
-        <span class="column-name">单位：</span>
-        <select id="unitid"></select>
+        <span class="column-name">价格/<label id="unitName"></label>：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="detailsPrice" class="input verify width80" />
+        
+    </li>
+    <li id="bigpriceli">
+        <span class="column-name">价格/<label id="bigName"></label>：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="bigPrice" class="input verify width80" />
+        *<label id="bigquantity"></label>
     </li>
     <li>
-        <span class="column-name">价格：</span><input type="text" maxlength="10" data-empty="*" data-type="double" data-text="请输入数字!"  id="price" class="input verify width80" />
-    </li>
-    <li>
-        <span class="column-name">缩略图：</span><span id="productIco"></span>
+        <span class="column-name">缩略图：</span><span id="imgSIco"></span>
     </li>
  </ul>
-<img class="product-img" id="productImg" alt="" src="/modules/images/default.png" />
+<img class="product-imgS" id="imgS" alt="" src="/modules/images/default.png" />

@@ -353,9 +353,7 @@ namespace CloudSalesBusiness
                     //子产品
                     ProductDetail detail = new ProductDetail();
                     detail.FillData(item);
-                    var unit = new ProductUnit();
-                    unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
-                    detail.Unit = unit;
+
                     Dictionary<string, string> attrs = new Dictionary<string, string>();
                     foreach (string attr in detail.SaleAttrValue.Split(','))
                     {
@@ -723,7 +721,7 @@ namespace CloudSalesBusiness
         /// <param name="operateid"></param>
         /// <param name="clientid"></param>
         /// <returns></returns>
-        public string AddProductDetails(string productid, string productCode, string shapeCode, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string unitid, string productImg, string description, string operateid, string clientid)
+        public string AddProductDetails(string productid, string productCode, string shapeCode, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight,decimal bigprice, string productImg, string description, string operateid, string clientid)
         {
             lock (SingleLock)
             {
@@ -746,7 +744,7 @@ namespace CloudSalesBusiness
                 }
 
                 var dal = new ProductsDAL();
-                return dal.AddProductDetails(productid, productCode, shapeCode, attrlist, valuelist, attrvaluelist, price, weight, unitid, productImg, description, operateid, clientid);
+                return dal.AddProductDetails(productid, productCode, shapeCode, attrlist, valuelist, attrvaluelist, price, weight, bigprice, productImg, description, operateid, clientid);
             }
         }
 
@@ -1015,7 +1013,7 @@ namespace CloudSalesBusiness
         /// <param name="operateid"></param>
         /// <param name="clientid"></param>
         /// <returns></returns>
-        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, string unitid, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description, string productImg, string operateid, string clientid)
+        public bool UpdateProductDetails(string detailid, string productid, string productCode, string shapeCode, decimal bigPrice, string attrlist, string valuelist, string attrvaluelist, decimal price, decimal weight, string description, string productImg, string operateid, string clientid)
         {
             lock (SingleLock)
             {
@@ -1040,7 +1038,7 @@ namespace CloudSalesBusiness
                     productImg = FILEPATH + DateTime.Now.ToString("yyyyMMddHHmmssms") + new Random().Next(1000, 9999).ToString() + ".png";
                 }
                 var dal = new ProductsDAL();
-                return dal.UpdateProductDetails(detailid, productid, productCode, shapeCode, unitid, attrlist, valuelist, attrvaluelist, price, weight, description, productImg);
+                return dal.UpdateProductDetails(detailid, productid, productCode, shapeCode, bigPrice, attrlist, valuelist, attrvaluelist, price, weight, description, productImg);
             }
         }
 
