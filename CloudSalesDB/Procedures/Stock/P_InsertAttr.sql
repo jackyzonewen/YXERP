@@ -29,13 +29,13 @@ begin tran
 declare @Err int
 set @Err=0
 
-INSERT INTO C_ProductAttr([AttrID] ,[AttrName],[Description],CategoryID,[Status],CreateUserID,ClientID) 
+INSERT INTO ProductAttr([AttrID] ,[AttrName],[Description],CategoryID,[Status],CreateUserID,ClientID) 
 					values(@AttrID ,@AttrName,@Description,@CategoryID,1,@CreateUserID,@ClientID)
 set @Err+=@@error
 
 if(@CategoryID is not null and @CategoryID<>'')
 begin
-	insert into C_CategoryAttr(CategoryID,AttrID,Status,[Type],CreateUserID)
+	insert into CategoryAttr(CategoryID,AttrID,Status,[Type],CreateUserID)
 	values(@CategoryID,@AttrID,1,@Type,@CreateUserID)
 end
 

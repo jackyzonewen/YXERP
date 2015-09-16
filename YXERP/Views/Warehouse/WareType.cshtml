@@ -19,7 +19,7 @@
 </div>
 <div class="content-body">
     <ul class="obj-list">
-        @foreach (var item in (List<CloudSalesEntity.C_WareHouseType>)ViewBag.Items)
+        @foreach (var item in (List<CloudSalesEntity.WareHouseType>)ViewBag.Items)
         {
             <li class="obj-item" ><label data-id="@(item.TypeID)" data-value="@(item.TypeName)" title="@(item.Description)">@(item.TypeName)</label><span data-id="@(item.TypeID)" class="ico-delete"></span></li>
         }

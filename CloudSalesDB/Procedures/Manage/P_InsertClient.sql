@@ -34,45 +34,45 @@ begin tran
 
 set @Result=0
 
-declare @Err int ,@DepartID nvarchar(64),@RoleID nvarchar(64),@C_UserID nvarchar(64)
+declare @Err int ,@DepartID nvarchar(64),@RoleID nvarchar(64),@UserID nvarchar(64)
 
-select @Err=0,@DepartID=NEWID(),@RoleID=NEWID(),@C_UserID=NEWID()
+select @Err=0,@DepartID=NEWID(),@RoleID=NEWID(),@UserID=NEWID()
 
 set @Modules='''' + REPLACE(@Modules,',',''',''') + ''''
 
 --客户端
-insert into M_Clients(ClientID,CompanyName,ContactName,MobilePhone,Status,Industry,CityCode,Address,Description,CreateUserID) 
+insert into Clients(ClientID,CompanyName,ContactName,MobilePhone,Status,Industry,CityCode,Address,Description,CreateUserID) 
 				values(@ClientiD,@CompanyName,@ContactName,@MobilePhone,1,@Industry,@CityCode,@Address,@Description,@CreateUserID)
 
 set @Err+=@@error
 --客户端模块
-exec('insert into M_ClientModules(ClientID,ModulesID,CreateUserID) select '''+@ClientiD+''',ModulesID,'''+@CreateUserID+''' from M_Modules where ModulesID in('+@Modules+')')
+exec('insert into ClientModules(ClientID,ModulesID,CreateUserID) select '''+@ClientiD+''',ModulesID,'''+@CreateUserID+''' from Modules where ModulesID in('+@Modules+')')
 set @Err+=@@error
 
 --部门
-insert into C_Department(DepartID,Name,Status,CreateUserID,ClientID) values (@DepartID,'系统管理',1,@C_UserID,@ClientID)
+insert into Department(DepartID,Name,Status,CreateUserID,ClientID) values (@DepartID,'系统管理',1,@UserID,@ClientID)
 set @Err+=@@error
 
 --角色
-insert into C_Role(RoleID,Name,Status,IsDefault,CreateUserID,ClientID) values (@RoleID,'管理员',1,1,@C_UserID,@ClientID)
+insert into Role(RoleID,Name,Status,IsDefault,CreateUserID,ClientID) values (@RoleID,'管理员',1,1,@UserID,@ClientID)
 
 set @Err+=@@error
 --管理员账号已存在
-if exists(select UserID from C_Users where LoginName=@LoginName)
+if exists(select UserID from Users where LoginName=@LoginName)
 begin
 	set @Result=2
 	rollback tran
 	return
 end
-insert into C_Users(UserID,LoginName,LoginPWD,Name,MobilePhone,Allocation,Status,IsDefault,CreateUserID,ClientID)
-             values(@C_UserID,@LoginName,@LoginPWD,@ContactName,@MobilePhone,1,1,1,@C_UserID,@ClientID)
+insert into Users(UserID,LoginName,LoginPWD,Name,MobilePhone,Allocation,Status,IsDefault,CreateUserID,ClientID)
+             values(@UserID,@LoginName,@LoginPWD,@ContactName,@MobilePhone,1,1,1,@UserID,@ClientID)
 
 --管理员部门
-insert into C_UserDepart(UserID,DepartID,CreateUserID,ClientID) values(@C_UserID,@DepartID,@C_UserID,@ClientID)  
+insert into UserDepart(UserID,DepartID,CreateUserID,ClientID) values(@UserID,@DepartID,@UserID,@ClientID)  
 set @Err+=@@error
    
 --管理员角色
-insert into C_UserRole(UserID,RoleID,CreateUserID,ClientID) values(@C_UserID,@RoleID,@C_UserID,@ClientID) 
+insert into UserRole(UserID,RoleID,CreateUserID,ClientID) values(@UserID,@RoleID,@UserID,@ClientID) 
 set @Err+=@@error
 
 if(@Err>0)

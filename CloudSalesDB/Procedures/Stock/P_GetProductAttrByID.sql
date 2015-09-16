@@ -18,8 +18,8 @@ CREATE PROCEDURE [dbo].[P_GetProductAttrByID]
 	@AttrID nvarchar(64)
 AS
 
-select * from C_ProductAttr where AttrID=@AttrID 
+select * from ProductAttr where AttrID=@AttrID 
 
-select * from C_AttrValue where Status<>9 and AttrID=@AttrID
+select * from AttrValue where Status<>9 and AttrID=@AttrID
  
 

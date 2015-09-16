@@ -48,7 +48,7 @@ namespace YXERP.Controllers
             {
                 return View("WareHouse");
             }
-            C_WareHouse model = new WarehouseBusiness().GetWareByID(id);
+            WareHouse model = new WarehouseBusiness().GetWareByID(id);
             ViewBag.Item = model;
             ViewBag.ID = id;
 
@@ -81,7 +81,7 @@ namespace YXERP.Controllers
         public JsonResult SaveWareHouseType(string type)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_WareHouseType model = serializer.Deserialize<C_WareHouseType>(type);
+            WareHouseType model = serializer.Deserialize<WareHouseType>(type);
 
             string typeID = string.Empty;
             if (string.IsNullOrEmpty(model.TypeID))
@@ -125,7 +125,7 @@ namespace YXERP.Controllers
         public JsonResult GetWareHouses(string keyWords, int pageSize, int pageIndex, int totalCount)
         {
             int pageCount = 0;
-            List<C_WareHouse> list = new WarehouseBusiness().GetWareHouses(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            List<WareHouse> list = new WarehouseBusiness().GetWareHouses(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);
@@ -144,7 +144,7 @@ namespace YXERP.Controllers
         public JsonResult SaveWareHouse(string ware)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_WareHouse model = serializer.Deserialize<C_WareHouse>(ware);
+            WareHouse model = serializer.Deserialize<WareHouse>(ware);
 
             string id = string.Empty;
             if (string.IsNullOrEmpty(model.WareID))
@@ -204,7 +204,7 @@ namespace YXERP.Controllers
         public JsonResult SaveDepotSeat(string obj)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_DepotSeat model = serializer.Deserialize<C_DepotSeat>(obj);
+            DepotSeat model = serializer.Deserialize<DepotSeat>(obj);
 
             string id = string.Empty;
             if (string.IsNullOrEmpty(model.DepotID))
@@ -235,7 +235,7 @@ namespace YXERP.Controllers
         public JsonResult GetDepotSeats(string wareid, string keyWords, int pageSize, int pageIndex, int totalCount)
         {
             int pageCount = 0;
-            List<C_DepotSeat> list = new WarehouseBusiness().GetDepotSeats(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID, wareid);
+            List<DepotSeat> list = new WarehouseBusiness().GetDepotSeats(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID, wareid);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);

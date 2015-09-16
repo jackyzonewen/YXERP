@@ -49,7 +49,7 @@ namespace YXERP.Controllers
             {
                 return View("Brand");
             }
-            C_Brand model = new ProductsBusiness().GetBrandByBrandID(id);
+            Brand model = new ProductsBusiness().GetBrandByBrandID(id);
             ViewBag.Item = model;
             ViewBag.ID = id;
            
@@ -165,7 +165,7 @@ namespace YXERP.Controllers
         public JsonResult SavaBrand(string brand)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_Brand model = serializer.Deserialize<C_Brand>(brand);
+            Brand model = serializer.Deserialize<Brand>(brand);
 
             string brandID = "";
             if (string.IsNullOrEmpty(model.BrandID))
@@ -195,7 +195,7 @@ namespace YXERP.Controllers
         public JsonResult GetBrandList(string keyWords, int pageSize, int pageIndex, int totalCount)
         {
             int pageCount = 0;
-            List<C_Brand> list = new ProductsBusiness().GetBrandList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            List<Brand> list = new ProductsBusiness().GetBrandList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);
@@ -241,7 +241,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult GetBrandDetail(string brandID)
         {
-            C_Brand model = new ProductsBusiness().GetBrandByBrandID(brandID);
+            Brand model = new ProductsBusiness().GetBrandByBrandID(brandID);
             JsonDictionary.Add("Item", model);
             return new JsonResult
             {
@@ -262,7 +262,7 @@ namespace YXERP.Controllers
         public JsonResult SaveUnit(string unit)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_ProductUnit model = serializer.Deserialize<C_ProductUnit>(unit);
+            ProductUnit model = serializer.Deserialize<ProductUnit>(unit);
 
             string UnitID = "";
             if (string.IsNullOrEmpty(model.UnitID))
@@ -311,7 +311,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult GetAttrList(int index, string keyWorks)
         {
-            List<C_ProductAttr> list = new List<C_ProductAttr>();
+            List<ProductAttr> list = new List<ProductAttr>();
 
             int totalCount = 0, pageCount = 0;
             list = new ProductsBusiness().GetAttrList("", keyWorks, PageSize, index, ref totalCount, ref pageCount, CurrentUser.ClientID);
@@ -331,7 +331,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult GetAttrsByCategoryID(string categoryid)
         {
-            List<C_ProductAttr> list = new List<C_ProductAttr>();
+            List<ProductAttr> list = new List<ProductAttr>();
             list = new ProductsBusiness().GetAttrList(categoryid, CurrentUser.ClientID);
 
             JsonDictionary.Add("Items", list);
@@ -350,7 +350,7 @@ namespace YXERP.Controllers
         public JsonResult SaveAttr(string attr)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_ProductAttr model = serializer.Deserialize<C_ProductAttr>(attr);
+            ProductAttr model = serializer.Deserialize<ProductAttr>(attr);
 
             string attrID = string.Empty;
             if (string.IsNullOrEmpty(model.AttrID))
@@ -402,7 +402,7 @@ namespace YXERP.Controllers
         public JsonResult SaveAttrValue(string value)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_AttrValue model = serializer.Deserialize<C_AttrValue>(value);
+            AttrValue model = serializer.Deserialize<AttrValue>(value);
 
             string valueID = string.Empty;
             if (!string.IsNullOrEmpty(model.AttrID))
@@ -505,7 +505,7 @@ namespace YXERP.Controllers
         public JsonResult SavaCategory(string category, string attrlist, string saleattr)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_Category model = serializer.Deserialize<C_Category>(category);
+            Category model = serializer.Deserialize<Category>(category);
             //参数
             if (!string.IsNullOrEmpty(attrlist))
             {
@@ -594,7 +594,7 @@ namespace YXERP.Controllers
         public JsonResult SavaProduct(string product)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_Products model = serializer.Deserialize<C_Products>(product);
+            Products model = serializer.Deserialize<Products>(product);
 
             if (!string.IsNullOrEmpty(model.AttrList))
             {
@@ -643,7 +643,7 @@ namespace YXERP.Controllers
         public JsonResult GetProductList(string keyWords, int pageIndex, int totalCount)
         {
             int pageCount = 0;
-            List<C_Products> list = new ProductsBusiness().GetProductList(keyWords, PageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            List<Products> list = new ProductsBusiness().GetProductList(keyWords, PageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);
@@ -727,7 +727,7 @@ namespace YXERP.Controllers
         public JsonResult SavaProductDetail(string product)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_ProductDetail model = serializer.Deserialize<C_ProductDetail>(product);
+            ProductDetail model = serializer.Deserialize<ProductDetail>(product);
 
             if (!string.IsNullOrEmpty(model.SaleAttr))
             {

@@ -17,7 +17,7 @@
 </div>
 <div class="content-body">
     <ul class="entity-list">
-        @foreach (var item in (List<CloudSalesEntity.C_Department>)ViewBag.Items)
+        @foreach (var item in (List<CloudSalesEntity.Department>)ViewBag.Items)
         {
             <li class="entity-item"><input type="text" data-id="@(item.DepartID)" data-value="@(item.Name)" value="@(item.Name)" /><span data-id="@(item.DepartID)" class="ico-delete"></span></li>
         }

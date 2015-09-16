@@ -34,15 +34,15 @@ namespace CloudSalesBusiness
         /// <param name="pageCount">总页数</param>
         /// <param name="clientID">客户端ID</param>
         /// <returns></returns>
-        public List<C_Brand> GetBrandList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public List<Brand> GetBrandList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
             DataSet ds = dal.GetBrandList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
-            List<C_Brand> list = new List<C_Brand>();
+            List<Brand> list = new List<Brand>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                C_Brand model = new C_Brand();
+                Brand model = new Brand();
                 model.FillData(dr);
                 model.City = CommonCache.Citys.Where(c => c.CityCode == model.CityCode).FirstOrDefault();
                 list.Add(model);
@@ -50,15 +50,15 @@ namespace CloudSalesBusiness
             return list;
         }
 
-        public List<C_Brand> GetBrandList(string clientID)
+        public List<Brand> GetBrandList(string clientID)
         {
             var dal = new ProductsDAL();
             DataTable dt = dal.GetBrandList(clientID);
 
-            List<C_Brand> list = new List<C_Brand>();
+            List<Brand> list = new List<Brand>();
             foreach (DataRow dr in dt.Rows)
             {
-                C_Brand model = new C_Brand();
+                Brand model = new Brand();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -70,12 +70,12 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="brandID">传入参数</param>
         /// <returns></returns>
-        public C_Brand GetBrandByBrandID(string brandID)
+        public Brand GetBrandByBrandID(string brandID)
         {
             var dal = new ProductsDAL();
             DataTable dt = dal.GetBrandByBrandID(brandID);
 
-            C_Brand model = new C_Brand();
+            Brand model = new Brand();
             if (dt.Rows.Count > 0)
             {
                 model.FillData(dt.Rows[0]);
@@ -88,15 +88,15 @@ namespace CloudSalesBusiness
         /// 获取单位列表
         /// </summary>
         /// <returns></returns>
-        public List<C_ProductUnit> GetClientUnits(string clientid)
+        public List<ProductUnit> GetClientUnits(string clientid)
         {
             var dal = new ProductsDAL();
             DataTable dt = dal.GetClientUnits(clientid);
 
-            List<C_ProductUnit> list = new List<C_ProductUnit>();
+            List<ProductUnit> list = new List<ProductUnit>();
             foreach (DataRow dr in dt.Rows)
             {
-                C_ProductUnit model = new C_ProductUnit();
+                ProductUnit model = new ProductUnit();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -112,24 +112,24 @@ namespace CloudSalesBusiness
         /// <param name="totalCount"></param>
         /// <param name="pageCount"></param>
         /// <returns></returns>
-        public List<C_ProductAttr> GetAttrList(string categoryid, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
+        public List<ProductAttr> GetAttrList(string categoryid, string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
         {
             var dal = new ProductsDAL();
             DataSet ds = dal.GetAttrList(categoryid, keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientid);
 
-            List<C_ProductAttr> list = new List<C_ProductAttr>();
+            List<ProductAttr> list = new List<ProductAttr>();
             if (ds.Tables.Contains("Attrs"))
             {
                 foreach (DataRow dr in ds.Tables["Attrs"].Rows)
                 {
-                    C_ProductAttr model = new C_ProductAttr();
+                    ProductAttr model = new ProductAttr();
                     model.FillData(dr);
 
-                    List<C_AttrValue> valueList = new List<C_AttrValue>();
+                    List<AttrValue> valueList = new List<AttrValue>();
                     StringBuilder build = new StringBuilder();
                     foreach (DataRow drValue in ds.Tables["Values"].Select("AttrID='" + model.AttrID + "'"))
                     {
-                        C_AttrValue valueModel = new C_AttrValue();
+                        AttrValue valueModel = new AttrValue();
                         valueModel.FillData(drValue);
                         valueList.Add(valueModel);
                         build.Append(valueModel.ValueName + ",");
@@ -169,15 +169,15 @@ namespace CloudSalesBusiness
         /// <param name="categoryid">产品分类ID</param>
         /// <param name="clientid">客户端ID</param>
         /// <returns></returns>
-        public List<C_ProductAttr> GetAttrList(string categoryid, string clientid)
+        public List<ProductAttr> GetAttrList(string categoryid, string clientid)
         {
             var dal = new ProductsDAL();
             DataTable dt = dal.GetAttrList(categoryid, clientid);
 
-            List<C_ProductAttr> list = new List<C_ProductAttr>();
+            List<ProductAttr> list = new List<ProductAttr>();
             foreach (DataRow dr in dt.Rows)
             {
-                C_ProductAttr model = new C_ProductAttr();
+                ProductAttr model = new ProductAttr();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -190,19 +190,19 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="attrID"></param>
         /// <returns></returns>
-        public C_ProductAttr GetProductAttrByID(string attrID)
+        public ProductAttr GetProductAttrByID(string attrID)
         {
             var dal = new ProductsDAL();
             DataSet ds = dal.GetProductAttrByID(attrID);
 
-            C_ProductAttr model = new C_ProductAttr();
+            ProductAttr model = new ProductAttr();
             if (ds.Tables.Contains("Attrs") && ds.Tables["Attrs"].Rows.Count > 0)
             {
                 model.FillData(ds.Tables["Attrs"].Rows[0]);
-                List<C_AttrValue> list = new List<C_AttrValue>();
+                List<AttrValue> list = new List<AttrValue>();
                 foreach (DataRow item in ds.Tables["Values"].Rows)
                 {
-                    C_AttrValue attrValue = new C_AttrValue();
+                    AttrValue attrValue = new AttrValue();
                     attrValue.FillData(item);
                     list.Add(attrValue);
                 }
@@ -218,16 +218,16 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="categoryid">分类ID</param>
         /// <returns></returns>
-        public List<C_Category> GetChildCategorysByID(string categoryid, string clientid)
+        public List<Category> GetChildCategorysByID(string categoryid, string clientid)
         {
             var dal = new ProductsDAL();
             DataTable dt = dal.GetChildCategorysByID(categoryid, clientid);
 
-            List<C_Category> list = new List<C_Category>();
+            List<Category> list = new List<Category>();
 
             foreach (DataRow dr in dt.Rows)
             {
-                C_Category model = new C_Category();
+                Category model = new Category();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -239,12 +239,12 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="categoryid">分类ID</param>
         /// <returns></returns>
-        public C_Category GetCategoryByID(string categoryid)
+        public Category GetCategoryByID(string categoryid)
         {
             var dal = new ProductsDAL();
             DataTable dt = dal.GetCategoryByID(categoryid);
 
-            C_Category model = new C_Category();
+            Category model = new Category();
             if (dt.Rows.Count > 0)
             {
                 model.FillData(dt.Rows[0]);
@@ -258,22 +258,22 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="categoryid">分类ID</param>
         /// <returns></returns>
-        public C_Category GetCategoryDetailByID(string categoryid)
+        public Category GetCategoryDetailByID(string categoryid)
         {
             var dal = new ProductsDAL();
             DataSet ds = dal.GetCategoryDetailByID(categoryid);
 
-            C_Category model = new C_Category();
+            Category model = new Category();
             if (ds.Tables.Contains("Category") && ds.Tables["Category"].Rows.Count > 0)
             {
                 model.FillData(ds.Tables["Category"].Rows[0]);
-                List<C_ProductAttr> salelist = new List<C_ProductAttr>();
-                List<C_ProductAttr> attrlist = new List<C_ProductAttr>();
+                List<ProductAttr> salelist = new List<ProductAttr>();
+                List<ProductAttr> attrlist = new List<ProductAttr>();
 
                 foreach (DataRow attr in ds.Tables["Attrs"].Rows)
                 {
 
-                    C_ProductAttr modelattr = new C_ProductAttr();
+                    ProductAttr modelattr = new ProductAttr();
                     modelattr.FillData(attr);
                     if (modelattr.Type==1)
                     {
@@ -283,10 +283,10 @@ namespace CloudSalesBusiness
                     {
                         salelist.Add(modelattr);
                     }
-                    modelattr.AttrValues = new List<C_AttrValue>();
+                    modelattr.AttrValues = new List<AttrValue>();
                     foreach (DataRow value in ds.Tables["Values"].Select("AttrID='" + modelattr.AttrID + "'"))
                     {
-                        C_AttrValue valuemodel = new C_AttrValue();
+                        AttrValue valuemodel = new AttrValue();
                         valuemodel.FillData(value);
                         modelattr.AttrValues.Add(valuemodel);
                     }
@@ -309,15 +309,15 @@ namespace CloudSalesBusiness
         /// <param name="pageCount">总页数</param>
         /// <param name="clientID">客户端ID</param>
         /// <returns></returns>
-        public List<C_Products> GetProductList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public List<Products> GetProductList(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
             DataSet ds = dal.GetProductList(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
-            List<C_Products> list = new List<C_Products>();
+            List<Products> list = new List<Products>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                C_Products model = new C_Products();
+                Products model = new Products();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -329,31 +329,31 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="productid"></param>
         /// <returns></returns>
-        public C_Products GetProductByID(string productid)
+        public Products GetProductByID(string productid)
         {
             var dal = new ProductsDAL();
             DataSet ds = dal.GetProductByID(productid);
 
-            C_Products model = new C_Products();
+            Products model = new Products();
             if (ds.Tables.Contains("Product") && ds.Tables["Product"].Rows.Count > 0)
             {
                 model.FillData(ds.Tables["Product"].Rows[0]);
                 model.Category = GetCategoryDetailByID(model.CategoryID);
-                var bigunit = new C_ProductUnit();
+                var bigunit = new ProductUnit();
                 bigunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
                 model.BigUnit = bigunit;
 
-                var smallunit = new C_ProductUnit();
+                var smallunit = new ProductUnit();
                 smallunit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
                 model.SmallUnit = smallunit;
 
-                model.ProductDetails = new List<C_ProductDetail>();
+                model.ProductDetails = new List<ProductDetail>();
                 foreach (DataRow item in ds.Tables["Details"].Rows)
                 {
                     //子产品
-                    C_ProductDetail detail = new C_ProductDetail();
+                    ProductDetail detail = new ProductDetail();
                     detail.FillData(item);
-                    var unit = new C_ProductUnit();
+                    var unit = new ProductUnit();
                     unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
                     detail.Unit = unit;
                     Dictionary<string, string> attrs = new Dictionary<string, string>();
@@ -389,7 +389,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool IsExistProductCode(string code, string clientid)
         {
-            object obj = CommonBusiness.Select("C_Products", " Count(0) ", "ClientID='" + clientid + "' and ProductCode='" + code + "'");
+            object obj = CommonBusiness.Select("Products", " Count(0) ", "ClientID='" + clientid + "' and ProductCode='" + code + "'");
             return Convert.ToInt32(obj) > 0;
         }
 
@@ -409,7 +409,7 @@ namespace CloudSalesBusiness
         /// <param name="pageCount"></param>
         /// <param name="clientID"></param>
         /// <returns></returns>
-        public List<C_Products> GetFilterProducts(string categoryid, List<FilterAttr> Attrs, string beginprice, string endprice, string keyWords, string orderby, bool isasc, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public List<Products> GetFilterProducts(string categoryid, List<FilterAttr> Attrs, string beginprice, string endprice, string keyWords, string orderby, bool isasc, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new ProductsDAL();
             StringBuilder attrbuild = new StringBuilder();
@@ -428,10 +428,10 @@ namespace CloudSalesBusiness
 
             DataSet ds = dal.GetFilterProducts(categoryid, attrbuild.ToString(), salebuild.ToString(), beginprice, endprice, keyWords, orderby, isasc ? 1 : 0, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
-            List<C_Products> list = new List<C_Products>();
+            List<Products> list = new List<Products>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                C_Products model = new C_Products();
+                Products model = new Products();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -443,38 +443,38 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="productid"></param>
         /// <returns></returns>
-        public C_Products GetProductByIDForDetails(string productid)
+        public Products GetProductByIDForDetails(string productid)
         {
             var dal = new ProductsDAL();
             DataSet ds = dal.GetProductByIDForDetails(productid);
 
-            C_Products model = new C_Products();
+            Products model = new Products();
             if (ds.Tables.Contains("Product") && ds.Tables["Product"].Rows.Count > 0)
             {
                 model.FillData(ds.Tables["Product"].Rows[0]);
 
                 //单位
-                model.BigUnit = new C_ProductUnit();
+                model.BigUnit = new ProductUnit();
                 model.BigUnit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.BigUnitID + "'").FirstOrDefault());
 
-                model.SmallUnit = new C_ProductUnit();
+                model.SmallUnit = new ProductUnit();
                 model.SmallUnit.FillData(ds.Tables["Unit"].Select("UnitID='" + model.SmallUnitID + "'").FirstOrDefault());
 
-                model.AttrLists = new List<C_ProductAttr>();
-                model.SaleAttrs = new List<C_ProductAttr>();
+                model.AttrLists = new List<ProductAttr>();
+                model.SaleAttrs = new List<ProductAttr>();
 
                 foreach (DataRow attrtr in ds.Tables["Attrs"].Rows)
                 {
-                    C_ProductAttr attrModel = new C_ProductAttr();
+                    ProductAttr attrModel = new ProductAttr();
                     attrModel.FillData(attrtr);
-                    attrModel.AttrValues = new List<C_AttrValue>();
+                    attrModel.AttrValues = new List<AttrValue>();
 
                     //参数
                     if (attrModel.Type == (int)EnumAttrType.Parameter)
                     {
                         foreach (DataRow valuetr in ds.Tables["Values"].Select("AttrID='" + attrModel.AttrID + "'"))
                         {
-                            C_AttrValue valueModel = new C_AttrValue();
+                            AttrValue valueModel = new AttrValue();
                             valueModel.FillData(valuetr);
                             if (model.AttrValueList.IndexOf(valueModel.ValueID) >= 0)
                             {
@@ -491,14 +491,14 @@ namespace CloudSalesBusiness
                     }
                 }
 
-                model.ProductDetails = new List<C_ProductDetail>();
+                model.ProductDetails = new List<ProductDetail>();
                 foreach (DataRow item in ds.Tables["Details"].Rows)
                 {
 
-                    C_ProductDetail detail = new C_ProductDetail();
+                    ProductDetail detail = new ProductDetail();
                     detail.FillData(item);
 
-                    detail.Unit = new C_ProductUnit();
+                    detail.Unit = new ProductUnit();
                     detail.Unit.FillData(ds.Tables["Unit"].Select("UnitID='" + detail.UnitID + "'").FirstOrDefault());
 
                     //填充存在的规格
@@ -506,7 +506,7 @@ namespace CloudSalesBusiness
                     {
                         foreach (DataRow valuetr in ds.Tables["Values"].Select("AttrID='" + attrModel.AttrID + "'"))
                         {
-                            C_AttrValue valueModel = new C_AttrValue();
+                            AttrValue valueModel = new AttrValue();
                             valueModel.FillData(valuetr);
                             if (detail.AttrValue.IndexOf(valueModel.ValueID) >= 0)
                             {
@@ -764,7 +764,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateBrandStatus(string brandID, EnumStatus status, string operateIP, string operateID)
         {
-            bool bl = CommonBusiness.Update("C_Brand", "Status", ((int)status).ToString(), " BrandID='" + brandID + "'");
+            bool bl = CommonBusiness.Update("Brand", "Status", ((int)status).ToString(), " BrandID='" + brandID + "'");
 
             if (bl)
             {
@@ -921,7 +921,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateProductStatus(string productid, EnumStatus status, string operateIP, string operateID)
         {
-            return CommonBusiness.Update("C_Products", "Status", ((int)status).ToString(), " ProductID='" + productid + "'");
+            return CommonBusiness.Update("Products", "Status", ((int)status).ToString(), " ProductID='" + productid + "'");
         }
         /// <summary>
         /// 编辑产品是否新品
@@ -933,7 +933,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateProductIsNew(string productid, bool isNew, string operateIP, string operateID)
         {
-            return CommonBusiness.Update("C_Products", "IsNew", isNew ? "1" : "0", " ProductID='" + productid + "'");
+            return CommonBusiness.Update("Products", "IsNew", isNew ? "1" : "0", " ProductID='" + productid + "'");
         }
         /// <summary>
         /// 编辑产品是否推荐
@@ -945,7 +945,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateProductIsRecommend(string productid, bool isRecommend, string operateIP, string operateID)
         {
-            return CommonBusiness.Update("C_Products", "IsRecommend", isRecommend ? "1" : "0", " ProductID='" + productid + "'");
+            return CommonBusiness.Update("Products", "IsRecommend", isRecommend ? "1" : "0", " ProductID='" + productid + "'");
         }
 
         /// <summary>
@@ -995,7 +995,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateProductDetailsStatus(string productdetailid, EnumStatus status, string operateIP, string operateID)
         {
-            return CommonBusiness.Update("C_ProductDetail", "Status", (int)status, " ProductDetailID='" + productdetailid + "'");
+            return CommonBusiness.Update("ProductDetail", "Status", (int)status, " ProductDetailID='" + productdetailid + "'");
         }
 
 

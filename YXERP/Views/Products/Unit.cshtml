@@ -19,7 +19,7 @@
 </div>
 <div class="content-body">
     <ul class="unit-list">
-        @foreach (var item in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.Items)
+        @foreach (var item in (List<CloudSalesEntity.ProductUnit>)ViewBag.Items)
         {
             <li class="unit-item"><input type="text" data-id="@(item.UnitID)" data-value="@(item.UnitName)" value="@(item.UnitName)" /><span data-id="@(item.UnitID)" class="ico-delete"></span></li>
         }

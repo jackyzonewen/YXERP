@@ -37,7 +37,7 @@ namespace CloudSalesDAL
         public DataTable GetBrandList(string clientID)
         {
             SqlParameter[] paras = { new SqlParameter("@clientID", clientID) };
-            DataTable dt = GetDataTable("select BrandID,Name from C_Brand where ClientID=@clientID and Status<>9", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select BrandID,Name from Brand where ClientID=@clientID and Status<>9", paras, CommandType.Text);
             return dt;
 
         }
@@ -45,21 +45,21 @@ namespace CloudSalesDAL
         public DataTable GetBrandByBrandID(string brandID)
         {
             SqlParameter[] paras = { new SqlParameter("@brandID", brandID) };
-            DataTable dt = GetDataTable("select * from C_Brand where BrandID=@brandID", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from Brand where BrandID=@brandID", paras, CommandType.Text);
             return dt;
         }
 
         public DataTable GetUnitByUnitID(string unitID) 
         {
             SqlParameter[] paras = { new SqlParameter("@unitID", unitID) };
-            DataTable dt = GetDataTable("select * from C_ProductUnit where UnitID=@unitID", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from ProductUnit where UnitID=@unitID", paras, CommandType.Text);
             return dt;
         }
 
         public DataTable GetClientUnits(string clientid)
         {
             SqlParameter[] paras = { new SqlParameter("@ClientID", clientid) };
-            DataTable dt = GetDataTable("select * from C_ProductUnit where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from ProductUnit where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
             return dt;
         }
 
@@ -110,14 +110,14 @@ namespace CloudSalesDAL
                                        new SqlParameter("@PID", categoryid) ,
                                        new SqlParameter("@ClientID", clientid) 
                                    };
-            DataTable dt = GetDataTable("select * from C_Category where PID=@PID and ClientID=@ClientID Order by CreateTime", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from Category where PID=@PID and ClientID=@ClientID Order by CreateTime", paras, CommandType.Text);
             return dt;
         }
 
         public DataTable GetCategoryByID(string categoryid)
         {
             SqlParameter[] paras = { new SqlParameter("@CategoryID", categoryid) };
-            DataTable dt = GetDataTable("select * from C_Category where CategoryID=@CategoryID", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from Category where CategoryID=@CategoryID", paras, CommandType.Text);
             return dt;
         }
 
@@ -202,7 +202,7 @@ namespace CloudSalesDAL
         public string AddBrand(string name, string anotherName, string icoPath, string countryCode, string cityCode, int status, string remark, string brandStyle, string operateIP, string operateID, string clientID)
         {
             string brandID = Guid.NewGuid().ToString();
-            string sqlText = "INSERT INTO C_Brand([BrandID] ,[Name],[AnotherName] ,[IcoPath],[CountryCode],[CityCode],[Status],[Remark],[BrandStyle],[OperateIP],[CreateUserID],ClientID) "
+            string sqlText = "INSERT INTO Brand([BrandID] ,[Name],[AnotherName] ,[IcoPath],[CountryCode],[CityCode],[Status],[Remark],[BrandStyle],[OperateIP],[CreateUserID],ClientID) "
                                       + "values(@BrandID ,@Name,@AnotherName ,@IcoPath,@CountryCode,@CityCode,@Status,@Remark,@BrandStyle,@OperateIP,@CreateUserID,@ClientID)";
             SqlParameter[] paras = { 
                                      new SqlParameter("@BrandID" , brandID),
@@ -225,7 +225,7 @@ namespace CloudSalesDAL
         public string AddUnit(string unitName, string description, string operateid, string clientid)
         {
             string guid = Guid.NewGuid().ToString();
-            string sqlText = "INSERT INTO C_ProductUnit([UnitID] ,[UnitName],[Description],CreateUserID,ClientID) "
+            string sqlText = "INSERT INTO ProductUnit([UnitID] ,[UnitName],[Description],CreateUserID,ClientID) "
                                             + "values(@UnitID ,@UnitName,@Description,@CreateUserID,@ClientID)";
             SqlParameter[] paras = { 
                                      new SqlParameter("@UnitID" , guid),
@@ -258,7 +258,7 @@ namespace CloudSalesDAL
 
         public bool AddAttrValue(string valueID, string valueName, string attrID, string operateid, string clientid)
         {
-            string sqlText = "INSERT INTO C_AttrValue([ValueID] ,[ValueName],[Status],[AttrID],CreateUserID,ClientID) "
+            string sqlText = "INSERT INTO AttrValue([ValueID] ,[ValueName],[Status],[AttrID],CreateUserID,ClientID) "
                                              + "values(@ValueID ,@ValueName,1,@AttrID,@CreateUserID,@ClientID) ";
             SqlParameter[] paras = { 
                                      new SqlParameter("@ValueID" , valueID),
@@ -388,7 +388,7 @@ namespace CloudSalesDAL
 
         public bool UpdateBrand(string brandID, string name, string anotherName, string countryCode, string cityCode, int status, string remark, string brandStyle, string operateIP, string operateID)
         {
-            string sqlText = "Update C_Brand set [Name]=@Name,[AnotherName]=@AnotherName ,[CountryCode]=@CountryCode,[CityCode]=@CityCode," +
+            string sqlText = "Update Brand set [Name]=@Name,[AnotherName]=@AnotherName ,[CountryCode]=@CountryCode,[CityCode]=@CityCode," +
                 "[Status]=@Status,[Remark]=@Remark,[BrandStyle]=@BrandStyle,[UpdateTime]=getdate() where [BrandID]=@BrandID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@Name" , name),
@@ -405,7 +405,7 @@ namespace CloudSalesDAL
 
         public bool UpdateUnit(string unitID, string unitName, string description)
         {
-            string sqlText = "Update C_ProductUnit set [UnitName]=@UnitName,[Description]=@Description,UpdateTime=getdate()  where [UnitID]=@UnitID";
+            string sqlText = "Update ProductUnit set [UnitName]=@UnitName,[Description]=@Description,UpdateTime=getdate()  where [UnitID]=@UnitID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@UnitID",unitID),
                                      new SqlParameter("@UnitName" , unitName),
@@ -416,7 +416,7 @@ namespace CloudSalesDAL
 
         public bool UpdateUnitStatus(string unitid, int status)
         {
-            string sqlText = "Update C_ProductUnit set Status=@Status,UpdateTime=getdate()  where [UnitID]=@UnitID";
+            string sqlText = "Update ProductUnit set Status=@Status,UpdateTime=getdate()  where [UnitID]=@UnitID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@UnitID",unitid),
                                      new SqlParameter("@Status" , status)
@@ -426,7 +426,7 @@ namespace CloudSalesDAL
 
         public bool UpdateProductAttr(string attrID, string attrName, string description)
         {
-            string sqlText = "Update C_ProductAttr set [AttrName]=@AttrName,[Description]=@Description  where [AttrID]=@AttrID";
+            string sqlText = "Update ProductAttr set [AttrName]=@AttrName,[Description]=@Description  where [AttrID]=@AttrID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@AttrID",attrID),
                                      new SqlParameter("@AttrName" , attrName),
@@ -437,7 +437,7 @@ namespace CloudSalesDAL
 
         public bool UpdateAttrValue(string ValueID, string ValueName)
         {
-            string sqlText = "Update C_AttrValue set [ValueName]=@ValueName  where [ValueID]=@ValueID";
+            string sqlText = "Update AttrValue set [ValueName]=@ValueName  where [ValueID]=@ValueID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@ValueID",ValueID),
                                      new SqlParameter("@ValueName" , ValueName),
@@ -447,7 +447,7 @@ namespace CloudSalesDAL
 
         public bool UpdateProductAttrStatus(string attrid, int status)
         {
-            string sqlText = "Update C_ProductAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID";
+            string sqlText = "Update ProductAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@AttrID",attrid),
                                      new SqlParameter("@Status" , status)
@@ -457,7 +457,7 @@ namespace CloudSalesDAL
 
         public bool UpdateCategoryAttrStatus(string categoryid, string attrid, int status, int type)
         {
-            string sqlText = "Update C_CategoryAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID and CategoryID=@CategoryID and Type=@Type";
+            string sqlText = "Update CategoryAttr set Status=@Status,UpdateTime=getdate()  where [AttrID]=@AttrID and CategoryID=@CategoryID and Type=@Type";
             SqlParameter[] paras = { 
                                      new SqlParameter("@CategoryID",categoryid),
                                      new SqlParameter("@AttrID",attrid),
@@ -469,7 +469,7 @@ namespace CloudSalesDAL
 
         public bool UpdateAttrValueStatus(string valueid, int status)
         {
-            string sqlText = "Update C_AttrValue set Status=@Status,UpdateTime=getdate()  where [ValueID]=@ValueID";
+            string sqlText = "Update AttrValue set Status=@Status,UpdateTime=getdate()  where [ValueID]=@ValueID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@ValueID",valueid),
                                      new SqlParameter("@Status" , status)

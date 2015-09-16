@@ -45,8 +45,8 @@ AS
 	@key nvarchar(100)
 	
 
-	set @tableName='C_Products P join C_Brand B on P.BrandID=B.BrandID 
-					join C_ProductDetail pd on p.ProductID=pd.ProductID and pd.Status<>9 '
+	set @tableName='Products P join Brand B on P.BrandID=B.BrandID 
+					join ProductDetail pd on p.ProductID=pd.ProductID and pd.Status<>9 '
 	set @columns='P.ProductID,P.ProductName,p.CommonPrice,isnull(pd.price,p.price) price,B.Name BrandName,
 				  ISNULL(pd.ImgS,p.ProductImage) ProductImage,p.SaleCount,pd.ProductDetailID '
 	set @key='pd.AutoID'
@@ -74,7 +74,7 @@ AS
 
 	set @condition += @AttrWhere
 
-	set @condition += ' and pd.AutoID in (select MAX(AutoID) from C_ProductDetail where ClientID='''+@ClientID+''' and Status=1'+@SaleWhere+'  group by ProductID )'
+	set @condition += ' and pd.AutoID in (select MAX(AutoID) from ProductDetail where ClientID='''+@ClientID+''' and Status=1'+@SaleWhere+'  group by ProductID )'
 
 	declare @total int,@page int
 	exec P_GetPagerData @tableName,@columns,@condition,@key,@orderColumn,@pageSize,@pageIndex,@total out,@page out,@isAsc 

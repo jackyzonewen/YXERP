@@ -45,7 +45,7 @@ namespace YXERP.Controllers
         public JsonResult SaveDepartment(string entity)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            C_Department model = serializer.Deserialize<C_Department>(entity);
+            Department model = serializer.Deserialize<Department>(entity);
 
             string ID = "";
             if (string.IsNullOrEmpty(model.DepartID))

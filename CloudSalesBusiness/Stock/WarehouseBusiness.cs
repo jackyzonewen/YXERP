@@ -25,14 +25,14 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="clientid"></param>
         /// <returns></returns>
-        public List<C_WareHouseType> GetWarehouseTypes(string clientid)
+        public List<WareHouseType> GetWarehouseTypes(string clientid)
         {
             var dal = new WarehouseDAL();
             DataTable dt = dal.GetWarehouseTypes(clientid);
-            List<C_WareHouseType> list = new List<C_WareHouseType>();
+            List<WareHouseType> list = new List<WareHouseType>();
             foreach (DataRow item in dt.Rows)
             {
-                C_WareHouseType model = new C_WareHouseType();
+                WareHouseType model = new WareHouseType();
                 model.FillData(item);
                 list.Add(model);
             }
@@ -82,7 +82,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool DeleteWarehouseType(string id, string operateid, string clientid)
         {
-            return CommonBusiness.Update("C_WareHouseType", "Status", (int)CloudSalesEnum.EnumStatus.Delete, " TypeID='" + id + "'");
+            return CommonBusiness.Update("WareHouseType", "Status", (int)CloudSalesEnum.EnumStatus.Delete, " TypeID='" + id + "'");
         }
         #endregion
 
@@ -98,15 +98,15 @@ namespace CloudSalesBusiness
         /// <param name="pageCount">总页数</param>
         /// <param name="clientID">客户端ID</param>
         /// <returns></returns>
-        public List<C_WareHouse> GetWareHouses(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        public List<WareHouse> GetWareHouses(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
         {
             var dal = new WarehouseDAL();
             DataSet ds = dal.GetWareHouses(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
 
-            List<C_WareHouse> list = new List<C_WareHouse>();
+            List<WareHouse> list = new List<WareHouse>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                C_WareHouse model = new C_WareHouse();
+                WareHouse model = new WareHouse();
                 model.FillData(dr);
                 model.City = CommonCache.Citys.Where(c => c.CityCode == model.CityCode).FirstOrDefault();
                 list.Add(model);
@@ -119,15 +119,15 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="clientID"></param>
         /// <returns></returns>
-        public List<C_WareHouse> GetWareHouses(string clientID)
+        public List<WareHouse> GetWareHouses(string clientID)
         {
             var dal = new WarehouseDAL();
             DataTable dt = dal.GetWareHouses(clientID);
 
-            List<C_WareHouse> list = new List<C_WareHouse>();
+            List<WareHouse> list = new List<WareHouse>();
             foreach (DataRow dr in dt.Rows)
             {
-                C_WareHouse model = new C_WareHouse();
+                WareHouse model = new WareHouse();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -139,12 +139,12 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="wareid"></param>
         /// <returns></returns>
-        public C_WareHouse GetWareByID(string wareid)
+        public WareHouse GetWareByID(string wareid)
         {
             var dal = new WarehouseDAL();
             DataTable dt = dal.GetWareByID(wareid);
 
-            C_WareHouse model = new C_WareHouse();
+            WareHouse model = new WareHouse();
             if (dt.Rows.Count > 0)
             {
                 model.FillData(dt.Rows[0]);
@@ -163,15 +163,15 @@ namespace CloudSalesBusiness
         /// <param name="pageCount">总页数</param>
         /// <param name="clientID">客户端ID</param>
         /// <returns></returns>
-        public List<C_DepotSeat> GetDepotSeats(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID, string wareid = "")
+        public List<DepotSeat> GetDepotSeats(string keyWords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID, string wareid = "")
         {
             var dal = new WarehouseDAL();
             DataSet ds = dal.GetDepotSeats(keyWords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID, wareid);
 
-            List<C_DepotSeat> list = new List<C_DepotSeat>();
+            List<DepotSeat> list = new List<DepotSeat>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                C_DepotSeat model = new C_DepotSeat();
+                DepotSeat model = new DepotSeat();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -183,12 +183,12 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public C_DepotSeat GetDepotByID(string depotid)
+        public DepotSeat GetDepotByID(string depotid)
         {
             var dal = new WarehouseDAL();
             DataTable dt = dal.GetDepotByID(depotid);
 
-            C_DepotSeat model = new C_DepotSeat();
+            DepotSeat model = new DepotSeat();
             if (dt.Rows.Count > 0)
             {
                 model.FillData(dt.Rows[0]);
@@ -274,7 +274,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateWareHouseStatus(string id, EnumStatus status, string operateid, string clientid)
         {
-            return CommonBusiness.Update("C_WareHouse", "Status", (int)status, " WareID='" + id + "'");
+            return CommonBusiness.Update("WareHouse", "Status", (int)status, " WareID='" + id + "'");
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public bool UpdateDepotSeatStatus(string id, EnumStatus status, string operateid, string clientid)
         {
-            return CommonBusiness.Update("C_DepotSeat", "Status", (int)status, " DepotID='" + id + "'");
+            return CommonBusiness.Update("DepotSeat", "Status", (int)status, " DepotID='" + id + "'");
         }
 
         #endregion

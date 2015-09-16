@@ -28,7 +28,7 @@ while @id<=@count
 begin
 	select @tablename=[name] from #table where id=@id
 	set @id=@id+1
-	if @tablename in ('City','Country','Menu','Permission','M_Modules','M_ModulesMenu','M_Dictionary')  
+	if @tablename in ('City','Country','Menu','Permission','Modules','ModulesMenu','Dictionary')  
 	begin
 		continue
 	end

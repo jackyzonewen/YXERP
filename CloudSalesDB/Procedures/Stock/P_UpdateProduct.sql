@@ -47,11 +47,11 @@ begin tran
 declare @Err int,@PIDList nvarchar(max),@SaleAttr  nvarchar(max),@BUnitID nvarchar(64),@MUnitID nvarchar(64)
 set @Err=0
 
-select @PIDList=PIDList,@SaleAttr=SaleAttr from C_Category where CategoryID=@CategoryID
+select @PIDList=PIDList,@SaleAttr=SaleAttr from Category where CategoryID=@CategoryID
 
-select @BUnitID=[BigUnitID],@MUnitID=[SmallUnitID] from [C_Products] where ProductID=@ProductID
+select @BUnitID=[BigUnitID],@MUnitID=[SmallUnitID] from [Products] where ProductID=@ProductID
 
-Update [C_Products] set [ProductName]=@ProductName,[GeneralName]=@GeneralName,[IsCombineProduct]=@IsCombineProduct,[BrandID]=@BrandID,
+Update [Products] set [ProductName]=@ProductName,[GeneralName]=@GeneralName,[IsCombineProduct]=@IsCombineProduct,[BrandID]=@BrandID,
 						[BigUnitID]=@BigUnitID,[SmallUnitID]=@SmallUnitID,[BigSmallMultiple]=@BigSmallMultiple ,
 						[CategoryIDList]=@PIDList,[SaleAttr]=@SaleAttr,[AttrList]=@AttrList,[ValueList]=@ValueList,[AttrValueList]=@AttrValueList,
 						[CommonPrice]=@CommonPrice,[Price]=@Price,[PV]=0,[Status]=@Status,
@@ -62,12 +62,12 @@ where ProductID=@ProductID
 
 if(@BUnitID<>@BigUnitID and @BUnitID<>@MUnitID)
 begin
-	update C_ProductDetail set UnitID=@BigUnitID where ProductID=@ProductID and UnitID=@BUnitID
+	update ProductDetail set UnitID=@BigUnitID where ProductID=@ProductID and UnitID=@BUnitID
 	set @Err+=@@Error
 end
 if(@MUnitID<>@SmallUnitID)
 begin
-	update C_ProductDetail set UnitID=@SmallUnitID where ProductID=@ProductID and UnitID=@MUnitID
+	update ProductDetail set UnitID=@SmallUnitID where ProductID=@ProductID and UnitID=@MUnitID
 	set @Err+=@@Error
 end
 

@@ -29,7 +29,7 @@ begin tran
 declare @Err int, @Layers int=0 
 set @Err=0
 
-Update C_Category set CategoryName=@CategoryName,Status=@Status,AttrList=@AttrList,SaleAttr=@SaleAttr,Description=@Description,UpdateTime=getdate() 
+Update Category set CategoryName=@CategoryName,Status=@Status,AttrList=@AttrList,SaleAttr=@SaleAttr,Description=@Description,UpdateTime=getdate() 
 where CategoryID=@CategoryID
 set @Err+=@@error
 

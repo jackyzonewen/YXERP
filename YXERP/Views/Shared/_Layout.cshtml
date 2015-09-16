@@ -8,7 +8,7 @@
 </head>
 <body>
     @{
-        CloudSalesEntity.C_Users CurrentUser = (CloudSalesEntity.C_Users)Session["ClientManager"];
+        CloudSalesEntity.Users CurrentUser = (CloudSalesEntity.Users)Session["ClientManager"];
         string controller =  Url.RequestContext.RouteData.Values["controller"].ToString().ToUpper();
         string action = Url.RequestContext.RouteData.Values["action"].ToString().ToUpper();
     }

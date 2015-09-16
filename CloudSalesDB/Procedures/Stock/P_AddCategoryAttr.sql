@@ -26,9 +26,9 @@ declare @Err int
 set @Err=0
 
 
-if not exists(select AutoID from C_CategoryAttr where CategoryID=@CategoryID and AttrID=@AttrID and [Type]=@Type and Status=1)
+if not exists(select AutoID from CategoryAttr where CategoryID=@CategoryID and AttrID=@AttrID and [Type]=@Type and Status=1)
 begin
-	insert into C_CategoryAttr(CategoryID,AttrID,Status,[Type],CreateUserID)
+	insert into CategoryAttr(CategoryID,AttrID,Status,[Type],CreateUserID)
 	values(@CategoryID,@AttrID,1,@Type,@CreateUserID)
 end
 

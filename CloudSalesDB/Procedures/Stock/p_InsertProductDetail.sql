@@ -40,14 +40,14 @@ set @Result=0
 set @DetailID=NEWID()
 
 
-if exists(select AutoID from C_ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList)
+if exists(select AutoID from ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList)
 begin
 	set @DetailID=''
 	rollback tran
 	return
 end
 
-INSERT INTO C_ProductDetail(ProductDetailID,[ProductID],DetailsCode,[UnitID] ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
+INSERT INTO ProductDetail(ProductDetailID,[ProductID],DetailsCode,[UnitID] ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
 					Weight,ImgS,[ShapeCode] ,[Description],[CreateUserID],[CreateTime] ,[UpdateTime],[OperateIP] ,[ClientID])
 				VALUES(@DetailID,@ProductID,@ProductCode,@UnitID,@AttrList,@ValueList,@AttrValueList,@Price,1,
 					@Weight,@ProductImg,@ShapeCode,@Description,@CreateUserID,getdate(),getdate(),'',@ClientID);

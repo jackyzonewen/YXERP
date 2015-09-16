@@ -37,7 +37,7 @@
         <span class="columnname">行业：</span>
         <span>
              <select id="industry">
-                @foreach (CloudSalesEntity.C_Industry model in (List<CloudSalesEntity.C_Industry>)ViewBag.Industry)
+                @foreach (CloudSalesEntity.Industry model in (List<CloudSalesEntity.Industry>)ViewBag.Industry)
                 {
                     <option value="@(model.IndustryID)" data-name="@(model.Name)">@(model.Name)</option>
                 }
@@ -63,7 +63,7 @@
     <li>
         <span class="columnname">模块：</span>
         
-        @foreach (CloudSalesEntity.M_Modules model in (List<CloudSalesEntity.M_Modules>)ViewBag.Modules)
+        @foreach (CloudSalesEntity.Modules model in (List<CloudSalesEntity.Modules>)ViewBag.Modules)
         {
             <span class="direction modules-item" title="@(model.Description)" data-value="@(model.ModulesID)">@(model.Name)</span>
         }

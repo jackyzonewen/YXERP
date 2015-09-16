@@ -32,7 +32,7 @@ AS
 
 	create table #Attrs(AttrID nvarchar(64),AttrName nvarchar(200),Description nvarchar(4000))
 	
-	select @tableName=' C_ProductAttr ',@columns='AttrID,AttrName,Description',@key='AutoID',@orderColumn='',@isAsc=0
+	select @tableName=' ProductAttr ',@columns='AttrID,AttrName,Description',@key='AutoID',@orderColumn='',@isAsc=0
 	set @condition=' ClientID='''+@ClientID+''' and CategoryID='''+@CategoryID+''' and Status<>9 '
 	if(@keyWords <> '')
 	begin
@@ -43,7 +43,7 @@ AS
 	insert into #Attrs exec P_GetPagerData @tableName,@columns,@condition,@key,@orderColumn,@pageSize,@pageIndex,@total out,@page out,@isAsc
 	
 	select * from #Attrs
-	select * from C_AttrValue where AttrID in (select AttrID from #Attrs) and Status<>9
+	select * from AttrValue where AttrID in (select AttrID from #Attrs) and Status<>9
 	
 	select @totalCount=@total,@pageCount =@page
  

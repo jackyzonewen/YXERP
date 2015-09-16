@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "产品详情页";
-    var model = (CloudSalesEntity.C_Products)ViewBag.Model;
+    var model = (CloudSalesEntity.Products)ViewBag.Model;
 }
 @section css{
    <link href="/modules/css/products/product.css" rel="stylesheet" />
@@ -50,19 +50,19 @@
         <li>
             <span class="column-name">品牌：</span>
             <select id="brand">
-            @foreach (CloudSalesEntity.C_Brand brand in (List<CloudSalesEntity.C_Brand>)ViewBag.BrandList)
+            @foreach (CloudSalesEntity.Brand brand in (List<CloudSalesEntity.Brand>)ViewBag.BrandList)
             {
                 <option value="@brand.BrandID">@brand.Name</option> 
             }
             </select>
         </li>
         
-        @foreach (CloudSalesEntity.C_ProductAttr attr in model.Category.AttrLists)
+        @foreach (CloudSalesEntity.ProductAttr attr in model.Category.AttrLists)
         {
             <li data-id="@attr.AttrID" class="productattr">
                 <span class="column-name">@attr.AttrName：</span>
                 <select id="@attr.AttrID">
-                    @foreach (CloudSalesEntity.C_AttrValue value in attr.AttrValues)
+                    @foreach (CloudSalesEntity.AttrValue value in attr.AttrValues)
                     {
                         <option value="@value.ValueID">@value.ValueName</option> 
                     }
@@ -73,7 +73,7 @@
             <span class="column-name">小单位：</span>
 
             <select id="smallUnit">
-            @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
+            @foreach (CloudSalesEntity.ProductUnit unit in (List<CloudSalesEntity.ProductUnit>)ViewBag.UnitList)
             {
                 <option value="@unit.UnitID">@unit.UnitName</option> 
             }
@@ -83,7 +83,7 @@
             <span class="column-name">大单位：</span>
            
             <select id="bigUnit">
-            @foreach (CloudSalesEntity.C_ProductUnit unit in (List<CloudSalesEntity.C_ProductUnit>)ViewBag.UnitList)
+            @foreach (CloudSalesEntity.ProductUnit unit in (List<CloudSalesEntity.ProductUnit>)ViewBag.UnitList)
             {
                 <option value="@unit.UnitID">@unit.UnitName</option> 
             }

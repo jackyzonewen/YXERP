@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "货位设置";
-    var wares = (List<CloudSalesEntity.C_WareHouse>)ViewBag.Wares;
+    var wares = (List<CloudSalesEntity.WareHouse>)ViewBag.Wares;
 }
 
 <link href="/modules/css/warehouse/warehouse.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
     <li>
         仓库：<select id="sltWareID">
                     <option selected="selected" value="-1">全部</option> 
-                    @foreach (CloudSalesEntity.C_WareHouse model in wares)
+                    @foreach (CloudSalesEntity.WareHouse model in wares)
                     {
                         <option value="@(model.WareID)">@(model.Name)</option> 
                     }

@@ -23,7 +23,7 @@ namespace CloudSalesBusiness
         /// <returns></returns>
         public static bool IsExistLoginName(string loginName)
         {
-            object count = CommonBusiness.Select("C_Users", "count(0)", "LoginName='" + loginName + "'");
+            object count = CommonBusiness.Select("Users", "count(0)", "LoginName='" + loginName + "'");
             return Convert.ToInt32(count) > 0;
         }
 
@@ -33,14 +33,14 @@ namespace CloudSalesBusiness
         /// <param name="loginname">用户名</param>
         /// <param name="pwd">密码</param>
         /// <returns></returns>
-        public static C_Users GetC_UserByUserName(string loginname, string pwd, string operateip)
+        public static Users GetUserByUserName(string loginname, string pwd, string operateip)
         {
             pwd = CloudSalesTool.Encrypt.GetEncryptPwd(pwd, loginname);
-            DataSet ds = new OrganizationDAL().GetC_UserByUserName(loginname, pwd);
-            C_Users model = null;
+            DataSet ds = new OrganizationDAL().GetUserByUserName(loginname, pwd);
+            Users model = null;
             if (ds.Tables.Contains("User") && ds.Tables["User"].Rows.Count > 0)
             {
-                model = new C_Users();
+                model = new Users();
                 model.FillData(ds.Tables["User"].Rows[0]);
 
                 if (CommonCache.ClientMenus.ContainsKey(model.ClientID))
@@ -53,7 +53,7 @@ namespace CloudSalesBusiness
                     var modules = CommonCache.Modules;
                     foreach (DataRow dr in ds.Tables["Modules"].Rows)
                     {
-                        M_Modules module = new M_Modules();
+                        Modules module = new Modules();
                         module.FillData(dr);
                         if (modules.ContainsKey(module.ModulesID))
                         {
@@ -83,13 +83,13 @@ namespace CloudSalesBusiness
         /// </summary>
         /// <param name="clientid">客户端ID</param>
         /// <returns></returns>
-        public static List<C_Department> GetDepartments(string clientid)
+        public static List<Department> GetDepartments(string clientid)
         {
             DataTable dt = new OrganizationDAL().GetDepartments(clientid);
-            List<C_Department> list = new List<C_Department>();
+            List<Department> list = new List<Department>();
             foreach (DataRow dr in dt.Rows)
             {
-                C_Department model = new C_Department();
+                Department model = new Department();
                 model.FillData(dr);
                 list.Add(model);
             }
@@ -146,13 +146,13 @@ namespace CloudSalesBusiness
         {
             if (status == EnumStatus.Delete)
             {
-                object count = CommonBusiness.Select(" C_UserDepart ", " count(0) ", " DepartID='" + departid + "' and Status=1 ");
+                object count = CommonBusiness.Select(" UserDepart ", " count(0) ", " DepartID='" + departid + "' and Status=1 ");
                 if (Convert.ToInt32(count) > 0)
                 {
                     return EnumResultStatus.Exists;
                 }
             }
-            if (CommonBusiness.Update(" C_Department ", " Status ", (int)status, " DepartID='" + departid + "'"))
+            if (CommonBusiness.Update(" Department ", " Status ", (int)status, " DepartID='" + departid + "'"))
             {
                 return EnumResultStatus.Success;
             }

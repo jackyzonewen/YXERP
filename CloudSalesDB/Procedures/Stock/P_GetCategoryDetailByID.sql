@@ -18,14 +18,14 @@ CREATE PROCEDURE [dbo].[P_GetCategoryDetailByID]
 	@CategoryID nvarchar(64)
 AS
 
-select * from C_Category where CategoryID=@CategoryID
+select * from Category where CategoryID=@CategoryID
 
-select p.AttrID,AttrName,Description,p.CategoryID,c.Type into #AttrTable from C_ProductAttr p join C_CategoryAttr c on p.AttrID=c.AttrID 
+select p.AttrID,AttrName,Description,p.CategoryID,c.Type into #AttrTable from ProductAttr p join CategoryAttr c on p.AttrID=c.AttrID 
 where c.Status=1 and c.CategoryID= @CategoryID and p.Status=1 order by p.AutoID
 --属性
 select * from #AttrTable
 --属性值
-select ValueID,ValueName,AttrID from C_AttrValue  where AttrID in (select AttrID from #AttrTable) and Status<>9
+select ValueID,ValueName,AttrID from AttrValue  where AttrID in (select AttrID from #AttrTable) and Status<>9
 
 
  

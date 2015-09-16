@@ -50,11 +50,11 @@ declare @Err int,@PIDList nvarchar(max),@SaleAttr  nvarchar(max)
 set @Err=0
 set @ProductID=NEWID()
 
-select @PIDList=PIDList,@SaleAttr=SaleAttr from C_Category where CategoryID=@CategoryID
+select @PIDList=PIDList,@SaleAttr=SaleAttr from Category where CategoryID=@CategoryID
 
-IF(NOT EXISTS(SELECT 1 FROM [C_Products] WHERE [ProductCode]=@ProductCode and ClientID=@ClientID))--产品编号唯一，编号不存在时才能执行插入
+IF(NOT EXISTS(SELECT 1 FROM [Products] WHERE [ProductCode]=@ProductCode and ClientID=@ClientID))--产品编号唯一，编号不存在时才能执行插入
 BEGIN
-		INSERT INTO [C_Products]([ProductID],[ProductCode],[ProductName],[GeneralName],[IsCombineProduct],[BrandID],[BigUnitID],[SmallUnitID],[BigSmallMultiple] ,
+		INSERT INTO [Products]([ProductID],[ProductCode],[ProductName],[GeneralName],[IsCombineProduct],[BrandID],[BigUnitID],[SmallUnitID],[BigSmallMultiple] ,
 						[CategoryID],[CategoryIDList],[SaleAttr],[AttrList],[ValueList],[AttrValueList],[CommonPrice],[Price],[PV],[TaxRate],[Status],
 						[OnlineTime],[UseType],[IsNew],[IsRecommend] ,[IsDiscount],[DiscountValue],[SaleCount],[Weight] ,[ProductImage],[EffectiveDays],
 						[ShapeCode] ,[ProdiverID],[Description],[CreateUserID],[CreateTime] ,[UpdateTime],[OperateIP] ,[ClientID])
@@ -66,9 +66,9 @@ BEGIN
 						set @Err+=@@Error
 
 		--不存在规格，插入默认子产品
-		if not exists (select AutoID from C_CategoryAttr where CategoryID=@CategoryID and Type=2 and Status=1)
+		if not exists (select AutoID from CategoryAttr where CategoryID=@CategoryID and Type=2 and Status=1)
 		begin
-			INSERT INTO C_ProductDetail(ProductDetailID,[ProductID],DetailsCode,[UnitID] ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
+			INSERT INTO ProductDetail(ProductDetailID,[ProductID],DetailsCode,[UnitID] ,[SaleAttr],[AttrValue],[SaleAttrValue],[Price],[Status],
 					Weight,ImgS,[ShapeCode] ,[Description],[CreateUserID],[CreateTime] ,[UpdateTime],[OperateIP] ,[ClientID])
 				VALUES(NEWID(),@ProductID,'',@SmallUnitID,'','','',@Price,1,
 					@Weight,'','','',@CreateUserID,getdate(),getdate(),'',@ClientID);

@@ -34,7 +34,7 @@ set @Err=0
 set @CategoryID=NEWID()
 if(@PID is not null and @PID<>'')
 begin
-	select @PIDList=PIDList+','+@CategoryID,@Layers=Layers+1 from C_Category where CategoryID=@PID
+	select @PIDList=PIDList+','+@CategoryID,@Layers=Layers+1 from Category where CategoryID=@PID
 end
 else
 begin
@@ -42,7 +42,7 @@ begin
 	set @Layers=1
 end
 
-insert into C_Category(CategoryID,CategoryCode,CategoryName,PID,PIDList,Layers,SaleAttr,AttrList,Status,Description,CreateUserID,ClientID)
+insert into Category(CategoryID,CategoryCode,CategoryName,PID,PIDList,Layers,SaleAttr,AttrList,Status,Description,CreateUserID,ClientID)
 				values(@CategoryID,@CategoryCode,@CategoryName,@PID,@PIDList,@Layers,@SaleAttr,@AttrList,@Status,@Description,@CreateUserID,@ClientID)
 set @Err+=@@error
 

@@ -12,19 +12,19 @@ namespace CloudSalesDAL
     {
         #region 查询
 
-        public DataSet GetC_UserByUserName(string loginname, string pwd)
+        public DataSet GetUserByUserName(string loginname, string pwd)
         {
 
             SqlParameter[] paras = { 
                                     new SqlParameter("@LoginName",loginname),
                                     new SqlParameter("@LoginPwd",pwd)
                                    };
-            return GetDataSet("P_GetC_UserToLogin", paras, CommandType.StoredProcedure, "User|Department|Role|Permission|Modules");
+            return GetDataSet("P_GetUserToLogin", paras, CommandType.StoredProcedure, "User|Department|Role|Permission|Modules");
         }
 
         public DataTable GetDepartments(string clientid)
         {
-            string sql = "select * from C_Department where ClientID=@ClientID and Status<>9";
+            string sql = "select * from Department where ClientID=@ClientID and Status<>9";
 
             SqlParameter[] paras = { 
                                     new SqlParameter("@ClientID",clientid)
@@ -40,7 +40,7 @@ namespace CloudSalesDAL
         public string AddDepartment(string name, string parentid, string description, string operateid, string clientid)
         {
             string id = Guid.NewGuid().ToString();
-            string sql = "insert into C_Department(DepartID,Name,ParentID,Status,Description,CreateUserID,ClientID) "+
+            string sql = "insert into Department(DepartID,Name,ParentID,Status,Description,CreateUserID,ClientID) "+
                         " values(@DepartID,@Name,@ParentID,1,@Description,@CreateUserID,@ClientID)";
 
             SqlParameter[] paras = { 
@@ -65,7 +65,7 @@ namespace CloudSalesDAL
 
         public bool UpdateDepartment(string departid, string name, string description)
         {
-            string sql = "update C_Department set Name=@Name,Description=@Description where DepartID=@DepartID";
+            string sql = "update Department set Name=@Name,Description=@Description where DepartID=@DepartID";
 
             SqlParameter[] paras = { 
                                        new SqlParameter("@DepartID",departid),

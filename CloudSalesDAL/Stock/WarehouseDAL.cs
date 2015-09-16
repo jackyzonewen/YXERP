@@ -14,7 +14,7 @@ namespace CloudSalesDAL
         public DataTable GetWarehouseTypes(string clientid)
         {
             SqlParameter[] paras = { new SqlParameter("@ClientID", clientid) };
-            DataTable dt = GetDataTable("select * from C_WareHouseType where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from WareHouseType where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
             return dt;
         }
 
@@ -44,14 +44,14 @@ namespace CloudSalesDAL
         public DataTable GetWareHouses(string clientID)
         {
             SqlParameter[] paras = { new SqlParameter("@ClientID", clientID) };
-            DataTable dt = GetDataTable("select WareID,Name from C_WareHouse where Status<>9 and ClientID=@ClientID", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select WareID,Name from WareHouse where Status<>9 and ClientID=@ClientID", paras, CommandType.Text);
             return dt;
         }
 
         public DataTable GetWareByID(string wareid)
         {
             SqlParameter[] paras = { new SqlParameter("@WareID", wareid) };
-            DataTable dt = GetDataTable("select * from C_WareHouse where WareID=@WareID", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from WareHouse where WareID=@WareID", paras, CommandType.Text);
             return dt;
         }
 
@@ -82,7 +82,7 @@ namespace CloudSalesDAL
         public DataTable GetDepotByID(string depotid)
         {
             SqlParameter[] paras = { new SqlParameter("@DepotID", depotid) };
-            DataTable dt = GetDataTable("select * from C_DepotSeat where DepotID=@DepotID", paras, CommandType.Text);
+            DataTable dt = GetDataTable("select * from DepotSeat where DepotID=@DepotID", paras, CommandType.Text);
             return dt;
         }
 
@@ -93,7 +93,7 @@ namespace CloudSalesDAL
 
         public bool AddWarehouseType(string id, string name, string description, string operateid, string clientid)
         {
-            string sqlText = "INSERT INTO C_WareHouseType([TypeID] ,[TypeName],[Description],[Status],CreateUserID,ClientID) "
+            string sqlText = "INSERT INTO WareHouseType([TypeID] ,[TypeName],[Description],[Status],CreateUserID,ClientID) "
                                              + "values(@TypeID ,@TypeName,@Description,1,@CreateUserID,@ClientID) ";
             SqlParameter[] paras = { 
                                      new SqlParameter("@TypeID" , id),
@@ -107,7 +107,7 @@ namespace CloudSalesDAL
 
         public bool AddWareHouse(string id, string warecode, string name, string shortname, string citycode, int status,string description, string operateid, string clientid)
         {
-            string sqlText = "insert into C_WareHouse(WareID,WareCode,Name,ShortName,CityCode,Status,Description,CreateUserID,ClientID) "+
+            string sqlText = "insert into WareHouse(WareID,WareCode,Name,ShortName,CityCode,Status,Description,CreateUserID,ClientID) "+
                                             " values(@WareID,@WareCode,@Name,@ShortName,@CityCode,@Status,@Description,@CreateUserID,@ClientID) ";
             SqlParameter[] paras = { 
                                      new SqlParameter("@WareID" , id),
@@ -125,7 +125,7 @@ namespace CloudSalesDAL
 
         public bool AddDepotSeat(string id, string depotcode, string wareid, string name, int status, string description, string operateid, string clientid)
         {
-            string sqlText = "insert into C_DepotSeat(DepotID,DepotCode,WareID,Name,Status,Description,CreateUserID,ClientID) " +
+            string sqlText = "insert into DepotSeat(DepotID,DepotCode,WareID,Name,Status,Description,CreateUserID,ClientID) " +
                                             " values(@DepotID,@DepotCode,@WareID,@Name,@Status,@Description,@CreateUserID,@ClientID) ";
             SqlParameter[] paras = { 
                                     
@@ -147,7 +147,7 @@ namespace CloudSalesDAL
 
         public bool UpdateWarehouseType(string id, string name, string description)
         {
-            string sqlText = "Update C_WareHouseType set [TypeName]=@TypeName,[Description]=@Description,UpdateTime=getdate() "
+            string sqlText = "Update WareHouseType set [TypeName]=@TypeName,[Description]=@Description,UpdateTime=getdate() "
                            + "where [TypeID]=@TypeID";
             SqlParameter[] paras = { 
                                      new SqlParameter("@TypeID" , id),
@@ -159,7 +159,7 @@ namespace CloudSalesDAL
 
         public bool UpdateWareHouse(string id, string name, string shortname, string citycode, int status, string description)
         {
-            string sqlText = "Update C_WareHouse set Name=@Name,ShortName=@ShortName,CityCode=@CityCode,Status=@Status,Description=@Description,UpdateTime=getdate() " +
+            string sqlText = "Update WareHouse set Name=@Name,ShortName=@ShortName,CityCode=@CityCode,Status=@Status,Description=@Description,UpdateTime=getdate() " +
                             "  where WareID=@WareID ";
             SqlParameter[] paras = { 
                                      new SqlParameter("@WareID" , id),
@@ -174,7 +174,7 @@ namespace CloudSalesDAL
 
         public bool UpdateDepotSeat(string id, string name, int status, string description)
         {
-            string sqlText = "Update C_DepotSeat set Name=@Name,Status=@Status,Description=@Description,UpdateTime=getdate() " +
+            string sqlText = "Update DepotSeat set Name=@Name,Status=@Status,Description=@Description,UpdateTime=getdate() " +
                             "  where DepotID=@DepotID ";
             SqlParameter[] paras = { 
                                      new SqlParameter("@DepotID" , id),

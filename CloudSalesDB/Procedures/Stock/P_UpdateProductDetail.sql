@@ -36,13 +36,13 @@ declare @Err int
 set @Err=0
 set @Result=0
 
-if exists(select AutoID from C_ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList and ProductDetailID<>@DetailID)
+if exists(select AutoID from ProductDetail where ProductID=@ProductID and UnitID=@UnitID and [AttrValue]=@ValueList and ProductDetailID<>@DetailID)
 begin
 	rollback tran
 	return
 end
 
-update C_ProductDetail set DetailsCode=@ProductCode ,[SaleAttr]=@AttrList,[AttrValue]=@ValueList,[SaleAttrValue]=@AttrValueList,[Price]=@Price,
+update ProductDetail set DetailsCode=@ProductCode ,[SaleAttr]=@AttrList,[AttrValue]=@ValueList,[SaleAttrValue]=@AttrValueList,[Price]=@Price,
 					[Weight]=@Weight,[ShapeCode]=@ShapeCode ,ImgS=@ImgS,[Description]=@Description ,[UpdateTime]=getdate()
 where ProductDetailID=@DetailID
 

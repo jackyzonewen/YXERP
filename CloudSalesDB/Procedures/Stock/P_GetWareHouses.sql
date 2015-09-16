@@ -29,7 +29,7 @@ AS
 	@orderColumn nvarchar(4000),
 	@isAsc int
 
-	select @tableName='C_WareHouse',@columns='*',@key='AutoID',@orderColumn='CreateTime desc',@isAsc=0
+	select @tableName='WareHouse',@columns='*',@key='AutoID',@orderColumn='CreateTime desc',@isAsc=0
 	set @condition=' ClientID='''+@ClientID+''' and Status<>9 '
 	if(@keyWords <> '')
 	begin

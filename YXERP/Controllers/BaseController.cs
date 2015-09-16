@@ -29,7 +29,7 @@ namespace YXERP.Controllers
         /// <summary>
         /// 当前登录用户
         /// </summary>
-        protected CloudSalesEntity.C_Users CurrentUser
+        protected CloudSalesEntity.Users CurrentUser
         {
             get
             {
@@ -39,7 +39,7 @@ namespace YXERP.Controllers
                 }
                 else
                 {
-                    return (CloudSalesEntity.C_Users)Session["ClientManager"];
+                    return (CloudSalesEntity.Users)Session["ClientManager"];
                 }
             }
             set { Session["ClientManager"] = value; }

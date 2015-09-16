@@ -33,13 +33,13 @@ namespace CloudSalesBusiness
         /// <param name="ordertype"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static List<C_ProductDetail> GetShoppingCart(EnumOrderType ordertype, string userid)
+        public static List<ProductDetail> GetShoppingCart(EnumOrderType ordertype, string userid)
         {
             DataTable dt = OrdersDAL.GetShoppingCart((int)ordertype, userid);
-            List<C_ProductDetail> list = new List<C_ProductDetail>();
+            List<ProductDetail> list = new List<ProductDetail>();
             foreach (DataRow dr in dt.Rows)
             {
-                C_ProductDetail model = new C_ProductDetail();
+                ProductDetail model = new ProductDetail();
                 model.FillData(dr);
                 list.Add(model);
             }

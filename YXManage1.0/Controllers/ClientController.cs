@@ -24,8 +24,8 @@ namespace YXManage.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Industry = C_IndustryBusiness.GetIndustryByClientID(ClientID);
-            ViewBag.Modules = M_ModulesBusiness.GetModules();
+            ViewBag.Industry = IndustryBusiness.GetIndustryByClientID(ClientID);
+            ViewBag.Modules = ModulesBusiness.GetModules();
             return View();
         }
 
@@ -40,7 +40,7 @@ namespace YXManage.Controllers
         public JsonResult GetClients(int pageIndex, string keyWords)
         {
             int totalCount = 0, pageCount = 0;
-            var list = M_ClientBusiness.GetClients(keyWords, PageSize, pageIndex, ref totalCount, ref pageCount);
+            var list = ClientBusiness.GetClients(keyWords, PageSize, pageIndex, ref totalCount, ref pageCount);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);
@@ -58,7 +58,7 @@ namespace YXManage.Controllers
         /// <returns></returns>
         public JsonResult CreateIndustry(string name)
         {
-            string id = new C_IndustryBusiness().InsertIndustry(name, "", string.Empty, ClientID);
+            string id = new IndustryBusiness().InsertIndustry(name, "", string.Empty, ClientID);
             JsonDictionary.Add("ID", id);
             return new JsonResult()
             {
@@ -75,10 +75,10 @@ namespace YXManage.Controllers
         public JsonResult CreateClient(string client, string loginName)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            M_Clients model = serializer.Deserialize<M_Clients>(client);
+            Clients model = serializer.Deserialize<Clients>(client);
 
             int result = 0;
-            string clientid = M_ClientBusiness.InsertClient(model, loginName, loginName, CurrentUser.UserID, out result);
+            string clientid = ClientBusiness.InsertClient(model, loginName, loginName, CurrentUser.UserID, out result);
             JsonDictionary.Add("Result", result);
             JsonDictionary.Add("ClientID", clientid);
             return new JsonResult()

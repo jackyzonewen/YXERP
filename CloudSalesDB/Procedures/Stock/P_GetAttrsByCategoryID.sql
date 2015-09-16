@@ -20,11 +20,11 @@ CREATE PROCEDURE [dbo].[P_GetAttrsByCategoryID]
 AS
 if(@CategoryID='')
 begin
-	select AttrID,AttrName,Description from C_ProductAttr where ClientID=@ClientID and CategoryID=@CategoryID and Status<>9
+	select AttrID,AttrName,Description from ProductAttr where ClientID=@ClientID and CategoryID=@CategoryID and Status<>9
 end
 else
 begin
-	select c.AttrID,AttrName,Description,c.Type,c.CategoryID from C_ProductAttr p join C_CategoryAttr  c on p.AttrID=c.AttrID
+	select c.AttrID,AttrName,Description,c.Type,c.CategoryID from ProductAttr p join CategoryAttr  c on p.AttrID=c.AttrID
 	where c.CategoryID=@CategoryID and p.Status<>9 and c.Status<>9
 end
  

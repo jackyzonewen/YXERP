@@ -19,7 +19,7 @@
     <div class="category-layer">
         <div class="category-header">全部分类 <a href="javascript:void(0);" data-id="" data-layer="1" class="ico-add right mTop3">添加分类</a></div>
         <ul class="category-list">
-            @foreach (CloudSalesEntity.C_Category model in (List<CloudSalesEntity.C_Category>)ViewBag.Items)
+            @foreach (CloudSalesEntity.Category model in (List<CloudSalesEntity.Category>)ViewBag.Items)
             { 
                 <li data-id="@(model.CategoryID)" title="@(model.Description)" data-layer="@(model.Layers)">
                     <span class="category-name long @(model.Status.Value==1?"":"colorccc")">@(model.CategoryName)</span>

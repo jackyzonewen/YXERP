@@ -101,6 +101,7 @@
     <Compile Include="Common\UserAuthorize.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CustomerRPTController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfomationController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -119,6 +120,7 @@
     <Content Include="modules\css\orders\confirmcart.css" />
     <Content Include="Views\Purchase\ConfirmPurchase.cshtml" />
     <Content Include="Views\Purchase\Purchase.cshtml" />
+    <Content Include="Views\CustomerRPT\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\uploadFiles\2015071122152715275334.png" />

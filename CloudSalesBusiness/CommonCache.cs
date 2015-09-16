@@ -31,7 +31,7 @@ namespace CloudSalesBusiness
                     {
                         foreach (DataRow dr in ds.Tables["Modules"].Rows)
                         {
-                            M_Modules model = new M_Modules();
+                            Modules model = new Modules();
                             model.FillData(dr);
                             List<Menu> list = new List<Menu>();
                             foreach (DataRow menu in ds.Tables["Menus"].Select("ModulesID='" + model.ModulesID + "'"))
@@ -91,18 +91,18 @@ namespace CloudSalesBusiness
             }
         }
 
-        private static Dictionary<string, List<C_Industry>> _industry;
+        private static Dictionary<string, List<Industry>> _industry;
 
         /// <summary>
         /// 行业
         /// </summary>
-        public static Dictionary<string, List<C_Industry>> Industry
+        public static Dictionary<string, List<Industry>> Industry
         {
             get
             {
                 if (_industry == null)
                 {
-                    _industry = new Dictionary<string, List<C_Industry>>();
+                    _industry = new Dictionary<string, List<Industry>>();
                 }
                 return _industry;
             }

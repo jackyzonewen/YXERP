@@ -20,12 +20,12 @@ AS
 
 declare @BigUnit nvarchar(64),@Unit nvarchar(64)
 
-select @BigUnit=BigUnitID,@Unit=SmallUnitID from C_Products where ProductID=@ProductID
+select @BigUnit=BigUnitID,@Unit=SmallUnitID from Products where ProductID=@ProductID
 
-select * from C_Products where ProductID=@ProductID 
+select * from Products where ProductID=@ProductID 
 
-select * from C_ProductDetail where ProductID=@ProductID
+select * from ProductDetail where ProductID=@ProductID
 
-select UnitID,UnitName from C_ProductUnit where UnitID=@BigUnit or UnitID=@Unit
+select UnitID,UnitName from ProductUnit where UnitID=@BigUnit or UnitID=@Unit
  
 

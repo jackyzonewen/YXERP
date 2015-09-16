@@ -16,7 +16,7 @@ namespace YXManage.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Items = M_ModulesBusiness.GetModules();
+            ViewBag.Items = ModulesBusiness.GetModules();
             return View();
         }
     }

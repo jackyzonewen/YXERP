@@ -29,7 +29,7 @@ public static class ExpandClass
     {
         if (httpContext.Session["ClientManager"] != null)
         {
-            return ((CloudSalesEntity.C_Users)httpContext.Session["ClientManager"]).Menus.Where(m => m.PCode == menuCode).ToList();
+            return ((CloudSalesEntity.Users)httpContext.Session["ClientManager"]).Menus.Where(m => m.PCode == menuCode).ToList();
         }
         else
         {
@@ -45,7 +45,7 @@ public static class ExpandClass
     {
         if (httpContext.Session["ClientManager"] != null && httpContext.Session["topMenuCode"] != null)
         {
-            return ((CloudSalesEntity.C_Users)httpContext.Session["ClientManager"]).Menus.Where(m => m.PCode == httpContext.Session["topMenuCode"].ToString()).ToList();
+            return ((CloudSalesEntity.Users)httpContext.Session["ClientManager"]).Menus.Where(m => m.PCode == httpContext.Session["topMenuCode"].ToString()).ToList();
         }
         else
         {
