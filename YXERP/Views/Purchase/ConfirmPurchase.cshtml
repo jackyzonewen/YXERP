@@ -6,7 +6,7 @@
 @section scripts{
     <script type="text/javascript">
         seajs.use(["scripts/purchase/confirmpurchase"], function (obj) {
-            obj.initList();
+            obj.init();
         });
     </script>
 }
@@ -38,18 +38,28 @@
         @foreach (var model in (List<CloudSalesEntity.ProductDetail>)ViewBag.Items)
         { 
             <tr class="item">
-                <td><img src="@(model.ImgS)" /> @(model.ProductName)</td>
+                <td><a href="/Products/ChooseDetail?pid=@(model.ProductID)&did=@(model.ProductDetailID)&type=1" target="_blank"><img src="@(model.ImgS)" /> @(model.ProductName)</a></td>
                 <td>@(model.Description)</td>
                 <td class="center">@(model.UnitName)</td>
                 <td><input  type="text" class="batch" value="@(DateTime.Now.ToString("yyyyMMdd"))" /></td>
-                <td><input type="text" class="price" value="@(model.Price.ToString("f2"))" /></td>
-                <td class="center"><input  type="text" class="quantity" value="@(model.Quantity)" /></td>
-                <td class="tRight">@((model.Price*model.Quantity).ToString("f2"))</td>
+                <td class="tr-price"><input type="text" data-value="@(model.Price.ToString("f2"))" class="price" value="@(model.Price.ToString("f2"))" /></td>
+                <td class="center tr-quantity"><input  type="text" data-id="@(model.AutoID)" data-value="@(model.Quantity)" class="quantity" value="@(model.Quantity)" /></td>
+                <td class="tRight amount">@((model.Price*model.Quantity).ToString("f2"))</td>
                 <td class="center">
                     <a class="ico-del" href="javascript:void(0)" title="删除" data-id="@(model.AutoID)"></a>
                 </td>
             </tr>
         }
+        <tr class="amount-item">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="tRight">合计：</td>
+            <td class="tRight"><label id="amount"></label></td>
+            <td></td>
+        </tr>
     </table>
     <div class="bottom-div">
         备注：<input type="text" id="remark"  />

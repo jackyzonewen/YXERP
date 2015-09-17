@@ -69,5 +69,32 @@ namespace CloudSalesBusiness
         }
 
         #endregion
+
+        #region 编辑
+
+        /// <summary>
+        /// 编辑购物车产品数量
+        /// </summary>
+        /// <param name="autoid"></param>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
+        public static bool UpdateCartQuantity(string autoid, int quantity, string userid, string clientid)
+        {
+            return CommonBusiness.Update("ShoppingCart", "Quantity", quantity, "AutoID=" + autoid);
+        }
+
+        /// <summary>
+        /// 删除购物车记录
+        /// </summary>
+        /// <param name="autoid"></param>
+        /// <param name="userid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public static bool DeleteCart(string autoid, string userid, string clientid)
+        {
+            return CommonBusiness.Delete("ShoppingCart", "AutoID=" + autoid);
+        }
+
+        #endregion
     }
 }

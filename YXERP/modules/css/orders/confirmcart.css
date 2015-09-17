@@ -8,10 +8,12 @@
 .confirm-list a{ color:#333;  vertical-align:middle;}
 .confirm-list a:hover{ color:red; text-decoration:underline; }
 
-.item { height:50px; vertical-align:middle; background-color:#FBFCFF; }
+.item { height:50px; vertical-align:middle; background-color:#FBFCFF; border-bottom:dashed 1px #ccc; }
 .item img { width:30px; height:30px; display:inline-block;vertical-align:middle; }
 .item .price { width:120px;}
 .item .quantity { width:60px;}
+
+.amount-item { height:50px; vertical-align:middle; background-color:#FBFCFF;}
 
 .bottom-div { width:95%; margin-top:30px; }
 

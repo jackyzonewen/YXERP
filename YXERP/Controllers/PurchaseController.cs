@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 using CloudSalesEnum;
 using CloudSalesBusiness;
@@ -44,6 +45,24 @@ namespace YXERP.Controllers
             ViewBag.Items = OrdersBusiness.GetShoppingCart(EnumOrderType.RK, CurrentUser.UserID);
             return View();
         }
+
+        #region Ajax
+
+        public JsonResult SubmitPurchase(string doc)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var model = serializer.Deserialize<CloudSalesEntity.StorageInDoc>(doc);
+
+            var bl = false;
+            JsonDictionary.Add("Status", bl);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        #endregion
 
     }
 }

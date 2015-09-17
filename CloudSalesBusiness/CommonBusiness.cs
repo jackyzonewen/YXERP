@@ -52,6 +52,18 @@ namespace CloudSalesBusiness
         }
 
         /// <summary>
+        /// 删除记录
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="where">条件</param>
+        /// <returns></returns>
+        public static bool Delete(string tableName, string where)
+        {
+            int obj = CommonDAL.Delete(tableName, where);
+            return obj > 0;
+        }
+
+        /// <summary>
         /// 获取分页数据集合
         /// </summary>
         /// <param name="tableName">表名</param>
