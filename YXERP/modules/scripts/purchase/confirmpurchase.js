@@ -58,6 +58,10 @@ define(function (require, exports, module) {
             }
         });
 
+        $("#btnconfirm").click(function () {
+            _self.submitOrder();
+        });
+
     }
     //计算总金额
     ObjectJS.getAmount = function () {
@@ -69,7 +73,7 @@ define(function (require, exports, module) {
         });
         $("#amount").text(amount.toFixed(2));
     }
-    //更改仓库状态
+    //更改数量
     ObjectJS.editQuantity = function (ele) {
         var _self = this;
         Global.post("/Orders/UpdateCartQuantity", {
@@ -88,69 +92,35 @@ define(function (require, exports, module) {
     }
 
     //保存
-    ObjectJS.savaEntity = function () {
+    ObjectJS.submitOrder = function () {
         var _self = this;
+        var totalamount = 0, list = [];
+        $(".cart-item").each(function () {
+            var _this = $(this);
+            var model = {
+                AutoID: _this.data("autoid"),
+                ProductDetailID: _this.data("id"),
+                Quantity: _this.find(".quantity").val(),
+                Price: _this.find(".price").val(),
+                BatchCode: _this.find(".batch").val(),
+                TotalMoney: _this.find(".quantity").val() * _this.find(".price").val()
+            };
+            list.push(model);
+            totalamount += model.TotalMoney;
+        });
+        if (list.length <= 0) {
+            return;
+        }
         var entity = {
-            WareID: _self.wareID,
-            Name: $("#warehouseName").val().trim(),
-            WareCode: $("#warehouseCode").val().trim(),
-            ShortName: $("#shortName").val().trim(),
-            CityCode: CityObj.getCityCode(),
-            Status: $("#warehouseStatus").prop("checked") ? 1 : 0,
-            Description: $("#description").val()
+            TotalMoney: totalamount,
+            Remark: $("#remark").val(),
+            Details: list
         };
-        Global.post("/Warehouse/SaveWareHouse", { ware: JSON.stringify(entity) }, function (data) {
+        Global.post("/Purchase/SubmitPurchase", { doc: JSON.stringify(entity) }, function (data) {
             if (data.ID.length > 0) {
-                location.href = "/Warehouse/WareHouse"
+                location.href = "/Purchase/Purchase";
             }
         })
-    }
-
-    //初始化编辑页数据
-    ObjectJS.initEdit = function (model) {
-        var _self = this;
-        model = JSON.parse(model.replace(/&quot;/g, '"'));
-        _self.bindDetailEvent(model);
-        _self.bindDetail(model);
-    }
-    //获取详细信息
-    ObjectJS.bindDetail = function (model) {
-        var _self = this;
-        _self.wareID = model.WareID;
-        $("#warehouseCode").text(model.WareCode);
-
-        $("#warehouseName").val(model.Name);
-
-        $("#shortName").val(model.ShortName);
-        if (model.Status == 1) {
-            $("#warehouseStatus").prop("checked", "checked");
-        }
-        $("#description").val(model.Description);
-
-        
-    }
-    //绑定详情事件
-    ObjectJS.bindDetailEvent = function (model) {
-        var _self = this;
-        CityObj = City.createCity({
-            elementID: "warehouseCity",
-            cityCode: model.CityCode
-        });
-        
-        $("#btnSave").on("click", function () {
-            if (!VerifyObject.isPass()) {
-                return;
-            }
-            _self.savaEntity();
-        });
-
-        VerifyObject = Verify.createVerify({
-            element: ".verify",
-            emptyAttr: "data-empty",
-            verifyType: "data-type",
-            regText: "data-text"
-        });
-       
     }
 
     module.exports = ObjectJS;

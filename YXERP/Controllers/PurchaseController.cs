@@ -26,14 +26,14 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult Purchase()
         {
-            return View();
-        }
-
-        public ActionResult CreatePurchase()
-        {
-            ViewBag.Type = (int)EnumOrderType.RK;
+             ViewBag.Type = (int)EnumOrderType.RK;
             ViewBag.Title = "采购入库";
             return View("FilterProducts");
+        }
+
+        public ActionResult MyPurchase()
+        {
+            return View();
         }
 
         /// <summary>
@@ -46,15 +46,26 @@ namespace YXERP.Controllers
             return View();
         }
 
+        public ActionResult PurchaseAudit()
+        {
+            return View();
+        }
+
         #region Ajax
 
+        /// <summary>
+        /// 保存采购单
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public JsonResult SubmitPurchase(string doc)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var model = serializer.Deserialize<CloudSalesEntity.StorageInDoc>(doc);
+            var model = serializer.Deserialize<CloudSalesEntity.StorageDoc>(doc);
+            model.DocType = (int)EnumDocType.RK;
 
-            var bl = false;
-            JsonDictionary.Add("Status", bl);
+            var id = OrdersBusiness.CreateStorageDoc(model, CurrentUser.UserID, OperateIP, CurrentUser.ClientID);
+            JsonDictionary.Add("ID", id);
             return new JsonResult
             {
                 Data = JsonDictionary,

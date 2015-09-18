@@ -22,19 +22,19 @@ namespace CloudSalesEntity
 	/// StorageInDoc:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
     [Serializable]
-    public partial class StorageInDoc
+    public partial class StorageDoc
     {
-        public StorageInDoc()
+        public StorageDoc()
         { }
         #region Model
         private int _autoid;
         private string _docid;
-        private string _doctype;
+        private int _doctype;
         private int? _status = 0;
         private int? _returnstatus = 0;
         private int? _flag = 0;
         private string _prodiverid;
-        private decimal? _totalmoney = 0M;
+        private decimal _totalmoney = 0M;
         private decimal? _taxmoney = 0M;
         private decimal? _taxrate = 1M;
         private decimal? _returnmoney = 0M;
@@ -76,7 +76,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
-        public string DocType
+        public int DocType
         {
             set { _doctype = value; }
             get { return _doctype; }
@@ -119,7 +119,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
-        public decimal? TotalMoney
+        public decimal TotalMoney
         {
             set { _totalmoney = value; }
             get { return _totalmoney; }
@@ -308,6 +308,8 @@ namespace CloudSalesEntity
         /// 单据明细
         /// </summary>
         public List<StorageInDetail> Details { get; set; }
+
+        public string Remark { get; set; }
 
     }
 }

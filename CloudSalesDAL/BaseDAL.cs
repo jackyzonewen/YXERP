@@ -9,7 +9,7 @@ namespace CloudSalesDAL
 {
     public abstract class BaseDAL
     {
-        protected static string ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+        public static string ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
 
         /// <summary>
         /// 执行SQL语句返回影响的行数

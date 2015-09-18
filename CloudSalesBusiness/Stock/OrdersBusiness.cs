@@ -8,6 +8,7 @@ using CloudSalesEnum;
 using CloudSalesDAL;
 using CloudSalesEntity;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace CloudSalesBusiness
 {
@@ -66,6 +67,42 @@ namespace CloudSalesBusiness
         public static bool AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, EnumOrderType ordertype, string remark, string userid, string operateip)
         {
             return OrdersDAL.AddShoppingCart(productid, detailsid, quantity, unitid, isBigUnit, (int)ordertype, remark, userid, operateip);
+        }
+
+        /// <summary>
+        /// 创建单据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static string CreateStorageDoc(StorageDoc model, string userid, string operateip, string clientid)
+        {
+            string docid = Guid.NewGuid().ToString();
+            SqlConnection conn = new SqlConnection(OrdersDAL.ConnectionString);
+            conn.Open();
+            SqlTransaction tran = conn.BeginTransaction();
+            bool bl = OrdersDAL.AddStorageDoc(docid, model.DocType, model.TotalMoney, model.CityCode, model.Address, model.Remark, userid, operateip, clientid, tran);
+            if (bl)
+            {
+                foreach (var detail in model.Details)
+                {
+                    if (!OrdersDAL.AddStorageDocDetail(docid, detail.AutoID, detail.ProductDetailID, detail.Quantity, detail.Price, detail.TotalMoney, detail.BatchCode, clientid, tran))
+                    {
+                        tran.Rollback();
+                        conn.Dispose();
+                        return "";
+                    }
+                }
+                tran.Commit();
+                conn.Dispose();
+                return docid;
+            }
+            else
+            {
+                tran.Rollback();
+                conn.Dispose();
+                return "";
+            }
+            
         }
 
         #endregion

@@ -120,8 +120,9 @@
     <Content Include="modules\css\orders\confirmcart.css" />
     <Content Include="modules\scripts\purchase\confirmpurchase.js" />
     <Content Include="Views\Purchase\ConfirmPurchase.cshtml" />
-    <Content Include="Views\Purchase\Purchase.cshtml" />
+    <Content Include="Views\Purchase\MyPurchase.cshtml" />
     <Content Include="Views\CustomerRPT\Index.cshtml" />
+    <Content Include="Views\Purchase\PurchaseAudit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\uploadFiles\2015071122152715275334.png" />

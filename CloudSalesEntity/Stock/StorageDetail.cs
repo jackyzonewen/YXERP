@@ -30,13 +30,13 @@ namespace CloudSalesEntity
 		private string _docid;
 		private string _productid;
 		private string _docdate;
-		private int? _quantity=0;
-		private decimal? _price=0M;
-		private decimal? _totalmoney=0M;
-		private decimal? _taxmoney=0M;
-		private decimal? _taxrate=1M;
-		private decimal? _returnprice=0M;
-		private decimal? _returnmoney=0M;
+		private int _quantity=0;
+		private decimal _price=0M;
+		private decimal _totalmoney=0M;
+		private decimal _taxmoney=0M;
+		private decimal _taxrate=1M;
+		private decimal _returnprice=0M;
+		private decimal _returnmoney=0M;
 		private string _batchcode="";
 		private string _clientid;
 		/// <summary>
@@ -61,6 +61,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
+        [Property("Lower")]
 		public string ProductID
 		{
 			set{ _productid=value;}
@@ -74,10 +75,15 @@ namespace CloudSalesEntity
 			set{ _docdate=value;}
 			get{return _docdate;}
 		}
+
+        public string UnitID { get; set; }
+
+        public int IsBigUnit { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? Quantity
+		public int Quantity
 		{
 			set{ _quantity=value;}
 			get{return _quantity;}
@@ -85,7 +91,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? Price
+		public decimal Price
 		{
 			set{ _price=value;}
 			get{return _price;}
@@ -93,7 +99,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? TotalMoney
+		public decimal TotalMoney
 		{
 			set{ _totalmoney=value;}
 			get{return _totalmoney;}
@@ -101,7 +107,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? TaxMoney
+		public decimal TaxMoney
 		{
 			set{ _taxmoney=value;}
 			get{return _taxmoney;}
@@ -109,7 +115,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? TaxRate
+		public decimal TaxRate
 		{
 			set{ _taxrate=value;}
 			get{return _taxrate;}
@@ -117,7 +123,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? ReturnPrice
+		public decimal ReturnPrice
 		{
 			set{ _returnprice=value;}
 			get{return _returnprice;}
@@ -125,7 +131,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public decimal? ReturnMoney
+		public decimal ReturnMoney
 		{
 			set{ _returnmoney=value;}
 			get{return _returnmoney;}

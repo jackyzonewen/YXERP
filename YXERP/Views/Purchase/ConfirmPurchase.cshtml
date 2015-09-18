@@ -37,7 +37,7 @@
         </tr>
         @foreach (var model in (List<CloudSalesEntity.ProductDetail>)ViewBag.Items)
         { 
-            <tr class="item">
+            <tr class="item cart-item" data-autoid="@(model.AutoID)" data-id="@(model.ProductDetailID)" >
                 <td><a href="/Products/ChooseDetail?pid=@(model.ProductID)&did=@(model.ProductDetailID)&type=1" target="_blank"><img src="@(model.ImgS)" /> @(model.ProductName)</a></td>
                 <td>@(model.Description)</td>
                 <td class="center">@(model.UnitName)</td>
