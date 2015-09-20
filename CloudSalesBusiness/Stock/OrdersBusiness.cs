@@ -47,6 +47,58 @@ namespace CloudSalesBusiness
             return list;
         }
 
+        /// <summary>
+        /// 获取单据列表
+        /// </summary>
+        /// <param name="userid">创建人（拥有者）</param>
+        /// <param name="type">类型</param>
+        /// <param name="status">状态</param>
+        /// <param name="keywords">关键词</param>
+        /// <param name="pageSize">页Size</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="totalCount">总数</param>
+        /// <param name="pageCount"><总页/param>
+        /// <param name="clientID">客户端ID</param>
+        /// <returns></returns>
+        public static List<StorageDoc> GetStorageDocList(string userid, EnumDocType type, EnumDocStatus status, string keywords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientID)
+        {
+            DataSet ds = OrdersDAL.GetStorageDocList(userid, (int)type, (int)status, keywords, pageSize, pageIndex, ref totalCount, ref pageCount, clientID);
+
+            List<StorageDoc> list = new List<StorageDoc>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                StorageDoc model = new StorageDoc();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+        
+        /// <summary>
+        /// 获取单据详情
+        /// </summary>
+        /// <param name="docid">单据ID</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public static StorageDoc GetStorageDetail(string docid, string clientid)
+        {
+            DataSet ds = OrdersDAL.GetStorageDetail(docid, clientid);
+            StorageDoc model = new StorageDoc();
+            if (ds.Tables.Contains("Doc") && ds.Tables["Doc"].Rows.Count > 0)
+            {
+                model.FillData(ds.Tables["Doc"].Rows[0]);
+                model.Details = new List<StorageDetail>();
+                foreach (DataRow item in ds.Tables["Details"].Rows)
+                {
+                    StorageDetail details = new StorageDetail();
+                    details.FillData(item);
+                    model.Details.Add(details);
+                }
+            }
+
+            return model;
+        }
+
         #endregion
 
         #region 添加
@@ -80,29 +132,40 @@ namespace CloudSalesBusiness
             SqlConnection conn = new SqlConnection(OrdersDAL.ConnectionString);
             conn.Open();
             SqlTransaction tran = conn.BeginTransaction();
-            bool bl = OrdersDAL.AddStorageDoc(docid, model.DocType, model.TotalMoney, model.CityCode, model.Address, model.Remark, userid, operateip, clientid, tran);
-            if (bl)
+
+            try
             {
-                foreach (var detail in model.Details)
+
+                bool bl = OrdersDAL.AddStorageDoc(docid, model.DocType, model.TotalMoney, model.CityCode, model.Address, model.Remark, userid, operateip, clientid, tran);
+                if (bl)
                 {
-                    if (!OrdersDAL.AddStorageDocDetail(docid, detail.AutoID, detail.ProductDetailID, detail.Quantity, detail.Price, detail.TotalMoney, detail.BatchCode, clientid, tran))
+                    //单据明细
+                    foreach (var detail in model.Details)
                     {
-                        tran.Rollback();
-                        conn.Dispose();
-                        return "";
+                        if (!OrdersDAL.AddStorageDocDetail(docid, detail.AutoID, detail.ProductDetailID, detail.Quantity, detail.Price, detail.TotalMoney, detail.BatchCode, clientid, tran))
+                        {
+                            tran.Rollback();
+                            conn.Dispose();
+                            return "";
+                        }
                     }
+                    tran.Commit();
+                    conn.Dispose();
+                    return docid;
                 }
-                tran.Commit();
-                conn.Dispose();
-                return docid;
+                else
+                {
+                    tran.Rollback();
+                    conn.Dispose();
+                    return "";
+                }
             }
-            else
+            catch (Exception ex)
             {
                 tran.Rollback();
                 conn.Dispose();
                 return "";
-            }
-            
+            }            
         }
 
         #endregion

@@ -95,6 +95,7 @@ define(function (require, exports, module) {
     ObjectJS.submitOrder = function () {
         var _self = this;
         var totalamount = 0, list = [];
+        //单据明细
         $(".cart-item").each(function () {
             var _this = $(this);
             var model = {
@@ -118,7 +119,7 @@ define(function (require, exports, module) {
         };
         Global.post("/Purchase/SubmitPurchase", { doc: JSON.stringify(entity) }, function (data) {
             if (data.ID.length > 0) {
-                location.href = "/Purchase/Purchase";
+                location.href = "/Purchase/MyPurchase";
             }
         })
     }

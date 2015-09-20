@@ -10,6 +10,55 @@ namespace CloudSalesDAL
 {
     public class OrdersDAL : BaseDAL
     {
+
+        #region 查询
+
+        public static DataTable GetShoppingCart(int ordertype, string userid)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@OrderType",ordertype),
+                                     new SqlParameter("@UserID" , userid),
+                                   };
+            return GetDataTable("P_GetShoppingCart", paras, CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetStorageDocList(string userid, int type, int status, string keywords, int pageSize, int pageIndex, ref int totalCount, ref int pageCount, string clientid)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@TotalCount",SqlDbType.Int),
+                                       new SqlParameter("@PageCount",SqlDbType.Int),
+                                       new SqlParameter("@UserID", userid),
+                                       new SqlParameter("@DocType", type),
+                                       new SqlParameter("@Status", status),
+                                       new SqlParameter("@KeyWords",keywords),
+                                       new SqlParameter("@PageSize",pageSize),
+                                       new SqlParameter("@PageIndex",pageIndex),
+                                       new SqlParameter("@ClientID",clientid)
+                                   };
+            paras[0].Value = totalCount;
+            paras[1].Value = pageCount;
+
+            paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Direction = ParameterDirection.InputOutput;
+            DataSet ds = GetDataSet("P_GetStorageDocList", paras, CommandType.StoredProcedure, "Doc");
+            totalCount = Convert.ToInt32(paras[0].Value);
+            pageCount = Convert.ToInt32(paras[1].Value);
+            return ds;
+        }
+
+        public static DataSet GetStorageDetail(string docid, string clientid)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@DocID",docid),
+                                       new SqlParameter("@ClientID",clientid)
+                                   };
+
+            DataSet ds = GetDataSet("P_GetStorageDetail", paras, CommandType.StoredProcedure, "Doc|Details");
+            return ds;
+        }
+
+        #endregion
+
         #region 添加
 
         public static bool AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, int ordertype, string remark, string userid, string operateip)
@@ -32,6 +81,7 @@ namespace CloudSalesDAL
         {
             SqlParameter[] paras = { 
                                      new SqlParameter("@DocID",docid),
+                                     new SqlParameter("@DocCode",DateTime.Now.ToString("yyyyMMddHHmmssfff")),
                                      new SqlParameter("@DocType",doctype),
                                      new SqlParameter("@TotalMoney" , totalmoney),
                                      new SqlParameter("@CityCode" , cityCode),
@@ -63,19 +113,6 @@ namespace CloudSalesDAL
         }
 
         #endregion
-
-
-        #region 查询
-
-        public static DataTable GetShoppingCart(int ordertype, string userid)
-        {
-            SqlParameter[] paras = { 
-                                     new SqlParameter("@OrderType",ordertype),
-                                     new SqlParameter("@UserID" , userid),
-                                   };
-            return GetDataTable("P_GetShoppingCart", paras, CommandType.StoredProcedure);
-        }
-
-        #endregion
+ 
     }
 }

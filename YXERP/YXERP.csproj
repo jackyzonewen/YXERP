@@ -118,7 +118,9 @@
     <None Include="modules\plug\umeditor\net\Uploader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="modules\css\orders\confirmcart.css" />
+    <Content Include="modules\scripts\purchase\mypurchase.js" />
     <Content Include="modules\scripts\purchase\confirmpurchase.js" />
+    <Content Include="modules\template\purchase\mypurchase.html" />
     <Content Include="Views\Purchase\ConfirmPurchase.cshtml" />
     <Content Include="Views\Purchase\MyPurchase.cshtml" />
     <Content Include="Views\CustomerRPT\Index.cshtml" />

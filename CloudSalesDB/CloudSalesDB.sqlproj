@@ -144,4 +144,10 @@
   <ItemGroup>
     <None Include="Procedures\Stock\P_AddStorageDetail.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Stock\P_GetStorageDocList.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Stock\P_GetStorageDetail.sql" />
+  </ItemGroup>
 </Project>
