@@ -162,6 +162,12 @@ namespace CloudSalesEntity
 
 		#endregion Model
 
+
+
+        public int UserQuantity { get; set; }
+
+        public DateTime EndTime { get; set; }
+
         /// <summary>
         /// 填充数据
         /// </summary>

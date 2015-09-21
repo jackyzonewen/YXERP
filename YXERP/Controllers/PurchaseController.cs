@@ -36,6 +36,16 @@ namespace YXERP.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 我的采购详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DocDetail(string id)
+        {
+            ViewBag.Model = OrdersBusiness.GetStorageDetail(id, CurrentUser.ClientID);
+            return View();
+        }
 
         /// <summary>
         /// 采购单确认页面
@@ -95,10 +105,14 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
+        /// <summary>
+        ///  删除单据
+        /// </summary>
+        /// <param name="docid"></param>
+        /// <returns></returns>
         public JsonResult DeletePurchase(string docid)
         {
-            var bl = false;
+            var bl = new OrdersBusiness().DeleteDoc(docid, CurrentUser.ClientID, OperateIP, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
 
             return new JsonResult

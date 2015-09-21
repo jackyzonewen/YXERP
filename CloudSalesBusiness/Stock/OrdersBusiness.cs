@@ -69,6 +69,9 @@ namespace CloudSalesBusiness
             {
                 StorageDoc model = new StorageDoc();
                 model.FillData(dr);
+
+                model.StatusStr = GetDocStatusStr(model.DocType, model.Status);
+
                 list.Add(model);
             }
             return list;
@@ -87,6 +90,9 @@ namespace CloudSalesBusiness
             if (ds.Tables.Contains("Doc") && ds.Tables["Doc"].Rows.Count > 0)
             {
                 model.FillData(ds.Tables["Doc"].Rows[0]);
+
+                model.StatusStr = GetDocStatusStr(model.DocType, model.Status);
+
                 model.Details = new List<StorageDetail>();
                 foreach (DataRow item in ds.Tables["Details"].Rows)
                 {
@@ -97,6 +103,36 @@ namespace CloudSalesBusiness
             }
 
             return model;
+        }
+        /// <summary>
+        /// 单据状态
+        /// </summary>
+        /// <param name="doctype">类型</param>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        private static string GetDocStatusStr(int doctype, int status)
+        {
+            string str = "";
+            switch (status)
+            {
+                case 0:
+                    str = "待审核";
+                    break;
+                case 1:
+                    str = doctype == 1 ? "部分上架" 
+                        : doctype == 2 ? "部分出库" 
+                        : "部分审核";
+                    break;
+                case 2:
+                    str = doctype == 1 ? "已上架"
+                        : doctype == 2 ? "已出库"
+                        : "已审核";
+                    break;
+                case 9:
+                    str = "已删除";
+                    break;
+            }
+            return str;
         }
 
         #endregion
@@ -170,7 +206,7 @@ namespace CloudSalesBusiness
 
         #endregion
 
-        #region 编辑
+        #region 编辑、删除
 
         /// <summary>
         /// 编辑购物车产品数量
@@ -193,6 +229,18 @@ namespace CloudSalesBusiness
         public static bool DeleteCart(string autoid, string userid, string clientid)
         {
             return CommonBusiness.Delete("ShoppingCart", "AutoID=" + autoid);
+        }
+        /// <summary>
+        /// 删除单据
+        /// </summary>
+        /// <param name="docid">单据ID</param>
+        /// <param name="userid">操作人</param>
+        /// <param name="operateip">操作IP</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public bool DeleteDoc(string docid, string userid, string operateip, string clientid)
+        {
+            return CommonBusiness.Update("StorageDoc", "Status", (int)EnumDocStatus.Delete, "DocID='" + docid + "' and status=" + (int)EnumDocStatus.Normal);
         }
 
         #endregion

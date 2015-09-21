@@ -39,8 +39,9 @@ define(function (require, exports, module) {
                 //删除事件
                 $(".ico-del").click(function () {
                     if (confirm("采购单删除后不可恢复,确认删除吗？")) {
-                        Global.post("/Purchase/DeleteDoc", { docid: $(this).data("id") }, function (data) {
+                        Global.post("/Purchase/DeletePurchase", { docid: $(this).data("id") }, function (data) {
                             if (data.Status) {
+                                Params.pageIndex = 1;
                                 _self.getList();
                             } else {
                                 alert("删除失败！");
