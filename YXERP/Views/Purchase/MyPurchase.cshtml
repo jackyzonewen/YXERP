@@ -5,14 +5,15 @@
 <link href="/modules/css/orders/purchase.css" rel="stylesheet" />
 @section scripts{
     <script type="text/javascript">
-        seajs.use(["scripts/purchase/purchase"], function (obj) {
-            obj.initList();
+        seajs.use(["scripts/purchase/mypurchase"], function (obj) {
+            obj.init(false);
         });
     </script>
 }
 <div class="header-box">
     <span class="header-title left">我的采购</span>
     <a href="Purchase" class="ico-add left mTop4 mLeft20">新建采购</a>
+    <div class="right searth-module"> </div> 
 </div>
 <div class="content-body">
     <table class="table-list">
@@ -21,8 +22,7 @@
             <td>状态</td>
             <td>总金额</td>
             <td>采购日期</td>
-            <td>编辑</td>
-            <td>作废</td>
+            <td>删除</td>
         </tr>
     </table>
 </div>

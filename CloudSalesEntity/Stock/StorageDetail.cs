@@ -18,18 +18,17 @@ using System;
 namespace CloudSalesEntity
 {
 	/// <summary>
-	/// StorageInDetail:实体类(属性说明自动提取数据库字段的描述信息)
+    /// StorageDetail:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
 	[Serializable]
-	public partial class StorageInDetail
+	public partial class StorageDetail
 	{
-		public StorageInDetail()
+        public StorageDetail()
 		{}
 		#region Model
 		private int _autoid;
 		private string _docid;
 		private string _productid;
-		private string _docdate;
 		private int _quantity=0;
 		private decimal _price=0M;
 		private decimal _totalmoney=0M;
@@ -66,14 +65,6 @@ namespace CloudSalesEntity
 		{
 			set{ _productid=value;}
 			get{return _productid;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string DocDate
-		{
-			set{ _docdate=value;}
-			get{return _docdate;}
 		}
 
         public string UnitID { get; set; }
@@ -157,8 +148,26 @@ namespace CloudSalesEntity
 			set{ _clientid=value;}
 			get{return _clientid;}
 		}
-		#endregion Model
 
+        public int Status { get; set; }
+
+        public string Remark { get; set; }
+
+        public string ProductName { get; set; }
+
+        public string UnitName { get; set; }
+
+        public string Imgs { get; set; }
+
+		#endregion Model
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
 
 	}

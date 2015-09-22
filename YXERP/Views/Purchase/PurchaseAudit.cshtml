@@ -2,4 +2,34 @@
     ViewBag.Title = "采购审核";
 }
 
-<h2>PurchaseAudit</h2>
+<link href="/modules/css/orders/purchase.css" rel="stylesheet" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/purchase/mypurchase"], function (obj) {
+            obj.init(true);
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">采购审核</span>
+    <div class="right searth-module"> </div> 
+</div>
+<div class="content-body">
+    <table class="table-list">
+        <tr class="tr-header">
+            <td>采购单号</td>
+            <td>状态</td>
+            <td>总金额</td>
+            <td>采购员</td>
+            <td>采购日期</td>
+            <td>操作</td>
+        </tr>
+    </table>
+
+    
+</div>
+<ul class="dropdown-ul hide" style="width:70px;">
+    <li>审核</li>
+    <li>作废</li>
+    <li>删除</li>
+</ul>

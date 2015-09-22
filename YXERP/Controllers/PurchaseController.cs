@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 
 using CloudSalesEnum;
 using CloudSalesBusiness;
+using CloudSalesEntity;
 
 namespace YXERP.Controllers
 {
@@ -33,6 +34,16 @@ namespace YXERP.Controllers
 
         public ActionResult MyPurchase()
         {
+            return View();
+        }
+        /// <summary>
+        /// 我的采购详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DocDetail(string id)
+        {
+            ViewBag.Model = OrdersBusiness.GetStorageDetail(id, CurrentUser.ClientID);
             return View();
         }
 
@@ -72,6 +83,44 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        /// <summary>
+        /// 获取我的采购单
+        /// </summary>
+        /// <param name="keyWords"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="totalCount"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public JsonResult GetMyPurchase(string keyWords, int pageIndex, int totalCount, int status = -1, bool isAll = false)
+        {
+            int pageCount = 0;
+            List<StorageDoc> list = OrdersBusiness.GetStorageDocList(isAll ? string.Empty : CurrentUser.UserID, EnumDocType.RK, (EnumDocStatus)status, keyWords, PageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            JsonDictionary.Add("Items", list);
+            JsonDictionary.Add("TotalCount", totalCount);
+            JsonDictionary.Add("PageCount", pageCount);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        ///  删除单据
+        /// </summary>
+        /// <param name="docid"></param>
+        /// <returns></returns>
+        public JsonResult DeletePurchase(string docid)
+        {
+            var bl = new OrdersBusiness().DeleteDoc(docid, CurrentUser.ClientID, OperateIP, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
+
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        } 
 
         #endregion
 

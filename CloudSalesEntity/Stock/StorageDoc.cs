@@ -30,9 +30,8 @@ namespace CloudSalesEntity
         private int _autoid;
         private string _docid;
         private int _doctype;
-        private int? _status = 0;
+        private int _status = 0;
         private int? _returnstatus = 0;
-        private int? _flag = 0;
         private string _prodiverid;
         private decimal _totalmoney = 0M;
         private decimal? _taxmoney = 0M;
@@ -53,8 +52,8 @@ namespace CloudSalesEntity
         private string _mobiletele = "";
         private string _feedback = "";
         private string _createuserid;
-        private DateTime? _createtime = DateTime.Now;
-        private DateTime? _updatetime = DateTime.Now;
+        private DateTime _createtime = DateTime.Now;
+        private DateTime _updatetime = DateTime.Now;
         private string _operateip = "";
         private string _clientid;
         /// <summary>
@@ -85,11 +84,14 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
-        public int? Status
+        public int Status
         {
             set { _status = value; }
             get { return _status; }
         }
+
+        public string StatusStr { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -97,14 +99,6 @@ namespace CloudSalesEntity
         {
             set { _returnstatus = value; }
             get { return _returnstatus; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? Flag
-        {
-            set { _flag = value; }
-            get { return _flag; }
         }
 
         /// <summary>
@@ -273,7 +267,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? CreateTime
+        public DateTime CreateTime
         {
             set { _createtime = value; }
             get { return _createtime; }
@@ -281,7 +275,7 @@ namespace CloudSalesEntity
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? UpdateTime
+        public DateTime UpdateTime
         {
             set { _updatetime = value; }
             get { return _updatetime; }
@@ -307,9 +301,22 @@ namespace CloudSalesEntity
         /// <summary>
         /// 单据明细
         /// </summary>
-        public List<StorageInDetail> Details { get; set; }
+        public List<StorageDetail> Details { get; set; }
 
         public string Remark { get; set; }
+
+        public string DocCode { get; set; }
+
+        public Users CreateUser { get; set; }
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
 
     }
 }

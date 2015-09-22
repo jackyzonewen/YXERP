@@ -1,0 +1,27 @@
+﻿
+
+.docinfo { width:90%; padding:0 20px; }
+.docinfo li{ float:left; width:33.3%;  line-height:30px;}
+
+.remark { line-height:25px; text-indent:20px; padding-bottom:50px; }
+
+/*产品列表样式*/
+.item-list { width:99%; border-collapse:collapse;border-spacing:0;}
+.item-list .tr-header{ font-weight:bold; height:35px; }
+.item-list .tr-header td{ color:#2a3441; padding:0 20px;}
+.item-list .line td{ border-right:solid 2px #fff; background-color:#c5dceb; height:3px; }
+
+.item-list a{ color:#333;  vertical-align:middle;}
+.item-list a:hover{ color:red; text-decoration:underline; }
+
+.item { height:50px; vertical-align:middle; background-color:#FBFCFF; border-bottom:dashed 1px #ccc; }
+.item td { padding:0 20px;}
+.item img { width:30px; height:30px; display:inline-block;vertical-align:middle; }
+.item .price { width:120px;}
+.item .quantity { width:60px;}
+
+.amount-item { height:50px; vertical-align:middle; background-color:#FBFCFF;}
+.amount-item td { padding:0 20px;}
+
+
+
