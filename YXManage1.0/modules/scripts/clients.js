@@ -150,6 +150,13 @@ define(function (require, exports, module) {
                 var innerText = templateFun(data.Items);
                 innerText = $(innerText);
                 $("#client-header").after(innerText);
+
+                $(".table-list a.ico-del").bind("click", function () {
+                    if (confirm("确定删除?"))
+                    {
+
+                    }
+                });
             });
             $("#pager").paginate({
                 total_count: data.TotalCount,
@@ -173,5 +180,47 @@ define(function (require, exports, module) {
             });
         });
     }
+
+    //客户权限设置
+    Clients.initClientAuthorize = function () {
+        Clients.Params = {
+            pageIndex: 1
+        };
+        Clients.bindClientAuthorize();
+    };
+    //绑定事件
+    Clients.bindClientAuthorize = function () {
+        //验证插件
+        VerifyObject = Verify.createVerify({
+            element: ".verify",
+            emptyAttr: "data-empty"
+            //verifyType: "data-type",
+            //regText: "data-text"
+        });
+
+        $("#saveClientAuthorize").bind("click", function () {
+            if (!VerifyObject.isPass()) {
+                return false;
+            };
+
+            var clientAuthorize = {
+                ClientID: $("#ClientID").val(),
+                AuthorizeType: $("#AuthorizeType").val(),
+                UserQuantity: $("#UserQuantity").val(),
+                BeginTime: $("#BeginTime").val(),
+                EndTime: $("#EndTime").val(),
+            };
+
+            Global.post("/Client/SaveClientAuthorize", { clientAuthorize: JSON.stringify(clientAuthorize) }, function (data) {
+                alert(JSON.stringify(clientAuthorize));
+                if (data.Result == "1") {
+                    location.href = "/Client/Index";
+                } else if (data.Result == "2") {
+                    alert("登陆账号已存在!");
+                }
+            });
+
+        });
+    };
     module.exports = Clients;
 });

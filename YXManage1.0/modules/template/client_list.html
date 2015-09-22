@@ -3,6 +3,11 @@
 	var item = $data[i];
 %}
 <tr class="list-item">
+    <td>
+        <a href="/Client/Create/{%=item.ClientID%}" title="编辑" data-id="{%=item.ClientID%}">编辑</a>
+        <a  class="ico-del" href="javascript:void(0)" title="删除" data-id="{%=item.ClientID%}">删除</a>
+        <a  href="/Client/ClientAuthorize/{%=item.ClientID%}" title="授权" data-id="{%=item.ClientID%}">授权</a>
+    </td>
     <td><a href="javascript:void(0);">{%=item.CompanyName%}</a></td>
     <td class="center">{%=item.ContactName%}</td>
     <td class="center">{%=item.MobilePhone%}</td>
