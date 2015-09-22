@@ -15,8 +15,10 @@ namespace CloudSalesEnum
         /// 全部（仅供查询）
         /// </summary>
         All = -1,
-        [DescriptionAttribute("入库单")]
-        RK = 1
+        [DescriptionAttribute("采购单")]
+        RK = 1,
+        [DescriptionAttribute("出库单")]
+        CK = 2
     }
     /// <summary>
     /// 订单类型（冗余单据类型）
@@ -27,8 +29,10 @@ namespace CloudSalesEnum
         /// 全部（仅供查询）
         /// </summary>
         All = -1,
-        [DescriptionAttribute("入库单")]
-        RK = 1
+        [DescriptionAttribute("采购单")]
+        RK = 1,
+        [DescriptionAttribute("出库单")]
+        CK = 2
     }
     /// <summary>
     /// 单据状态

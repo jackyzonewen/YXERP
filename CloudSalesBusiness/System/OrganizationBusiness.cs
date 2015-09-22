@@ -14,6 +14,31 @@ namespace CloudSalesBusiness
 {
     public class OrganizationBusiness
     {
+
+        #region Cache
+
+        public static Dictionary<string, List<Users>> _cacheUsers;
+        /// <summary>
+        /// 缓存用户信息
+        /// </summary>
+        public static Dictionary<string, List<Users>> Users
+        {
+            get 
+            {
+                if (_cacheUsers == null)
+                {
+                    _cacheUsers = new Dictionary<string, List<Users>>();
+                }
+                return _cacheUsers;
+            }
+            set
+            {
+                _cacheUsers = value;
+            }
+        }
+
+        #endregion
+
         #region 查询
 
         /// <summary>
@@ -94,6 +119,36 @@ namespace CloudSalesBusiness
                 list.Add(model);
             }
             return list;
+        }
+
+        /// <summary>
+        /// 获取用户信息(缓存)
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public static Users GetUserByUserID(string userid, string clientid)
+        {
+            if (!Users.ContainsKey(clientid))
+            {
+                Users.Add(clientid, new List<Users>());
+            }
+
+            if (Users[clientid].Where(u => u.UserID == userid).Count() > 0)
+            {
+                return Users[clientid].Where(u => u.UserID == userid).FirstOrDefault();
+            }
+            else
+            {
+                DataTable dt = new OrganizationDAL().GetUserByUserID(userid);
+                Users model = new Users();
+                if (dt.Rows.Count > 0)
+                {
+                    model.FillData(dt.Rows[0]);
+                    Users[clientid].Add(model);
+                }
+                return model;
+            }
         }
 
         #endregion

@@ -22,7 +22,7 @@ select option{ padding:2px; }
 .clear { clear:both; }
 .center { text-align:center; }
 .tRight { text-align:right;}
-.hide { display:none !important; }
+.hide { display:none; }
 
 
 .long { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -36,32 +36,43 @@ select option{ padding:2px; }
 .btnccc { height:25px; padding:0px 8px; line-height:22px; background-color:#eee ; color:#333; 
        border:solid 1px #ccc; cursor:pointer; display:inline-block;}
 
+/*添加*/
 .ico-add{ background:url(../images/ico-add.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
           display:inline-block; cursor:pointer; padding-left:25px; color:#7faaca; font-weight:bold; }
-
+/*编辑*/
 .ico-edit{ background:url(../images/ico-edit-light.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
           display:inline-block; cursor:pointer;  color:#666; }
 .ico-edit:hover{ background:url(../images/ico-edit-deep.png) no-repeat;}
 
+/*删除-垃圾箱*/
 .ico-del{ background:url(../images/ico-del-light.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
           display:inline-block; cursor:pointer; color:#666; }
+.ico-del:hover{ background:url(../images/ico-del-deep.png) no-repeat;}
 
+/*返回*/
 .ico-back{ background:url(../images/ico-back.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
           display:inline-block; cursor:pointer; color:#666; padding-left:25px; }
 
+/*退出*/
 .ico-logout{ background:url(../images/ico-logout.png) no-repeat; height:24px; min-width:24px; line-height:24px; 
           display:inline-block; cursor:pointer; color:#666; padding-left:25px;}
 
-.ico-del:hover{ background:url(../images/ico-del-deep.png) no-repeat;}
-
+/*删除 叉*/
 .ico-delete{ background:url(../images/ico-delete.png) no-repeat; height:20px; min-width:20px; line-height:20px; 
           display:inline-block; cursor:pointer;}
 
+/*添加*/
 .ico-input-add{ background:url(../images/ico-input-add.png) no-repeat 4px ; height:20px; width:23px; line-height:20px; display:inline-block; cursor:pointer; }
 
+/*帮助*/
 .ico-help{ background:url(../images/ico-help.png) no-repeat; height:20px; min-width:20px; line-height:20px; 
           display:inline-block; cursor:pointer;}
 
+/*下拉*/
+.ico-dropdown{ background:url(../images/ico-dropdown.png) no-repeat; height:12px; min-width:12px; line-height:12px; 
+          display:inline-block; cursor:pointer;}
+
+/*排序*/
 .ico-orderby-down{ background:url(../images/ico-orderby-down.png) no-repeat; height:10px; min-width:10px; line-height:10px; 
           display:inline-block; cursor:pointer;}
 
@@ -235,4 +246,9 @@ nav .action .select{background:url(../images/submenu.gif) no-repeat left top;fon
 .alert .alertwrap { position: relative; }
 .alert .close { position: absolute; top: -15px; right: -15px; cursor: pointer; font-size: 16px; 
                 width: 20px; height: 20px; text-align: center; line-height: 20px; }
+
+/*下拉菜单样式*/
+.dropdown-ul { padding:10px 0; border:solid 1px #c5dceb; border-radius:5px; position:absolute; background-color:#fff; }
+.dropdown-ul li{ padding:0 20px; height:25px; line-height:25px; cursor:pointer; }
+.dropdown-ul li:hover{ background-color:#eee;}
 

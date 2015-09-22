@@ -69,7 +69,7 @@ namespace CloudSalesBusiness
             {
                 StorageDoc model = new StorageDoc();
                 model.FillData(dr);
-
+                model.CreateUser = OrganizationBusiness.GetUserByUserID(model.CreateUserID, clientID);
                 model.StatusStr = GetDocStatusStr(model.DocType, model.Status);
 
                 list.Add(model);
@@ -90,7 +90,7 @@ namespace CloudSalesBusiness
             if (ds.Tables.Contains("Doc") && ds.Tables["Doc"].Rows.Count > 0)
             {
                 model.FillData(ds.Tables["Doc"].Rows[0]);
-
+                model.CreateUser = OrganizationBusiness.GetUserByUserID(model.CreateUserID, clientid);
                 model.StatusStr = GetDocStatusStr(model.DocType, model.Status);
 
                 model.Details = new List<StorageDetail>();

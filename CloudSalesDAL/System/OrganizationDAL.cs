@@ -22,6 +22,17 @@ namespace CloudSalesDAL
             return GetDataSet("P_GetUserToLogin", paras, CommandType.StoredProcedure, "User|Department|Role|Permission|Modules");
         }
 
+        public DataTable GetUserByUserID(string userid)
+        {
+            string sql = "select * from Users where UserID=@UserID";
+
+            SqlParameter[] paras = { 
+                                    new SqlParameter("@UserID",userid)
+                                   };
+
+            return GetDataTable(sql, paras, CommandType.Text);
+        }
+
         public DataTable GetDepartments(string clientid)
         {
             string sql = "select * from Department where ClientID=@ClientID and Status<>9";

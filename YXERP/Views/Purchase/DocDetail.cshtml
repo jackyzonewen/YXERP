@@ -11,9 +11,10 @@
 <div class="content-body">
     <ul class="docinfo">
         <li>单据编号：@(model.DocCode)</li>
+        <li>创建人：@(model.CreateUser.Name)</li>
+        <li>创建日期：@(model.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))</li>
         <li>总金额：@(model.TotalMoney.ToString("f2"))</li>
         <li>状态：@(model.StatusStr)</li>
-        <li>创建日期：@(model.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))</li>
     </ul>
     <div class="remark clear">
         备注：@(model.Remark)

@@ -307,6 +307,8 @@ namespace CloudSalesEntity
 
         public string DocCode { get; set; }
 
+        public Users CreateUser { get; set; }
+
         /// <summary>
         /// 填充数据
         /// </summary>

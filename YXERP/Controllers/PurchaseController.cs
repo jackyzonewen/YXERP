@@ -92,10 +92,10 @@ namespace YXERP.Controllers
         /// <param name="totalCount"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public JsonResult GetMyPurchase(string keyWords, int pageIndex, int totalCount, int status = -1)
+        public JsonResult GetMyPurchase(string keyWords, int pageIndex, int totalCount, int status = -1, bool isAll = false)
         {
             int pageCount = 0;
-            List<StorageDoc> list = OrdersBusiness.GetStorageDocList(CurrentUser.UserID, EnumDocType.RK, (EnumDocStatus)status, keyWords, PageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
+            List<StorageDoc> list = OrdersBusiness.GetStorageDocList(isAll ? string.Empty : CurrentUser.UserID, EnumDocType.RK, (EnumDocStatus)status, keyWords, PageSize, pageIndex, ref totalCount, ref pageCount, CurrentUser.ClientID);
             JsonDictionary.Add("Items", list);
             JsonDictionary.Add("TotalCount", totalCount);
             JsonDictionary.Add("PageCount", pageCount);

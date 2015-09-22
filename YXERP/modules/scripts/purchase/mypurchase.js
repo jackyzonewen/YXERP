@@ -7,12 +7,14 @@ define(function (require, exports, module) {
         keyWords: "",
         status: -1,
         pageIndex: 1,
-        totalCount: 0
+        totalCount: 0,
+        isAll: false
     };
     var ObjectJS = {};
     //初始化
-    ObjectJS.init = function () {
+    ObjectJS.init = function (isAudit) {
         var _self = this;
+        Params.isAll = isAudit;
         _self.bindEvent();
         _self.getList();
     }
@@ -25,13 +27,28 @@ define(function (require, exports, module) {
                 _self.getList();
             });
         });
+
+        $(document).click(function (e) {
+            //隐藏下拉
+            if (!$(e.target).parents().hasClass("dropdown-ul") && !$(e.target).parents().hasClass("dropdown") && !$(e.target).hasClass("dropdown")) {
+                $(".dropdown-ul").hide();
+            }
+        });
+
     }
-    //获取品牌列表
+    //获取单据列表
     ObjectJS.getList = function () {
         var _self = this;
         $(".tr-header").nextAll().remove();
-        Global.post("/Purchase/GetMyPurchase", Params, function (data) {
-            doT.exec("template/purchase/mypurchase.html", function (templateFun) {
+        var url = "/Purchase/GetMyPurchase",
+            template = "template/purchase/mypurchase.html";
+        
+        if (Params.isAll) {
+            template = "template/purchase/purchaseaudit.html";
+        }
+
+        Global.post(url, Params, function (data) {
+            doT.exec(template, function (templateFun) {
                 var innerText = templateFun(data.Items);
                 innerText = $(innerText);
                 $(".tr-header").after(innerText);
@@ -49,7 +66,14 @@ define(function (require, exports, module) {
                         });
                     }
                 });
-
+                //下拉事件
+                $(".dropdown").click(function () {
+                    var _this = $(this);
+                    var position = _this.find(".ico-dropdown").position();
+                    $(".dropdown-ul").data("id", _this.data("id")).css({ "top": position.top + 15, "left": position.left }).show().mouseleave(function () {
+                        $(this).hide();
+                    });
+                });
             });
             $("#pager").paginate({
                 total_count: data.TotalCount,
@@ -73,5 +97,6 @@ define(function (require, exports, module) {
             });
         });
     }
+
     module.exports = ObjectJS;
 })
