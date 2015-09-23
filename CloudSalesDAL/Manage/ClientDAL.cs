@@ -9,7 +9,16 @@ namespace CloudSalesDAL
 {
     public class ClientDAL : BaseDAL
     {
+        public static ClientDAL BaseProvider = new ClientDAL();
         #region 查询
+        public DataTable GetClientDetail(string clientID)
+        {
+
+            SqlParameter[] paras = { 
+                                    new SqlParameter("@ClientID",clientID),
+                                   };
+            return GetDataTable("select * from Clients where ClientID=@ClientID and Status<>9", paras, CommandType.Text);
+        }
         #endregion
 
         #region 添加
@@ -42,9 +51,11 @@ namespace CloudSalesDAL
             return clientid;
         }
 
+
         #endregion
 
         #region 编辑
+
             #endregion
     }
 }

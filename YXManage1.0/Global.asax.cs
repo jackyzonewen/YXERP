@@ -23,12 +23,17 @@ namespace YXManage
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    "ClientAuthorize", // 路由名称
+            //    "{Client}/{ClientAuthorize}/{clientID}", // 带有参数的 URL
+            //    new { controller = "Client", action = "ClientAuthorize", clientID = UrlParameter.Optional } // 参数默认值
+            //);
+
             routes.MapRoute(
                 "Default", // 路由名称
                 "{controller}/{action}/{id}", // 带有参数的 URL
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // 参数默认值
             );
-
         }
 
         protected void Application_Start()

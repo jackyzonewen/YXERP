@@ -41,6 +41,18 @@ namespace CloudSalesBusiness
             return list;
         }
 
+        public static Clients GetClientDetail(string clientID)
+        {
+            DataTable dt = ClientDAL.BaseProvider.GetClientDetail(clientID);
+            Clients item = new Clients();
+            if (dt.Rows.Count==1)
+            {
+                DataRow row=dt.Rows[0];
+                item.FillData(row);
+            }
+
+            return item;
+        }
         #endregion
 
         #region 添加
@@ -74,7 +86,10 @@ namespace CloudSalesBusiness
         }
 
         #endregion
-
+        public static bool DeleteClient(string clientID)
+        {
+            return CommonBusiness.Update("Clients", "Status", 9, " ClientID='" + clientID + "'");
+        }
         #region 编辑
         #endregion
 

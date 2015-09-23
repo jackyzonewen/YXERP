@@ -29,6 +29,23 @@ namespace YXManage.Controllers
             return View();
         }
 
+        public ActionResult ClientAuthorize(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+               RedirectToAction("Index", "Client");
+            else
+            {
+                var client = ClientBusiness.GetClientDetail(id);
+                if (client != null)
+                {
+                    ViewBag.ClientID = id;
+                    ViewBag.ClientName = client.CompanyName;
+                }
+                else
+                    RedirectToAction("Index", "Client");
+            }
+            return View();
+         }
         #region Ajax
 
         /// <summary>
@@ -88,6 +105,16 @@ namespace YXManage.Controllers
             };
         }
 
+        public JsonResult DeleteClient(string clientID)
+        {
+            bool flag = ClientBusiness.DeleteClient(clientID);
+            JsonDictionary.Add("Result", flag?1:0);
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         /// <summary>
         /// 账号是否存在
         /// </summary>
@@ -104,6 +131,27 @@ namespace YXManage.Controllers
             };
         }
 
+
+        /// <summary>
+        /// 添加客户端
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        public JsonResult SaveClientAuthorize(string clientAuthorize)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            //Clients model = serializer.Deserialize<Clients>(client);
+
+            int result = 0;
+            //string clientid = ClientBusiness.InsertClient(model, loginName, loginName, CurrentUser.UserID, out result);
+            JsonDictionary.Add("Result", 2);
+            JsonDictionary.Add("ClientID", string.Empty);
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
 
     }
