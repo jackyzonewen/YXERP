@@ -129,6 +129,7 @@
     <Content Include="Views\CustomerRPT\Index.cshtml" />
     <Content Include="Views\Purchase\PurchaseAudit.cshtml" />
     <Content Include="Views\Purchase\DocDetail.cshtml" />
+    <Content Include="Views\Purchase\AuditDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\uploadFiles\2015071122152715275334.png" />

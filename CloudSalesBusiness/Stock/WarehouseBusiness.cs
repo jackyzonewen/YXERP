@@ -177,6 +177,27 @@ namespace CloudSalesBusiness
             }
             return list;
         }
+        /// <summary>
+        /// 根据仓库ID获取货位
+        /// </summary>
+        /// <param name="wareid"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public List<DepotSeat> GetDepotSeatsByWareID(string wareid, string clientid)
+        {
+            var dal = new WarehouseDAL();
+            DataTable dt = dal.GetDepotSeatsByWareID(wareid);
+
+            List<DepotSeat> list = new List<DepotSeat>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                DepotSeat model = new DepotSeat();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
+
 
         /// <summary>
         /// 获取货位详情

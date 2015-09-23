@@ -1,0 +1,86 @@
+﻿@{
+    var model = (CloudSalesEntity.StorageDoc)ViewBag.Model;
+    var wares = (List<CloudSalesEntity.WareHouse>)ViewBag.Wares;
+    ViewBag.Title = "采购审核";
+}
+
+<link href="/modules/css/purchase/docdetail.css" rel="stylesheet" />
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["scripts/purchase/mypurchase"], function (obj) {
+            obj.initDetail('@Html.ToJSONString(wares)');
+        });
+    </script>
+}
+
+<div class="header-box">
+    <span class="header-title left">采购审核</span>
+</div>
+<div class="content-body">
+    <ul class="docinfo">
+        <li>单据编号：@(model.DocCode)</li>
+        <li>创建人：@(model.CreateUser.Name)</li>
+        <li>创建日期：@(model.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))</li>
+        <li>总金额：@(model.TotalMoney.ToString("f2"))</li>
+        <li>状态：@(model.StatusStr)</li>
+    </ul>
+    <div class="remark clear">
+        备注：@(model.Remark)
+    </div>
+    <table class="item-list">
+        <tr class="tr-header">
+            <td class="center"><label><input type="checkbox" id="checkall" /></label></td>
+            <td>产品名称</td>
+            <td>规格</td>
+            <td style="width:80px;" class="center">单位</td>
+            <td>批次</td>
+            <td class="center">仓库</td>
+            <td class="center">货位</td>
+            <td class="tRight">采购价</td>
+            <td class="center">数量</td>
+            <td class="tRight">小计</td>
+        </tr>
+        <tr class="line">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        @foreach (var item in model.Details)
+        { 
+            <tr class="item" data-id="@(item.AutoID)" >
+                <td class="center"> @if(item.Status==0) {<input type="checkbox" class="check" value="@(item.AutoID)" />}</td>
+                <td><a href="/Products/ChooseDetail?pid=@(item.ProductID)&did=@(item.ProductDetailID)&type=1" target="_blank"><img src="@(item.Imgs)" /> @(item.ProductName)</a></td>
+                <td>@(item.Remark)</td>
+                <td class="center">@(item.UnitName)</td>
+                <td>@(item.BatchCode)</td>
+                <td class="ware-li center" data-id="@(item.WareID)"></td>
+                <td class="depot-li center" data-id="@(item.DepotID)"></td>
+                <td class=" tRight">@(item.Price.ToString("f2"))</td>
+                <td class="center">@(item.Quantity)</td>
+                <td class="tRight">@(item.TotalMoney.ToString("f2"))</td>
+            </tr>
+        }
+        <tr class="amount-item">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="tRight">合计：</td>
+            <td class="tRight">@(model.TotalMoney.ToString("f2"))</td>
+        </tr>
+    </table>
+    <div class="bottom-div">
+        <input type="button" class="btnconfirm" id="btnconfirm" value="审核上架" />
+    </div>
+</div>
