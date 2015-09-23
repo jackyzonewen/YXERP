@@ -128,6 +128,9 @@ namespace CloudSalesBusiness
                         : doctype == 2 ? "已出库"
                         : "已审核";
                     break;
+                case 4:
+                    str = "已作废";
+                    break;
                 case 9:
                     str = "已删除";
                     break;
@@ -241,6 +244,30 @@ namespace CloudSalesBusiness
         public bool DeleteDoc(string docid, string userid, string operateip, string clientid)
         {
             return CommonBusiness.Update("StorageDoc", "Status", (int)EnumDocStatus.Delete, "DocID='" + docid + "' and status=" + (int)EnumDocStatus.Normal);
+        }
+        /// <summary>
+        /// 作废单据
+        /// </summary>
+        /// <param name="docid"></param>
+        /// <param name="userid"></param>
+        /// <param name="operateip"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool InvalidDoc(string docid, string userid, string operateip, string clientid)
+        {
+            return CommonBusiness.Update("StorageDoc", "Status", (int)EnumDocStatus.Invalid, "DocID='" + docid + "' and status=" + (int)EnumDocStatus.Normal);
+        }
+        /// <summary>
+        /// 更换入库仓库
+        /// </summary>
+        /// <param name="autoid">单据详情ID</param>
+        /// <param name="wareid">仓库ID</param>
+        /// <param name="depotid">货位ID</param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool UpdateStorageDetailWare(string autoid, string wareid, string depotid, string userid, string operateip, string clientid)
+        {
+            return new OrdersDAL().UpdateStorageDetailWare(autoid, wareid, depotid);
         }
 
         #endregion

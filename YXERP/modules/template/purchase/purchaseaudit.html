@@ -8,8 +8,8 @@
     <td class="tRight">{%=item.TotalMoney.toFixed(2)%}</td>
     <td class="center">{%=item.CreateUser.Name%}</td>
     <td class="center">{%=item.CreateTime.toDate("yyyy-MM-dd hh:mm:ss")%}</td>
-    <td class="center dropdown" data-id="{%=item.DocID%}">
-        <span class="ico-dropdown"></span>
+    <td class="center {%=item.Status < 2? 'dropdown':''%} " data-id="{%=item.DocID%}">
+        <span class="{%=item.Status < 2? 'ico-dropdown':''%}"></span>
     </td>
 </tr>
 {% } %}

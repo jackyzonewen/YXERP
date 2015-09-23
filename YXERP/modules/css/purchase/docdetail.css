@@ -23,5 +23,7 @@
 .amount-item { height:50px; vertical-align:middle; background-color:#FBFCFF;}
 .amount-item td { padding:0 20px;}
 
+.btnconfirm { height:36px; background-color:#B10000; color:#fff; font-size:14px; font-weight:bold; padding:0 20px; border:none; cursor:pointer; }
+
 
 
