@@ -27,7 +27,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult Purchase()
         {
-             ViewBag.Type = (int)EnumOrderType.RK;
+            ViewBag.Type = (int)EnumDocType.RK;
             ViewBag.Title = "采购入库";
             return View("FilterProducts");
         }
@@ -53,7 +53,18 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult ConfirmPurchase()
         {
-            ViewBag.Items = OrdersBusiness.GetShoppingCart(EnumOrderType.RK, CurrentUser.UserID);
+            ViewBag.Items = OrdersBusiness.GetShoppingCart(EnumDocType.RK, CurrentUser.UserID);
+            return View();
+        }
+        /// <summary>
+        /// 采购审核页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult AuditDetail(string id)
+        {
+            ViewBag.Wares = new WarehouseBusiness().GetWareHouses(CurrentUser.ClientID); 
+            ViewBag.Model = OrdersBusiness.GetStorageDetail(id, CurrentUser.ClientID);
             return View();
         }
 
@@ -112,9 +123,58 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult DeletePurchase(string docid)
         {
-            var bl = new OrdersBusiness().DeleteDoc(docid, CurrentUser.ClientID, OperateIP, CurrentUser.ClientID);
+            var bl = new OrdersBusiness().DeleteDoc(docid, CurrentUser.UserID, OperateIP, CurrentUser.ClientID);
             JsonDictionary.Add("Status", bl);
 
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 作废单据
+        /// </summary>
+        /// <param name="docid"></param>
+        /// <returns></returns>
+        public JsonResult InvalidPurchase(string docid)
+        {
+            var bl = new OrdersBusiness().InvalidDoc(docid, CurrentUser.UserID, OperateIP, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
+
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 更换入库仓库和货位
+        /// </summary>
+        /// <param name="autoid"></param>
+        /// <param name="wareid"></param>
+        /// <param name="depotid"></param>
+        /// <returns></returns>
+        public JsonResult UpdateStorageDetailWare(string autoid, string wareid, string depotid)
+        {
+            var bl = new OrdersBusiness().UpdateStorageDetailWare(autoid, wareid, depotid, CurrentUser.UserID, OperateIP, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
+
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// 审核上架
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public JsonResult AuditPurchase(string ids)
+        {
+            bool bl = new OrdersBusiness().AuditStorageIn(ids, CurrentUser.UserID, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
                 Data = JsonDictionary,

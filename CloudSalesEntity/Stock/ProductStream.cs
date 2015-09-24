@@ -31,9 +31,9 @@ namespace CloudSalesEntity
 		private string _ordercode;
 		private string _batchcode="";
 		private string _orderdate;
-		private int? _ordertype=0;
-		private int? _quantity=0;
-		private int? _surplusquantity=0;
+		private int _ordertype=0;
+		private int _quantity=0;
+		private int _surplusquantity=0;
 		private string _warecode="";
 		private string _depotcode="";
 		private string _createuserid;
@@ -51,19 +51,22 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
+        [Property("Lower")] 
         public string ProductDetailID { set; get; }
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ProductID
+        [Property("Lower")] 
+        public string ProductID
 		{
 			set{ _productid=value;}
 			get{return _productid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string OrderCode
+
+        [Property("Lower")] 
+        public string DocID { get; set; }
+
+		public string DocCode
 		{
 			set{ _ordercode=value;}
 			get{return _ordercode;}
@@ -79,7 +82,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string OrderDate
+        public string DocDate
 		{
 			set{ _orderdate=value;}
 			get{return _orderdate;}
@@ -87,7 +90,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? OrderType
+		public int DocType
 		{
 			set{ _ordertype=value;}
 			get{return _ordertype;}
@@ -95,7 +98,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? Quantity
+		public int Quantity
 		{
 			set{ _quantity=value;}
 			get{return _quantity;}
@@ -103,7 +106,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? SurplusQuantity
+		public int SurplusQuantity
 		{
 			set{ _surplusquantity=value;}
 			get{return _surplusquantity;}
@@ -111,7 +114,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string WareCode
+		public string WareID
 		{
 			set{ _warecode=value;}
 			get{return _warecode;}
@@ -119,7 +122,7 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string DepotCode
+		public string DepotID
 		{
 			set{ _depotcode=value;}
 			get{return _depotcode;}
@@ -127,7 +130,8 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string CreateUserID
+        [Property("Lower")] 
+        public string CreateUserID
 		{
 			set{ _createuserid=value;}
 			get{return _createuserid;}
@@ -151,7 +155,8 @@ namespace CloudSalesEntity
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ClientID
+        [Property("Lower")] 
+        public string ClientID
 		{
 			set{ _clientid=value;}
 			get{return _clientid;}

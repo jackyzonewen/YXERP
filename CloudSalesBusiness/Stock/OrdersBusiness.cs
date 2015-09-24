@@ -23,7 +23,7 @@ namespace CloudSalesBusiness
         /// <param name="ordertype">订单类型</param>
         /// <param name="userid">操作员</param>
         /// <returns></returns>
-        public static int GetShoppingCartCount(EnumOrderType ordertype, string userid)
+        public static int GetShoppingCartCount(EnumDocType ordertype, string userid)
         {
             object obj = CommonBusiness.Select("ShoppingCart", "count(0)", "ordertype=" + (int)ordertype + " and UserID='" + userid + "'");
             return Convert.ToInt32(obj);
@@ -34,7 +34,7 @@ namespace CloudSalesBusiness
         /// <param name="ordertype"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static List<ProductDetail> GetShoppingCart(EnumOrderType ordertype, string userid)
+        public static List<ProductDetail> GetShoppingCart(EnumDocType ordertype, string userid)
         {
             DataTable dt = OrdersDAL.GetShoppingCart((int)ordertype, userid);
             List<ProductDetail> list = new List<ProductDetail>();
@@ -128,6 +128,9 @@ namespace CloudSalesBusiness
                         : doctype == 2 ? "已出库"
                         : "已审核";
                     break;
+                case 4:
+                    str = "已作废";
+                    break;
                 case 9:
                     str = "已删除";
                     break;
@@ -152,7 +155,7 @@ namespace CloudSalesBusiness
         /// <param name="userid">操作员</param>
         /// <param name="operateip">操作IP</param>
         /// <returns></returns>
-        public static bool AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, EnumOrderType ordertype, string remark, string userid, string operateip)
+        public static bool AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, EnumDocType ordertype, string remark, string userid, string operateip)
         {
             return OrdersDAL.AddShoppingCart(productid, detailsid, quantity, unitid, isBigUnit, (int)ordertype, remark, userid, operateip);
         }
@@ -241,6 +244,51 @@ namespace CloudSalesBusiness
         public bool DeleteDoc(string docid, string userid, string operateip, string clientid)
         {
             return CommonBusiness.Update("StorageDoc", "Status", (int)EnumDocStatus.Delete, "DocID='" + docid + "' and status=" + (int)EnumDocStatus.Normal);
+        }
+        /// <summary>
+        /// 作废单据
+        /// </summary>
+        /// <param name="docid"></param>
+        /// <param name="userid"></param>
+        /// <param name="operateip"></param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool InvalidDoc(string docid, string userid, string operateip, string clientid)
+        {
+            return CommonBusiness.Update("StorageDoc", "Status", (int)EnumDocStatus.Invalid, "DocID='" + docid + "' and status=" + (int)EnumDocStatus.Normal);
+        }
+        /// <summary>
+        /// 更换入库仓库
+        /// </summary>
+        /// <param name="autoid">单据详情ID</param>
+        /// <param name="wareid">仓库ID</param>
+        /// <param name="depotid">货位ID</param>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public bool UpdateStorageDetailWare(string autoid, string wareid, string depotid, string userid, string operateip, string clientid)
+        {
+            return new OrdersDAL().UpdateStorageDetailWare(autoid, wareid, depotid);
+        }
+        /// <summary>
+        /// 审核上架
+        /// </summary>
+        /// <param name="ids">明细ID</param>
+        /// <param name="userid">审核人</param>
+        /// <param name="clientid">客户端ID</param>
+        /// <returns></returns>
+        public bool AuditStorageIn(string ids, string userid, string clientid)
+        {
+            bool bl = false;
+
+            foreach (string autoid in ids.Split(','))
+            {
+                if (new OrdersDAL().AuditStorageIn(autoid, userid, clientid))
+                {
+                    bl = true;
+                }
+            }
+
+            return bl;
         }
 
         #endregion

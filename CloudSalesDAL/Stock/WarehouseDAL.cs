@@ -86,6 +86,13 @@ namespace CloudSalesDAL
             return dt;
         }
 
+        public DataTable GetDepotSeatsByWareID(string wareid)
+        {
+            SqlParameter[] paras = { new SqlParameter("@WareID", wareid) };
+            DataTable dt = GetDataTable("select * from DepotSeat where WareID=@WareID and Status<>9 ", paras, CommandType.Text);
+            return dt;
+        }
+
         #endregion
 
         #region 添加

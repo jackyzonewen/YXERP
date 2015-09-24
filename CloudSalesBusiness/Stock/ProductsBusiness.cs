@@ -184,7 +184,6 @@ namespace CloudSalesBusiness
             return list;
         }
 
-
         /// <summary>
         /// 根据属性ID获取属性
         /// </summary>

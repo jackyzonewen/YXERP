@@ -245,6 +245,23 @@ namespace YXERP.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        /// <summary>
+        /// 根据仓库获取货位
+        /// </summary>
+        /// <param name="wareid"></param>
+        /// <returns></returns>
+        public JsonResult GetDepotSeatsByWareID(string wareid)
+        {
+            List<DepotSeat> list = new WarehouseBusiness().GetDepotSeatsByWareID(wareid, CurrentUser.ClientID);
+            JsonDictionary.Add("Items", list);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         /// <summary>
         /// 获取货位详情
         /// </summary>

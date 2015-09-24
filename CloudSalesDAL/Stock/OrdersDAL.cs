@@ -116,6 +116,27 @@ namespace CloudSalesDAL
 
         #region 编辑、删除
 
+        public bool UpdateStorageDetailWare(string autoid, string wareid, string depotid)
+        {
+            string sql = "update StorageDetail set WareID=@WareID,DepotID=@DepotID where AutoID=@AutoID and Status=0";
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@WareID",wareid),
+                                     new SqlParameter("@DepotID",depotid),
+                                     new SqlParameter("@AutoID",autoid)
+         
+                                   };
+            return ExecuteNonQuery(sql, paras, CommandType.Text) > 0;
+        }
+
+        public bool AuditStorageIn(string autoid, string userid, string clientid)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@AutoID",autoid),
+                                     new SqlParameter("@UserID",userid),
+                                     new SqlParameter("@ClientID",clientid)
+                                   };
+            return ExecuteNonQuery("P_AuditStorageIn", paras, CommandType.StoredProcedure) > 0;
+        }
 
         #endregion
 
