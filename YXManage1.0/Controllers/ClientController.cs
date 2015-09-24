@@ -29,6 +29,14 @@ namespace YXManage.Controllers
             return View();
         }
 
+        public ActionResult Detail(string id)
+        {
+            ViewBag.ID = id;
+            ViewBag.Industry = IndustryBusiness.GetIndustryByClientID(ClientID);
+            ViewBag.Modules = ModulesBusiness.GetModules();
+            return View();
+        }
+
         public ActionResult ClientAuthorize(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -40,6 +48,9 @@ namespace YXManage.Controllers
                 {
                     ViewBag.ClientID = id;
                     ViewBag.ClientName = client.CompanyName;
+                    ViewBag.UserQuantity = client.UserQuantity;
+                    ViewBag.EndTime = client.EndTime!=null?client.EndTime:DateTime.Now;
+                    ViewBag.AuthorizeType = client.AuthorizeType;
                 }
                 else
                     RedirectToAction("Index", "Client");
@@ -68,6 +79,17 @@ namespace YXManage.Controllers
             };
         }
 
+        public JsonResult GetClientDetail(string id)
+        {
+            var item = ClientBusiness.GetClientDetail(id);
+            JsonDictionary.Add("Item", item);
+            JsonDictionary.Add("Result", 1);
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         /// <summary>
         /// 添加行业
         /// </summary>
@@ -89,15 +111,24 @@ namespace YXManage.Controllers
         /// </summary>
         /// <param name="client"></param>
         /// <returns></returns>
-        public JsonResult CreateClient(string client, string loginName)
+        public JsonResult SaveClient(string client, string loginName)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             Clients model = serializer.Deserialize<Clients>(client);
 
             int result = 0;
-            string clientid = ClientBusiness.InsertClient(model, loginName, loginName, CurrentUser.UserID, out result);
-            JsonDictionary.Add("Result", result);
-            JsonDictionary.Add("ClientID", clientid);
+            if (string.IsNullOrEmpty(model.ClientID))
+            {
+                string clientid = ClientBusiness.InsertClient(model, loginName, loginName, CurrentUser.UserID, out result);
+                JsonDictionary.Add("Result", result);
+                JsonDictionary.Add("ClientID", clientid);
+            }
+            else
+            {
+                bool flag = ClientBusiness.UpdateClient(model, loginName, loginName, CurrentUser.UserID, out result);
+                JsonDictionary.Add("Result", flag?1:0);
+            }
+
             return new JsonResult()
             {
                 Data = JsonDictionary,
@@ -105,9 +136,9 @@ namespace YXManage.Controllers
             };
         }
 
-        public JsonResult DeleteClient(string clientID)
+        public JsonResult DeleteClient(string id)
         {
-            bool flag = ClientBusiness.DeleteClient(clientID);
+            bool flag = ClientBusiness.DeleteClient(id);
             JsonDictionary.Add("Result", flag?1:0);
             return new JsonResult()
             {
@@ -137,14 +168,14 @@ namespace YXManage.Controllers
         /// </summary>
         /// <param name="client"></param>
         /// <returns></returns>
-        public JsonResult SaveClientAuthorize(string clientAuthorize)
+        public JsonResult SaveClientAuthorize(string client)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            //Clients model = serializer.Deserialize<Clients>(client);
+            Clients model = serializer.Deserialize<Clients>(client);
 
-            int result = 0;
-            //string clientid = ClientBusiness.InsertClient(model, loginName, loginName, CurrentUser.UserID, out result);
-            JsonDictionary.Add("Result", 2);
+            bool flag = ClientBusiness.ClientAuthorize(model.ClientID,model.UserQuantity,model.Status,model.EndTime);
+
+            JsonDictionary.Add("Result", flag?1:0);
             JsonDictionary.Add("ClientID", string.Empty);
             return new JsonResult()
             {

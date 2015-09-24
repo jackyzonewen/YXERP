@@ -11,10 +11,11 @@ define(function (require, exports, module) {
     var VerifyObject, CityObject;
     var Clients = {};
     //新建客户初始化
-    Clients.createInit = function () {
+    Clients.createInit = function (id) {
         Clients.createEvent();
         //行业为空
         if ($("#industry option").length == 1) $("#industry").change();
+        
     }
     //绑定事件
     Clients.createEvent = function () {
@@ -117,7 +118,7 @@ define(function (require, exports, module) {
                 Modules: modules
             };
 
-            Global.post("/Client/CreateClient", { client: JSON.stringify(client), loginName: $("#loginName").val() }, function (data) {
+            Global.post("/Client/SaveClient", { client: JSON.stringify(client), loginName: $("#loginName").val() }, function (data) {
                 if (data.Result == "1") {
                     location.href = "/Client/Index";
                 } else if (data.Result == "2") {
@@ -127,7 +128,151 @@ define(function (require, exports, module) {
             })
         });
     };
+   
+    //客户详情初始化
+    Clients.detailInit = function (id) {
+        Clients.detailEvent();
+        //行业为空
+        if ($("#industry option").length == 1) $("#industry").change();
+        Clients.getClientDetail(id);
+    }
+    //绑定事件
+    Clients.detailEvent = function () {
+        //验证插件
+        VerifyObject = Verify.createVerify({
+            element: ".verify",
+            emptyAttr: "data-empty",
+            verifyType: "data-type",
+            regText: "data-text"
+        });
+        //城市插件
+        CityObject = City.createCity({
+            elementID: "citySpan"
+        });
+        //选择模块
+        $(".modules-item").first().addClass("active");
+        $(".modules-item:gt(0)").click(function () {
+            var _this = $(this);
+            if (_this.hasClass("active")) {
+                _this.removeClass("active");
+            } else {
+                _this.addClass("active");
+            }
+        });
 
+        //更换行业
+        $("#industry").change(function () {
+            $("#industryName").val("");
+            if ($(this).val() == "") {
+                $("#otherIndustry").show();
+                $("#saveIndustry").hide();
+            } else {
+                $("#otherIndustry").hide();
+            }
+        });
+
+        $("#industryName").blur(function () {
+            if ($(this).val() == "") {
+                $("#saveIndustry").hide();
+            } else {
+                var ele = $("#industry option[data-name='" + $(this).val() + "']");
+                if (ele.length > 0) {
+                    ele.prop("selected", "selected");
+                    $("#otherIndustry").hide();
+                } else {
+                    $("#saveIndustry").show();
+                }
+            }
+        });
+        //保存行业
+        $("#saveIndustry").click(function () {
+            var name = $("#industryName").val();
+            Global.post("/Client/CreateIndustry", { name: name }, function (data) {
+                if (data.ID) {
+                    var option = "<option value=\"" + data.ID + "\" selected=\"selected\" data-name=\"" + name + "\">" + name + "</option>";
+                    $("#industry").prepend(option);
+                    $("#otherIndustry").hide();
+                }
+            });
+        });
+        //判断账号是否存在
+        $("#loginName").blur(function () {
+            var value = $(this).val();
+            if (!value) {
+                return;
+            }
+            Global.post("/Client/IsExistLoginName", { loginName: value }, function (data) {
+                if (data.Result) {
+                    $("#loginName").val("");
+                    alert("登录账号已存在!");
+                }
+            });
+        });
+
+        //保存客户端
+        $("#saveClient").click(function () {
+            if (!VerifyObject.isPass()) {
+                return false;
+            };
+            if ($("#industry").val() == "") {
+                $("#industryName").css("borderColor", "red");
+                return false;
+            }
+            var modules = [];
+            $(".modules-item").each(function () {
+                var _this = $(this);
+                if (_this.hasClass("active")) {
+                    modules.push({
+                        ModulesID: _this.data("value")
+                    });
+                }
+            });
+            var client = {
+                ClientID: $("#clientID").val(),
+                CompanyName: $("#name").val(),
+                ContactName: $("#contact").val(),
+                MobilePhone: $("#mobile").val(),
+                Industry: $("#industry").val(),
+                CityCode: CityObject.getCityCode(),
+                Address: $("#address").val(),
+                Description: $("#description").val(),
+                Modules: modules
+            };
+
+            Global.post("/Client/SaveClient", { client: JSON.stringify(client), loginName: $("#loginName").val() }, function (data) {
+                if (data.Result == "1") {
+                    location.href = "/Client/Index";
+                } else if (data.Result == "2") {
+                    alert("登陆账号已存在!");
+                    $("#loginName").val("");
+                }
+            });
+        });
+    };
+    //客户详情
+    Clients.getClientDetail = function (id) {
+        Global.post("/Client/GetClientDetail", { id: id }, function (data) {
+            if (data.Result == "1") {
+                var item = data.Item;
+                $("#name").val(item.CompanyName);
+                $("#contact").val(item.ContactName);
+                $("#mobile").val(item.MobilePhone);
+                $("#industry").val(item.Industry);
+                $("#address").val(item.Address);
+                $("#description").val(item.Description);
+                
+                var modules = item.Modules;
+                for (var i = 0; len = modules.length, i < len; i++) {
+                    $("span.modules-item[data-value='" + modules[i].ModulesID + "']").addClass("active");
+                }
+
+                CityObject.setValue(item.City.CityCode);
+            } else if (data.Result == "2") {
+                alert("登陆账号已存在!");
+                $("#loginName").val("");
+            }
+        });
+    };
 
     //客户列表初始化
     Clients.init = function () {
@@ -154,7 +299,14 @@ define(function (require, exports, module) {
                 $(".table-list a.ico-del").bind("click", function () {
                     if (confirm("确定删除?"))
                     {
-
+                        Global.post("/Client/DeleteClient", { id: $(this).attr("data-id") }, function (data) {
+                            if (data.Result == 1) {
+                                location.href = "/Client/Index";
+                            }
+                            else {
+                                alert("删除失败");
+                            }
+                        });
                     }
                 });
             });
@@ -203,16 +355,14 @@ define(function (require, exports, module) {
                 return false;
             };
 
-            var clientAuthorize = {
+            var client = {
                 ClientID: $("#ClientID").val(),
-                AuthorizeType: $("#AuthorizeType").val(),
+                Status: $("#AuthorizeType").val(),
                 UserQuantity: $("#UserQuantity").val(),
-                BeginTime: $("#BeginTime").val(),
                 EndTime: $("#EndTime").val(),
             };
 
-            Global.post("/Client/SaveClientAuthorize", { clientAuthorize: JSON.stringify(clientAuthorize) }, function (data) {
-                alert(JSON.stringify(clientAuthorize));
+            Global.post("/Client/SaveClientAuthorize", { client: JSON.stringify(client) }, function (data) {
                 if (data.Result == "1") {
                     location.href = "/Client/Index";
                 } else if (data.Result == "2") {

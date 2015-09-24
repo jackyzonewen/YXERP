@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "新建客户";
+    ViewBag.Title = "客户详情";
 }
 
 @section script{
     <script type="text/javascript">
            seajs.use(["scripts/clients"], function (client) {
-               client.createInit();
+               client.detailInit('@ViewBag.ID');
            });
     </script>
 }
@@ -14,7 +14,7 @@
 }
 <link href="/modules/css/clients.css" rel="stylesheet" />
 <div class="headertitle">
-    <span>新建客户</span>
+    <span>客户详情</span>
 </div>
 <ul class="contentnew">
     <li>
@@ -76,3 +76,4 @@
 <div class="mTop20">
     <input type="button" id="saveClient" class="btn" value="保存" />
 </div>
+<input type="hidden" id="clientID" value="@ViewBag.ID" />

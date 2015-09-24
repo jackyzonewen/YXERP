@@ -22,29 +22,29 @@
 <ul class="contentnew">
     <li>
         <span class="columnname">授权人数：</span>
-        <span><input type="text" style="width:50px;" id="UserQuantity" class="verify" data-empty="授权人数不能为空!" /></span>
+        <span><input type="text" style="width:50px;" id="UserQuantity" value="@ViewBag.UserQuantity" class="verify" data-empty="授权人数不能为空!" /></span>
     </li>
     <li>
         <span class="columnname">授权类型：</span> 
-        <select style="cursor:pointer;" id="AuthorizeType" >
+        <select style="cursor:pointer;" id="AuthorizeType" name="@ViewBag.AuthorizeType"">
             <option value="-1">选择授权类型</option>
             <option value="1">试用</option>
             <option value="2">付费</option>
         </select>
     </li>
-    <li>
+   @* <li>
         <span class="columnname">起始时间：</span>
         <span><input type="text" id="BeginTime" class="verify" data-empty="起始时间不能为空!" /></span>
-    </li>
+    </li>*@
     <li>
         <span class="columnname">到期时间：</span>
-        <span><input type="text" id="EndTime" class="verify"  maxlength="11"  data-empty="到期时间不能为空!" /></span>
+        <span><input type="text" id="EndTime" class="verify" value="@ViewBag.EndTime""  maxlength="11"  data-empty="到期时间不能为空!" /></span>
     </li>
 </ul>
 <div class="mTop20">
-    <input type="button" id="saveClientAuthorize" class="btn" value="保存授权" />
+    <input type="button" id="saveClientAuthorize" class="btn" value="授权" />
 </div>
-<input type="hidden" value="@ViewBag.ClientID" />
+<input type="hidden" value="@ViewBag.ClientID" id="ClientID" />
 <script type="text/javascript">
 $(function(){
     laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
@@ -52,29 +52,29 @@ $(function(){
 
 });
 //日期范围限制
-var start = {
-    elem: '#BeginTime',
-    format: 'YYYY-MM-DD',
-    min: laydate.now(), //设定最小日期为当前日期
-    max: '2099-06-16', //最大日期
-    istime: false,
-    istoday: false,
-    choose: function (datas) {
-        end.min = datas; //开始日选好后，重置结束日的最小日期
-        end.start = datas //将结束日的初始值设定为开始日
-    }
-};
+//var start = {
+//    elem: '#BeginTime',
+//    format: 'YYYY-MM-DD',
+//    min: laydate.now(), //设定最小日期为当前日期
+//    max: '2099-06-16', //最大日期
+//    istime: false,
+//    istoday: false,
+//    choose: function (datas) {
+//        end.min = datas; //开始日选好后，重置结束日的最小日期
+//        end.start = datas //将结束日的初始值设定为开始日
+//    }
+//};
 var end = {
     elem: '#EndTime',
     format: 'YYYY-MM-DD',
     min: laydate.now(),
     max: '2099-06-16',
     istime: false,
-    istoday: false,
-    choose: function (datas) {
-        start.max = datas; //结束日选好后，充值开始日的最大日期
-    }
+    istoday: false
+    //choose: function (datas) {
+    //    start.max = datas; //结束日选好后，充值开始日的最大日期
+    //}
 };
-laydate(start);
+//laydate(start);
 laydate(end);
 </script>

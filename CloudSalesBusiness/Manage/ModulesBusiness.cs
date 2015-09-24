@@ -27,5 +27,18 @@ namespace CloudSalesBusiness
             }
             return list;
         }
+
+        public static List<Modules> GetModulesByClientID(string clientID)
+        {
+            List<Modules> list = new List<Modules>();
+            DataTable dt = new ModulesDAL().GetModulesByClientID(clientID);
+            foreach (DataRow dr in dt.Rows)
+            {
+                Modules model = new Modules();
+                model.FillData(dr);
+                list.Add(model);
+            }
+            return list;
+        }
     }
 }

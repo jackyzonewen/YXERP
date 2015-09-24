@@ -38,6 +38,7 @@ namespace CloudSalesEntity
 		private string _mobilephone="";
 		private string _officephone="";
 		private int _status=0;
+        private int _authorizetype = 0;
 		private DateTime? _createtime= DateTime.Now;
         private string _createuserid;
 
@@ -131,6 +132,15 @@ namespace CloudSalesEntity
 			set{ _status=value;}
 			get{return _status;}
 		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int AuthorizeType
+        {
+            set { _authorizetype = value; }
+            get { return _authorizetype; }
+        }
 
         public string Description { get; set; }
 

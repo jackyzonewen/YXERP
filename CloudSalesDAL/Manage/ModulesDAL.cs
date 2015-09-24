@@ -16,6 +16,13 @@ namespace CloudSalesDAL
             return GetDataTable("select * from Modules Order by Sort");
         }
 
+        public DataTable GetModulesByClientID(string clientID)
+        {
+            SqlParameter[] paras = { 
+                                    new SqlParameter("@ClientID",clientID),
+                                   };
+            return GetDataTable("select c.*,m.Name,m.Description from ClientModules as c,Modules as m where c.ModulesID=m.ModulesID and c.ClientID=@ClientID", paras, CommandType.Text);
+        } 
         #endregion
     }
 }
