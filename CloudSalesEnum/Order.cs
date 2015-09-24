@@ -18,21 +18,13 @@ namespace CloudSalesEnum
         [DescriptionAttribute("采购单")]
         RK = 1,
         [DescriptionAttribute("出库单")]
-        CK = 2
-    }
-    /// <summary>
-    /// 订单类型（冗余单据类型）
-    /// </summary>
-    public enum EnumOrderType
-    {
-        /// <summary>
-        /// 全部（仅供查询）
-        /// </summary>
-        All = -1,
-        [DescriptionAttribute("采购单")]
-        RK = 1,
-        [DescriptionAttribute("出库单")]
-        CK = 2
+        CK = 2,
+        [DescriptionAttribute("报损单")]
+        BS = 3,
+        [DescriptionAttribute("报溢单")]
+        BY = 4,
+        [DescriptionAttribute("调拨单")]
+        DB = 5
     }
     /// <summary>
     /// 单据状态

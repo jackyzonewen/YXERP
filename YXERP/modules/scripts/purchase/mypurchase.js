@@ -50,7 +50,7 @@ define(function (require, exports, module) {
                         Params.pageIndex = 1;
                         _self.getList();
                     } else {
-                        alert("删除失败！");
+                        alert("作废失败！");
                     }
                 });
             }
@@ -145,6 +145,8 @@ define(function (require, exports, module) {
                 }
             });
 
+            ware.prop("disabled", warebox.data("status") == 1);
+
             warebox.append(ware);
 
             if (CacheDepot[warebox.data("id")]) {
@@ -162,6 +164,7 @@ define(function (require, exports, module) {
             $(".item").find(".check").prop("checked", $(this).prop("checked"));
         });
 
+        //审核入库
         $("#btnconfirm").click(function () {
             if ($(".item").find("input:checked").length <= 0) {
                 alert("请选择审核上架的产品！");
@@ -205,6 +208,8 @@ define(function (require, exports, module) {
                 };
             });
         });
+
+        depot.prop("disabled", depotbox.data("status") == 1);
 
         depotbox.append(depot);
 

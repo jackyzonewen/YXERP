@@ -60,8 +60,8 @@
                 <td>@(item.Remark)</td>
                 <td class="center">@(item.UnitName)</td>
                 <td>@(item.BatchCode)</td>
-                <td class="ware-li center" data-id="@(item.WareID)"></td>
-                <td class="depot-li center" data-id="@(item.DepotID)"></td>
+                <td class="ware-li center" data-id="@(item.WareID)" data-status="@(item.Status)"></td>
+                <td class="depot-li center" data-id="@(item.DepotID)" data-status="@(item.Status)"></td>
                 <td class=" tRight">@(item.Price.ToString("f2"))</td>
                 <td class="center">@(item.Quantity)</td>
                 <td class="tRight">@(item.TotalMoney.ToString("f2"))</td>
@@ -81,6 +81,9 @@
         </tr>
     </table>
     <div class="bottom-div">
-        <input type="button" class="btnconfirm" id="btnconfirm" value="审核上架" />
+        @if (model.Status < 2)
+        {
+            <input type="button" class="btnconfirm" id="btnconfirm" value="审核上架" />
+        }
     </div>
 </div>

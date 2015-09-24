@@ -128,6 +128,16 @@ namespace CloudSalesDAL
             return ExecuteNonQuery(sql, paras, CommandType.Text) > 0;
         }
 
+        public bool AuditStorageIn(string autoid, string userid, string clientid)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@AutoID",autoid),
+                                     new SqlParameter("@UserID",userid),
+                                     new SqlParameter("@ClientID",clientid)
+                                   };
+            return ExecuteNonQuery("P_AuditStorageIn", paras, CommandType.StoredProcedure) > 0;
+        }
+
         #endregion
 
     }

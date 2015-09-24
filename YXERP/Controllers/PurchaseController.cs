@@ -27,7 +27,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult Purchase()
         {
-             ViewBag.Type = (int)EnumOrderType.RK;
+            ViewBag.Type = (int)EnumDocType.RK;
             ViewBag.Title = "采购入库";
             return View("FilterProducts");
         }
@@ -53,7 +53,7 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public ActionResult ConfirmPurchase()
         {
-            ViewBag.Items = OrdersBusiness.GetShoppingCart(EnumOrderType.RK, CurrentUser.UserID);
+            ViewBag.Items = OrdersBusiness.GetShoppingCart(EnumDocType.RK, CurrentUser.UserID);
             return View();
         }
         /// <summary>
@@ -173,6 +173,8 @@ namespace YXERP.Controllers
         /// <returns></returns>
         public JsonResult AuditPurchase(string ids)
         {
+            bool bl = new OrdersBusiness().AuditStorageIn(ids, CurrentUser.UserID, CurrentUser.ClientID);
+            JsonDictionary.Add("Status", bl);
             return new JsonResult
             {
                 Data = JsonDictionary,

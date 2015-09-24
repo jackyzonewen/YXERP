@@ -150,4 +150,7 @@
   <ItemGroup>
     <None Include="Procedures\Stock\P_GetStorageDetail.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Stock\P_AuditStorageIn.sql" />
+  </ItemGroup>
 </Project>

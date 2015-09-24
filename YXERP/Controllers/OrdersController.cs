@@ -55,7 +55,7 @@ namespace YXERP.Controllers
         /// <param name="quantity"></param>
         /// <param name="ordertype"></param>
         /// <returns></returns>
-        public JsonResult AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, EnumOrderType ordertype, string remark)
+        public JsonResult AddShoppingCart(string productid, string detailsid, int quantity, string unitid, int isBigUnit, EnumDocType ordertype, string remark)
         {
             var bl = OrdersBusiness.AddShoppingCart(productid, detailsid, quantity, unitid, isBigUnit, ordertype, remark, CurrentUser.UserID, OperateIP);
             JsonDictionary.Add("Status", bl);
@@ -70,7 +70,7 @@ namespace YXERP.Controllers
         /// </summary>
         /// <param name="ordertype"></param>
         /// <returns></returns>
-        public JsonResult GetShoppingCartCount(EnumOrderType ordertype)
+        public JsonResult GetShoppingCartCount(EnumDocType ordertype)
         {
             var count = OrdersBusiness.GetShoppingCartCount(ordertype, CurrentUser.UserID);
             JsonDictionary.Add("Quantity", count);
